@@ -1,0 +1,20 @@
+# Ignore these
+
+/node_modules
+/public
+/storage/*.key
+/vendor
+/nbproject
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+.env.example
+/nbproject/private/
+deploy.php
+
+
+#Except for the directories:
