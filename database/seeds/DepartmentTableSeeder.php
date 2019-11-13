@@ -11,16 +11,25 @@ class DepartmentTableSeeder extends Seeder
      */
     public function run()
     {
-    
-        for ($i=1; $i < 300; $i++) { 
-            Department::create(
-                  [ 
-                'name' => "Air Receiver$i",
-                 "display_name" => "Department$i",
-                'created_by' => 1
-                  ]
-            );
-        }
-    
+        $data=[
+            [
+                'name'=>'Information Communication Technology',
+                'display_name'=>'ICT'
+            ],
+            [
+                'name'=>'Human Resource',
+                'display_name'=>'HR'
+            ],
+            [
+                'name'=>'Account',
+                'display_name'=>'AC'
+            ],
+            [
+                'name'=>'Marketing',
+                'display_name'=>'MT'
+            ]
+        ];
+       
+            Department::insert($data);
     }
 }

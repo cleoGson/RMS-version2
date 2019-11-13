@@ -72,6 +72,7 @@ class   StaffController extends Controller
     public function store(StaffRequest $request)
     {
       
+        $birth_date = date("Y-m-d h:m:s", strtotime(request('birth_date')));
         $staff = Staff::create([
             'created_by'=>auth()->id(),
             'firstname'=>request('firstname'), 
@@ -79,7 +80,7 @@ class   StaffController extends Controller
             'lastname'=>request('lastname'), 
             'sex'=>request('sex'),
             'marital_status'=>request('marital_status'),
-            'birth_date'=>request('birth_date'), 
+            'birth_date'=>$birth_date, 
             'disability'=>request('disability'),
             'birth_place'=>request('birth_place'), 
             'email'=>request('email'),
@@ -138,13 +139,13 @@ class   StaffController extends Controller
     public function update(StaffRequest $request, Staff $staff)
     {
         $staff->updated_by = auth()->id();
+        $staff->birth_date = date("Y-m-d h:m:s", strtotime(request('birth_date')));
         $staff->update(request([   
         'firstname',
         'middlename',
         'lastname',
         'sex',
         'marital_status',
-        'birth_date',
         'disability',
         'birth_place',
         'email',

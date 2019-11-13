@@ -2,7 +2,6 @@
             {{ Form::inputText('middlename') }}
             {{ Form::inputText('lastname') }}
             {{ Form::inputSelect('sex',[''=>'Select','female'=>'Female','male'=>'Male']) }}
-            {{ Form::inputSelect('middlename') }}
             {{ Form::inputDateTime('birth_date') }}
             {{ Form::inputSelect('marital_status',$maritals) }}
             {{ Form::inputSelect('disability',$disabilities) }}

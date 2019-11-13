@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             return str_replace('_', ' ' , 'The '. $attribute .' must be greater than the ' .$params[0]);
         });
         Schema::defaultStringLength(191);
+        Form::component('inputPassword', 'components.form.password', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputText', 'components.form.text', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputTextArea', 'components.form.textarea', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputNumber', 'components.form.number', ['name', 'value'=>null, 'attributes'=>[]]);

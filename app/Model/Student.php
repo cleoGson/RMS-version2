@@ -33,6 +33,8 @@ class Student extends Model
             'student_number',
             'birth_country',
             'citzenship', 
+            'created_by',
+            'updated_by'
     ];
 
     /**
@@ -54,6 +56,8 @@ class Student extends Model
             'student_number',
             'birth_country',
             'citzenship', 
+            'created_by',
+            'updated_by'
     ];
 
 

@@ -38,12 +38,12 @@
                     <div class="row">
                         <div class="col-md-12 form-group text-right">
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     Update
                                 </button>
 
-                                <a href="{{route('setting.department.index')}}" class="btn btn-default">
-                            Back to List <i class="fas fa-list fa-fw"></i>
+                                <a href="{{route('setting.department.index')}}" class="btn btn-primary">
+                            Back to List <i class="fas fa-fast-forward"></i>
                               </a>
                             </div>
                         </div>

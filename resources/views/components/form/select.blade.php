@@ -2,7 +2,7 @@
     <?php $lable = str_replace('_id','',$name);
     $key = str_replace('_',' ',$lable);
     ?>
-    {{ Form::label($lable, null, ['class' => 'col-md-3 col-form-label']) }}
+    {{ Form::label($lable, null, ['class' => 'black col-md-3 col-form-label']) }}
     <div class="col-md-9">
         {{ Form::select(strtolower($name),[''=>'Select '.ucwords($key)]+ $options, $value, array_merge(['class' => 'form-control select2-single'], $attributes)) }}
         @if ($errors->has($name))

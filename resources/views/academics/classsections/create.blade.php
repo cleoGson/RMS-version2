@@ -44,7 +44,7 @@
                         </button>
 
                         <a href="{{route('academic.classsection.index')}}" class="btn btn-primary">
-                            Back to List <i class="fas fa-list fa-fw"></i>
+                            Back to List <i class="fas fa-fast-forward"></i>
                         </a>
                     </div>
           </div>

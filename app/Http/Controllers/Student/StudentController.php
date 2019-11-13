@@ -19,7 +19,7 @@ class StudentController extends Controller
      */
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
-        $template = 'student.students.actions';
+        $template = 'students.students.actions';
         return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
@@ -48,9 +48,10 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $countries=Country::get();
         $disability = Disability::pluck('name','id')->toArray();
-        $birthcountries= Country::pluck('name','id')->toArray();
-        $citizenship = Country::pluck('name','id')->toArray();
+        $birthcountries=  $countries->pluck('name','id')->toArray();
+        $citizenship =  $countries->pluck('citizenship','id')->toArray();
         return view('students.students.create',compact(['disability','birthcountries','citizenship']));
     }
 
@@ -62,20 +63,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $email= !is_null(request('email'))  ?  request('email') : request('firstname').'.'.request('middlename').date('Ymdhms').'@student.com';
-         $studentnumber = request('student_number');
+        $email= !is_null(request('email'))  ?  request('email') : strtolower(request('firstname')).'.'.strtolower(request('middlename')).date('Ymdhms').'@student.com';
+         $studentnumber ='10090089'.date('Ymdhms');
+         $birth_date = date("Y-m-d", strtotime(request('birth_date')));
          $student = Student::create([
             'firstname'=>request('firstname'),
             'middlename'=>request('middlename'),
             'lastname'=>request('lastname'),
             'sex'=>request('sex'),
             'marital_status'=>request('marital_status'), 
-            'birth_date'=>request('birth_date'),
+            'birth_date'=>$birth_date,
             'disability'=>request('disability'),
             'birth_place'=>request('birth_place'),
             'email'=>$email, 
             'address'=>request('address'), 
-            'phone_no'=>request('phone_n'), 
+            'phone_no'=>request('phone_no'), 
             'student_number'=>$studentnumber,
             'birth_country'=>request('birth_country'),
             'citzenship'=>request('citzenship'),
@@ -105,9 +107,10 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
+        $countries=Country::get();
         $disability = Disability::pluck('name','id')->toArray();
-        $birthcountries= Country::pluck('name','id')->toArray();
-        $citizenship = Country::pluck('name','id')->toArray();
+        $birthcountries= $countries->pluck('name','id')->toArray();
+        $citizenship = $countries->pluck('citizenship','id')->toArray();
         return view('students.students.edit',
         [
             'disability'=>$disability,
@@ -126,13 +129,13 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->updated_by = auth()->id();
+        $student->birth_date =date("Y-m-d", strtotime(request('birth_date')));
         $student->update(request([
             'firstname',
             'middlename',
             'lastname',
             'sex',
             'marital_status', 
-            'birth_date',
             'disability',
             'birth_place',
             'address', 
