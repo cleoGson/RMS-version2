@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\Setting\EducationlevelRequest;
-use App\Admin\Educationlevel;
+use App\Model\Educationlevel;
 
 class EducationlevelController extends Controller
 {

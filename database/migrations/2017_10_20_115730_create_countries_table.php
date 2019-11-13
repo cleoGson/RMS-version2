@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration
             $table->bigInteger('code')->unique();
             $table->string('monetary')->nullable();
             $table->string('monetary_short_name')->nullable();
-            $table->string('monetary_sign')->nullable();
+            $table->string('citizenship')->nullable();
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();

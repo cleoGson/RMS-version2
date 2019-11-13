@@ -24,7 +24,7 @@
 <th>code</th>
 <th>Monetary</th>
 <th>monetary Short Name</th>
-<th>monetary Symbol</th>
+<th>Citizenship</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -36,7 +36,7 @@
 <th>code</th>
 <th>Monetary</th>
 <th>monetary Short Name</th>
-<th>monetary Symbol</th>
+<th>Citizenship</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -76,8 +76,8 @@
             '<td colspan="3">'+d.monetary_short_name+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>monetary_sign:</td>'+
-            '<td colspan="3">'+d.monetary_sign+'</td>'+
+            '<td>citizenship:</td>'+
+            '<td colspan="3">'+d.citizenship+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Display name:</td>'+
@@ -117,7 +117,7 @@
                     {data: 'code', name: 'code'},
                     {data: 'monetary', name: 'monetary'},
                     {data: 'monetary_short_name', name: 'monetary_short_name'},
-                    {data: 'monetary_sign', name: 'monetary_sign'},
+                    {data: 'citizenship', name: 'citizenship'},
                     {
                         className:      'details-control',
                         orderable:      false,

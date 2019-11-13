@@ -14,7 +14,7 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(DataTables $dataTables)
-    {    if (request()->wantsJson()) {
+    {   if (request()->wantsJson()) {
             $template = 'settings.countries.actions';
             return $dataTables->eloquent(Country::with(['creator','updator'])->select('countries.*'))
                 ->editColumn('action', function ($row) use ($template) {
@@ -33,8 +33,8 @@ class CountryController extends Controller
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
                 })
                 ->make(true);
-         }
-         return view('settings.countries.index');
+        }
+        return view('settings.countries.index');
     }
 
     /**
@@ -62,7 +62,7 @@ class CountryController extends Controller
             'code'=>request('code'),
             'monetary'=>request('monetary'),
             'monetary_short_name'=>request('monetary_short_name'),
-            'monetary_sign'=>request('monetary_sign'),
+            'citizenship'=>request('citizenship'),
         ]);
         alert()->success('success', 'Country  has  successfully added.')->persistent();
         return redirect()->route('setting.country.index');
@@ -101,7 +101,7 @@ class CountryController extends Controller
     public function update(CountryRequest $request, Country $country)
     {
         $country->updated_by = auth()->id();
-        $country->update(request([ 'name', 'display_name', 'code', 'monetary', 'monetary_short_name', 'monetary_sign',]));
+        $country->update(request([ 'name', 'display_name', 'code', 'monetary', 'monetary_short_name', 'citizenship',]));
         alert()->success('success', 'Country  has  successfully Updated.')->persistent();
         return redirect()->route('setting.country.index');
     }

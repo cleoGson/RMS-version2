@@ -25,7 +25,7 @@ class Country extends Model
             'code',
             'monetary',
             'monetary_short_name',
-            'monetary_sign',
+            'citizenship',
             'created_by',
             'updated_by'
     ];
@@ -41,7 +41,7 @@ class Country extends Model
             'code', 
             'monetary',
             'monetary_short_name', 
-            'monetary_sign',
+            'citizenship',
             'created_by',
             'updated_by'
     ];
