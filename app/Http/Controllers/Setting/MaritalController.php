@@ -96,10 +96,6 @@ class MaritalController extends Controller
      */
     public function update(MaritalstatusRequest $request, Marital $marital)
     {
-        $this->validate($request, [
-            'name'=> 'required',
-            'display_name'  => 'required',
-        ]);
         $marital->updated_by = auth()->id();
         $marital->update(request(['name','display_name']));
         alert()->success('success', 'Department  has  successfully Updated.')->persistent();

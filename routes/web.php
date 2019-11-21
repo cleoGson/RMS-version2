@@ -19,6 +19,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('logsdata', 'Admin\LogController@data')->name('logs.data');
     Route::get('activitylogs', 'Admin\LogController@activityIndex')->name('activitylogs.index');
     Route::get('activitylogsdata', 'Admin\LogController@dataActivityLogs')->name('activitylogs.data');
+    Route::get('permissionUser/{user}', 'Admin\UsersController@userPermission')->name('permission.user');
+    Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
+
     Route::resource('staff', 'Admin\StaffController');
 });
 Route::group(['middleware' => ['auth'], 'prefix' => 'staff', 'as' => 'staff.'], function () {

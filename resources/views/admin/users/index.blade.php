@@ -34,6 +34,9 @@
                         <th>
                             Account Status
                         </th>
+                        <th> 
+                        Specific Permission
+                        </th>
                         <th>
                            Roles
                         </th>
@@ -61,8 +64,18 @@
                             <td>
                                 {{ $user->status ==1  ? 'Active' : '' }} 
                             </td>
+                            <td> 
+                                <a href="{{ route('admin.permission.user', $user->id) }}"
+                                        class="btn btn-link sims-show">
+                                        Assign                                    </a> 
+                                    <ul>
+                                    @foreach($user->Permissions as $permission_user)
+                                    <span class="badge badge-info">  {{$permission_user->name}} </span>
+                                    @endforeach
+                                        </ul>                                          
+                                </td>
                             <td>
-                                @foreach($user->roles()->pluck('name') as $role)
+                                @foreach($user->roles->pluck('name') as $role)
                                     <span class="badge badge-info">{{ $role }}</span>
                                 @endforeach
                             </td>

@@ -105,6 +105,65 @@ class UsersController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
+
+      /**
+     * Display the specified resource.
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function userPermission(User $user)
+    {
+        $extrapermission = [];
+        $attachedpermissions = [];
+        $admin_default_permissions = [];
+        foreach ($user->Permissions as $extrapermissions) {
+            $extrapermission[] = $extrapermissions->id;
+        }
+        foreach ($user->roles as $roles) {
+          
+            foreach ($roles->permissions as $role_permission) {
+                $attachedpermissions[] = $role_permission->id;
+            }
+        }
+       
+        if (count($attachedpermissions) > 0) {
+            $attachedpermissions = array_unique($attachedpermissions);
+        }
+      
+        $adminroles = Role::whereIn('id', [1, 2])->get();
+        $adminrole2 =Role::all();
+       
+        foreach ($adminrole2 as $adminrole_default) {
+            //dd($adminrole_default);
+            dd($adminrole_default->permissions);
+            foreach ($adminrole_default->permissions as $admin_permission) {
+               
+                $admin_default_permissions[] = $admin_permission->id;
+            }
+        }
+        $uniq_admin_default_permissions = array_unique($admin_default_permissions);
+        $allattachedpermissions = array_merge($uniq_admin_default_permissions, $attachedpermissions);
+
+        $permission = Permission::whereNotIn('id', $allattachedpermissions)->get();
+        
+        return view('admin.users.user_permissions',
+            [
+                'user' => $user,
+                'permissions' => $permission,
+                'extrapermission' => $extrapermission
+            ]);
+    }
+
+    public function userPermissionsAssignment(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+        $permissions = $request->input("permission_ids");
+        $user->syncPermissions($permissions, 'App/User');
+        alert()->success('User specific permission. ', 'Specific Permission Successfully Assigned', 'success')->persistent('Ok');
+        return redirect()->back();
+    }
+
     /**
      * Remove User from storage.
      *

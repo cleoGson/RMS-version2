@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                        Chaneg Password  <i class="fas fa-plus-circle fa-fw"></i>
+                        Change Password  <i class="fas fa-plus-circle fa-fw"></i>
                         </p>
                     </h1>
                 </div>
