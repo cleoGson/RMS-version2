@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add datatables.net-bs4
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add highcharts
 
 PATH: 
   /usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
@@ -18,46 +18,63 @@ Trace:
 
 npm manifest: 
   {
-      "private": true,
-      "scripts": {
-          "dev": "npm run development",
-          "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-          "watch": "npm run development -- --watch",
-          "watch-poll": "npm run watch -- --watch-poll",
-          "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-          "prod": "npm run production",
-          "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-      },
-      "devDependencies": {
-          "axios": "^0.19",
-          "cross-env": "^5.1",
-          "laravel-mix": "^4.0.7",
-          "lodash": "^4.17.13",
-          "resolve-url-loader": "^2.3.1",
-          "sass": "^1.15.2",
-          "sass-loader": "^7.1.0"
-      },
-      "dependencies": {
-          "@coreui/coreui": "2.1.12",
-          "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
-          "@coreui/icons": "^0.4.1",
-          "@fortawesome/fontawesome-free": "5.2.0",
-          "@ttskch/select2-bootstrap4-theme": "^1.3.2",
-          "bootstrap": "^4.3.1",
-          "bootstrap-sass": "^3.4.1",
-          "chart.js": "^2.8.0",
-          "flag-icon-css": "^3.4.2",
-          "highcharts": "^7.2.0",
-          "jquery": "^3.4.1",
-          "pace": "^0.0.4",
-          "pace-progress": "^1.0.2",
-          "perfect-scrollbar": "^1.4.0",
-          "popper.js": "^1.16.0",
-          "simple-line-icons": "^2.4.1",
-          "vue": "^2.6.10",
-          "vue-template-compiler": "^2.6.10",
-          "webpack": "^4.41.2"
-      }
+    "private": true,
+    "scripts": {
+      "dev": "npm run development",
+      "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+      "watch": "npm run development -- --watch",
+      "watch-poll": "npm run watch -- --watch-poll",
+      "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+      "prod": "npm run production",
+      "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+      "axios": "^0.19",
+      "cross-env": "^5.1",
+      "laravel-mix": "^4.0.7",
+      "lodash": "^4.17.13",
+      "resolve-url-loader": "^2.3.1",
+      "sass": "^1.15.2",
+      "sass-loader": "^7.1.0"
+    },
+    "dependencies": {
+      "@coreui/coreui": "2.1.12",
+      "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
+      "@coreui/icons": "^0.4.1",
+      "@fortawesome/fontawesome-free": "5.2.0",
+      "@fullcalendar/daygrid": "^4.3.0",
+      "@ttskch/select2-bootstrap4-theme": "^1.3.2",
+      "bootstrap": "^4.3.1",
+      "bootstrap-datepicker": "^1.9.0",
+      "bootstrap-sass": "^3.4.1",
+      "chart.js": "^2.8.0",
+      "datatables.net-bs4": "^1.10.20",
+      "datatables.net-dt": "^1.10.20",
+      "flag-icon-css": "^3.4.2",
+      "gijgo": "^1.9.13",
+      "highcharts": "^7.2.0",
+      "jquery": "^3.4.1",
+      "pace": "^0.0.4",
+      "pace-progress": "^1.0.2",
+      "perfect-scrollbar": "^1.4.0",
+      "popper.js": "^1.16.0",
+      "select2": "^4.0.11",
+      "select2-bootstrap4-theme": "^1.0.0",
+      "simple-line-icons": "^2.4.1",
+      "sweetalert": "^2.1.2",
+      "sweetalert2": "^8.17.1",
+      "vform": "^1.0.1",
+      "vue": "^2.6.10",
+      "vue-chartjs": "^3.4.2",
+      "vue-ctk-date-time-picker": "^2.2.0",
+      "vue-progressbar": "^0.7.5",
+      "vue-router": "^3.1.3",
+      "vue-select2": "^0.2.6",
+      "vue-template-compiler": "^2.6.10",
+      "vuejs-datatable": "^1.7.0",
+      "vuex": "^3.1.1",
+      "webpack": "^4.41.2"
+    }
   }
 
 yarn manifest: 
@@ -752,6 +769,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.2.0.tgz#50cd9856774351c56c0b1b0db4efe122d7913e58"
     integrity sha512-4pgStJx9UmydKc7wwF6Xjw4dFqzUnQejeuP2aUNHWazayWbmMbrx5rieN9+oob4bUwkf1thS3am0Ko+uhFHpNA==
   
+  "@fullcalendar/daygrid@^4.3.0":
+    version "4.3.0"
+    resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-4.3.0.tgz#1b4ab9fdc238dba77921cb7c5bd2d813c834e905"
+    integrity sha512-OrGaRIGbELESOXOCXtoQVY4cOxnxmN7OrjDGbMoVITdoXWuIZ6sFNO84WcBQoRaIbkmqVM0SAU2MENwy+eEwqQ==
+  
   "@mrmlnc/readdir-enhanced@^2.2.1":
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1336,6 +1358,13 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
     integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+  
+  bootstrap-datepicker@^1.9.0:
+    version "1.9.0"
+    resolved "https://registry.yarnpkg.com/bootstrap-datepicker/-/bootstrap-datepicker-1.9.0.tgz#e4bfce3fcce1967876b21dc6833ec5994aaed090"
+    integrity sha512-9rYYbaVOheGYxjOr/+bJCmRPihfy+LkLSg4fIFMT9Od8WwWB/MB50w0JO1eBgKUMbb7PFHQD5uAfI3ArAxZRXA==
+    dependencies:
+      jquery ">=1.7.1 <4.0.0"
   
   bootstrap-sass@^3.4.1:
     version "3.4.1"
@@ -2231,6 +2260,37 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
     integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
   
+  d@1, d@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/d/-/d-1.0.1.tgz#8698095372d58dbee346ffd0c7093f99f8f9eb5a"
+    integrity sha512-m62ShEObQ39CfralilEQRjH6oAMtNCV1xJyEx5LpRYUVN+EviphDgUc/F3hnYbADmkiNs67Y+3ylmlG7Lnu+FA==
+    dependencies:
+      es5-ext "^0.10.50"
+      type "^1.0.1"
+  
+  datatables.net-bs4@^1.10.20:
+    version "1.10.20"
+    resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.10.20.tgz#beff1c8d3510826c0678eaa055270607c0e53882"
+    integrity sha512-kQmMUMsHMOlAW96ztdoFqjSbLnlGZQ63iIM82kHbmldsfYdzuyhbb4hTx6YNBi481WCO3iPSvI6YodNec46ZAw==
+    dependencies:
+      datatables.net "1.10.20"
+      jquery ">=1.7"
+  
+  datatables.net-dt@^1.10.20:
+    version "1.10.20"
+    resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.10.20.tgz#998ab7d035e1ad52ad406451026ab968d1e63849"
+    integrity sha512-D+65buDke96a3WlJo2re+SbcAVfjPh2nsFZG198Vbkz3i1wKPdB+wkV2K07qYIiIpypcXWOnD2pz3MvnUqM9Tw==
+    dependencies:
+      datatables.net "1.10.20"
+      jquery ">=1.7"
+  
+  datatables.net@1.10.20:
+    version "1.10.20"
+    resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.20.tgz#9d65ecc3c83cbe7baa4fa5a053405c8fe42c1350"
+    integrity sha512-4E4S7tTU607N3h0fZPkGmAtr9mwy462u+VJ6gxYZ8MxcRIjZqHy3Dv1GNry7i3zQCktTdWbULVKBbkAJkuHEnQ==
+    dependencies:
+      jquery ">=1.7"
+  
   date-now@^0.1.4:
     version "0.1.4"
     resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -2597,6 +2657,37 @@ Lockfile:
       is-callable "^1.1.4"
       is-date-object "^1.0.1"
       is-symbol "^1.0.2"
+  
+  es5-ext@^0.10.35, es5-ext@^0.10.50, es5-ext@^0.10.51:
+    version "0.10.51"
+    resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.51.tgz#ed2d7d9d48a12df86e0299287e93a09ff478842f"
+    integrity sha512-oRpWzM2WcLHVKpnrcyB7OW8j/s67Ba04JCm0WnNv3RiABSvs7mrQlutB8DBv793gKcp0XENR8Il8WxGTlZ73gQ==
+    dependencies:
+      es6-iterator "~2.0.3"
+      es6-symbol "~3.1.1"
+      next-tick "^1.0.0"
+  
+  es6-iterator@~2.0.3:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/es6-iterator/-/es6-iterator-2.0.3.tgz#a7de889141a05a94b0854403b2d0a0fbfa98f3b7"
+    integrity sha1-p96IkUGgWpSwhUQDstCg+/qY87c=
+    dependencies:
+      d "1"
+      es5-ext "^0.10.35"
+      es6-symbol "^3.1.1"
+  
+  es6-object-assign@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
+    integrity sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw=
+  
+  es6-symbol@^3.1.0, es6-symbol@^3.1.1, es6-symbol@~3.1.1:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.2.tgz#859fdd34f32e905ff06d752e7171ddd4444a7ed1"
+    integrity sha512-/ZypxQsArlv+KHpGvng52/Iz8by3EQPxhmbuz8yFG89N/caTFBSbcXONDw0aMjy827gQg26XAjP4uXFvnfINmQ==
+    dependencies:
+      d "^1.0.1"
+      es5-ext "^0.10.51"
   
   es6-templates@^0.2.3:
     version "0.2.3"
@@ -3056,6 +3147,13 @@ Lockfile:
     version "2.0.6"
     resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
     integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
+  
+  gijgo@^1.9.13:
+    version "1.9.13"
+    resolved "https://registry.yarnpkg.com/gijgo/-/gijgo-1.9.13.tgz#22c6186252369de3a618e1e6369a923849128b6e"
+    integrity sha512-VxUzueysKaSRpjNM6jiMdoTJuUEWiPJNir5PCVKat6uA1R6vH7crKyFnR/Ey1k2r0i1yvYeJ3QKsPFkTB7aZxg==
+    dependencies:
+      jquery "^3.2.1"
   
   glob-parent@^3.1.0:
     version "3.1.0"
@@ -3857,7 +3955,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
     integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
   
-  jquery@^3.4.1:
+  jquery@>=1.7, "jquery@>=1.7.1 <4.0.0", jquery@^3.2.1, jquery@^3.4.1:
     version "3.4.1"
     resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
     integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
@@ -4427,7 +4525,14 @@ Lockfile:
     dependencies:
       minimist "0.0.8"
   
-  moment@^2.10.2:
+  moment-range@^4.0.1:
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/moment-range/-/moment-range-4.0.2.tgz#f7c3863df2a1ed7fd1822ba5a7bcf53a78701be9"
+    integrity sha512-n8sceWwSTjmz++nFHzeNEUsYtDqjgXgcOBzsHi+BoXQU2FW+eU92LUaK8gqOiSu5PG57Q9sYj1Fz4LRDj4FtKA==
+    dependencies:
+      es6-symbol "^3.1.0"
+  
+  moment@^2.10.2, moment@^2.24.0:
     version "2.24.0"
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
     integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -4512,6 +4617,11 @@ Lockfile:
     version "2.6.1"
     resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
     integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+  
+  next-tick@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
+    integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
   
   nice-try@^1.0.4:
     version "1.0.5"
@@ -4698,6 +4808,11 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
     integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
+  
+  object-path@^0.11.4:
+    version "0.11.4"
+    resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
+    integrity sha1-NwrnUvvzfePqcKhhwju6iRVpGUk=
   
   object-path@^0.9.2:
     version "0.9.2"
@@ -5444,6 +5559,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
     integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
   
+  promise-polyfill@^6.0.2:
+    version "6.1.0"
+    resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.1.0.tgz#dfa96943ea9c121fca4de9b5868cb39d3472e057"
+    integrity sha1-36lpQ+qcEh/KTem1hoyznTRy4Fc=
+  
   proxy-addr@~2.0.5:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.5.tgz#34cbd64a2d81f4b1fd21e76f9f06c8a45299ee34"
@@ -5930,6 +6050,16 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
     integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
   
+  select2-bootstrap4-theme@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/select2-bootstrap4-theme/-/select2-bootstrap4-theme-1.0.0.tgz#d637ff18e7fdade8d723ad4c567ef2ba48b73094"
+    integrity sha512-H5v9fd5JWqYKZZ0T8jB5cIrAhWdAIbr3K0pkfuUebcEZqFXlPtZSKoANzJc/qbDzj0/Sle1h/4APpVPveiR/VA==
+  
+  select2@^4.0.11:
+    version "4.0.11"
+    resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.11.tgz#85c6243971947a798d96808ab608f75d5befa2d1"
+    integrity sha512-8Z/yd43F5EMOkz2Mo+aE7nOx2i8nSuxGZVFkbeyCklkU+WTwCa+xdZqG+IPgZ75lkEkLD+X+f8vEG9aKBxISqA==
+  
   selfsigned@^1.10.7:
     version "1.10.7"
     resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.10.7.tgz#da5819fd049d5574f28e88a9bcc6dbc6e6f3906b"
@@ -6406,6 +6536,19 @@ Lockfile:
       unquote "~1.1.1"
       util.promisify "~1.0.0"
   
+  sweetalert2@^8.17.1:
+    version "8.18.5"
+    resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.18.5.tgz#ed6a9e4647026333de8e7cc0df02f61ec5bb850f"
+    integrity sha512-GTP24XbiLqdT/Sd+lYac/bQLEJKqzWldV63hvyqPdWcqRimsDRSsumhWL3yyzLvqXMIwzoVbqpa1kWgg2/fm0g==
+  
+  sweetalert@^2.1.2:
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/sweetalert/-/sweetalert-2.1.2.tgz#010baaa80d0dbdc86f96bfcaa96b490728594b79"
+    integrity sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA==
+    dependencies:
+      es6-object-assign "^1.1.0"
+      promise-polyfill "^6.0.2"
+  
   tapable@^1.0.0, tapable@^1.1.3:
     version "1.1.3"
     resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
@@ -6551,6 +6694,11 @@ Lockfile:
     dependencies:
       media-typer "0.3.0"
       mime-types "~2.1.24"
+  
+  type@^1.0.1:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/type/-/type-1.2.0.tgz#848dd7698dafa3e54a6c479e759c4bc3f18847a0"
+    integrity sha512-+5nt5AAniqsCnu2cEQQdpzCAh33kVx8n0VoFidKpB1dVVLAN/F+bgVOqOJqOnEnrhp222clB5p3vUlD+1QAnfg==
   
   typedarray@^0.0.6:
     version "0.0.6"
@@ -6725,6 +6873,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
     integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
   
+  v-click-outside@^2.0.2:
+    version "2.1.4"
+    resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-2.1.4.tgz#7d7813b09a0fd4a9d0fbccc2ca12ca7c5591e087"
+    integrity sha512-NbQiwRjJjeKptI1qr1co2Ox44fUWEnj08chR1nw3DVrNCQHjb+sqlevzb1zCXMgb7orTFE0wpiecqMlbOZ15EQ==
+  
   v8-compile-cache@2.0.3:
     version "2.0.3"
     resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.3.tgz#00f7494d2ae2b688cfe2899df6ed2c54bef91dbe"
@@ -6740,10 +6893,30 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.3.tgz#a6467781abd366217c050f8202e7e50cc9eef8c0"
     integrity sha512-fOi47nsJP5Wqefa43kyWSg80qF+Q3XA6MUkgi7Hp1HQaKDQW4cQrK2D0P7mmbFtsV1N89am55Yru/nyEwRubcw==
   
+  vform@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/vform/-/vform-1.0.1.tgz#aedce47696c589e0c1eab9bd76a00189d6164683"
+    integrity sha512-O+6zpxxhn3/iYWBaWWwx0sjeRP6Mh5MDNHCjPALtXFT/Mef6nPHquXEAUtai96FwogkGlTQCzFADqwbOsj8E7A==
+  
   vm-browserify@^1.0.1:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
     integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
+  
+  vue-chartjs@^3.4.2:
+    version "3.4.2"
+    resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-3.4.2.tgz#0323e6a99a10a68f38d426899c3994f48596fd23"
+    integrity sha512-EhoXUJ17+9isMLhJpOliS++xE5z5FM8iAVytIqnKofByVMr8AISRL/SCy3zvWbvzhjgQPStd9y6adMF5bnWQdg==
+  
+  vue-ctk-date-time-picker@^2.2.0:
+    version "2.3.1"
+    resolved "https://registry.yarnpkg.com/vue-ctk-date-time-picker/-/vue-ctk-date-time-picker-2.3.1.tgz#6207de1abd7e015768e580bec7506329205ad387"
+    integrity sha512-02Wjyp+VhIH3t+F0EXGghqY6+mhUYr0e6kLhS3GYIWbPpXUiPbMNlitqlGiJvjysm+ue9IXJhz+YA8hPN/w8Lw==
+    dependencies:
+      moment "^2.24.0"
+      moment-range "^4.0.1"
+      v-click-outside "^2.0.2"
+      vue "^2.6.9"
   
   vue-hot-reload-api@^2.3.0:
     version "2.3.4"
@@ -6760,6 +6933,21 @@ Lockfile:
       loader-utils "^1.1.0"
       vue-hot-reload-api "^2.3.0"
       vue-style-loader "^4.1.0"
+  
+  vue-progressbar@^0.7.5:
+    version "0.7.5"
+    resolved "https://registry.yarnpkg.com/vue-progressbar/-/vue-progressbar-0.7.5.tgz#414730892252b1e45582d4979dec93038e007f79"
+    integrity sha512-VeNG/inMsFbvdCTS7lJ1gjDAKSUZdqkhW9gS1tb0we1rqFKxR+BCEiVUgw5C84vODKb14M2GWHTw0WVdpoVg6g==
+  
+  vue-router@^3.1.3:
+    version "3.1.3"
+    resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.3.tgz#e6b14fabc0c0ee9fda0e2cbbda74b350e28e412b"
+    integrity sha512-8iSa4mGNXBjyuSZFCCO4fiKfvzqk+mhL0lnKuGcQtO1eoj8nq3CmbEG8FwK5QqoqwDgsjsf1GDuisDX4cdb/aQ==
+  
+  vue-select2@^0.2.6:
+    version "0.2.6"
+    resolved "https://registry.yarnpkg.com/vue-select2/-/vue-select2-0.2.6.tgz#d3dbbff656d7ab755b3acee48a725efd1fd0fc1b"
+    integrity sha1-09u/9lbXq3VbOs7kinJe/R/Q/Bs=
   
   vue-style-loader@^4.1.0:
     version "4.1.2"
@@ -6782,10 +6970,23 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
     integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
   
-  vue@^2.6.10:
+  vue@^2.5.17, vue@^2.6.10, vue@^2.6.9:
     version "2.6.10"
     resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
     integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+  
+  vuejs-datatable@^1.7.0:
+    version "1.7.0"
+    resolved "https://registry.yarnpkg.com/vuejs-datatable/-/vuejs-datatable-1.7.0.tgz#16f6afcfa53addae9bf625f64ffdcf776668357f"
+    integrity sha512-gsK6gVJ11GP4X1/XyomKXpfsunQetL6Un9XNkJ0YQIrbAZAT5F4DnCKNf+kPrxZNOpLb5pW0NctVFbEEiD9hqQ==
+    dependencies:
+      object-path "^0.11.4"
+      vue "^2.5.17"
+  
+  vuex@^3.1.1:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
+    integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
   
   watchpack@^1.6.0:
     version "1.6.0"

@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="content">
+<div class="row"> 
+<example> </example>
+
+</div>
 <div class="row">
 <div class="col-sm-6 col-lg-3">
 <div class="card text-white bg-primary">
@@ -87,8 +91,8 @@
 
 
 
-    <div class="row">
-    <div class="col-md-12">
+ <div class="row">
+ <div class="col-md-12">
 <div class="card">
 <div class="card-header">
 <i class="fa fa-align-justify"></i> List group
@@ -151,7 +155,7 @@
                         <i class="fa fa-ellipsis-v"></i>
                         <i class="fa fa-ellipsis-v"></i>
                         <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
+                        <span class="text">Make the theme responsive oksy</span>
                       </span>
 
                   
@@ -189,35 +193,10 @@
 </div>
 </div>
 </div>
+</div>
 @endsection
 @section('scripts')
-<script>
- document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Fruit Consumption'
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }]
-        });
-    });
-</script>
+
 @parent
 
 @endsection

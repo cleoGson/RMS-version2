@@ -7,6 +7,7 @@ use App\Model\Country;
 use App\Model\Disability;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use PDF;
 use App\Http\Requests\Student\StudentRequest;
 
 
