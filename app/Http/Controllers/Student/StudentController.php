@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Student;
 use App\Model\Country;
 use App\Model\Disability;
+use App\Setting\Bloodgroup;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use PDF;
@@ -51,9 +52,10 @@ class StudentController extends Controller
     {
         $countries=Country::get();
         $disability = Disability::pluck('name','id')->toArray();
+        $bloodgroups =Bloodgroup::pluck('name','id')->toArray();
         $birthcountries=  $countries->pluck('name','id')->toArray();
         $citizenship =  $countries->pluck('citizenship','id')->toArray();
-        return view('students.students.create',compact(['disability','birthcountries','citizenship']));
+        return view('students.students.create',compact(['disability','birthcountries','citizenship','bloodgroups']));
     }
 
     /**
@@ -81,6 +83,7 @@ class StudentController extends Controller
             'phone_no'=>request('phone_no'), 
             'student_number'=>$studentnumber,
             'birth_country'=>request('birth_country'),
+            'blood_group'=>request('blood_group'),
             'citzenship'=>request('citzenship'),
             'created_by'=>auth()->id(),
         ]);
@@ -96,8 +99,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        alert()->warning('warning', 'Sorry please  use the provided view Link.')->persistent();
-        return redirect()->back();
+        $show =$student;
+        return view('students.students.show',compact('show'));
     }
 
     /**
@@ -109,6 +112,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $countries=Country::get();
+        $bloodgroups =Bloodgroup::pluck('name','id')->toArray();
         $disability = Disability::pluck('name','id')->toArray();
         $birthcountries= $countries->pluck('name','id')->toArray();
         $citizenship = $countries->pluck('citizenship','id')->toArray();
@@ -117,6 +121,7 @@ class StudentController extends Controller
             'disability'=>$disability,
             'birthcountries'=>$birthcountries,
             'citizenship'=>$citizenship,
+            'bloodgroups'=>$bloodgroups,
             'show'=>$student]);
     }
 
@@ -127,7 +132,7 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentRequest $request, Student $student)
     {
         $student->updated_by = auth()->id();
         $student->birth_date =date("Y-m-d", strtotime(request('birth_date')));
@@ -142,6 +147,7 @@ class StudentController extends Controller
             'address', 
             'phone_no', 
             'birth_country',
+            'blood_grroup',
             'citzenship',
         ]));
         alert()->success('success', 'Student status  has  successfully Updated.')->persistent();

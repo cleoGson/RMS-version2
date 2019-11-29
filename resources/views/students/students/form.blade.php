@@ -7,6 +7,7 @@
             {{ Form::inputTextArea('address') }}
             {{ Form::inputDate('birth_date') }}
             {{ Form::inputSelect('disability',$disability) }}
+            {{ Form::inputSelect('blood_group',$bloodgroups) }}
             {{ Form::inputText('birth_place') }}
             {{ Form::inputSelect('birth_country', $birthcountries) }}
             {{ Form::inputSelect('citzenship', $citizenship) }}

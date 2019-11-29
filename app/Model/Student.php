@@ -27,6 +27,7 @@ class Student extends Model
             'birth_date',
             'disability',
             'birth_place',
+            'blood_group',
             'email', 
             'address', 
             'phone_no', 
@@ -50,6 +51,7 @@ class Student extends Model
             'birth_date',
             'disability',
             'birth_place',
+            'blood_group',
             'email', 
             'address', 
             'phone_no', 
@@ -107,5 +109,9 @@ class Student extends Model
     public function updator()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
+    }
+
+    public function getFullNameAttribute(){
+        return $this->firstname." ".$this->middlename." ".$this->lastname;
     }
 }

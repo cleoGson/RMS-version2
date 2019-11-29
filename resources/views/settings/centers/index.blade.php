@@ -60,17 +60,11 @@
             '<td colspan="3">'+d.display_name+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
-        '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
             '<td colspan="3">'+d.created_at+'</td>'+
         '</tr>'+
         '<tr>'+
-        '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'+
         '<tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+

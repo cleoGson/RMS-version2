@@ -4,19 +4,13 @@
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
-            <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
                 <div class="card-body">
                     @if(\Session::has('message'))
                         <p class="alert alert-info">
                             {{ \Session::get('message') }}
                         </p>
                     @endif
-                    @isset($url)
-                    <form method="POST" action='{{ url("$url/login") }}' aria-label="{{ __('Login') }}">
-                    @else
-                    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
-                    @endisset
-                            @csrf
+                    <form method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         <h1>{{ env('APP_NAME', 'Permissions Manager') }}</h1>
                         <p class="text-muted">Login</p>
@@ -55,13 +49,13 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary px-4">
                                     Login
                                 </button>
                             </div>
+
                             <div class="col-6 text-right">
                                 <a class="btn btn-link px-0" href="{{ route('password.request') }}">
                                     Forgot your password?
@@ -75,8 +69,4 @@
         </div>
     </div>
 </div>
-
 @endsection
-
-
-

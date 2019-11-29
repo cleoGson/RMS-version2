@@ -2,6 +2,9 @@
 Route::redirect('/', '/admin/home');
 
 Auth::routes(['register' => false]);
+Route::get('login/applicant', 'Auth\LoginController@showApplicantLoginForm')->name('application.login');
+Route::post('applicant/login', 'Auth\LoginController@applicantLogin');
+ Route::resource('applicantdashboard','Applicant\ApplicantDashboard');
 
 // Change Password Routes...
 Route::get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
@@ -21,12 +24,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('activitylogsdata', 'Admin\LogController@dataActivityLogs')->name('activitylogs.data');
     Route::get('permissionUser/{user}', 'Admin\UsersController@userPermission')->name('permission.user');
     Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
-
     Route::resource('staff', 'Admin\StaffController');
-});
+  });
 Route::group(['middleware' => ['auth'], 'prefix' => 'staff', 'as' => 'staff.'], function () {
   
-});
+  });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'setting', 'as' => 'setting.'], function () {
     Route::resource('academicyear', 'Setting\AcademicYearController');
@@ -57,7 +59,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('subject', 'Academic\SubjectController');
 });
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'axamination.'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
    
 });
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {
@@ -65,3 +67,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.
     Route::resource('student', 'Student\StudentController');
     Route::resource('studentstudy', 'Student\StudentstudyController');
 });
+
+Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applicant.'], function () {
+    
+    
+});
+   

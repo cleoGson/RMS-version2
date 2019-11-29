@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 use Auth;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+ 
     protected $redirectTo = '/admin/home';
 
     /**
@@ -38,6 +41,28 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+         $this->middleware('guest:applicants')->except('logout');
+    }
+
+
+        public function showApplicantLoginForm()
+    {
+        return view('auth.login', ['url' => 'applicant']);
+    }
+
+    public function applicantLogin(Request $request)
+    {
+      
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]); 
+
+        if (Auth::guard('applicants')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+            return redirect()->intended('applicant/applicantdashboard');
+        }
+        return back()->withInput($request->only('email', 'remember'));
     }
 
     

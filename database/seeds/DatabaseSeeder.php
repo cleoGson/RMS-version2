@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionTableSeeder::class);
         $this->call(SemesterTableSeeder::class);
         $this->call(SubjectTableSeeder::class);
-        $this->call(TermsofServiceTableSeeder::class);  
+        $this->call(TermsofServiceTableSeeder::class); 
+        $this->call(BloodgroupSeeder::class); 
+         
     }
 }

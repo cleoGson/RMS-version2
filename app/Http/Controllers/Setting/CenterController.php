@@ -18,7 +18,7 @@ class CenterController extends Controller
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
             $template = 'settings.centers.actions';
-            return $dataTables->eloquent(Center::with(['creator','updator'])->select('centers.*'))
+            return $dataTables->eloquent(Center::select('centers.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'setting.center';
                     $routeKey = 'setting.center';
@@ -28,12 +28,6 @@ class CenterController extends Controller
                     return $row->display_name ? strip_tags($row->display_name) : '';
                 })
                 
-                ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
-                })
-                ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
-                })
                 ->make(true);
          }
          return view('settings.centers.index');
@@ -60,7 +54,6 @@ class CenterController extends Controller
         $center = Center::create([
             'name'=>request('name'),
             'display_name'=>request('display_name'),
-            'created_by'=>auth()->id(),
         ]);
         alert()->success('success', 'Center  has  successfully added.')->persistent();
         return redirect()->route('setting.center.index');
@@ -98,7 +91,6 @@ class CenterController extends Controller
      */
     public function update(CenterRequest $request, Center $center)
     {
-        $center->updated_by = auth()->id();
         $center->update(request(['name','display_name']));
         alert()->success('success', 'Center  has  successfully Updated.')->persistent();
         return redirect()->route('setting.center.index');

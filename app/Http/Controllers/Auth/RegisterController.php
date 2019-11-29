@@ -37,6 +37,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+         $this->middleware('guest:applicants');
     }
 
     /**
@@ -54,6 +55,11 @@ class RegisterController extends Controller
         ]);
     }
 
+     public function showApplicantRegisterForm()
+    {
+        return view('auth.applicants.register');
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -67,5 +73,18 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+
+
+        protected function createApplicant(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $admin = Applicantuser::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+        return redirect()->intended('applicant/login');
     }
 }

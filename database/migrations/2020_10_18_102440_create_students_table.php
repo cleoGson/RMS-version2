@@ -27,6 +27,9 @@ class CreateStudentsTable extends Migration
             $table->string('birth_place', 120);
             $table->string('email')->nullable();
             $table->text('address')->nullable();
+            $table->text('photo')->nullable();
+            $table->bigInteger('blood_group')->unsigned()->nullable();
+            $table->foreign('blood_group')->references('id')->on('bloodgroups');
             $table->string('phone_no', 13)->nullable();
             $table->string('student_number')->unique();
             $table->bigInteger('birth_country')->unsigned();

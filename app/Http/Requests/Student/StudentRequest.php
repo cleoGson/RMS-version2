@@ -33,13 +33,14 @@ class StudentRequest extends FormRequest
             'lastname'=>'required|string|max:191',
             'sex'=>'required|in:female,male',
             'birth_date'=>'required|date|',
-            'disability'=>'required|exists:disiabilities,id',
-            'birth_place'=>'required|exists:countries,id',
+            'disability'=>'required|exists:disabilities,id',
+            'birth_place'=>'required|string',
             'email'=>'nullable|email', 
             'address'=>'required|string', 
             'phone_no'=>'nullable|numeric', 
             'birth_country'=>'required|exists:countries,id',
-            'citizenship'=>'required|exists:couuntries,id',
+            'blood_group'=>'nullable|exists:bloodgroups,id',
+            'citizenship'=>'required|exists:countries,id',
         ];
        }
        case 'PUT':
@@ -52,13 +53,14 @@ class StudentRequest extends FormRequest
             'lastname'=>'required|string|max:191',
             'sex'=>'required|in:female,male',
             'birth_date'=>'required|date',
-            'disability'=>'required|exists:disiabilities,id',
-            'birth_place'=>'required|exists:countries,id',
+            'disability'=>'required|exists:disabilities,id',
+            'birth_place'=>'required|string',
             'email'=>'nullable|email', 
             'address'=>'required|string', 
             'phone_no'=>'nullable|numeric', 
             'birth_country'=>'required|exists:countries,id',
-            'citizenship'=>'required|exists:couuntries,id',
+            'blood_group'=>'nullable|exists:bloodgroups,id',
+            'citizenship'=>'required|exists:countries,id',
         ];
        }
        default:break;
