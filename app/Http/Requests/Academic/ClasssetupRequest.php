@@ -34,6 +34,7 @@ class ClasssetupRequest extends FormRequest
             'classsection_id'=>'required|integer|exists:classsections,id',
             'grade_curricular'=>'required|integer|exists:gradecurriculars,id',
             'curricular_id'=>'required|integer|exists:curriculars,id',
+            'feesstructure_id'=>'required|integer|exists:feesstructures,id',
             
         ];
        }
@@ -51,6 +52,7 @@ class ClasssetupRequest extends FormRequest
             'classsection_id'=>'required|integer|exists:classsections,id',
             'grade_curricular'=>'required|integer|exists:gradecurriculars,id',
             'curricular_id'=>'required|integer|exists:curriculars,id',
+            'feesstructure_id'=>'required|integer|exists:feesstructures,id',
             
         ];
        }

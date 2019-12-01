@@ -34,8 +34,10 @@ class CreateStudentsTable extends Migration
             $table->string('student_number')->unique();
             $table->bigInteger('birth_country')->unsigned();
             $table->foreign('birth_country')->references('id')->on('countries');
-            $table->bigInteger('citzenship')->unsigned();
-            $table->foreign('citzenship')->references('id')->on('countries');           
+            $table->bigInteger('citizenship')->unsigned();
+            $table->foreign('citizenship')->references('id')->on('countries');    
+            $table->bigInteger('course')->unsigned();
+            $table->foreign('course')->references('id')->on('courses');          
             $table->bigInteger('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');           
             $table->bigInteger('updated_by')->unsigned()->nullable();

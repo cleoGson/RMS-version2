@@ -21,6 +21,11 @@ class RelationshipTableSeeder extends Seeder
             ],
             ['name'=>'Sister',
             'display_name'=>'Sister'],
+            ['name'=>'Grand father',
+            'display_name'=>'Grand father'
+            ],
+            ['name'=>'Grand Mother',
+            'display_name'=>'Grand Mother'],
             ['name'=>'Spouse',
             'display_name'=>'Spouse'
             ] ,
@@ -41,6 +46,9 @@ class RelationshipTableSeeder extends Seeder
             ],
             ['name'=>'Friend',
             'display_name'=>'Friend'
+            ],
+             ['name'=>'Guardian',
+            'display_name'=>'Guardian'
             ],
     ];
     FamilyRelationship::insert($data);

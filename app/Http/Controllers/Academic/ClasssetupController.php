@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Academic;
 use App\Http\Controllers\Controller;
 use App\Model\Classsetup;
 use App\Model\Gradecurricular;
+use App\Model\Feesstructure;
 use App\Model\Curricular;
 use App\Model\Academicyear;
 use App\Model\Classroom;
@@ -69,7 +70,8 @@ class ClasssetupController extends Controller
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
-        return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular']));
+        $feesstructure=Feesstructure::pluck('name','id')->toArray();
+        return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular','feesstructure']));
     }
 
 
@@ -90,6 +92,7 @@ class ClasssetupController extends Controller
             'minimum_capacity'=>request('minimum_capacity'),
             'maximum_capacity'=>request('maximum_capacity'),
             'curricular_id'=>request('curricular_id'),
+            'feesstructure_id'=>request('feesstructure_id'),
             'status'=>1,
             'created_by'=>auth()->id(),
         ]);
@@ -122,13 +125,15 @@ class ClasssetupController extends Controller
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
+        $feesstructure=Feesstructure::pluck('name','id')->toArray();
         return view('academics.classsetups.edit',[
             'show'=>$classsetup,
             'years'=>$years,
             'classsections'=>$classsections,
             'classes'=>$classes,
             'grades'=>$grades,
-            'curricular'=>$curricular
+            'curricular'=>$curricular,
+            'feesstructure'=>$feesstructure
             ]);
     }
 
@@ -151,6 +156,7 @@ class ClasssetupController extends Controller
               'minimum_capacity',
               'maximum_capacity',
               'curricular_id',
+              'feesstructure_id',
               'year_id',
             ]));
         alert()->success('success', 'classsetup  has  successfully Updated.')->persistent();

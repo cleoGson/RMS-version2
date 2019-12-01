@@ -6,6 +6,7 @@ use App\Model\Student;
 use App\Model\Country;
 use App\Model\Disability;
 use App\Setting\Bloodgroup;
+use App\Model\Course;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use PDF;
@@ -53,9 +54,10 @@ class StudentController extends Controller
         $countries=Country::get();
         $disability = Disability::pluck('name','id')->toArray();
         $bloodgroups =Bloodgroup::pluck('name','id')->toArray();
+        $courses =Course::get()->pluck('course_name','id')->toArray();
         $birthcountries=  $countries->pluck('name','id')->toArray();
         $citizenship =  $countries->pluck('citizenship','id')->toArray();
-        return view('students.students.create',compact(['disability','birthcountries','citizenship','bloodgroups']));
+        return view('students.students.create',compact(['disability','birthcountries','citizenship','bloodgroups','courses']));
     }
 
     /**
@@ -64,7 +66,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $email= !is_null(request('email'))  ?  request('email') : strtolower(request('firstname')).'.'.strtolower(request('middlename')).date('Ymdhms').'@student.com';
          $studentnumber ='10090089'.date('Ymdhms');
@@ -83,8 +85,9 @@ class StudentController extends Controller
             'phone_no'=>request('phone_no'), 
             'student_number'=>$studentnumber,
             'birth_country'=>request('birth_country'),
+            'course'=>request('course'),
             'blood_group'=>request('blood_group'),
-            'citzenship'=>request('citzenship'),
+            'citizenship'=>request('citizenship'),
             'created_by'=>auth()->id(),
         ]);
         alert()->success('success', 'Student status  has  successfully added.')->persistent();
@@ -112,6 +115,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $countries=Country::get();
+        $courses =Course::get()->pluck('course_name','id')->toArray();
         $bloodgroups =Bloodgroup::pluck('name','id')->toArray();
         $disability = Disability::pluck('name','id')->toArray();
         $birthcountries= $countries->pluck('name','id')->toArray();
@@ -120,6 +124,7 @@ class StudentController extends Controller
         [
             'disability'=>$disability,
             'birthcountries'=>$birthcountries,
+            'courses'=> $courses,
             'citizenship'=>$citizenship,
             'bloodgroups'=>$bloodgroups,
             'show'=>$student]);
@@ -148,7 +153,8 @@ class StudentController extends Controller
             'phone_no', 
             'birth_country',
             'blood_grroup',
-            'citzenship',
+            'course',
+            'citizenship',
         ]));
         alert()->success('success', 'Student status  has  successfully Updated.')->persistent();
         return redirect()->route('student.student.index');

@@ -33,7 +33,8 @@ class Student extends Model
             'phone_no', 
             'student_number',
             'birth_country',
-            'citzenship', 
+            'citizenship', 
+            'course',
             'created_by',
             'updated_by'
     ];
@@ -44,7 +45,7 @@ class Student extends Model
      * @var array
      */
     protected static $logAttributes = [
-           'firstname',
+            'firstname',
             'middlename',
             'lastname',
             'sex',
@@ -57,7 +58,8 @@ class Student extends Model
             'phone_no', 
             'student_number',
             'birth_country',
-            'citzenship', 
+            'citizenship', 
+            'course',
             'created_by',
             'updated_by'
     ];
@@ -89,7 +91,7 @@ class Student extends Model
      */
     public function citizens()
     {
-        return $this->belongsTo(Country::class, 'citzenship')->withDefault();
+        return $this->belongsTo(Country::class, 'citizenship')->withDefault();
     }
         /**
      * An applicant belongs to users

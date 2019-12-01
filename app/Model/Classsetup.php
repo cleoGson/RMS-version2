@@ -27,6 +27,7 @@ class Classsetup extends Model
          'grade_curricular',
          'minimum_capacity',
          'maximum_capacity',
+         'feesstructure_id',
          'curricular_id',
          'year_id',
          'created_by',
@@ -41,13 +42,14 @@ class Classsetup extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name',
+         'name',
          'class_id',
          'classsection_id',
          'grade_curricular',
          'minimum_capacity',
          'maximum_capacity',
          'curricular_id',
+         'feesstructure_id',
          'year_id',
          'created_by',
          'updated_by',
@@ -71,6 +73,17 @@ class Classsetup extends Model
     public function centers()
     {
         return $this->belongsTo(Classroom::class, 'class_id')->withDefault();
+    }
+
+
+       /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function feesStructure()
+    {
+        return $this->belongsTo(Feessttructure::class, 'feesstructure_id')->withDefault();
     }
 
        /**

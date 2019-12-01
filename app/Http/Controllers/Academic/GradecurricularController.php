@@ -55,7 +55,8 @@ class GradecurricularController extends Controller
     {
         $gradeMarks =Grademark::pluck('name','id')->toArray(); 
         $academicYears=Academicyear::pluck('name','id')->toArray();
-        return view('academics.gradecurricular.create',compact(['academicYears','gradeMarks']));
+        $selectedGrades=[];
+        return view('academics.gradecurricular.create',compact(['academicYears','gradeMarks','selectedGrades']));
     }
 
     /**
@@ -103,9 +104,11 @@ class GradecurricularController extends Controller
     {
         $gradeMarks =Grademark::pluck('name','id')->toArray(); 
         $academicYears=Academicyear::pluck('name','id')->toArray();
+        $selectedGrades=$gradecurricular->gradeCurricular->pluck('id')->toArray();
         return view('academics.gradecurricular.edit',
         ['show'=>$gradecurricular,
         'academicYears'=> $academicYears,
+        'selectedGrades'=>$selectedGrades,
         'gradeMarks'=>$gradeMarks]);
 
     }

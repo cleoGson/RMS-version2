@@ -26,21 +26,20 @@ class StudentRequest extends FormRequest
         case 'POST':
         {
         return [
-            'name'=>"required|string|unique:studentstatuses,name",
-            'display_name'=>'required',
             'firstname'=>'required|string|max:191',
             'middlename'=>'required|string|max:191',
             'lastname'=>'required|string|max:191',
             'sex'=>'required|in:female,male',
-            'birth_date'=>'required|date|',
+            'phone_no'=>'nullable|numeric',
+            'address'=>'required|string',  
+            'birth_date'=>'required|date',
             'disability'=>'required|exists:disabilities,id',
-            'birth_place'=>'required|string',
-            'email'=>'nullable|email', 
-            'address'=>'required|string', 
-            'phone_no'=>'nullable|numeric', 
-            'birth_country'=>'required|exists:countries,id',
             'blood_group'=>'nullable|exists:bloodgroups,id',
+            'birth_place'=>'required|string',
+            'birth_country'=>'required|exists:countries,id',
             'citizenship'=>'required|exists:countries,id',
+            'course'=>'required|exists:courses,id',
+            'email'=>'nullable|email', 
         ];
        }
        case 'PUT':
@@ -52,15 +51,17 @@ class StudentRequest extends FormRequest
             'middlename'=>'required|string|max:191',
             'lastname'=>'required|string|max:191',
             'sex'=>'required|in:female,male',
+            'phone_no'=>'nullable|numeric',
+            'address'=>'required|string',  
             'birth_date'=>'required|date',
             'disability'=>'required|exists:disabilities,id',
-            'birth_place'=>'required|string',
-            'email'=>'nullable|email', 
-            'address'=>'required|string', 
-            'phone_no'=>'nullable|numeric', 
-            'birth_country'=>'required|exists:countries,id',
             'blood_group'=>'nullable|exists:bloodgroups,id',
+            'birth_place'=>'required|string',
+            'birth_country'=>'required|exists:countries,id',
             'citizenship'=>'required|exists:countries,id',
+            'course'=>'required|exists:courses,id',
+            'email'=>'nullable|email', 
+
         ];
        }
        default:break;

@@ -49,8 +49,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'setting', 'as' => 'setting.
 Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academic.'], function () {
     Route::resource('grade', 'Academic\GradeController');
     Route::resource('grademark', 'Academic\GrademarkController');
-    Route::resource('event', 'Academic\EventController');
     Route::resource('gradecurricular', 'Academic\GradecurricularController');
+    Route::resource('event', 'Academic\EventController');
+    Route::resource('fees', 'Academic\FeesController');
+    Route::resource('feesamount', 'Academic\FeesamountController');
+    Route::resource('feesstructure', 'Academic\FeesstructureController');
     Route::resource('almanac', 'Academic\AlmanacController');
     Route::resource('classroom', 'Academic\ClassroomController');
     Route::resource('curricular', 'Academic\CurricularController');
@@ -66,10 +69,18 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.
     Route::resource('studentstatus', 'Student\StudentstatusController');
     Route::resource('student', 'Student\StudentController');
     Route::resource('studentstudy', 'Student\StudentstudyController');
+    Route::resource('level', 'Student\LevelController');
+    Route::resource('course', 'Student\CourseController');
+    Route::resource('durationunit', 'Student\DurationunitController');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applicant.'], function () {
     
+    
+});
+
+Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.'], function () {
+    Route::resource('familymember', 'General\FamilymemberController');
     
 });
    

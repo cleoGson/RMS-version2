@@ -24,6 +24,8 @@ class CreateClasssetupsTable extends Migration
             $table->foreign('grade_curricular')->references('id')->on('gradecurriculars');
             $table->bigInteger('curricular_id')->unsigned()->nullable();
             $table->foreign('curricular_id')->references('id')->on('curriculars');
+            $table->bigInteger('feesstructure_id')->unsigned()->nullable();
+            $table->foreign('feesstructure_id')->references('id')->on('feesstructures');
             $table->double('minimum_capacity')->default(0);
             $table->double('maximum_capacity')->default(0);
             $table->bigInteger('year_id')->unsigned()->nullable();

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Model;
-
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -20,10 +19,21 @@ class Familymember extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'display_name',
+        'firstname',
+        'middlename',
+        'lastname',
+        'sex',
+        'birth_date',
+        'memberable_type',
+        'memberable_id',
+        'address',
+        'disability',
+        'phone_no',
+        'email',
+        'relationship',
         'created_by',
-        'updated_by'
+        'updated_by',
+
     ];
 
     /**
@@ -32,22 +42,43 @@ class Familymember extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name',
-        'display_name',
+        'firstname',
+        'middlename',
+        'lastname',
+        'sex',
+        'birth_date',
+        'memberable_type',
+        'address',
+        'memberable_id',
+        'disability',
+        'phone_no',
+        'email',
+        'relationship',
         'created_by',
-        'updated_by'
+        'updated_by',
     ];
 
-
-
+     public function memberable(){
+        return $this->morphTo();
+        }
       /**
      * An applicant belongs to users
      *      *
      * @return belongsTo
      */
-    public function creator()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by')->withDefault();
+    }
+
+      public function disability()
+    {
+        return $this->belongsTo(Disability::class, 'disability')->withDefault();
+    }
+
+       public function relationship()
+    {
+        return $this->belongsTo(Familyrelationship::class, 'relationship')->withDefault();
     }
 
     /**
@@ -55,7 +86,7 @@ class Familymember extends Model
      *      *
      * @return belongsTo
      */
-    public function updator()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
     }

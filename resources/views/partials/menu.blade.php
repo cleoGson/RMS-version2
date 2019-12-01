@@ -191,6 +191,29 @@
                               Grade Curricular
                             </a>
                         </li>
+                     <li class="nav-item">
+                            <a href="{{ route('academic.fees.index') }}" class="nav-link {{ request()->is('academic/fees') || request()->is('academic/fees/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                              Fees
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('academic.feesamount.index') }}" class="nav-link {{ request()->is('academic/feesamount') || request()->is('academic/feesamount/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Fees Amount
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('academic.feesstructure.index') }}" class="nav-link {{ request()->is('academic/feesstructure') || request()->is('academic/feesstructure/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                               Fees Structure
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('academic.event.index') }}" class="nav-link {{ request()->is('academic/event') || request()->is('academic/event/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
@@ -262,18 +285,33 @@
                               Students Accounts
                             </a>
                         </li>
+                          <li class="nav-item">
+                            <a href="{{ route('student.student.index') }}" class="nav-link {{ request()->is('student/student') || request()->is('student/student/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-lock nav-icon">
+
+                                </i>
+                              Student levels
+                            </a>
+                        </li>
                      <li class="nav-item">
-                            <a href="{{ route('student.studentstatus.index') }}" class="nav-link {{ request()->is('student/studentstatus') || request()->is('student/studentstatus/*') ? 'active' : '' }}">
+                            <a href="{{ route('student.level.index') }}" class="nav-link {{ request()->is('student/level') || request()->is('student/level/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-users nav-icon">
                                 </i>
-                               Promotion
+                              Studeies Level
+                            </a>
+                        </li>
+                          <li class="nav-item">
+                            <a href="{{ route('student.durationunit.index') }}" class="nav-link {{ request()->is('student/durationunit') || request()->is('student/durationunit/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-book nav-icon">
+                                </i>
+                             Duration Units
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('student.studentstatus.index') }}" class="nav-link {{ request()->is('student/studentstatus') || request()->is('student/studentstatus/*') ? 'active' : '' }}">
+                            <a href="{{ route('student.course.index') }}" class="nav-link {{ request()->is('student/course') || request()->is('student/course/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-book nav-icon">
                                 </i>
-                              Interclass Transfer
+                             Student Course
                             </a>
                         </li>
                         <li class="nav-item">
@@ -328,6 +366,23 @@
             </li>
 
             <li class="nav-item nav-dropdown">
+                    <a class="nav-link  nav-dropdown-toggle" href="#">
+                        <i class="fa-fw fas fa-users nav-icon"></i>
+                       General 
+                    </a>
+                <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a href="{{ route('general.familymember.index') }}" class="nav-link {{ request()->is('general/familymember') || request()->is('general/familymember/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Familly Member
+                            </a>
+                        </li>
+                    </ul>
+            </li>
+           
+
+             <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle" href="#">
                         <i class="fa-fw fas fa-users nav-icon"></i>
                        User Management

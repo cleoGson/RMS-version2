@@ -10,4 +10,5 @@
             {{ Form::inputSelect('blood_group',$bloodgroups) }}
             {{ Form::inputText('birth_place') }}
             {{ Form::inputSelect('birth_country', $birthcountries) }}
-            {{ Form::inputSelect('citzenship', $citizenship) }}
+            {{ Form::inputSelect('citizenship', $citizenship) }}
+            {{ Form::inputSelect('course', $courses) }}

@@ -24,7 +24,8 @@ class CreateFamilymembersTable extends Migration
             $table->bigInteger('memberable_id')->nullable();
             $table->bigInteger('disability')->unsigned();
             $table->foreign('disability')->references('id')->on('disabilities');
-            $table->string('phone_no', 13)->nullable();
+            $table->string('phone_no', 30)->nullable();
+            $table->text('address')->nullable();
             $table->string('email')->nullable();
             $table->bigInteger('relationship')->unsigned();
             $table->foreign('relationship')->references('id')->on('familyrelationships');
