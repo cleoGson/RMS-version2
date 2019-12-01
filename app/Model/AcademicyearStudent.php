@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 class AcademicyearStudent extends Model
 {
-    use LogsActivity, softDeletes;
+    use LogsActivity,softDeletes;
 
     protected $table = 'academicyear_students';
     protected $primaryKey = 'id';
@@ -19,10 +19,15 @@ class AcademicyearStudent extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'display_name',
-        'created_by',
-        'updated_by'
+       'student_id',
+       'year_id',
+       'studentstatus_id',
+       'class_id',
+       'classsetup_id',
+       'created_by',
+       'updated_by',
+       'reporting_date',
+       'remarks'
     ];
 
     /**
@@ -31,10 +36,15 @@ class AcademicyearStudent extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name',
-        'display_name',
-        'created_by',
-        'updated_by'
+       'student_id',
+       'year_id',
+       'studentstatus_id',
+       'class_id',
+       'classsetup_id',
+       'created_by',
+       'updated_by',
+       'reporting_date',
+       'remarks'
     ];
 
 
@@ -44,9 +54,29 @@ class AcademicyearStudent extends Model
      *      *
      * @return belongsTo
      */
-    public function creator()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class, 'created_by')->withDefault();
+        return $this->belongsTo(User::class,'created_by')->withDefault();
+    }
+       
+    public function studentStatus()
+    {
+        return $this->belongsTo(Studentstatus::class, 'studentstatus_id')->withDefault();
+    }
+
+      public function classSetups()
+    {
+        return $this->belongsTo(Classsetup::class,'classsetup_id')->withDefault();
+    }
+
+     /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function years()
+    {
+        return $this->belongsTo(Academicyear::class, 'year_id')->withDefault();
     }
 
     /**
@@ -54,8 +84,8 @@ class AcademicyearStudent extends Model
      *      *
      * @return belongsTo
      */
-    public function updator()
+    public function updatedBy()
     {
-        return $this->belongsTo(User::class, 'updated_by')->withDefault();
+        return $this->belongsTo(User::class,'updated_by')->withDefault();
     }
 }

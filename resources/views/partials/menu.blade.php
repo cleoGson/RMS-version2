@@ -307,6 +307,14 @@
                              Duration Units
                             </a>
                         </li>
+                           <li class="nav-item">
+                            <a href="{{ route('student.academicyearStudent.index') }}" class="nav-link {{ request()->is('student/academicyearStudent') || request()->is('student/academicyearStudent/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-book nav-icon">
+                                </i>
+                            Students Registration
+                            </a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a href="{{ route('student.course.index') }}" class="nav-link {{ request()->is('student/course') || request()->is('student/course/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-book nav-icon">

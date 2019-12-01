@@ -72,6 +72,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.
     Route::resource('level', 'Student\LevelController');
     Route::resource('course', 'Student\CourseController');
     Route::resource('durationunit', 'Student\DurationunitController');
+    Route::resource('academicyearStudent', 'Student\AcademicyearStudentController');
+
+    
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applicant.'], function () {
