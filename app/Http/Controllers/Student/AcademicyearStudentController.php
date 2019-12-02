@@ -23,7 +23,7 @@ class AcademicyearStudentController extends Controller
      */
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
-            $template = 'students.academicyearStudents.actions';
+            $template = 'students.academicyearStudents.actionsreg';
             return $dataTables->eloquent(AcademicyearStudent::with(['createdBy','createdBy'])->select('academicyear_students.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'student.academicyearStudent';
@@ -56,11 +56,16 @@ class AcademicyearStudentController extends Controller
          return view('students.academicyearStudents.index');
     }
 
-    public function indexRegistration(DataTables $dataTables)
-    {   
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(DataTables $dataTables)
+    {
          if (request()->wantsJson()) {
-         $template = 'students.academicyearStudents.actionsreg';
-         return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
+        $template = 'students.academicyearStudents.actionsreg';
+        return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
                 $routeKey = 'student.student';
@@ -78,16 +83,7 @@ class AcademicyearStudentController extends Controller
                 return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
             })
             ->make(true);
-     }
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
         $years=Academicyear::pluck('name','id')->toArray();
         $classsetups=Classsetup::pluck('name','id')->toArray();
         $studentstatus=Studentstatus::pluck('name','id')->toArray();

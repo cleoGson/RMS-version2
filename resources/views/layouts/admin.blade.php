@@ -62,6 +62,8 @@
     </div>
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/js/dataTables.checkboxes.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".editor").editor();
