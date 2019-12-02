@@ -314,6 +314,13 @@
                             Students Registration
                             </a>
                         </li>
+                          <li class="nav-item">
+                            <a href="{{ route('student.promotion.index') }}" class="nav-link {{ request()->is('student/promotion') || request()->is('student/promotion/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-book nav-icon">
+                                </i>
+                            Students Promotion
+                            </a>
+                        </li>
                         
                         <li class="nav-item">
                             <a href="{{ route('student.course.index') }}" class="nav-link {{ request()->is('student/course') || request()->is('student/course/*') ? 'active' : '' }}">
