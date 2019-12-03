@@ -62,7 +62,12 @@ class   StaffController extends Controller
         'designations','disabilities','citizenship','birthcountries']));
     }
 
-
+    public function disabilityData(Request $request){
+        $searchedvalue =$request->q;
+        $searchedvalue = '%'.$searchedvalue.'%';
+        $disabilities = Disability::where('name','LIKE',$searchedvalue)->pluck('name','id')->toArray();
+        return response()->json(['items'=>$disabilities]);
+    }
     /**
      * Store a newly created resource in storage.
      *

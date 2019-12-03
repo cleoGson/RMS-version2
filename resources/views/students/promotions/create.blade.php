@@ -171,7 +171,7 @@ $(document).ready(function() {
         '<td>Updated By:</td>'+
             '<td colspan="3">'+d.updator.email+'</td>'+
         '</tr>'+
-        '<tr>'+
+        '<tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+
@@ -180,6 +180,7 @@ $(document).ready(function() {
    var table = $('#example').DataTable({
        serverSide: true,
        processing: true,
+      "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
       'ajax': url,
       'columnDefs': [
          {

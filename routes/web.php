@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('permissionUser/{user}', 'Admin\UsersController@userPermission')->name('permission.user');
     Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
     Route::resource('staff', 'Admin\StaffController');
+    Route::post('disabilitydata','Admin\StaffController@disabilityData');
   });
 Route::group(['middleware' => ['auth'], 'prefix' => 'staff', 'as' => 'staff.'], function () {
   

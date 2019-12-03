@@ -130,7 +130,7 @@
         '<td>Updated By:</td>'+
             '<td colspan="3">'+d.updator.email+'</td>'+
         '</tr>'+
-        '<tr>'+
+        '<tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+

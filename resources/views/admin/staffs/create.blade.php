@@ -58,5 +58,54 @@
     </section>
 </section>
 @endsection
+@section('scripts')
+<script>
+// ajax select from the database with page nation
+$(function () {
+$("#sex2").select2({
+  ajax: {
+    url: "/admin/disabilitydata",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+      return {
+        q: params.term, // search term
+        page: params.page
+      };
+    },
+    processResults: function (data, params) {
+      params.page = params.page || 1;
+      return {
+        results: data.items,
+      };
+    },
+    cache: true
+  },
+  placeholder: 'Search Disability',
+  minimumInputLength: 1,
+  templateResult: formatRepo,
+  templateSelection: formatRepoSelection
+});
 
-                                 
+function formatRepo (repo) {
+  if (repo.loading) {
+    return repo.text;
+  }
+
+  var $container = $(
+    "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__description'></div>" +
+        "</div>" +
+      "</div>" +
+    "</div>"
+  );
+  $container.find(".select2-result-repository__description").text(repo.description);
+  return $container;
+}
+
+function formatRepoSelection (repo) {
+  return repo.full_name || repo.text;
+}
+   });
+    </script>
+@stop

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Model;
+use App\Http\Controllers\Controller;
 
-use App\StudentRegistration;
+use App\Model\Classsemister;
 use Illuminate\Http\Request;
 
-class StudentRegistrationController extends Controller
+class ClasssemisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class StudentRegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StudentRegistration  $studentRegistration
+     * @param  \App\Model\Classsemister  $classsemister
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentRegistration $studentRegistration)
+    public function show(Classsemister $classsemister)
     {
         //
     }
@@ -52,10 +53,10 @@ class StudentRegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StudentRegistration  $studentRegistration
+     * @param  \App\Model\Classsemister  $classsemister
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentRegistration $studentRegistration)
+    public function edit(Classsemister $classsemister)
     {
         //
     }
@@ -64,10 +65,10 @@ class StudentRegistrationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StudentRegistration  $studentRegistration
+     * @param  \App\Model\Classsemister  $classsemister
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentRegistration $studentRegistration)
+    public function update(Request $request, Classsemister $classsemister)
     {
         //
     }
@@ -75,10 +76,10 @@ class StudentRegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StudentRegistration  $studentRegistration
+     * @param  \App\Model\Classsemister  $classsemister
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentRegistration $studentRegistration)
+    public function destroy(Classsemister $classsemister)
     {
         //
     }

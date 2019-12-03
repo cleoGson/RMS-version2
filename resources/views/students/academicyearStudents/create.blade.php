@@ -35,7 +35,7 @@
           <div class="card-body">
  {!! Form::open(['route'=>'student.academicyearStudent.store','files'=>true,'id'=>"frm-example"] ); !!}
  @include('students.academicyearStudents.form')
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="table  table-striped table-bordered display" cellspacing="0" width="100%">
    <thead>
       <tr>
          <th></th>
@@ -110,7 +110,7 @@ $(document).ready(function() {
             var orign = '/student/academicyearStudent/create';
            
             function format ( d ) {
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table  table-bordered" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>First name:</td>'+
             '<td colspan="3">'+d.firstname+'</td>'+
@@ -171,7 +171,7 @@ $(document).ready(function() {
         '<td>Updated By:</td>'+
             '<td colspan="3">'+d.updator.email+'</td>'+
         '</tr>'+
-        '<tr>'+
+        '<tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+
@@ -180,6 +180,7 @@ $(document).ready(function() {
    var table = $('#example').DataTable({
        serverSide: true,
        processing: true,
+       "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
       'ajax': url,
       'columnDefs': [
          {

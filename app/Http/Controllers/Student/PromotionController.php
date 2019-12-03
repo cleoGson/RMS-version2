@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Model\AcademicyearStudent;
+use App\Model\Academicyear;
+use App\Model\Classsetup;
+use App\Model\Studentstatus;
+use App\Model\Classroom;
+use App\Model\Classsection;
+use App\Model\Student;
 use App\Http\Requests\Academic\ClassroomRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
