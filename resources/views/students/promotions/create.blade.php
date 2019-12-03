@@ -35,7 +35,7 @@
           <div class="card-body">
  {!! Form::open(['route'=>'student.promotion.store','files'=>true,'id'=>"frm-example"] ); !!}
  @include('students.promotions.form')
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="table  table-bordered display" cellspacing="0" width="100%">
    <thead>
       <tr>
          <th></th>
@@ -110,7 +110,7 @@ $(document).ready(function() {
             var orign = '/student/promotion/create';
            
             function format ( d ) {
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table  table-bordered" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>First name:</td>'+
             '<td colspan="3">'+d.firstname+'</td>'+
