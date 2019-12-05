@@ -56,7 +56,7 @@ class StaffRequest extends FormRequest
             'sex'=>'required|string|in:female,male',
             'marital_status'=>'required|exists:maritals,id',
             'birth_date'=>'required|date|string',
-            'disability'=>'required|exists:disiabilities,id',
+            'disability'=>'required|exists:disabilities,id',
             'birth_place'=>'required|string',
             'email'=>"required|email|unique:staff,id,$this->route('staff')->id",
             'address'=>'required|string',

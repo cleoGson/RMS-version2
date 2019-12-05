@@ -88,7 +88,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Disability:</td>'+
-            '<td colspan="3">'+d.disability.name+'</td>'+
+            '<td colspan="3">'+d.disability+'</td>'+
         '</tr>'+
         '<tr>'+
         '<td>Birth Place:</td>'+

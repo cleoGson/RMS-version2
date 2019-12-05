@@ -21,7 +21,7 @@ class   StaffController extends Controller
      */
     public function index(DataTables $dataTables)
     {    
-        if (request()->wantsJson()) {
+       // if (request()->wantsJson()) {
             $template = 'admin.staffs.actions';
             return $dataTables->eloquent(Staff::with(['departments','designations','citizens','countries','disability','maritals','creator','updator'])->select('staff.*'))
                 ->editColumn('action', function ($row) use ($template) {
@@ -41,8 +41,8 @@ class   StaffController extends Controller
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
                 })
                 ->make(true);
-         }
-         return view('admin.staffs.index');
+        // }
+         //return view('admin.staffs.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -77,7 +77,8 @@ class   StaffController extends Controller
      */
     public function store(StaffRequest $request)
     {
-      
+
+        
         $birth_date = date("Y-m-d h:m:s", strtotime(request('birth_date')));
         $staff = Staff::create([
             'created_by'=>auth()->id(),
@@ -144,6 +145,7 @@ class   StaffController extends Controller
      */
     public function update(StaffRequest $request, Staff $staff)
     {
+
         $staff->updated_by = auth()->id();
         $staff->birth_date = date("Y-m-d h:m:s", strtotime(request('birth_date')));
         $staff->update(request([   
