@@ -55,18 +55,19 @@ class   StaffController extends Controller
         $maritals=  Marital::pluck('name','id')->toArray();
         $departments=  Department::pluck('name','id')->toArray();
         $designations=  Designation::pluck('name','id')->toArray();
-        $disabilities=  Disability::pluck('name','id')->toArray();
+//$disabilities=  Disability::pluck('name','id')->toArray();
         $citizenship=  $countrydata->pluck('name','id')->toArray();
         $birthcountries= $countrydata->pluck('name','id')->toArray();
         return view('admin.staffs.create',compact([ 'maritals','departments',
-        'designations','disabilities','citizenship','birthcountries']));
+        'designations','citizenship','birthcountries']));
     }
 
     public function disabilityData(Request $request){
-        $searchedvalue =$request->q;
-        $searchedvalue = '%'.$searchedvalue.'%';
-        $disabilities = Disability::where('name','LIKE',$searchedvalue)->pluck('name','id')->toArray();
-        return response()->json(['items'=>$disabilities]);
+       $search = $request->get('search');
+        $data = Disability::Where('name', 'like', '%' . $search . '%')
+            ->orWhere('display_name', 'like', '%' . $search . '%')
+            ->orderBy('name')->paginate(10);
+        return response()->json(['items' => $data->toArray()['data'], 'pagination' => $data->nextPageUrl() ? true : false]);
     }
     /**
      * Store a newly created resource in storage.
@@ -176,5 +177,13 @@ class   StaffController extends Controller
         $staff->delete();
         alert()->success('success', 'Staff status  has  successfully Deleted.')->persistent();
         return redirect()->route('admin.staff.index');
+    }
+
+       public function selectOptions(Request $request){
+        $search = $request->get('search');
+        $data = Disability::Where('name', 'like', '%' . $search . '%')
+            ->orWhere('display_name', 'like', '%' . $search . '%')
+            ->orderBy('name')->paginate(10);
+        return response()->json(['items' => $data->toArray()['data'], 'pagination' => $data->nextPageUrl() ? true : false]);
     }
 }

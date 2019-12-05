@@ -61,51 +61,44 @@
 @section('scripts')
 <script>
 // ajax select from the database with page nation
-$(function () {
-$("#sex2").select2({
-  ajax: {
-    url: "/admin/disabilitydata",
-    dataType: 'json',
-    delay: 250,
-    data: function (params) {
-      return {
-        q: params.term, // search term
-        page: params.page
-      };
-    },
-    processResults: function (data, params) {
-      params.page = params.page || 1;
-      return {
-        results: data.items,
-      };
-    },
-    cache: true
-  },
-  placeholder: 'Search Disability',
-  minimumInputLength: 1,
-  templateResult: formatRepo,
-  templateSelection: formatRepoSelection
-});
+           $(document).ready(function () {
+            $('#disability').select2({
+                ajax: {
+                    method:'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{'/admin/disabilitydata'}}',
+                    data: function (params) {
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    },
+                    dataType: 'json',
+                    processResults: function (data) {
+                        data.page = data.page || 1;
+                        return {
+                            results: data.items.map(function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name,
+                                };
+                            }),
+                            pagination: {
+                                more: data.pagination
+                            }
+                        }
+                    },
+                    cache: true,
+                    delay: 250
+                },
+                placeholder: 'search Disability',
+                minimumInputLength: 3,
+                multiple: false
+            });
 
-function formatRepo (repo) {
-  if (repo.loading) {
-    return repo.text;
-  }
 
-  var $container = $(
-    "<div class='select2-result-repository clearfix'>" +
-        "<div class='select2-result-repository__description'></div>" +
-        "</div>" +
-      "</div>" +
-    "</div>"
-  );
-  $container.find(".select2-result-repository__description").text(repo.description);
-  return $container;
-}
-
-function formatRepoSelection (repo) {
-  return repo.full_name || repo.text;
-}
-   });
+        });
     </script>
 @stop

@@ -56,3 +56,48 @@
     </section>
 </section>
 @endsection
+
+@section('scripts')
+<script>
+// ajax select from the database with page nation
+           $(document).ready(function () {
+            $('#disability').select2({
+                ajax: {
+                    method:'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{'/admin/disabilitydata'}}',
+                    data: function (params) {
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    },
+                    dataType: 'json',
+                    processResults: function (data) {
+                        data.page = data.page || 1;
+                        return {
+                            results: data.items.map(function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name,
+                                };
+                            }),
+                            pagination: {
+                                more: data.pagination
+                            }
+                        }
+                    },
+                    cache: true,
+                    delay: 250
+                },
+                placeholder: 'search Disability',
+                minimumInputLength: 3,
+                multiple: false
+            });
+
+
+        });
+    </script>
+@stop
