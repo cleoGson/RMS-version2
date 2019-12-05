@@ -15,7 +15,6 @@ class CreateExaminationmarksTable extends Migration
     {
         Schema::create('examinationmarks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->bigInteger('examinationtype_id')->unsigned()->nullable();
             $table->foreign('examinationtype_id')->references('id')->on('examinationtypes');
             $table->double('marks')->nullable();

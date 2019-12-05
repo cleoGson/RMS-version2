@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Academic;
 use App\Http\Controllers\Controller;
 
 use App\Model\Examinationcurricular;
+use App\Model\Examinationmarks;
+use App\Model\Academicyear;
+use App\Model\Semester;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Http\Requests\Academic\EventRequest;
+use App\Http\Requests\Academic\ExaminationcurricularRequest;
 
 class ExaminationcurricularController extends Controller
 {
@@ -18,31 +21,40 @@ class ExaminationcurricularController extends Controller
     public function index(DataTables $dataTables)
     {
      if (request()->wantsJson()) {
-            $template = 'academics.gradecurricular.actions';
-            return $dataTables->eloquent(Gradecurricular::with(['creator','updator','years'])->select('gradecurriculars.*'))
+            $template = 'academics.examinations.curriculars.actions';
+            return $dataTables->eloquent(Examinationcurricular::with(['createdBy','updatedBy','years'])->select('examinationcurriculars.*'))
                 ->editColumn('action', function ($row) use ($template) {
-                    $gateKey = 'academic.gradecurricular';
-                    $routeKey = 'academic.gradecurricular';
+                    $gateKey = 'academic.examinationcurricular';
+                    $routeKey = 'academic.examinationcurricular';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
-                })
+                  ->addColumn('examination_curricular', function ($row) {
+               return $row->examinationCurriculars->map(function ($examinationCurricular) {
+                    return 
+                         
+                        ucfirst(strtoupper($examinationCurricular->full_name));
+                        
+                })->implode(', ');
+               })
+                
                 ->editColumn('status', function ($row) {
                     return $row->status == 1 ? 'Active' : 'Non Active';
                 })
                 ->editColumn('approved', function ($row) {
                     return $row->approved == 1 ? 'Active' : 'Non Active';
                 })
+                 ->editColumn('approved_by', function ($row) {
+                    return $row->approved_by  ? $row->approvedBy->email : "" ;
+                })
                 ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
+                    return $row->created_by ? $row->createdBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
                 })
                 ->make(true);
          }
-         return view('academics.gradecurricular.index');
+         return view('academics.examinations.curriculars.index');
     }
 
     /**
@@ -52,10 +64,11 @@ class ExaminationcurricularController extends Controller
      */
     public function create()
     {
-        $gradeMarks =Grademark::pluck('name','id')->toArray(); 
-        $academicYears=Academicyear::pluck('name','id')->toArray();
-        $selectedGrades=[];
-        return view('academics.gradecurricular.create',compact(['academicYears','gradeMarks','selectedGrades']));
+        $exammarks =Examinationmarks::get()->pluck('full_name','id')->toArray(); 
+        $years=Academicyear::pluck('name','id')->toArray();
+        $semesters=Semester::pluck('name','id')->toArray();
+        $selectedexammarks=[];
+        return view('academics.examinations.curriculars.create',compact(['years','semesters','exammarks','selectedexammarks']));
     }
 
     /**
@@ -64,21 +77,21 @@ class ExaminationcurricularController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GradeCurricularRequest $request)
+    public function store(ExaminationcurricularRequest $request)
     {
-        $gradecurricular = Gradecurricular::create([
+        $examinationcurricular = Examinationcurricular::create([
             'name'=>request('name'),
-            'display_name'=>request('display_name'),
             'created_by'=>auth()->id(),
+            'semester_id'=>request('semester_id'),
             'year_id'=>request('year_id'), 
             'status'=>1,
             'approved'=>1,
             'approved_by'=>auth()->id(),
         ]);
-        $grademarks_lists = $request->input('grademarks_id');
-        $gradecurricular->gradeCurricular()->sync($grademarks_lists);
-        alert()->success('success', 'Department  has  successfully added.')->persistent();
-        return redirect()->route('academic.gradecurricular.index');
+        $examination_curricular = $request->input('examinationmark_id');
+        $examinationcurricular->examinationCurriculars()->sync($examination_curricular);
+        alert()->success('success', 'Examination curricular  has  successfully added.')->persistent();
+        return redirect()->route('academic.examinationcurricular.index');
     }
 
 
@@ -102,14 +115,17 @@ class ExaminationcurricularController extends Controller
      */
     public function edit(Examinationcurricular $examinationcurricular)
     {
-          $gradeMarks =Grademark::pluck('name','id')->toArray(); 
-        $academicYears=Academicyear::pluck('name','id')->toArray();
-        $selectedGrades=$gradecurricular->gradeCurricular->pluck('id')->toArray();
-        return view('academics.gradecurricular.edit',
-        ['show'=>$gradecurricular,
-        'academicYears'=> $academicYears,
-        'selectedGrades'=>$selectedGrades,
-        'gradeMarks'=>$gradeMarks]);
+        $exammarks =Examinationmarks::get()->pluck('full_name','id')->toArray(); 
+        $years=Academicyear::pluck('name','id')->toArray();
+        $semesters=Semester::pluck('name','id')->toArray();
+
+        $selectedexammarks=$examinationcurricular->examinationCurriculars->pluck('id')->toArray();
+        return view('academics.examinations.curriculars.edit',
+        ['show'=>$examinationcurricular,
+        'years'=> $years,
+        'selectedexammarks'=>$selectedexammarks,
+        'semesters'=>$semesters,
+        'exammarks'=>$exammarks]);
     }
 
     /**
@@ -119,14 +135,14 @@ class ExaminationcurricularController extends Controller
      * @param  \App\Model\Examinationcurricular  $examinationcurricular
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examinationcurricular $examinationcurricular)
+    public function update(ExaminationcurricularRequest $request, Examinationcurricular $examinationcurricular)
     {
-         $gradecurricular->updated_by = auth()->id();
-        $gradecurricular->update(request(['name','display_name','year_id']));
-        $grademarks_lists = $request->input('grademarks_id');
-        $gradecurricular->gradeCurricular()->sync($grademarks_lists);
-        alert()->success('success', 'Department  has  successfully Updated.')->persistent();
-        return redirect()->route('academic.gradecurricular.index');
+        $examinationcurricular->updated_by = auth()->id();
+        $examinationcurricular->update(request(['name','semester_id', 'status', 'year_id']));
+        $examination_curricular = $request->input('examinationmark_id');
+        $examinationcurricular->examinationCurriculars()->sync($examination_curricular);
+        alert()->success('success', 'Examinatiion curricular  has  successfully Updated.')->persistent();
+        return redirect()->route('academic.examinationcurricular.index');
     }
 
     /**
@@ -137,8 +153,8 @@ class ExaminationcurricularController extends Controller
      */
     public function destroy(Examinationcurricular $examinationcurricular)
     {
-        $gradecurricular->delete();
+        $examinationcurricular->delete();
         alert()->success('success', 'Department  has  successfully Deleted.')->persistent();
-        return redirect()->route('academic.gradecurricular.index');
+        return redirect()->route('academic.examinationcurricular.index');
     }
 }

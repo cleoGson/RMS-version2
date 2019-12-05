@@ -214,6 +214,31 @@
                                Fees Structure
                             </a>
                         </li>
+
+                          <li class="nav-item">
+                            <a href="{{ route('academic.examinationtype.index') }}" class="nav-link {{ request()->is('academic/examinationtype') || request()->is('academic/examinationtype/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                              Examination types
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('academic.examinationmarks.index') }}" class="nav-link {{ request()->is('academic/examinationmarks') || request()->is('academic/examinationmarks/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                             Examination marks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('academic.examinationcurricular.index') }}" class="nav-link {{ request()->is('academic/examinationcurricular') || request()->is('academic/examinationcurricular/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                               Examination curricular
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('academic.event.index') }}" class="nav-link {{ request()->is('academic/event') || request()->is('academic/event/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">

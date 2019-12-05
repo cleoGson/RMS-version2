@@ -7,12 +7,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 
-class Examinationresult extends Model
+class Examinationtype extends Model
 {
-   
+
     use LogsActivity,softDeletes;
 
-    protected $table = 'examinationresults';
+    protected $table = 'examinationtypes';
     protected $primaryKey = 'id';
 
     /**

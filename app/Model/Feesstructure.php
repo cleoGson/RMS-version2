@@ -21,7 +21,6 @@ class Feesstructure extends Model
      */
     protected $fillable = [
           'name',
-          'display_name',
           'year_id',
           'status',
           'approved',
@@ -37,7 +36,6 @@ class Feesstructure extends Model
      */
     protected static $logAttributes = [
           'name',
-          'display_name',
           'year_id',
           'status',
           'approved',

@@ -61,6 +61,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('classsection', 'Academic\ClasssectionController');
     Route::resource('classsetup', 'Academic\ClasssetupController');
     Route::resource('subject', 'Academic\SubjectController');
+    Route::resource('examinationtype','Academic\ExaminationtypeController');
+    Route::resource('examinationcurricular','Academic\ExaminationcurricularController');
+    Route::resource('examinationmarks','Academic\ExaminationmarksController');
+    Route::resource('examinationresult','Academic\ExaminationresultController');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {

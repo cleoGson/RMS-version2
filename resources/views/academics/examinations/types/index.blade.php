@@ -6,26 +6,21 @@
 <div class="col-lg-12">
 <div class="card">
 <div class="card-header">
-<i class="fa fa-align-justify"></i>List of  
+<i class="fa fa-align-justify"></i>List Of Examination Type
 
   
-  <a href="{{ route('academic.feesstructure.create') }}" class="float-right">
+  <a href="{{ route('academic.examinationtype.create') }}" class="float-right">
                          
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
                    </div>
 <div class="card-body">
 <div class="table table-responsive">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="feesstructure">
+<table class="table  table-bordered table-striped table-responsive-sm  table-striped table-hover" id="examinationtype">
 <thead>
 <tr>
 <th>Name</th>
 <th>Display Name</th>
-<th>year </th> 
-<th>Fee Amount</th>
-<th>Status </th>
-<th>Approved </th>
-<th>Approved By </th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -34,11 +29,6 @@
 <tr>
 <th>Name</th>
 <th>Display Name</th>
-<th>year </th> 
-<th>Fee Amount</th>
-<th>Status </th>
-<th>Approved </th>
-<th>Approved By </th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -53,38 +43,21 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/academic/feesstructure';
+            var url = '/academic/examinationtype';
             var start = '';
             var end = '';
-            var orign = '/academic/feesstructure';
+            var orign = '/academic/examinationtype';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
-    return '<table cellpadding="5" class="table table-bordered table-striped table-hover" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>feesstructure name:</td>'+
+            '<td>examinationtype name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
         '</tr>'+
-          '<tr>'+
-        '<td>Financial Year:</td>'+
-            '<td colspan="3">'+d.years.name+'</td>'+
-        '</tr>'+
-         '<tr>'+
-        '<td>Fees & Amount:</td>'+
-            '<td colspan="3">'+d.feesamount_id+'</td>'+
-        '</tr>'+
-          '<tr>'+
-        '<td>Status:</td>'+
-            '<td colspan="3">'+d.status+'</td>'+
-              '<tr>'+
-        '</tr>'+
-          '<tr>'+
-        '<td>Approved:</td>'+
-            '<td colspan="3">'+d.approved+'</td>'+
-        '</tr>'+
-          '<tr>'+
-        '<td>Approved By:</td>'+
-            '<td colspan="3">'+d.approved_by+'</td>'+
+        '<tr>'+
+            '<td>Display name:</td>'+
+            '<td colspan="3">'+d.display_name+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
@@ -96,7 +69,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updaed_by+'</td>'+
+            '<td colspan="3">'+d.updated_by+'</td>'+
         '</tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
@@ -104,7 +77,7 @@
     '</table>';
 }
             
-            var table = $('#feesstructure').DataTable({
+            var table = $('#examinationtype').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -117,11 +90,6 @@
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'display_name', name: 'display_name'},
-                    {data: 'years.name', name: 'year_id'},
-                    {data: 'feesamount_id', name: 'feesamount_id'},
-                    {data: 'status', name: 'status'},
-                    {data: 'approved', name: 'approved'},
-                    {data: 'approved_by', name: 'apperoved_by'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -174,7 +142,7 @@
             });
         
 
-        $('#feesstructure tbody').on('click', 'td.details-control', function () {
+        $('#examinationtype tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  

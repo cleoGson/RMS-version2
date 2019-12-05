@@ -15,8 +15,7 @@ class CreateFeesstructuresTable extends Migration
     {
         Schema::create('feesstructures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->text('display_name')->nullable();
+            $table->string('name');
             $table->bigInteger('year_id')->unsigned()->nullable();
             $table->foreign('year_id')->references('id')->on('academicyears');
             $table->enum('status',[1,0])->default(1);

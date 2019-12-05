@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Examinationtype;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Http\Requests\Academic\EventRequest;
+use App\Http\Requests\Academic\ExaminationtypeRequest;
 
 class ExaminationtypeController extends Controller
 {
@@ -17,11 +17,11 @@ class ExaminationtypeController extends Controller
      */
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
-            $template = 'academics.fees.actions';
-            return $dataTables->eloquent(Fees::with(['createdBy','updatedBy'])->select('fees.*'))
+            $template = 'academics.examinations.types.actions';
+            return $dataTables->eloquent(Examinationtype::with(['createdBy','updatedBy'])->select('examinationtypes.*'))
                 ->editColumn('action', function ($row) use ($template) {
-                    $gateKey = 'academic.fees';
-                    $routeKey = 'academic.fees';
+                    $gateKey = 'academic.examinationtype';
+                    $routeKey = 'academic.examinationtype';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
                 ->editColumn('display_name', function ($row) {
@@ -36,7 +36,7 @@ class ExaminationtypeController extends Controller
                 })
                 ->make(true);
          }
-         return view('academics.fees.index');
+         return view('academics.examinations.types.index');
     }
 
     /**
@@ -46,7 +46,7 @@ class ExaminationtypeController extends Controller
      */
     public function create()
     {
-        return view('academics.fees.create');
+        return view('academics.examinations.types.create');
     }
 
     /**
@@ -55,15 +55,15 @@ class ExaminationtypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FeesRequest $request)
+    public function store(ExaminationtypeRequest $request)
     {
-        $fees = Fees::create([
+        $examinationtype = Examinationtype::create([
             'name'=>request('name'),
             'display_name'=>request('display_name'),
             'created_by'=>auth()->id(),
         ]);
         alert()->success('success', 'fees  has  successfully added.')->persistent();
-        return redirect()->route('academic.fees.index');
+        return redirect()->route('academic.examinationtype.index');
     }
     /**
      * Display the specified resource.
@@ -85,10 +85,8 @@ class ExaminationtypeController extends Controller
      */
     public function edit(Examinationtype $examinationtype)
     {
-         $fees =Fees::pluck('name','id')->toArray(); 
-         $academicYears=Academicyear::pluck('name','id')->toArray();
-         $show=$feesamount;
-         return view('academics.feesamounts.edit',compact(['fees','academicYears','show']));
+         $show=$examinationtype;
+         return view('academics.examinations.types.edit',compact(['show']));
     }
 
     /**
@@ -98,12 +96,12 @@ class ExaminationtypeController extends Controller
      * @param  \App\Model\Examinationtype  $examinationtype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examinationtype $examinationtype)
+    public function update(ExaminationtypeRequest $request, Examinationtype $examinationtype)
     {
-        $feesamount->updated_by = auth()->id();
-        $feesamount->update(request(['amount','fees_id','year_id','status']));
-        alert()->success('success', 'Fees amount  has  successfully Updated.')->persistent();
-        return redirect()->route('academic.feesamount.index');
+        $examinationtype->updated_by = auth()->id();
+        $examinationtype->update(request(['name','display_name']));
+        alert()->success('success', 'Examination type  has  successfully Updated.')->persistent();
+        return redirect()->route('academic.examinationtype.index');
     }
 
     /**
@@ -114,8 +112,8 @@ class ExaminationtypeController extends Controller
      */
     public function destroy(Examinationtype $examinationtype)
     {
-        $feesamount->delete();
-        alert()->success('success', 'Fees amount  has  successfully Deleted.')->persistent();
-        return redirect()->route('academic.feesamount.index');
+        $examinationtype->delete();
+        alert()->success('success', 'Examination type  has  successfully Deleted.')->persistent();
+        return redirect()->route('academic.examinationtype.index');
     }
 }

@@ -27,9 +27,6 @@ class FeesstructureController extends Controller
                     $routeKey = 'academic.feesstructure';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
-                })
                 ->editColumn('status', function ($row) {
                     return $row->status == 1 ? 'Active' : 'Non Active';
                 })
@@ -44,6 +41,9 @@ class FeesstructureController extends Controller
                 })
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->createdBy->email : '';
+                })
+                   ->editColumn('approved_by', function ($row) {
+                    return $row->approved_by ? $row->approvedBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
                     return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
@@ -76,7 +76,6 @@ class FeesstructureController extends Controller
     {
         $feesstructure = Feesstructure::create([
             'name'=>request('name'),
-            'display_name'=>request('display_name'),
             'created_by'=>auth()->id(),
             'year_id'=>request('year_id'), 
             'status'=>1,
@@ -130,7 +129,7 @@ class FeesstructureController extends Controller
     public function update(FeesstructureRequest $request, Feesstructure $feesstructure)
     {
         $feesstructure->updated_by = auth()->id();
-        $feesstructure->update(request(['name','display_name','semester_id','year_id','status']));
+        $feesstructure->update(request(['name','semester_id','year_id','status']));
         $feeamount_lists = $request->input('feeamount_id');
         $feesstructure->feesStructures()->sync($feeamount_lists);
         alert()->success('success', 'Fee Stucture  has  successfully Updated.')->persistent();

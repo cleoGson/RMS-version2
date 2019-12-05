@@ -4,9 +4,9 @@ namespace App\Http\Requests\Academic;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeesstructureRequest extends FormRequest
+class ExaminationmarksRequest extends FormRequest
 {
-    /**
+   /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -26,7 +26,9 @@ class FeesstructureRequest extends FormRequest
         case 'POST':
         {
         return [
-            'name'=>"required|string",
+            'examinationtype_id'=>'required|numeric|exists:examinationtypes,id',
+            'marks'=>'required|numeric|max:100',
+            'out_of'=>'required|numeric|max:100|greater_than:marks', 
         ];
        }
        case 'PUT':
@@ -34,7 +36,9 @@ class FeesstructureRequest extends FormRequest
        { 
 
         return [
-            'name'=>"required|string",
+            'examinationtype_id'=>'required|numeric|exists:examinationtypes,id',
+            'marks'=>'required|numeric|max:100',
+            'out_of'=>'required|numeric|max:100|greater_than:marks', 
         ];
        }
        default:break;

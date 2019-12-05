@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Examinationmarks;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Http\Requests\Academic\EventRequest;
+use App\Model\Examinationtype;
+use App\Http\Requests\Academic\ExaminationmarksRequest;
 
 class ExaminationmarksController extends Controller
 {
@@ -18,29 +19,26 @@ class ExaminationmarksController extends Controller
     public function index(DataTables $dataTables)
     {
         if (request()->wantsJson()) {
-            $template = 'academics.grademarks.actions';
-            return $dataTables->eloquent(Grademark::with(['creator','updator','grades'])->select('grademarks.*'))
+            $template = 'academics.examinations.marks.actions';
+            return $dataTables->eloquent(Examinationmarks::with(['updatedBy','createdBy','types'])->select('examinationmarks.*'))
                 ->editColumn('action', function ($row) use ($template) {
-                    $gateKey = 'academic.grademark';
-                    $routeKey = 'academic.grademark';
+                    $gateKey = 'academic.examinationmarks';
+                    $routeKey = 'academic.examinationmarks';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
+                ->editColumn('examinationtype_id', function ($row) {
+                    return $row->examinationtype_id ? $row->types->name : '';
                 })
                 
                 ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
-                })
-                ->editColumn('grade_id', function ($row) {
-                    return $row->grade_id ? $row->grades->name : '';
+                    return $row->created_by ? $row->updatedBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                    return $row->updated_by ? ucfirst(strtolower($row->createdBy->email)) : '';
                 })
                 ->make(true);
          }
-         return view('academics.grademarks.index');
+         return view('academics.examinations.marks.index');
     }
 
     /**
@@ -50,8 +48,8 @@ class ExaminationmarksController extends Controller
      */
     public function create()
     {
-        $grades=Grade::pluck('name','id')->toArray();
-        return view('academics.grademarks.create',compact('grades'));
+        $types=Examinationtype::pluck('name','id')->toArray();
+        return view('academics.examinations.marks.create',compact('types'));
     }
 
     /**
@@ -60,19 +58,16 @@ class ExaminationmarksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GradeMarkRequest $request)
+    public function store(ExaminationmarksRequest $request)
     {
-        $grademark = Grademark::create([
-            'name'=>request('name'),
-            'display_name'=>request('display_name'),
+        $examinationmarks = Examinationmarks::create([
             'created_by'=>auth()->id(),
-            'grade_id'=>request('grade_id'), 
-            'minimum_marks'=>request('minimum_marks'),
-            'maximum_marks'=>request('maximum_marks'),
-            'grade_point'=>request('grade_point'),
+            'examinationtype_id'=>request('examinationtype_id'), 
+            'marks'=>request('marks'),
+            'out_of'=>request('out_of')
         ]);
-        alert()->success('success', 'Grade Marks  has  successfully added.')->persistent();
-        return redirect()->route('academic.grademark.index');
+        alert()->success('success', 'Examination Marks  has  successfully added.')->persistent();
+        return redirect()->route('academic.examinationmarks.index');
     }
 
 
@@ -96,9 +91,8 @@ class ExaminationmarksController extends Controller
      */
     public function edit(Examinationmarks $examinationmarks)
     {
-       $grades=Grade::pluck('name','id')->toArray();
-        return view('academics.grademarks.edit',['show'=>$grademark,'grades'=>$grades]);
-
+        $types=Examinationtype::pluck('name','id')->toArray();
+        return view('academics.examinations.marks.edit',['show'=>$examinationmarks,'types'=>$types]);
     }
 
     /**
@@ -108,12 +102,16 @@ class ExaminationmarksController extends Controller
      * @param  \App\Model\Examinationmarks  $examinationmarks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examinationmarks $examinationmarks)
+    public function update(ExaminationmarksRequest $request, Examinationmarks $examinationmarks)
     {
-        $grademark->updated_by = auth()->id();
-        $grademark->update(request(['name','display_name','grade_id','minimum_marks','maximum_marks','grade_point']));
-        alert()->success('success', 'Grade Marks  has  successfully Updated.')->persistent();
-        return redirect()->route('academic.grademark.index');
+        dd($examinationmarks);
+        $examinationmarks->updated_by = auth()->id();
+        $examinationmarks->update(request([
+         'examinationtype_id',
+         'marks',
+         'out_of']));
+        alert()->success('success', 'Examination Marks  has  successfully Updated.')->persistent();
+        return redirect()->route('academic.examinationmarks.index');
     }
 
     /**
@@ -124,8 +122,8 @@ class ExaminationmarksController extends Controller
      */
     public function destroy(Examinationmarks $examinationmarks)
     {
-        $grademark->delete();
-        alert()->success('success', 'Grade Marks  has  successfully Deleted.')->persistent();
-        return redirect()->route('academic.grademark.index');
+        $examinationmarks->delete();
+        alert()->success('success', 'Examination Marks  has  successfully Deleted.')->persistent();
+        return redirect()->route('academic.examinationmarks.index');
     }
 }

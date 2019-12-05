@@ -4,9 +4,8 @@ namespace App\Http\Requests\Academic;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeesstructureRequest extends FormRequest
-{
-    /**
+class ExaminationtypeRequest extends FormRequest
+{/**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -26,7 +25,8 @@ class FeesstructureRequest extends FormRequest
         case 'POST':
         {
         return [
-            'name'=>"required|string",
+            'name'=>"required|string|unique:examinationtypes,name",
+            'display_name'=>'required',
         ];
        }
        case 'PUT':
@@ -34,7 +34,8 @@ class FeesstructureRequest extends FormRequest
        { 
 
         return [
-            'name'=>"required|string",
+            'name'=>"required|string|unique:examinationtypes,id,$this->route('examinationtype')->id",
+            'display_name'=>'required',
         ];
        }
        default:break;
