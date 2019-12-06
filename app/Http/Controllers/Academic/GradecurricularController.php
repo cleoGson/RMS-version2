@@ -20,15 +20,18 @@ class GradecurricularController extends Controller
     {
         if (request()->wantsJson()) {
             $template = 'academics.gradecurricular.actions';
-            return $dataTables->eloquent(Gradecurricular::with(['creator','updator','years'])->select('gradecurriculars.*'))
+            return $dataTables->eloquent(Gradecurricular::with(['creator','updator','approvedBy','years'])->select('gradecurriculars.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'academic.gradecurricular';
                     $routeKey = 'academic.gradecurricular';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
-                })
+                   ->addColumn('grade_mark', function ($row) {
+               return $row->gradeCurricular->map(function ($gradMarks) {
+                    return   ucfirst(strtoupper($gradMarks->grade_marks));
+                        
+             })->implode(', ');
+               })
                 ->editColumn('status', function ($row) {
                     return $row->status == 1 ? 'Active' : 'Non Active';
                 })
@@ -37,6 +40,9 @@ class GradecurricularController extends Controller
                 })
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->creator->email : '';
+                })
+                   ->editColumn('approved_by', function ($row) {
+                    return $row->approved_by ? $row->approvedBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
@@ -69,7 +75,6 @@ class GradecurricularController extends Controller
     {
         $gradecurricular = Gradecurricular::create([
             'name'=>request('name'),
-            'display_name'=>request('display_name'),
             'created_by'=>auth()->id(),
             'year_id'=>request('year_id'), 
             'status'=>1,
@@ -123,7 +128,7 @@ class GradecurricularController extends Controller
     public function update(GradeCurricularRequest $request, Gradecurricular $gradecurricular)
     {
         $gradecurricular->updated_by = auth()->id();
-        $gradecurricular->update(request(['name','display_name','year_id']));
+        $gradecurricular->update(request(['name','year_id']));
         $grademarks_lists = $request->input('grademarks_id');
         $gradecurricular->gradeCurricular()->sync($grademarks_lists);
         alert()->success('success', 'Department  has  successfully Updated.')->persistent();

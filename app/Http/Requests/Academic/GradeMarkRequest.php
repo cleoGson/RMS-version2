@@ -27,8 +27,7 @@ class GradeMarkRequest extends FormRequest
         {
         return [
             'name'=>"required|string|unique:grademarks,name",
-            'display_name'=>'nullable',
-            'grade_id'=>'nullable|numeric|exists:grades,id',
+            'grade_id'=>'required|integer|exists:grades,id',
             'minimum_marks'=>'required|numeric|max:100',
             'maximum_marks'=>'required|numeric|max:100|greater_than:minimum_marks', 
             'grade_point'=>'required|numeric|max:100',
@@ -40,8 +39,7 @@ class GradeMarkRequest extends FormRequest
 
         return [
             'name'=>"required|string|unique:grademarks,id,$this->route('grademark')->id",
-            'display_name'=>'nullable',
-            'grade_id'=>'nullable|numeric|exists:grades,id',
+            'grade_id'=>'required|integer|exists:grades,id',
             'minimum_marks'=>'required|numeric|max:100',
             'maximum_marks'=>'required|numeric|max:100|greater_than:minimum_marks', 
             'grade_point'=>'required|numeric|max:100',

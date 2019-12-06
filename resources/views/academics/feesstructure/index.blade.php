@@ -20,7 +20,6 @@
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>year </th> 
 <th>Fee Amount</th>
 <th>Status </th>
@@ -33,7 +32,6 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>year </th> 
 <th>Fee Amount</th>
 <th>Status </th>
@@ -116,7 +114,6 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
                     {data: 'years.name', name: 'year_id'},
                     {data: 'feesamount_id', name: 'feesamount_id'},
                     {data: 'status', name: 'status'},

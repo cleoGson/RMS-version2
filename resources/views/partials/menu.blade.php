@@ -259,7 +259,7 @@
                                 <i class="fa-fw fas fa-briefcase nav-icon">
 
                                 </i>
-                              Curriculum 
+                              Subject Curriculum 
                             </a>
                         </li>
                         <li class="nav-item">
@@ -322,7 +322,7 @@
                             <a href="{{ route('student.level.index') }}" class="nav-link {{ request()->is('student/level') || request()->is('student/level/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-users nav-icon">
                                 </i>
-                              Studeies Level
+                              Studies Level
                             </a>
                         </li>
                           <li class="nav-item">

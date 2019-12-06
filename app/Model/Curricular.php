@@ -20,7 +20,8 @@ class Curricular extends Model
      */
     protected $fillable = [
         'name',
-        'display_name',
+        'semester_id',
+        'year_id',
         'created_by',
         'updated_by'
     ];
@@ -32,7 +33,8 @@ class Curricular extends Model
      */
     protected static $logAttributes = [
         'name',
-        'display_name',
+        'semester_id', 
+        'year_id',
         'created_by',
         'updated_by'
     ];
@@ -40,8 +42,29 @@ class Curricular extends Model
 
 
     public function curricularSubjects(){
-        return $this->belongsToMany(Curricular::class ,'curriculars_subjects', 
+        return $this->belongsToMany(Subject::class ,'curriculars_subjects', 
         'curricular_id', 'subject_id')->withTimestamps();
+    }
+
+    /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function years()
+    {
+        return $this->belongsTo(Academicyear::class, 'year_id')->withDefault();
+    }
+
+
+    /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function semesters()
+    {
+        return $this->belongsTo(Semester::class, 'semester_id')->withDefault();
     }
 
 
@@ -50,7 +73,7 @@ class Curricular extends Model
      *      *
      * @return belongsTo
      */
-    public function creator()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by')->withDefault();
     }
@@ -60,8 +83,18 @@ class Curricular extends Model
      *      *
      * @return belongsTo
      */
-    public function updator()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
+    }
+
+      /**
+     * A verifier belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function verifiedBy()
+    {
+        return $this->belongsTo(User::class, 'verified_by')->withDefault();
     }
 }

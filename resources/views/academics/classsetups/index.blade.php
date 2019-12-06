@@ -21,9 +21,9 @@
 <tr>
 <th>Name</th>
 <th>class</th> 
-<th>classsection</th>
-<th>Grade Curricular</th>
-<th>Curricular</th>
+<th>Subject Curricular</th>
+<th>Examinaation Curricular</th>
+<th>Grading</th>
 <th>Minimum Capacity</th>
  <th>Maximum Capacity</th>
 <th>Year</th> 
@@ -36,9 +36,9 @@
 <tr>
 <th>Name</th>
 <th>class</th> 
-<th>classsection</th>
-<th>Grade Curricular</th>
-<th>Curricular</th>
+<th>Subject Curricular</th>
+<th>Examinaation Curricular</th>
+<th>Grading</th>
 <th>Minimum Capacity</th>
  <th>Maximum Capacity</th>
 <th>Year</th> 
@@ -72,25 +72,27 @@
         '<tr>'+
             '<td>Class:</td>'+
             '<td colspan="3">'+d.classes.name+'</td>'+
-        '</tr>'+
-        '<td>Class Section:</td>'+
-            '<td colspan="3">'+d.classsections.name+'</td>'+
-        '</tr>'+
+        '</tr><tr>'+
          '<td>Grading System:</td>'+
-            '<td colspan="3">'+d.gradings.name+'</td>'+
+            '<td colspan="3">'+d.grade_curricular+'</td>'+
         '</tr>'+
-        '<td>Curricular:</td>'+
-            '<td colspan="3">'+d.curricular.name+'</td>'+
-        '</tr>'+
+        '<tr>'+
+        '<td>Subject Curricular:</td>'+
+            '<td colspan="3">'+d.subject_curricular+'</td>'+
+        '</tr><tr>'+
+         '<tr>'+
+        '<td>Examination Curricular:</td>'+
+            '<td colspan="3">'+d.examination_curricular+'</td>'+
+        '</tr><tr>'+
          '<td> Year:</td>'+
             '<td colspan="3">'+d.years.name+'</td>'+
-        '</tr>'+
+        '</tr><tr>'+
          '<td>Minimum Capacity:</td>'+
             '<td colspan="3">'+d.minimum_capacity+'</td>'+
-        '</tr>'+
+        '</tr><tr>'+
         '<td>Maximum Capacity:</td>'+
             '<td colspan="3">'+d.maximum_capacity+'</td>'+
-        '</tr>'+
+        '</tr><tr>'+
         '<td>Status:</td>'+
             '<td colspan="3">'+d.status+'</td>'+
         '</tr>'+
@@ -105,7 +107,7 @@
         '<tr>'+
         '<td>Updated By:</td>'+
             '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'
+        '</tr><tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+
@@ -125,9 +127,10 @@
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'classes.name', name: 'class_id'},
-                    {data: 'classsections.name', name: 'classsection_id'},
-                    {data: 'grade_curricular', name: 'grade_curricular'},
-                    {data: 'curricular_id', name: 'curricular_id'},                    {data: 'minimum_capacity', name: 'minimum_capacity'}, 
+                    {data: 'subject_curricular', name: 'subject_curricular' },
+                    {data: 'examination_curricular', name: 'examination_curricular' },
+                    {data: 'grade_curricular', name: 'grade_curricular'},          
+                    {data: 'minimum_capacity', name: 'minimum_capacity'}, 
                     {data: 'maximum_capacity', name: 'maximum_capacity'},
                     {data: 'years.name', name: 'year_id'},
                     

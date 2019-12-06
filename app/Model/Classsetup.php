@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
-use App\Curricular;
+use App\Model\Curricular;
+use App\Model\Academicyear;
+use App\Model\Gradecurricular;
+use App\Model\Examinationcurricular;
 
 class Classsetup extends Model
 {
@@ -94,12 +97,11 @@ class Classsetup extends Model
      return $this->belongsTo(Gradecurricular::class, 'grade_curricular')->withDefault();
     }
 
-    public function subjectCurricular(){
+    public function subjectCurriculars(){
         return $this->belongsToMany(Curricular::class ,'classsetups_curricular', 
         'curricular_id', 'classsetup_id')->withTimestamps();
     }
-
-      public function examinationCurricular(){
+      public function examinationCurriculars(){
         return $this->belongsToMany(Examinationcurricular::class ,'classsetups_examcurricular', 
         'examcurricular_id', 'classsetup_id')->withTimestamps();
     }

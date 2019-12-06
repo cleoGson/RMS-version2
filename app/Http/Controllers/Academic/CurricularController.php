@@ -20,21 +20,33 @@ class CurricularController extends Controller
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
             $template = 'academics.curricular.actions';
-            return $dataTables->eloquent(Curricular::with(['creator','updator'])->select('curriculars.*'))
+            return $dataTables->eloquent(Curricular::with(['createdBy','updatedBy','verifiedBy','semesters','years'])->select('curriculars.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'academic.curricular';
                     $routeKey = 'academic.curricular';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
+                  ->addColumn('subjects', function ($row) {
+               return $row->curricularSubjects->map(function ($curriculars) {
+                    return   ucfirst(strtoupper($curriculars->name));
+                        
+             })->implode(', ');
+               })
+                ->editColumn('semester_id', function ($row) {
+                    return $row->semester_id ? strip_tags($row->semesters->name) : '';
+                })
+                  ->editColumn('year_id', function ($row) {
+                    return $row->year_id ? strip_tags($row->years->name) : '';
+                })
+                  ->editColumn('verified_by', function ($row) {
+                    return $row->verified_by ? strip_tags($row->verifieBy->email) : '';
                 })
                 
                 ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
+                    return $row->created_by ? $row->createdBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
                 })
                 ->make(true);
          }
@@ -51,7 +63,8 @@ class CurricularController extends Controller
         $subjects = Subject::pluck('name','id')->toArray();
         $years=Academicyear::pluck('name','id')->toArray();
         $semesters=Semester::pluck('name','id')->toArray();
-        return view('academics.curricular.create',compact(['years','semesters','subjects']));
+        $selectedsubject=[];
+        return view('academics.curricular.create',compact(['years','semesters','subjects','selectedsubject']));
     }
 
     /**
@@ -64,7 +77,6 @@ class CurricularController extends Controller
     {
        $curricular = Curricular::create([
             'name'=>request('name'),
-            'display_name'=>request('display_name'),
             'year_id'=>request('year_id'),
             'semester_id'=>request('semester_id'),
             'status'=>1,
@@ -96,6 +108,7 @@ class CurricularController extends Controller
      */
     public function edit(Curricular $curricular)
     {
+         $selectedsubject=$curricular->curricularSubjects->pluck('id')->toArray();
         $subjects = Subject::pluck('name','id')->toArray();
         $years=Academicyear::pluck('name','id')->toArray();
         $semesters=Semester::pluck('name','id')->toArray();
@@ -103,7 +116,8 @@ class CurricularController extends Controller
         ['show'=>$curricular,
         'years'=>$years,
         'semesters'=>$semesters,
-        'subjects'=>$subjects
+        'subjects'=>$subjects,
+        'selectedsubject'=>$selectedsubject
         ]);
     }
 
@@ -117,7 +131,7 @@ class CurricularController extends Controller
     public function update(CurricularRequest $request, Curricular $curricular)
     {
         $curricular->updated_by = auth()->id();
-        $curricular->update(request(['name','display_name','semester_id','year_id','status']));
+        $curricular->update(request(['name','semester_id','year_id','status']));
         $subjects_lists = $request->input('subjects_id');
         $curricular->curricularSubjects()->sync($subjects_lists);
         alert()->success('success', 'Curriculum  has  successfully Updated.')->persistent();

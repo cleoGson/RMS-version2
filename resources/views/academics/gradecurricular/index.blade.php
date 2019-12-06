@@ -20,9 +20,9 @@
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>year </th> 
 <th>Status </th>
+<th>Grade Mark </th>
 <th>Approved </th>
 <th>Approved By </th>
 <th>View</th>
@@ -32,9 +32,9 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>year </th> 
 <th>Status </th>
+<th>Grade Mark </th>
 <th>Approved </th>
 <th>Approved By </th>
 <th>View</th>
@@ -62,26 +62,27 @@
         '<tr>'+
             '<td>gradecurricular name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
-        '</tr>'+
-        '<td>Display name:</td>'+
+        '</tr><tr>'+
+        '<td>Year:</td>'+
             '<td colspan="3">'+d.years.name+'</td>'+
-        '</tr>'+
-        '<td>Display name:</td>'+
+        '</tr><tr>'+
+        '<td>Status:</td>'+
             '<td colspan="3">'+d.status+'</td>'+
         '</tr>'+
-        '<td>Display name:</td>'+
+         '<tr>'+
+            '<td>Created By:</td>'+
+            '<td colspan="3">'+d.grade_mark+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Approved:</td>'+
             '<td colspan="3">'+d.approved+'</td>'+
         '</tr>'+
-        '<td>Display name:</td>'+
+        '<td>Approved By:</td>'+
             '<td colspan="3">'+d.approved_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -89,10 +90,10 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'
+            '<td colspan="3">'+d.updated_by+'</td>'+
+        '</tr><tr>'
         +'<td>Updated At:</td>'+
-            '<td  colspan="3">'+d.updated_at+'</td>'+
+            '<td  colspan="3">'+d.updated_at+'</tr>'+
         '</tr>'+
     '</table>';
 }
@@ -109,9 +110,9 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
                     {data: 'years.name', name: 'year_id'},
                     {data: 'status', name: 'status'},
+                    {data: 'grade_mark', name: 'grade_mark'},
                     {data: 'approved', name: 'approved'},
                     {data: 'approved_by', name: 'apperoved_by'},
                     {

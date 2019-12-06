@@ -20,7 +20,8 @@
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
+<th>Semester </th>
+<th>Subjects</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -28,7 +29,8 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
+<th>Semester </th>
+<th>Subjects</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -56,12 +58,17 @@
             '<td colspan="3">'+d.name+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
+            '<td>Semester:</td>'+
+            '<td colspan="3">'+d.semester_id+'</td>'+
         '</tr>'+
         '<tr>'+
+            '<td>Subjects:</td>'+
+            '<td colspan="3">'+d.subjects+'</td>'+
+        '</tr>'+
+        
+        '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -69,7 +76,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
+            '<td colspan="3">'+d.updated_by+'</td>'+
         '</tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
@@ -89,7 +96,8 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
+                    {data: 'semester_id', name: 'semester_id'},
+                    {data: 'subjects', name: 'subjects'},
                     {
                         className:      'details-control',
                         orderable:      false,

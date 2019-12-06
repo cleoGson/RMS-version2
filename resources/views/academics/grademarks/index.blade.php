@@ -20,7 +20,6 @@
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>Grade</th> 
 <th>Minimum Marks</th>
 <th>Maximum Marks</th>
@@ -32,7 +31,6 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
 <th>Grade</th> 
 <th>Minimum Marks</th>
 <th>Maximum Marks</th>
@@ -62,10 +60,6 @@
         '<tr>'+
             '<td>grademark name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Grade:</td>'+
@@ -112,7 +106,6 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
                     {data: 'grades.name',name: 'grade_id'},
                     {data: 'minimum_marks',name: 'minimum_marks'},
                     {data: 'maximum_marks',name: 'maximum_marks'},

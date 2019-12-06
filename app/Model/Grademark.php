@@ -22,7 +22,6 @@ class Grademark extends Model
      */
     protected $fillable = [
         'name',
-        'display_name',
         'grade_id',
         'minimum_marks',
         'maximum_marks',
@@ -38,7 +37,6 @@ class Grademark extends Model
      */
     protected static $logAttributes = [
         'name',
-        'display_name',
         'grade_id', 
         'minimum_marks',
         'maximum_marks',
@@ -62,6 +60,11 @@ class Grademark extends Model
     public function grades()
     {
         return $this->belongsTo(Grade::class, 'grade_id')->withDefault();
+    }
+
+     public function getGradeMarksAttribute()
+    {
+        return $this->grades->name." ( ".$this->minimum_marks.'/'.$this->maximum_marks." point-".$this->grade_point." )";
     }
 
     /**

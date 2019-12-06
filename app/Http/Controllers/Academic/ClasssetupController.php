@@ -25,29 +25,32 @@ class ClasssetupController extends Controller
     {   
         if (request()->wantsJson()) {
             $template = 'academics.classsetups.actions';
-            return $dataTables->eloquent(Classsetup::with(['creator','updator','classes','classsections','years','gradings','curricular'])->select('classsetups.*'))
+            return $dataTables->eloquent(Classsetup::with(['creator','updator','classes','years','gradings'])->select('classsetups.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'academic.classsetup';
                     $routeKey = 'academic.classsetup';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
-                })->addColumn('curricular_id', function ($row) {
-                return $row->curricular->curricularSubjects->map(function ($curriculardata) {
+                })
+                ->addColumn('subject_curricular', function ($row) {
+                return $row->subjectCurriculars->map(function ($curricularsubject) {
                     return
-                        ucfirst(strtoupper($curriculardata->name));
+                        ucfirst(strtoupper($curricularsubject->name));
+                        
+             })->implode(', '); })
+                ->addColumn('examination_curricular', function ($row) {
+                return $row->examinationCurriculars->map(function ($examcurricular) {
+                    return
+                        ucfirst(strtoupper($examcurricular->name));
                         
              })->implode(', '); })
                ->addColumn('grade_curricular', function ($row) {
-               return $row->gradings->gradeCurricular->map(function ($curriculargrade) {
+               return $row->gradings->gradeCurricular->map(function ($grade) {
                     return 
                          
-                        ucfirst(strtoupper($curriculargrade->name));
+                        ucfirst(strtoupper($grade->name));
                         
              })->implode(', ');
-               })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
-                })
-                
+               })        
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->creator->email : '';
                 })
@@ -68,12 +71,17 @@ class ClasssetupController extends Controller
     {
         $years=Academicyear::pluck('name','id')->toArray();
         $classsections=Classsection::pluck('name','id')->toArray();
-        $examcurriculars=Examinationcurricular::get()->pluck('full_name','id')->toArray();
+        $examcurriculars=Examinationcurricular::pluck('name','id')->toArray();
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
-        return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular','feesstructure','examcurriculars']));
+        $selectedexamcurr=[];
+        $selectedsubjectcurr=[];
+        return view('academics.classsetups.create',compact(['years',
+        'classsections','classes','grades','curricular',
+        'selectedexamcurr','selectedsubjectcurr',
+        'feesstructure','examcurriculars']));
     }
 
 
@@ -100,8 +108,8 @@ class ClasssetupController extends Controller
     
         $subjectscurriculars = request('subject_curricular');
         $examinationscurriculars = request('examination_curricular');  
-         $classsetup->subjectCurricular()->sync($subjectscurriculars);
-         $classsetup->examinationCurricular()->sync($examinationscurriculars);
+         $classsetup->subjectCurriculars()->sync($subjectscurriculars);
+         $classsetup->examinationCurriculars()->sync($examinationscurriculars);
         alert()->success('success', 'classsetup  has  successfully added.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }
@@ -114,8 +122,8 @@ class ClasssetupController extends Controller
      */
     public function show(Classsetup $classsetup)
     {
-        alert()->warning('warning', 'Sorry please  use the provided view Link.')->persistent();
-        return redirect()->back();
+        $show=$classsetup;
+        return view('academics.classsetups.show',compact(['show']));
     }
 
     /**
@@ -127,19 +135,22 @@ class ClasssetupController extends Controller
     public function edit(Classsetup $classsetup)
     {
         $years=Academicyear::pluck('name','id')->toArray();
-        $examcurriculars=Examinationcurricular::get()->pluck('full_name','id')->toArray();
+        $examcurriculars=Examinationcurricular::pluck('name','id')->toArray();
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
+        $selectedexamcurr=$classsetup->subjectCurriculars->pluck('id')->toArray();
+        $selectedsubjectcurr=$classsetup->examinationCurriculars->pluck('id')->toArray();
         return view('academics.classsetups.edit',[
             'show'=>$classsetup,
             'years'=>$years,
-            'classsections'=>$classsections,
             'examcurriculars'=>$examcurriculars,
             'classes'=>$classes,
             'grades'=>$grades,
             'curricular'=>$curricular,
+            'selectedexamcurr'=>$selectedexamcurr,
+            'selectedsubjectcurr'=> $selectedsubjectcurr,
             'feesstructure'=>$feesstructure
             ]);
     }
@@ -165,8 +176,9 @@ class ClasssetupController extends Controller
               'maximum_capacity',
               'year_id',
             ]));
-           //examination curricular
-         //subject curricular
+            
+        $classsetup->subjectCurriculars()->sync($subjectscurriculars);
+        $classsetup->examinationCurriculars()->sync($examinationscurriculars);
         alert()->success('success', 'classsetup  has  successfully Updated.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }
@@ -179,7 +191,7 @@ class ClasssetupController extends Controller
      */
     public function destroy(Classsetup $classsetup)
     {
-        $classsetup->delete();
+       $classsetup->delete();
         alert()->success('success', 'classsetup  has  successfully Deleted.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }

@@ -26,7 +26,6 @@ class GradeCurricularRequest extends FormRequest
        {
        return [
            'name'=>"required|string|unique:gradecurriculars,name",
-           'display_name'=>'nullable|string',
            'year_id'=>'required|integer|exists:academicyears,id',
            'grademarks_id'=>"required|array|min:1",
            'grademarks_id.*'=>'required|integer|distinct|exists:grademarks,id',
@@ -38,7 +37,6 @@ class GradeCurricularRequest extends FormRequest
 
        return [
            'name'=>"required|string|unique:gradecurriculars,id,$this->route('gradecurricular')->id",
-           'display_name'=>'nullable|string',
            'year_id'=>'required|integer|exists:academicyears,id',
            'grademarks_id'=>"required|array|min:1",
            'grademarks_id.*'=>'required|integer|distinct|exists:grademarks,id',

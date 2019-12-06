@@ -24,11 +24,7 @@ class GrademarkController extends Controller
                     $gateKey = 'academic.grademark';
                     $routeKey = 'academic.grademark';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
-                })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
-                })
-                
+                })      
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->creator->email : '';
                 })
@@ -64,7 +60,6 @@ class GrademarkController extends Controller
     {
         $grademark = Grademark::create([
             'name'=>request('name'),
-            'display_name'=>request('display_name'),
             'created_by'=>auth()->id(),
             'grade_id'=>request('grade_id'), 
             'minimum_marks'=>request('minimum_marks'),
@@ -110,7 +105,7 @@ class GrademarkController extends Controller
     public function update(GradeMarkRequest $request, Grademark $grademark)
     {
         $grademark->updated_by = auth()->id();
-        $grademark->update(request(['name','display_name','grade_id','minimum_marks','maximum_marks','grade_point']));
+        $grademark->update(request(['name','grade_id','minimum_marks','maximum_marks','grade_point']));
         alert()->success('success', 'Grade Marks  has  successfully Updated.')->persistent();
         return redirect()->route('academic.grademark.index');
     }

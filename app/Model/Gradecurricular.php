@@ -21,7 +21,6 @@ class Gradecurricular extends Model
      */
     protected $fillable = [
         'name',
-        'display_name',
         'year_id',
         'status', 
         'approved', 
@@ -37,7 +36,6 @@ class Gradecurricular extends Model
      */
     protected static $logAttributes = [
         'name',
-        'display_name',
         'year_id',
         'status', 
         'approved', 
@@ -81,4 +79,14 @@ class Gradecurricular extends Model
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
     }
+
+     /**
+     * A verifier belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function approvedBy()
+        {
+        return $this->belongsTo(User::class, 'approved_by')->withDefault();
+        }
 }

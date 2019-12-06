@@ -29,10 +29,13 @@ class CreateExaminationresultsTable extends Migration
             $table->foreign('semester_id')->references('id')->on('semesters');
             $table->bigInteger('year_id')->unsigned()->nullable();
             $table->foreign('year_id')->references('id')->on('academicyears');
+            $table->bigInteger('subject_id')->unsigned()->nullable();
+            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->double('marks')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

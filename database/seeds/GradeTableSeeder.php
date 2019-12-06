@@ -29,6 +29,9 @@ class GradeTableSeeder extends Seeder
             ],
             ['name'=>'B+',
             'display_name'=>'B+'
+            ] ,
+             ['name'=>'D',
+            'display_name'=>'D'
             ] 
     ];
     Grade::insert($data);

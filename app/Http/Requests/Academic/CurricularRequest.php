@@ -28,7 +28,6 @@ class CurricularRequest extends FormRequest
         {
         return [
             'name'=>"required|string|unique:curriculars,name",
-            'display_name'=>'nullable|string|max:255',
             'semester_id'=>'required|exists:semesters,id',
             'year_id'=>'required|integer|exists:academicyears,id',
             'subjects_id'=>"required|array|min:1",
@@ -41,7 +40,6 @@ class CurricularRequest extends FormRequest
 
         return [
             'name'=>"required|string|unique:curriculars,id,$this->route('curricular')->id",
-            'display_name'=>'nullable|string|max:255',
             'semester_id'=>'required|exists:semesters,id',
             'year_id'=>'required|integer|exists:academicyears,id',
             'subjects_id'=>"required|array|min:1",
