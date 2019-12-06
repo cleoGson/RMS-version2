@@ -31,9 +31,8 @@ class CurricularRequest extends FormRequest
             'display_name'=>'nullable|string|max:255',
             'semester_id'=>'required|exists:semesters,id',
             'year_id'=>'required|integer|exists:academicyears,id',
-            'subjects_id.*'=>'required|exists:subjects,id',
-            
-
+            'subjects_id'=>"required|array|min:1",
+            'subjects_id.*'=>'required|integer|distinct|exists:subjects,id',
         ];
        }
        case 'PUT':
@@ -45,7 +44,8 @@ class CurricularRequest extends FormRequest
             'display_name'=>'nullable|string|max:255',
             'semester_id'=>'required|exists:semesters,id',
             'year_id'=>'required|integer|exists:academicyears,id',
-            'subjects_id.*'=>'required|exists:subjects,id',
+            'subjects_id'=>"required|array|min:1",
+            'subjects_id.*'=>'required|integer|distinct|exists:subjects,id',
         ];
        }
        default:break;

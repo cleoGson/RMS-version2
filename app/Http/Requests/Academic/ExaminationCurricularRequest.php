@@ -29,7 +29,8 @@ class ExaminationCurricularRequest extends FormRequest
            'name'=>"required|string",
            'year_id'=>'required|integer|exists:academicyears,id',
            'semester_id'=>'required|integer|exists:semesters,id',
-           'examinationmark_id.*'=>'required|exists:examinationmarks,id',
+           'examinationmark_id'=>"required|array|min:1",
+           'examinationmark_id.*'=>'required|distinct|integer|exists:examinationmarks,id',
        ];
       }
       case 'PUT':
@@ -40,7 +41,9 @@ class ExaminationCurricularRequest extends FormRequest
            'name'=>"required|string",
            'year_id'=>'required|integer|exists:academicyears,id',
            'semester_id'=>'required|integer|exists:semesters,id',
-           'examinationmark_id.*'=>'required|exists:examinationmarks,id',
+           'examinationmark_id'=>"required|array|min:1",
+           'examinationmark_id.*'=>'required|distinct|integer|exists:examinationmarks,id',
+          
            
        ];
       }

@@ -26,7 +26,9 @@ class FeesstructureRequest extends FormRequest
         case 'POST':
         {
         return [
-            'name'=>"required|string",
+             'name'=>"required|string",
+             'feeamount_id'=>"required|array|min:1",
+             'feeamount_id.*'=>'required|integer|distinct|exists:feesamounts,id',
         ];
        }
        case 'PUT':
@@ -35,6 +37,8 @@ class FeesstructureRequest extends FormRequest
 
         return [
             'name'=>"required|string",
+            'feeamount_id'=>"required|array|min:1",
+            'feeamount_id.*'=>'required|integer|distinct|exists:feesamounts,id',
         ];
        }
        default:break;
