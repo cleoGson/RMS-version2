@@ -52,8 +52,10 @@ class ClasssetupRequest extends FormRequest
             'minimum_capacity'=>'required|numeric',
             'maximum_capacity'=>'required|numeric|greater_than:minimum_marks', 
             'grade_curricular'=>'required|integer|exists:gradecurriculars,id',
-            'subject_curricular'=>'required|integer|exists:curriculars,id',
-            'examination_curricular'=>'required|integer|exists:examinationcurriculars,id',
+            'subject_curricular'=>"required|array|min:1",
+            'subject_curricular.*'=>'required|integer|distinct|exists:curriculars,id',
+            'examination_curricular'=> "required|array|min:1",
+            'examination_curricular.*'=>'required|integer|distinct|exists:examinationcurriculars,id',
             'fees_structure'=>'required|integer|exists:feesstructures,id',  
         ];
        }
