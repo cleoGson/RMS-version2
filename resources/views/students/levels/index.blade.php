@@ -50,7 +50,7 @@
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>level name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
@@ -70,7 +70,7 @@
         '<tr>'+
         '<td>Updated By:</td>'+
             '<td colspan="3">'+d.email+'</td>'+
-        '</tr>'
+        '</tr><tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+

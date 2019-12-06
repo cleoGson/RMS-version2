@@ -56,7 +56,7 @@
             var end = '';
             var orign = '/student/student';
             function format ( d ) {
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>First name:</td>'+
             '<td colspan="3">'+d.firstname+'</td>'+

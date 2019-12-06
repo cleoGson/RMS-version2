@@ -8,6 +8,7 @@ use App\Model\Feesstructure;
 use App\Model\Curricular;
 use App\Model\Academicyear;
 use App\Model\Classroom;
+use App\Model\Examinationcurricular;
 use App\Model\Classsection;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -67,11 +68,12 @@ class ClasssetupController extends Controller
     {
         $years=Academicyear::pluck('name','id')->toArray();
         $classsections=Classsection::pluck('name','id')->toArray();
+        $examcurriculars=Examinationcurricular::get()->pluck('full_name','id')->toArray();
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
-        return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular','feesstructure']));
+        return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular','feesstructure','examcurriculars']));
     }
 
 
@@ -83,19 +85,23 @@ class ClasssetupController extends Controller
      */
     public function store(ClasssetupRequest $request)
     {
+    
         $classsetup = Classsetup::create([
             'name'=>request('name'),
             'class_id'=>request('class_id'),
-            'classsection_id'=>request('classsection_id'),
             'year_id'=>request('year_id'),
             'grade_curricular'=>request('grade_curricular'),
             'minimum_capacity'=>request('minimum_capacity'),
             'maximum_capacity'=>request('maximum_capacity'),
-            'curricular_id'=>request('curricular_id'),
-            'feesstructure_id'=>request('feesstructure_id'),
-            'status'=>1,
+            'fees_structure'=>request('fees_structure'),
+            'approved_by'=>auth()->id(),
             'created_by'=>auth()->id(),
         ]);
+    
+        $subjectscurriculars = request('subject_curricular');
+        $examinationscurriculars = request('examination_curricular');  
+         $classsetup->subjectCurricular()->sync($subjectscurriculars);
+         $classsetup->examinationCurricular()->sync($examinationscurriculars);
         alert()->success('success', 'classsetup  has  successfully added.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }
@@ -121,7 +127,7 @@ class ClasssetupController extends Controller
     public function edit(Classsetup $classsetup)
     {
         $years=Academicyear::pluck('name','id')->toArray();
-        $classsections=Classsection::pluck('name','id')->toArray();
+        $examcurriculars=Examinationcurricular::get()->pluck('full_name','id')->toArray();
         $classes=Classroom::pluck('name','id')->toArray();
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
@@ -130,6 +136,7 @@ class ClasssetupController extends Controller
             'show'=>$classsetup,
             'years'=>$years,
             'classsections'=>$classsections,
+            'examcurriculars'=>$examcurriculars,
             'classes'=>$classes,
             'grades'=>$grades,
             'curricular'=>$curricular,
@@ -147,18 +154,19 @@ class ClasssetupController extends Controller
     public function update(ClasssetupRequest $request, Classsetup $classsetup)
     {
         $classsetup->updated_by = auth()->id();
-
+        $subjectscurriculars=request('subject_curricular');
+        $examinationscurriculars = request('examination_curricular');
         $classsetup->update(request([
-             'name',
+              'name',
               'class_id',
-              'classsection_id',
               'grade_curricular',
+              'fees_structure',
               'minimum_capacity',
               'maximum_capacity',
-              'curricular_id',
-              'feesstructure_id',
               'year_id',
             ]));
+           //examination curricular
+         //subject curricular
         alert()->success('success', 'classsetup  has  successfully Updated.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }

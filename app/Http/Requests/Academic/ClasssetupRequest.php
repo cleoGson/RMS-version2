@@ -31,10 +31,10 @@ class ClasssetupRequest extends FormRequest
             'year_id'=>'required|integer|exists:academicyears,id',
             'minimum_capacity'=>'required|numeric|max:100',
             'maximum_capacity'=>'required|numeric|max:100|greater_than:minimum_capacity', 
-            'classsection_id'=>'required|integer|exists:classsections,id',
             'grade_curricular'=>'required|integer|exists:gradecurriculars,id',
-            'curricular_id'=>'required|integer|exists:curriculars,id',
-            'feesstructure_id'=>'required|integer|exists:feesstructures,id',
+            'subject_curricular'=>'required|integer|exists:curriculars,id',
+            'examination_curricular'=>'required|integer|exists:examinationcurriculars,id',
+            'fees_structure'=>'required|integer|exists:feesstructures,id',
             
         ];
        }
@@ -49,11 +49,10 @@ class ClasssetupRequest extends FormRequest
             'year_id'=>'required|integer|exists:academicyears,id',
             'minimum_capacity'=>'required|numeric',
             'maximum_capacity'=>'required|numeric|greater_than:minimum_marks', 
-            'classsection_id'=>'required|integer|exists:classsections,id',
             'grade_curricular'=>'required|integer|exists:gradecurriculars,id',
-            'curricular_id'=>'required|integer|exists:curriculars,id',
-            'feesstructure_id'=>'required|integer|exists:feesstructures,id',
-            
+            'subject_curricular'=>'required|integer|exists:curriculars,id',
+            'examination_curricular'=>'required|integer|exists:examinationcurriculars,id',
+            'fees_structure'=>'required|integer|exists:feesstructures,id',  
         ];
        }
        default:break;

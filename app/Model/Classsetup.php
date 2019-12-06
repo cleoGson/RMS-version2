@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use App\Curricular;
 
 class Classsetup extends Model
 {
@@ -23,14 +24,14 @@ class Classsetup extends Model
     protected $fillable = [
          'name',
          'class_id',
-         'classsection_id',
          'grade_curricular',
          'minimum_capacity',
          'maximum_capacity',
-         'feesstructure_id',
-         'curricular_id',
+         'fees_structure',
          'year_id',
+         'approved',
          'created_by',
+         'approved_by',
          'updated_by',
          'status',
 
@@ -44,12 +45,10 @@ class Classsetup extends Model
     protected static $logAttributes = [
          'name',
          'class_id',
-         'classsection_id',
          'grade_curricular',
          'minimum_capacity',
          'maximum_capacity',
-         'curricular_id',
-         'feesstructure_id',
+         'fees_structure',
          'year_id',
          'created_by',
          'updated_by',
@@ -83,9 +82,8 @@ class Classsetup extends Model
      */
     public function feesStructure()
     {
-        return $this->belongsTo(Feessttructure::class, 'feesstructure_id')->withDefault();
+        return $this->belongsTo(Feessttructure::class, 'fees_structure')->withDefault();
     }
-
        /**
      * An applicant belongs to users
      *      *
@@ -93,24 +91,18 @@ class Classsetup extends Model
      */
     public function gradings()
     {
-        return $this->belongsTo(Gradecurricular::class, 'grade_curricular')->withDefault();
+     return $this->belongsTo(Gradecurricular::class, 'grade_curricular')->withDefault();
     }
 
-    public function curricular()
-    {
-        return $this->belongsTo(Curricular::class, 'curricular_id')->withDefault();
-    }
-    
-      /**
-     * An applicant belongs to users
-     *      *
-     * @return belongsTo
-     */
-    public function classsections()
-    {
-        return $this->belongsTo(Classsection::class, 'classsection_id')->withDefault();
+    public function subjectCurricular(){
+        return $this->belongsToMany(Curricular::class ,'classsetups_curricular', 
+        'curricular_id', 'classsetup_id')->withTimestamps();
     }
 
+      public function examinationCurricular(){
+        return $this->belongsToMany(Examinationcurricular::class ,'classsetups_examcurricular', 
+        'examcurricular_id', 'classsetup_id')->withTimestamps();
+    }
 
       /**
      * An applicant belongs to users

@@ -40,7 +40,7 @@ class Curricular extends Model
 
 
     public function curricularSubjects(){
-        return $this->belongsToMany(Subject::class ,'curriculars_subjects', 
+        return $this->belongsToMany(Curricular::class ,'curriculars_subjects', 
         'curricular_id', 'subject_id')->withTimestamps();
     }
 
