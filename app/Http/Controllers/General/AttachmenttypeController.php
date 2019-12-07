@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
-
-use App\Model\Atttachementtype;
+use Yajra\DataTables\DataTables;
+use App\Http\Requests\General\AttachmenttypeRequest;
+use App\Model\Attachmenttype;
 use Illuminate\Http\Request;
 
 class AttachmenttypeController extends Controller
@@ -14,9 +15,10 @@ class AttachmenttypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(DataTables $dataTables)
-    {    if (request()->wantsJson()) {
+    {    
+        if (request()->wantsJson()) {
             $template = 'generals.attachmenttypes.actions';
-            return $dataTables->eloquent(Attachmenttype::with(['creator','updator'])->select('attachmenttypes.*'))
+            return $dataTables->eloquent(Attachmenttype::with(['createdBy','updatedBy'])->select('attachmenttypes.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'general.attachmenttype';
                     $routeKey = 'general.attachmenttype';
@@ -27,14 +29,14 @@ class AttachmenttypeController extends Controller
                 })
                 
                 ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
+                    return $row->created_by ? $row->createdBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
                 })
                 ->make(true);
-         }
-         return view('generals.attachmenttypes.index');
+        }
+        return view('generals.attachmenttypes.index');
     }
 
     /**
@@ -55,14 +57,10 @@ class AttachmenttypeController extends Controller
      */
     public function store(AttachmenttypeRequest $request)
     {
-        
-        $attachmenttype = Attachmenttype::create([
-                    'file'=>request('name'),
-                    'attachment_type'=>request('attachment_type'),
-                    'created_by'=>auth()->id(),
-                    'attachable_type'=>request('attachment_type'),
-                    'attachable_id'=>request('attachment_id'), 
-                    'remarks'=>request('remarks'),
+         $attachment = Attachmenttype::create([
+            'name'=>request('name'),
+            'display_name'=>request('display_name'),
+            'created_by'=>auth()->id(),
         ]);
         alert()->success('success', 'Attachmenttype  has  successfully added.')->persistent();
         return redirect()->route('general.attachmenttype.index');
@@ -101,7 +99,7 @@ class AttachmenttypeController extends Controller
     public function update(AttachmenttypeRequest $request, Attachmenttype $attachmenttype)
     {
         $attachmenttype->updated_by = auth()->id();
-        $attachmenttype->update(request(['file','attachment_type','remarks']));
+        $attachmenttype->update(request(['name','display_name']));
         alert()->success('success', 'Attachmenttype  has  successfully Updated.')->persistent();
         return redirect()->route('general.attachmenttype.index');
     }

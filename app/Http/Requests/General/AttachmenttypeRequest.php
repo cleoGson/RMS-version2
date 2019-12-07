@@ -4,7 +4,7 @@ namespace App\Http\Requests\General;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AtttachementtypeRequest extends FormRequest
+class AttachmenttypeRequest extends FormRequest
 {
    
     /**

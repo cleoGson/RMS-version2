@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-body">
-                    {!! Form::model($show,['method'=>'PATCH','route'=>['student.student.update',$show->id],'files'=>true]); !!}
+                    {!! Form::model($show,['method'=>'PATCH','route'=>['student.student.update',encrypt($show->id)],'files'=>true]); !!}
                     @include('students.students.form')
                     <div class="row">
                         <div class="col-md-12 form-group text-right">

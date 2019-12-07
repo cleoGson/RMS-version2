@@ -35,7 +35,7 @@
             <div class="card card-default">
           <div class="card-body">
         {!! Form::open(['route'=>'general.attachmenttype.store','files'=>true]); !!}
-                @include('generals.attachmentstypes.form')
+                @include('generals.attachmenttypes.form')
                 <div class="row">
          <div class="col-md-12 form-group text-right">
                     <div class="pull-right">

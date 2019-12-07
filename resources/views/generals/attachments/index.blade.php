@@ -63,11 +63,11 @@
         '</tr>'+
         '<tr>'+
             '<td>name:</td>'+
-            '<td colspan="3">'+d.name+'</td>'+
+            '<td colspan="3">'+d.remarks+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.creat+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -75,7 +75,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
+            '<td colspan="3">'+d.updat+'</td>'+
         '</tr>'+
         '<tr>'
         +'<td>Updated At:</td>'+
@@ -96,8 +96,8 @@
                 },
                 columns: [
                     {data: 'attachment_type', name: 'attachment_type'},
-                    {data: 'attachment', name: 'attachment'},
-                    {data: 'name', name: 'name'},
+                    {data: 'file', name: 'file'},
+                    {data: 'remarks', name: 'remarks'},
                     {
                         className:      'details-control',
                         orderable:      false,

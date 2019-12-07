@@ -4,7 +4,7 @@ namespace App\Http\Requests\General;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AtttachementRequest extends FormRequest
+class AttachmentRequest extends FormRequest
 {
   
     /**
@@ -28,7 +28,7 @@ class AtttachementRequest extends FormRequest
         {
         return [
             'attachment_type'=>'required|integer|exists:attachmenttypes,id',
-            'file'=>"required|file",
+            'file'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'remarks'=>"nullable|string"
         ];
        }
@@ -38,7 +38,7 @@ class AtttachementRequest extends FormRequest
 
         return [
             'attachment_type'=>'required|integer|exists:attachmenttypes,id',
-            'file'=>"required|file",
+            'file'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'remarks'=>"nullable|string"
         ];
        }

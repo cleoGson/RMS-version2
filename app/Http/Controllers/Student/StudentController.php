@@ -10,6 +10,7 @@ use App\Model\Course;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use PDF;
+use Crypt;
 use App\Http\Requests\Student\StudentRequest;
 
 
@@ -97,7 +98,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Student  $student
+     * @param  \App\Student  Crypt::encypt($student)
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)

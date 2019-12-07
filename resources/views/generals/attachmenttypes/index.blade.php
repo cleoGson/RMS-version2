@@ -62,7 +62,7 @@
        
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -70,7 +70,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
+            '<td colspan="3">'+d.updated_by+'</td>'+
         '</tr>'+
         '<tr>'
         +'<td>Updated At:</td>'+

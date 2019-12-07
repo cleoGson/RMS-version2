@@ -17,7 +17,7 @@ class CreateAttachmentsTable extends Migration
       $table->bigIncrements('id');
             $table->string('file');
             $table->bigInteger('attachment_type')->unsigned()->nullable();
-            $table->foreign('attachment_type')->references('id')->on('attachementtypes');
+            $table->foreign('attachment_type')->references('id')->on('attachmenttypes');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->morphs('attachable');

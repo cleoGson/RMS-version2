@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Model\Attachment;
 use App\Model\Attachmenttype;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Image;
+use App\Http\Requests\General\AttachmentRequest;
 
 class AttachmentController extends Controller
 {
@@ -16,7 +19,7 @@ class AttachmentController extends Controller
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
             $template = 'generals.attachments.actions';
-            return $dataTables->eloquent(Attachment::with(['creator','updator'])->select('attachments.*'))
+            return $dataTables->eloquent(Attachment::with(['createdBy','updatedBy','attachmentType'])->select('attachments.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'general.attachment';
                     $routeKey = 'general.attachment';
@@ -25,12 +28,15 @@ class AttachmentController extends Controller
                 ->editColumn('display_name', function ($row) {
                     return $row->display_name ? strip_tags($row->display_name) : '';
                 })
+                  ->editColumn('attachment_type', function ($row) {
+                    return $row->attachment_type ? strip_tags($row->attachmentType->name) : '';
+                })
                 
                 ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->creator->email : '';
+                    return $row->created_by ? $row->createdBy->email : '';
                 })
                 ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
                 })
                 ->make(true);
          }
@@ -56,10 +62,39 @@ class AttachmentController extends Controller
      */
     public function store(AttachmentRequest $request)
     {
-        $attachment = Attachment::create([
-            'name'=>request('name'),
-            'display_name'=>request('display_name'),
-            'created_by'=>auth()->id(),
+        $filepath=null;
+        if($request->hasFile('file')) {
+        $extension = $request->file('file')->getClientOriginalExtension();
+        //filename to store
+        $filenametostore = date('Ymdhms').microtime(true).'.'.$extension;
+        //Upload File
+        $request->file('file')->storeAs('public/attachments', $filenametostore);
+        $filepath = 'storage/attachments/'.$filenametostore;
+        }
+
+    //    $image = $request->file('file');
+
+    //     $file_name_path =date('Ymdhms').microtime(true).'.'.$image->extension();
+
+    //     $destinationPath = storage_path('attachments');
+
+    //     $img = Image::make($image->path());
+
+    //     $img->resize(150, 150, function ($constraint) {
+
+    //         $constraint->aspectRatio();
+
+    //     })->save($destinationPath.'/'.$file_name_path);
+
+    //     $destinationPath = storage_path('/images');
+    //     $image->move($destinationPath, $file_name_path);
+         $attachment = Attachment::create([
+                    'file'=> $filepath,
+                    'attachment_type'=>request('attachment_type'),
+                    'created_by'=>auth()->id(),
+                    'attachable_type'=>request('attachable_type'),
+                    'attachable_id'=>request('attachable_id'), 
+                    'remarks'=>request('remarks'),
         ]);
         alert()->success('success', 'Attachment  has  successfully added.')->persistent();
         return redirect()->route('general.attachment.index');
@@ -100,7 +135,8 @@ class AttachmentController extends Controller
     public function update(AttachmentRequest $request, Attachment $attachment)
     {
         $attachment->updated_by = auth()->id();
-        $attachment->update(request(['name','display_name']));
+        
+        $attachment->update(request(['file','attachment_type','remarks']));
         alert()->success('success', 'Attachment  has  successfully Updated.')->persistent();
         return redirect()->route('general.attachment.index');
     }

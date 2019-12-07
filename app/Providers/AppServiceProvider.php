@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Form::component('inputPassword', 'components.form.password', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputText', 'components.form.text', ['name', 'value'=>null, 'attributes'=>[]]);
+        Form::component('inputFile', 'components.form.file', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputTextArea', 'components.form.textarea', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputNumber', 'components.form.number', ['name', 'value'=>null, 'attributes'=>[]]);
         Form::component('inputSelect', 'components.form.select', ['name','options'=>[], 'value'=>null, 'attributes'=>[]]);
