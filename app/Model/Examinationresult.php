@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use App\Model\Semester;
+use App\Model\Classroom;
+use App\Model\Classsection;
+use App\Model\AcademicyearStudent;
+use App\Model\Student;
+use App\Model\Examinationtype;
 
 class Examinationresult extends Model
-{
-   
+{   
     use LogsActivity,softDeletes;
-
     protected $table = 'examinationresults';
     protected $primaryKey = 'id';
 
@@ -21,10 +25,19 @@ class Examinationresult extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'display_name',
-        'created_by',
-        'updated_by'
+         'class_id',
+         'classsection_id',
+         'examination_nature',
+         'student_id',
+         'academicyear_student_id',
+         'examinationtype_id',
+         'semester_id',
+         'year_id',
+         'subject_id',
+         'created_by',
+         'updated_by',
+         'marks',
+         'remarks',
     ];
 
     /**
@@ -33,13 +46,106 @@ class Examinationresult extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name',
-        'display_name',
-        'created_by',
-        'updated_by'
+         'class_id',
+         'classsection_id',
+         'examination_nature',
+         'student_id',
+         'academicyear_student_id',
+         'examinationtype_id',
+         'semester_id',
+         'year_id',
+         'subject_id',
+         'created_by',
+         'updated_by',
+         'marks',
+         'remarks',
     ];
 
 
+     /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function classes()
+    {
+        return $this->belongsTo(Classroom::class, 'class_id')->withDefault();
+    }
+
+         /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function subjects()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id')->withDefault();
+    }
+
+
+         /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function classsections()
+    {
+        return $this->belongsTo(Classection::class, 'subject_id')->withDefault();
+    }
+ 
+    /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function students()
+    {
+        return $this->belongsTo(Student::class, 'student_id')->withDefault();
+    }
+
+
+          /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function academicyearStudent()
+    {
+        return $this->belongsTo(AcademicyearStudent::class, 'academicyear_student_id')->withDefault();
+    }
+
+
+         /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function examinationsType()
+    {
+        return $this->belongsTo(Examinationtype::class, 'examinationtype_id')->withDefault();
+    }
+
+
+    
+       /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function years()
+    {
+        return $this->belongsTo(Academicyear::class, 'year_id')->withDefault();
+    }
+
+         /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function semesters()
+    {
+        return $this->belongsTo(Semester::class, 'semester_id')->withDefault();
+    }
 
       /**
      * An applicant belongs to users

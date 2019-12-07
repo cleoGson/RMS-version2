@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('examinationcurricular','Academic\ExaminationcurricularController');
     Route::resource('examinationmarks','Academic\ExaminationmarksController');
     Route::resource('examinationresult','Academic\ExaminationresultController');
+    Route::resource('examinationnature','Academic\ExaminationnatureController');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
@@ -87,7 +88,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applic
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.'], function () {
-    Route::resource('familymember', 'General\FamilymemberController');
+     Route::resource('familymember', 'General\FamilymemberController');
+     Route::resource('attachment', 'General\AttachmentController');
+     Route::resource('attachmenttype', 'General\AttachmenttypeController');
     
 });
    

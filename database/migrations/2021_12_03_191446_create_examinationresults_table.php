@@ -31,6 +31,8 @@ class CreateExaminationresultsTable extends Migration
             $table->foreign('year_id')->references('id')->on('academicyears');
             $table->bigInteger('subject_id')->unsigned()->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->bigInteger('examination_nature')->unsigned()->nullable();
+            $table->foreign('examination_nature')->references('id')->on('examinationnatures');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();

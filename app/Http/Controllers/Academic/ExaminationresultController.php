@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Academic;
 use App\Http\Controllers\Controller;
-
+use App\Model\Examinationnaature;
 use App\Model\Examinationresult;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -67,6 +67,7 @@ class ExaminationresultController extends Controller
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
+        $nature=Examinationnature::pluck('name','id')->toArray();
         return view('academics.classsetups.create',compact(['years','classsections','classes','grades','curricular','feesstructure']));
     }
 
@@ -85,6 +86,7 @@ class ExaminationresultController extends Controller
             'classsection_id'=>request('classsection_id'),
             'year_id'=>request('year_id'),
             'grade_curricular'=>request('grade_curricular'),
+            'examination_nature'=>request('examination_nature'),
             'minimum_capacity'=>request('minimum_capacity'),
             'maximum_capacity'=>request('maximum_capacity'),
             'curricular_id'=>request('curricular_id'),
@@ -122,6 +124,7 @@ class ExaminationresultController extends Controller
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
+        $nature=Examinationnature::pluck('name','id')->toArray();
         return view('academics.classsetups.edit',[
             'show'=>$classsetup,
             'years'=>$years,
@@ -152,6 +155,7 @@ class ExaminationresultController extends Controller
               'grade_curricular',
               'minimum_capacity',
               'maximum_capacity',
+              'examination_nature',
               'curricular_id',
               'feesstructure_id',
               'year_id',

@@ -223,6 +223,15 @@
                               Examination types
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a href="{{ route('academic.examinationnature.index') }}" class="nav-link {{ request()->is('academic/examinationnature') || request()->is('academic/examinationnature/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                              Examination nature
+                            </a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a href="{{ route('academic.examinationmarks.index') }}" class="nav-link {{ request()->is('academic/examinationmarks') || request()->is('academic/examinationmarks/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
@@ -286,6 +295,7 @@
                                Class Setup
                             </a>
                         </li>
+                        
                     </ul>
             </li>
             <li class="nav-item nav-dropdown">
@@ -411,6 +421,20 @@
                        General 
                     </a>
                 <ul class="nav-dropdown-items">
+                  <li class="nav-item">
+                            <a href="{{ route('general.attachmenttype.index') }}" class="nav-link {{ request()->is('general/attachmenttype') || request()->is('general/attachmenttype/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Attachment Type
+                            </a>
+                        </li>
+                  <li class="nav-item">
+                            <a href="{{ route('general.attachment.index') }}" class="nav-link {{ request()->is('general/attachment') || request()->is('general/attachment/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Attachment
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('general.familymember.index') }}" class="nav-link {{ request()->is('general/familymember') || request()->is('general/familymember/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
