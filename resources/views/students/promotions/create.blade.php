@@ -33,8 +33,57 @@
         <div class="container-fluid">
             <div class="card card-default">
           <div class="card-body">
- {!! Form::open(['route'=>'student.promotion.store','files'=>true,'id'=>"frm-example"] ); !!}
- @include('students.promotions.form')
+ <div class="row">
+             <div class="col-lg-6">
+                  <div class="client card">
+                    <div class="card-close">
+                      <div class="dropdown">
+                        <button type="button" style="color:green" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                      </div>
+                    </div>
+                    <div class="card-body text-center">
+                   <fieldset class="border p-2">
+                  <legend  class="w-auto btn btn-default" style="border-radius:3px; color:#306a99; font-weight:bold; font-size:18px; "><i class="fa fa-arrow-down"></i>Promote From: </legend>
+                      {!! Form::open(['route'=>'student.promotion.store','files'=>true,'id'=>"frm-example"] ); !!}
+                      @include('students.promotions.form')
+                     <div class="row">
+                    <div class="col-md-12 form-group text-right">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">
+                            Filter  Student(s)
+                        </button>
+                    </div>
+                    </div>
+                    </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-lg-6">
+                  <div class="client card">
+                    <div class="card-close">
+                      <div class="dropdown">
+                        <button type="button" style="color:green" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                      </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="status bg-green"></div>
+                  <fieldset class="border p-2">
+                  <legend  class="w-auto btn btn-default" style="border-radius:3px; color:#306a99; font-weight:bold; font-size:18px; "> <i class="fa fa-arrow-right"></i> Promote To:</legend>
+                     {!! Form::open(['route'=>'student.promotion.store','files'=>true,'id'=>"frm-example"] ); !!}
+                      @include('students.promotions.form')
+                       </fieldset>
+                      </div>
+                      <div class="client-title">
+                       </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+  <fieldset class="border p-2">
+ <legend  class="w-auto  btn btn-default" style="border-radius:3px; color:#306a99; font-weight:bold; font-size:18px; "> List of Student: </legend>
+                 
 <table id="example" class="table  table-bordered display" cellspacing="0" width="100%">
    <thead>
       <tr>
@@ -63,7 +112,7 @@
       </tr>
    </tfoot>
 </table>
-
+</fieldset>
 <hr>
 
 <p>Press <b>Submit</b> and check console for URL-encoded form data that would be submitted.</p>
@@ -182,6 +231,12 @@ $(document).ready(function() {
        processing: true,
       "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
       'ajax': url,
+       data: function (d) {
+                        d.class_id = $('select[name=class_id]').val()
+                        d.classsection_id = $('input[name=classsection_id]').val()
+                        d.year_id = $('select[name=year_id]').val()
+                        d.studentstatus_id = $('select[name=studentstatus_id]').val()
+                    },
       'columnDefs': [
          {
             'targets': 0,

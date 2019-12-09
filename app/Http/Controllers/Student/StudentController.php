@@ -24,7 +24,7 @@ class StudentController extends Controller
     public function index(DataTables $dataTables)
     {    if (request()->wantsJson()) {
         $template = 'students.students.actions';
-        return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
+        return $dataTables->eloquent(Student::with(['citizens','countries','disability','createdBy','updatedBy'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
                 $routeKey = 'student.student';
@@ -36,10 +36,10 @@ class StudentController extends Controller
                 return  $row->firstname.' '.$row->middlename.' '.$row->lastname;
              })
             ->editColumn('created_by', function ($row) {
-                return $row->created_by ? $row->creator->email : '';
+                return $row->created_by ? $row->createdBy->email : '';
             })
             ->editColumn('updated_by', function ($row) {
-                return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
             })
             ->make(true);
      }
@@ -72,6 +72,15 @@ class StudentController extends Controller
         $email= !is_null(request('email'))  ?  request('email') : strtolower(request('firstname')).'.'.strtolower(request('middlename')).date('Ymdhms').'@student.com';
          $studentnumber ='10090089'.date('Ymdhms');
          $birth_date = date("Y-m-d", strtotime(request('birth_date')));
+         $profile=null;
+        if($request->hasFile('photo')) {
+        $extension = $request->file('photo')->getClientOriginalExtension();
+        //filename to store
+        $filenametostore = date('Ymdhms').microtime(true).'.'.$extension;
+        //Upload File
+        $request->file('photo')->storeAs('public/profile', $filenametostore);
+        $profile = 'storage/profile/'.$filenametostore;
+        }
          $student = Student::create([
             'firstname'=>request('firstname'),
             'middlename'=>request('middlename'),
@@ -82,6 +91,7 @@ class StudentController extends Controller
             'disability'=>request('disability'),
             'birth_place'=>request('birth_place'),
             'email'=>$email, 
+             'photo'=>$profile,
             'address'=>request('address'), 
             'phone_no'=>request('phone_no'), 
             'student_number'=>$studentnumber,
@@ -151,6 +161,7 @@ class StudentController extends Controller
             'disability',
             'birth_place',
             'address', 
+            'photo',
             'phone_no', 
             'birth_country',
             'blood_grroup',

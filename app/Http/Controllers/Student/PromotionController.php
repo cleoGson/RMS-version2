@@ -53,7 +53,13 @@ class PromotionController extends Controller
                 })
                 ->make(true);
          }
-         return view('students.promotions.index');
+        $years=Academicyear::pluck('name','id')->toArray();
+        $classsetups=Classsetup::pluck('name','id')->toArray();
+        $studentstatus=Studentstatus::pluck('name','id')->toArray();
+        $classes=Classroom::pluck('name','id')->toArray();
+        $classesections=Classsection::pluck('name','id')->toArray();
+         return view('students.promotions.index',compact(['years','classsetups','classesections','studentstatus','classes']));
+     
     }
     /**
      * Show the form for creating a new resource.
@@ -83,13 +89,7 @@ class PromotionController extends Controller
             })
             ->make(true);
     }
-        $years=Academicyear::pluck('name','id')->toArray();
-        $classsetups=Classsetup::pluck('name','id')->toArray();
-        $studentstatus=Studentstatus::pluck('name','id')->toArray();
-        $classes=Classroom::pluck('name','id')->toArray();
-        $classesections=Classsection::pluck('name','id')->toArray();
-
-        return view('students.promotions.create',compact(['years','classsetups','classesections','studentstatus','classes']));
+      return redirect()->route('student.promotion.index');
     }
 
 
@@ -127,8 +127,7 @@ class PromotionController extends Controller
      */
     public function show(Promotion $promotion)
     {
-          alert()->warning('warning', 'Sorry please  use the provided view Link.')->persistent();
-        return redirect()->back();
+        return redirect()->route('student.promotion.index');
     }
 
     /**

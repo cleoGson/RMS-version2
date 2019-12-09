@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 
 use App\Model\AcademicyearStudent;
-use App\Http\Requests\Academic\ClassroomRequest;
+use App\Http\Requests\Student\AcademicYearStudentRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Model\Academicyear;
@@ -22,17 +22,35 @@ class AcademicyearStudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(DataTables $dataTables)
-    {    if (request()->wantsJson()) {
+    {    
+        if (request()->wantsJson()) {
             $template = 'students.academicyearStudents.actionsreg';
-            return $dataTables->eloquent(AcademicyearStudent::with(['createdBy','createdBy'])->select('academicyear_students.*'))
+            return $dataTables->eloquent(AcademicyearStudent::with(['createdBy','student','createdBy','years','studentStatus','class','classSetup','classSection'])->select('academicyear_students.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'student.academicyearStudent';
                     $routeKey = 'student.academicyearStudent';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                ->editColumn('display_name', function ($row) {
-                    return $row->display_name ? strip_tags($row->display_name) : '';
+                      ->editColumn('student_id', function ($row) {
+                    return $row->student_id ? $row->student->firstname : '';
                 })
+                      ->editColumn('year_id', function ($row) {
+                    return $row->year_id ? $row->years->name : '';
+                })
+                      ->editColumn('studentstatus_id', function ($row) {
+                    return $row->studentstatus_id ? $row->studentStatus->name : '';
+                })
+                      ->editColumn('class_id', function ($row) {
+                    return $row->class_id ? $row->class->name : '';
+                })
+                      ->editColumn('classsection_id', function ($row) {
+                    return $row->classsection_id ? $row->classSection->name : '';
+                })
+                    ->editColumn('classsetup_id', function ($row) {
+                    return $row->classsetup_id ? $row->classSetup->name : '';
+                })
+              
+              
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->createdBy->email : '';
                 })
@@ -65,7 +83,7 @@ class AcademicyearStudentController extends Controller
     {
          if (request()->wantsJson()) {
         $template = 'students.academicyearStudents.actionsreg';
-        return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
+        return $dataTables->eloquent(Student::with(['disability','createdBy','updatedBy'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
                 $routeKey = 'student.student';
@@ -77,13 +95,13 @@ class AcademicyearStudentController extends Controller
                 return  $row->firstname.' '.$row->middlename.' '.$row->lastname;
              })
             ->editColumn('created_by', function ($row) {
-                return $row->created_by ? $row->creator->email : '';
+                return $row->created_by ? $row->createdBy->email : '';
             })
             ->editColumn('updated_by', function ($row) {
-                return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
             })
             ->make(true);
-    }
+         }
         $years=Academicyear::pluck('name','id')->toArray();
         $classsetups=Classsetup::pluck('name','id')->toArray();
         $studentstatus=Studentstatus::pluck('name','id')->toArray();
@@ -103,18 +121,29 @@ class AcademicyearStudentController extends Controller
      */
     public function store(Request $request)
     {
-        $studentsList = request('student_id');
-        dd($studentsList);
+        $class_id =request('class_id');
+        $classsection_id=request('classsection_id');
+        $year_i=request('year_id');
+        $classsetup_id=request('classsetup_id');
+        $studentstatus_id=request('studentstatus_id');
+        $studentsList = request('id');
+        if(is_null($studentsList)){
+        alert()->warning('warning', 'Please select at least a student.')->persistent();
+       return redirect()->back();    
+        }
         foreach($studentsList as $studentkey=>$value){
+        $student_checking=AcademicyearStudent::where([['class_id','=',$class_id],['year_id','=',$year_i],['student_id','=',$value]])->count();
+        if($student_checking < 1){
          AcademicyearStudent::create([
              'created_by'=>auth()->id(),
              'student_id'=>$value,
-             'year_id'=>request('year_id'),
-             'studentstatus_id'=>1,
-             'class_id'=>request('class_id'),
-             'classsetup_id'=>request('classsetup_id'),
-             'reporting_date'=>request('reporting_date')
+             'year_id'=>$year_i,
+             'studentstatus_id'=>$studentstatus_id,
+             'class_id'=>$class_id,
+             'classsetup_id'=>$classsetup_id,
+             'reporting_date'=>date('Y-m-d'),
         ]);
+         }
        }
         alert()->success('success', 'Student status  has  successfully added.')->persistent();
         return redirect()->route('student.academicyearStudent.index');
@@ -178,7 +207,7 @@ class AcademicyearStudentController extends Controller
      * @param  \App\Model\AcademicyearStudent  $academicyearStudent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicyearStudent $academicyearStudent)
+    public function update(AcademicYearStudentRequest $request, AcademicyearStudent $academicyearStudent)
     {
          $academicyearStudent->updated_by = auth()->id();
          $academicyearStudent->reporting_date = date('Y-m-d');

@@ -25,11 +25,15 @@ class CreateAcademicyearStudentsTable extends Migration
             $table->foreign('class_id')->references('id')->on('classrooms');
             $table->bigInteger('classsetup_id')->unsigned()->nullable();
             $table->foreign('classsetup_id')->references('id')->on('classsetups');
+            $table->bigInteger('classsection_id')->unsigned()->nullable();
+            $table->foreign('classsection_id')->references('id')->on('classsections');
+             $table->bigInteger('department_id')->unsigned()->nullable();
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->datetime('reporting_date')->nullable();
+            $table->date('reporting_date')->nullable();
             $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

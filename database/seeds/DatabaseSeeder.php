@@ -42,5 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeMarksSeeder::class); 
         $this->call(FeesAmountSeeder::class);
         $this->call(ExaminationmarkSeeder::class);
+        $this->call(ExaminationnatureTableSeeder::class);
     }
 }

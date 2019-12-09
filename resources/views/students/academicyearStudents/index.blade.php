@@ -18,25 +18,24 @@
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>
 <tr>
-
-<th>Level</th>
-<th>Department Name </th>
-<th>Description </th>
-<th>Duration</th>
-<th>Duration Unit</th>
+<th>Student Name </th>
+<th>Year</th>
+<th>Class </th>
+<th>Class Section </th>
+<th>Class Setup</th>
+<th>Status</th>
 <th>View</th>
-<th>Actions </th>
 </tr>
 </thead>
 <tfoot>
 <tr>
-<th>Level</th>
-<th>Department Name </th>
-<th>Description </th>
-<th>Duration</th>
-<th>Duration Unit</th>
+<th>Student Name </th>
+<th>Year</th>
+<th>Class  </th>
+<th>Class Section </th>
+<th>Class Setup</th>
+<th>Status</th>
 <th>View</th>
-<th>Actions </th>
 </tr>
 </tfoot>
 </table>
@@ -58,24 +57,28 @@
     // `d` is the original data object for the row
     return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
          '<tr>'+
-            '<td>Department:</td>'+
-            '<td colspan="3">'+d.department_id+'</td>'+
+            '<td>Student:</td>'+
+            '<td colspan="3">'+d.student_id+'</td>'+
         '</tr>'+
          '<tr>'+
-            '<td>Level:</td>'+
-            '<td colspan="3">'+d.level_id+'</td>'+
+            '<td>Year:</td>'+
+            '<td colspan="3">'+d.year_id+'</td>'+
         '</tr>'+
          '<tr>'+
-            '<td>Description:</td>'+
-            '<td colspan="3">'+d.description+'</td>'+
+            '<td>student status:</td>'+
+            '<td colspan="3">'+d.studentstatus_id+'</td>'+
         '</tr>'+
          '<tr>'+
-            '<td>Duration:</td>'+
-            '<td colspan="3">'+d.duration+'</td>'+
+            '<td>Class:</td>'+
+            '<td colspan="3">'+d.class_id+'</td>'+
         '</tr>'+
           '<tr>'+
-            '<td>Duration Unit:</td>'+
-            '<td colspan="3">'+d.duration_unit+'</td>'+
+            '<td>Class setup:</td>'+
+            '<td colspan="3">'+d.classsetup_id+'</td>'+
+        '</tr>'+
+           '<tr>'+
+            '<td>Class section:</td>'+
+            '<td colspan="3">'+d.classsection_id+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
@@ -83,8 +86,8 @@
         '</tr>'+
         '<tr>'+
          '<tr>'+
-            '<td>Duration Unit:</td>'+
-            '<td colspan="3">'+d.duration_unit+'</td>'+
+            '<td>Reporting date:</td>'+
+            '<td colspan="3">'+d.reporting_date+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -110,12 +113,14 @@
                         d.status = $('select[name=status]').val()
                     },
                 },
+
                 columns: [
-                    {data: 'level_id', name: 'level_id'},
-                    {data: 'department_id', name: 'department_id'},
-                    {data: 'description', name: 'description'},
-                    {data: 'duration', name: 'duration'},
-                     {data: 'duration_unit', name: 'duration_unit'},
+                    {data: 'student_id', name: 'student_id'},
+                    {data: 'year_id', name: 'year_id'},
+                    {data: 'class_id', name: 'class_id'},
+                    {data: 'classsection_id', name: 'classsection_id' },
+                    {data: 'classsetup_id', name: 'classsetup_id'},
+                    {data: 'studentstatus_id', name: 'studentstatus_id'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -123,7 +128,7 @@
                         data:           null,
                         defaultContent: "<button class='btn btn-success'> <i class='fa fa-eye'></i> View</button>"
                      },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    //{data: 'action', name: 'action', orderable: false, searchable: false}
                 ], dom: 'lBfrtip<"actions">',
                 columnDefs: [],
                 "iDisplayLength": 15,

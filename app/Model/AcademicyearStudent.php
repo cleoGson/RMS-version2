@@ -41,6 +41,7 @@ class AcademicyearStudent extends Model
        'studentstatus_id',
        'class_id',
        'classsetup_id',
+       'classsection_id', 
        'created_by',
        'updated_by',
        'reporting_date',
@@ -58,15 +59,29 @@ class AcademicyearStudent extends Model
     {
         return $this->belongsTo(User::class,'created_by')->withDefault();
     }
+      public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id')->withDefault();
+    }
        
     public function studentStatus()
     {
         return $this->belongsTo(Studentstatus::class, 'studentstatus_id')->withDefault();
     }
 
-      public function classSetups()
+      public function classSetup()
     {
         return $this->belongsTo(Classsetup::class,'classsetup_id')->withDefault();
+    }
+
+      public function class()
+    {
+        return $this->belongsTo(Classroom::class,'class_id')->withDefault();
+    }
+
+      public function classSection()
+    {
+        return $this->belongsTo(Classsection::class,'classsection_id')->withDefault();
     }
 
      /**

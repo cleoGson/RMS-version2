@@ -99,12 +99,14 @@ class Classsetup extends Model
 
     public function subjectCurriculars(){
         return $this->belongsToMany(Curricular::class ,'classsetups_curricular', 
-        'curricular_id', 'classsetup_id')->withTimestamps();
+        'classsetup_id' ,'curricular_id')->withTimestamps();
     }
       public function examinationCurriculars(){
         return $this->belongsToMany(Examinationcurricular::class ,'classsetups_examcurricular', 
-        'examcurricular_id', 'classsetup_id')->withTimestamps();
+         'classsetup_id','examcurricular_id')->withTimestamps();
     }
+ 
+
 
       /**
      * An applicant belongs to users

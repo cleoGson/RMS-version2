@@ -106,10 +106,10 @@ class ClasssetupController extends Controller
             'created_by'=>auth()->id(),
         ]);
     
-        $subjectscurriculars = request('subject_curricular');
-        $examinationscurriculars = request('examination_curricular');  
-         $classsetup->subjectCurriculars()->sync($subjectscurriculars);
-         $classsetup->examinationCurriculars()->sync($examinationscurriculars);
+        $subjects = request('subject_curricular');
+        $examinations = request('examination_curricular');
+         $classsetup->subjectCurriculars()->sync($subjects);
+         $classsetup->examinationCurriculars()->sync($examinations);
         alert()->success('success', 'classsetup  has  successfully added.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }
@@ -165,8 +165,8 @@ class ClasssetupController extends Controller
     public function update(ClasssetupRequest $request, Classsetup $classsetup)
     {
         $classsetup->updated_by = auth()->id();
-        $subjectscurriculars=request('subject_curricular');
-        $examinationscurriculars = request('examination_curricular');
+        $subjects=request('subject_curricular');
+        $examinatios = request('examination_curricular');
         $classsetup->update(request([
               'name',
               'class_id',
@@ -176,9 +176,8 @@ class ClasssetupController extends Controller
               'maximum_capacity',
               'year_id',
             ]));
-            
-        $classsetup->subjectCurriculars()->sync($subjectscurriculars);
-        $classsetup->examinationCurriculars()->sync($examinationscurriculars);
+        $classsetup->subjectCurriculars()->sync($subjects);
+        $classsetup->examinationCurriculars()->sync($examinatios);
         alert()->success('success', 'classsetup  has  successfully Updated.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }

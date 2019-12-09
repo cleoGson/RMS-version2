@@ -21,7 +21,7 @@ class   StaffController extends Controller
      */
     public function index(DataTables $dataTables)
     {    
-       // if (request()->wantsJson()) {
+       if (request()->wantsJson()) {
             $template = 'admin.staffs.actions';
             return $dataTables->eloquent(Staff::with(['departments','designations','citizens','countries','disability','maritals','creator','updator'])->select('staff.*'))
                 ->editColumn('action', function ($row) use ($template) {
@@ -41,8 +41,8 @@ class   StaffController extends Controller
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
                 })
                 ->make(true);
-        // }
-         //return view('admin.staffs.index');
+         }
+        return view('admin.staffs.index');
     }
     /**
      * Show the form for creating a new resource.

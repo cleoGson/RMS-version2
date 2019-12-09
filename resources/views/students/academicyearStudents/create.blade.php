@@ -82,11 +82,11 @@
 </div>
 </div>
 
-<p><b>Selected rows data:</b></p>
+<!-- <p><b>Selected rows data:</b></p>
 <pre id="example-console-rows"></pre>
 
 <p><b>Form data as submitted to the server:</b></p>
-<pre id="example-console-form"></pre>
+<pre id="example-console-form"></pre> -->
 
  {!! Form::close()!!}
 
@@ -105,6 +105,7 @@
 <script>
 $(document).ready(function() {
             var url = '/student/academicyearStudent/create';
+            var urlSubmission="/student/academicyearStudent"
             var start = '';
             var end = '';
             var orign = '/student/academicyearStudent/create';
@@ -216,8 +217,8 @@ $(document).ready(function() {
    
    // Handle form submission event 
    $('#frm-example').on('submit', function(e){
+   //e.preventDefault();
       var form = this;
-      
       var rows_selected = table.column(0).checkboxes.selected();
 
       // Iterate over all selected checkboxes
@@ -230,21 +231,37 @@ $(document).ready(function() {
                 .val(rowId)
          );
       });
-
-      // FOR DEMONSTRATION ONLY
+        // FOR DEMONSTRATION ONLY
       // The code below is not needed in production
       
       // Output form data to a console     
       $('#example-console-rows').text(rows_selected.join(","));
       
       // Output form data to a console     
-      $('#example-console-form').text($(form).serialize());
+       $('#example-console-form').text($(form).serialize());
+      
+         $.ajax({
+           type: "POST",
+           url: urlSubmission,
+           data: function (d) {
+                        d.class_id = $('select[name=class_id]').val()
+                        d.classsection_id = $('input[name=classsection_id]').val()
+                        d.year_id = $('select[name=year_id]').val()
+                        d.classsetup_id = $('select[name=classsetup_id]').val()
+                        d.studentstatus_id = $('select[name=studentstatus_id]').val()
+                        d.students_list= $('#example-console-rows').text(rows_selected.join(","))
+                    }, // serializes the form's elements.
+           success: function(data)
+           {
+               alert(data); // show response from the php script.
+           }
+         });
        
-      // Remove added elements
-      $('input[name="id\[\]"]', form).remove();
+    //   // Remove added elements
+    //   $('input[name="id\[\]"]', form).remove();
        
-      // Prevent actual form submission
-      e.preventDefault();
+    //   // Prevent actual form submission
+    //  
    });   
 
 //collapse table view

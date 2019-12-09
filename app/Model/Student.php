@@ -30,6 +30,7 @@ class Student extends Model
             'blood_group',
             'email', 
             'address', 
+            'photo',
             'phone_no', 
             'student_number',
             'birth_country',
@@ -98,7 +99,7 @@ class Student extends Model
      *      *
      * @return belongsTo
      */
-    public function creator()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by')->withDefault();
     }
@@ -108,7 +109,7 @@ class Student extends Model
      *      *
      * @return belongsTo
      */
-    public function updator()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
     }

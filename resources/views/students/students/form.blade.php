@@ -12,3 +12,4 @@
             {{ Form::inputSelect('birth_country', $birthcountries) }}
             {{ Form::inputSelect('citizenship', $citizenship) }}
             {{ Form::inputSelect('course', $courses) }}
+            {{ Form::inputFile('photo') }}

@@ -48,7 +48,7 @@
                         <div class="status bg-green"></div>
                       </div>
                       <div class="client-title">
-                        <h3>Jumanne Malenga Wapya</h3>
+                        <h3>Godson F. Kileo</h3>
                         <h4 class="btn  btn-primary" style="height=20">Continue Student</h4>
                       </div>
                     </div>

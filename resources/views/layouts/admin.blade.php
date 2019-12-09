@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ env('APP_NAME', 'Permissions Manager') }}</title>
+    <title>{{ env('APP_NAME', 'RMS') }}</title>
      <link rel="stylesheet" href="/css/app.css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
@@ -19,26 +19,41 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full">{{ env('APP_NAME', 'Permissions Manager') }}</span>
-            <span class="navbar-brand-minimized">{{ env('APP_NAME', 'Permissions Manager') }}</span>
+            <span class="navbar-brand-full">{{ env('APP_NAME', 'RMS') }}</span>
+            <span class="navbar-brand-minimized">{{ env('APP_NAME', 'RMS') }}</span>
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <ul class="nav navbar-nav ml-auto">
-            @if(count(config('panel.available_languages', [])) > 1)
-                <li class="nav-item dropdown d-md-down-none">
+          <li>
+            <a href="#" class="nav-link indigo" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                    <i class="nav-icon fas fa-fw fa-sign-out-alt custom1">
+
+                    </i>
+                   <span class="custom1" style="font-weight:bold;"> {{ trans('global.logout') }}</span>
+                </a>
+          </li> 
+          &nbsp;&nbsp;
+        <li> 
+          <a href="{{ route('auth.change_password') }}" class="cyan nav-link">
+                    <i class="nav-icon fas fa-fw fa-key custom1"></i>
+                   <span class="custom1" style="font-weight:bold;">   Change password </span>
+                </a>
+        </li> 
+                <li class="nav-item dropdown d-md-down-none" style="margin-right:50px">
                     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ strtoupper(app()->getLocale()) }}
+                      <img class="c-avatar-img img-fluid rounded-circle"  width="40" height="40" src="https://d19m59y37dris4.cloudfront.net/admin/1-4-5/img/avatar-2.jpg"/> 
+
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        @foreach(config('panel.available_languages') as $langLocale => $langName)
-                            <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a>
-                        @endforeach
+                     <div class="dropdown-menu dropdown-menu-right">
+                        
+                            <a class="dropdown-item" href="#"> <i class="custom1 fa fa-list"></i>  <span class="custom1" style="font-weight:bold;"> Profile </span></a>
+                       
                     </div>
                 </li>
-            @endif
+            
 
 
         </ul>
