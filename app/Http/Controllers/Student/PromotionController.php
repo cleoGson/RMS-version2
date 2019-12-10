@@ -70,7 +70,7 @@ class PromotionController extends Controller
     {
          if (request()->wantsJson()) {
         $template = 'students.promotions.actionsreg';
-        return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
+        return $dataTables->eloquent(Student::with(['citizens','countries','disability','createdBy','updatedBy'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
                 $routeKey = 'student.student';
@@ -82,10 +82,10 @@ class PromotionController extends Controller
                 return  $row->firstname.' '.$row->middlename.' '.$row->lastname;
              })
             ->editColumn('created_by', function ($row) {
-                return $row->created_by ? $row->creator->email : '';
+                return $row->created_by ? $row->createdBy->email : '';
             })
             ->editColumn('updated_by', function ($row) {
-                return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
             })
             ->make(true);
     }
@@ -140,7 +140,7 @@ class PromotionController extends Controller
     {
         if (request()->wantsJson()) {
            $template = 'students.students.actions';
-           return $dataTables->eloquent(Student::with(['citizens','countries','disability','creator','updator'])->select('students.*'))
+           return $dataTables->eloquent(Student::with(['citizens','countries','disability','createdBy','updatedBy'])->select('students.*'))
             ->editColumn('action', function ($row) use ($template) {
                 $gateKey = 'student.student';
                 $routeKey = 'student.student';
@@ -152,10 +152,10 @@ class PromotionController extends Controller
                 return  $row->firstname.' '.$row->middlename.' '.$row->lastname;
              })
             ->editColumn('created_by', function ($row) {
-                return $row->created_by ? $row->creator->email : '';
+                return $row->created_by ? $row->createdBy->email : '';
             })
             ->editColumn('updated_by', function ($row) {
-                return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
+                return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
             })
             ->make(true);
         }

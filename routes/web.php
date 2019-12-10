@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
+    
+      Route::resource('examinationresult','Examination\ExaminationresultController');
    
 });
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {

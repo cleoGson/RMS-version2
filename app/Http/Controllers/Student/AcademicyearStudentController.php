@@ -31,10 +31,10 @@ class AcademicyearStudentController extends Controller
                     $routeKey = 'student.academicyearStudent';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                      ->editColumn('student_id', function ($row) {
-                    return $row->student_id ? $row->student->firstname : '';
+                    ->editColumn('student_id', function ($row) {
+                    return $row->student_id ? $row->student->firstname."  ".$row->student->middlename." ".$row->student->lastname." (".$row->student->student_number." )" : '';
                 })
-                      ->editColumn('year_id', function ($row) {
+                    ->editColumn('year_id', function ($row) {
                     return $row->year_id ? $row->years->name : '';
                 })
                       ->editColumn('studentstatus_id', function ($row) {

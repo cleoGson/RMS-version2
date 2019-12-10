@@ -1,20 +1,83 @@
-
-
 @extends('layouts.admin')
 @section('content')
 
-<div class="col-lg-12">
-<div class="card">
-<div class="card-header">
-<i class="fa fa-align-justify"></i>List of Registered Students 
+<section class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class=" m-0 text-dark">
+                        <p class="blue">
+                         Examination Result  <i class="fas fa-plus-circle fa-fw"></i>
+                        </p>
+                    </h1>
+                </div>
 
-  <a href="{{ route('student.academicyearStudent.create') }}" class="float-right">
-                         
-  <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
-                   </a>
-                   </div>
-<div class="card-body">
-<div class="table table-responsive">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                        <a  class="blue" href="{{ url('/') }}">Home</a>
+       
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('examination.examinationresult.index') }}" class="blue">Examination Result List</a>
+                        </li>
+                        <li class="breadcrumb-item active" class="blue">
+                             Examination Result
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+          <div class="card-body">
+
+          <div class="row">
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+</div>
+  <fieldset class="border p-2">
+ <legend  class="w-auto  btn btn-default" style="border-radius:3px; color:#306a99; font-weight:bold; font-size:18px; "> List of Student: </legend>
+                 
+        {!! Form::open(['route'=>'examination.examinationresult.store','files'=>true]); !!}
+        <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>
 <tr>
@@ -39,10 +102,16 @@
 </tr>
 </tfoot>
 </table>
-</div>
-</div>
-</div>
-
+</div>      
+          
+            {!! Form::close()!!}
+          </div>
+             </div>
+        <br /><br /><br /><br />
+        </div>
+            
+    </section>
+</section>
 @endsection
 
 @section('scripts')
@@ -193,6 +262,35 @@
 
         });
     </script>
+    <script type="text/javascript">
+    jQuery(document).ready(function ()
+    {
+            jQuery('select[name="class_id"]').on('change',function(){
+               var classId = jQuery(this).val();
+               if(classId)
+               {
+                  jQuery.ajax({
+                     url : 'examination/getexamination/' +classId,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery('select[name="examination_type"]').empty();
+                        jQuery.each(data, function(key,value){
+                           $('select[name="examination_type"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('select[name="state"]').empty();
+               }
+            });
+    });
+    </script>
    
 @stop
-                           
+
+                                 

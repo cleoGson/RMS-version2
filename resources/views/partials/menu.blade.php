@@ -389,7 +389,7 @@
                     </a>
                 <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a href="{{ route('setting.department.index') }}" class="nav-link {{ request()->is('setting/department') || request()->is('setting/department/*') ? 'active' : '' }}">
+                            <a href="{{ route('examination.examinationresult.index') }}" class="nav-link {{ request()->is('examination/examinationresult') || request()->is('examination/examinationresult/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                 </i>

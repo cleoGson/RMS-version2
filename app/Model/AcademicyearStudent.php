@@ -19,15 +19,17 @@ class AcademicyearStudent extends Model
      * @var array
      */
     protected $fillable = [
-       'student_id',
-       'year_id',
-       'studentstatus_id',
-       'class_id',
-       'classsetup_id',
-       'created_by',
-       'updated_by',
-       'reporting_date',
-       'remarks'
+        'student_id', 
+        'year_id', 
+        'studentstatus_id',
+        'class_id',
+        'classsetup_id',
+        'classsection_id',
+        'department_id',
+        'created_by',
+        'updated_by',
+        'reporting_date',
+        'remarks',
     ];
 
     /**
@@ -36,16 +38,17 @@ class AcademicyearStudent extends Model
      * @var array
      */
     protected static $logAttributes = [
-       'student_id',
-       'year_id',
-       'studentstatus_id',
-       'class_id',
-       'classsetup_id',
-       'classsection_id', 
-       'created_by',
-       'updated_by',
-       'reporting_date',
-       'remarks'
+        'student_id', 
+        'year_id', 
+        'studentstatus_id',
+        'class_id',
+        'classsetup_id',
+        'classsection_id',
+        'department_id',
+        'created_by',
+        'updated_by',
+        'reporting_date',
+        'remarks',
     ];
 
 
@@ -68,6 +71,11 @@ class AcademicyearStudent extends Model
     {
         return $this->belongsTo(Studentstatus::class, 'studentstatus_id')->withDefault();
     }
+
+      public function department()
+     {
+        return $this->belongsTo(Department::class, 'department_id')->withDefault();
+     }
 
       public function classSetup()
     {

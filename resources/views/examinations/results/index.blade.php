@@ -6,24 +6,50 @@
 <div class="col-lg-12">
 <div class="card">
 <div class="card-header">
-<i class="fa fa-align-justify"></i>List of Departments 
+<i class="fa fa-align-justify"></i>List of Examination Result 
 
   
-  <a href="{{ route('setting.department.create') }}" class="float-right">
+  <a href="{{ route('examination.examinationresult.create') }}" class="float-right">
                          
-  <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
+  <button class="btn btn-success  bold ">  Add Result  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
                    </div>
 <div class="card-body">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="department">
+<table class="table table-responsive-sm table-bordered table-striped table-hover" id="examinationresult">
 <thead>
 <tr>
-<th>Name</th>
-<th>Display Name</th>
-<th>View</th>
-<th>Actions </th>
+         <th> </th>
+         <th>Class</th>
+         <th>Classsection</th>
+         <th>Examination  nature</th>
+         <th>Student</th>
+         <th>Academicyear student</th>
+         <th>Examination type</th>
+         <th>Semester</th>
+         <th>Year</th>
+         <th>Subject</th>
+         <th>Marks</th>
+         <th>Remarks</th>
+         <th>View</th>
+         <th>Action</th>
 </tr>
 </thead>
+<tfoot>
+          <th> </th>
+          <th>Class</th>
+         <th>Classsection</th>
+         <th>Examination  nature</th>
+         <th>Student</th>
+         <th>Academicyear student</th>
+         <th>Examination type</th>
+         <th>Semester</th>
+         <th>Year</th>
+         <th>Subject</th>
+         <th>Marks</th>
+         <th>Remarks</th>
+         <th>View</th>
+        <th>Action</th>
+</tfoot>
 </table>
 </div>
 </div>
@@ -33,25 +59,58 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/setting/department';
+            var url = '/examination/examinationresult';
             var start = '';
             var end = '';
-            var orign = '/setting/department';
+            var orign = '/examination/examinationresult';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>Department name:</td>'+
-            '<td colspan="3">'+d.name+'</td>'+
+      '<tr>'+
+            '<td>Student :</td>'+
+            '<td colspan="3">'+d.student_id+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
+            '<td>Class :</td>'+
+            '<td colspan="3">'+d.class_id+'</td>'+
+        '</tr>'+
+        
+        '<tr>'+
+            '<td>Class section:</td>'+
+            '<td colspan="3">'+d.classsection_id+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Examination Type:</td>'+
+            '<td colspan="3">'+d.examinationtype_id+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Semester:</td>'+
+            '<td colspan="3">'+d.semester_id+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Year:</td>'+
+            '<td colspan="3">'+d.year_id+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Subject:</td>'+
+            '<td colspan="3">'+d.subject_id+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Examination nature:</td>'+
+            '<td colspan="3">'+d.examination_nature+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Marks:</td>'+
+            '<td colspan="3">'+d.marks+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Remarks:</td>'+
+            '<td colspan="3">'+d.remarks+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -59,7 +118,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
+            '<td colspan="3">'+d.updated_by+'</td>'+
         '</tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
@@ -67,7 +126,7 @@
     '</table>';
 }
             
-            var table = $('#department').DataTable({
+            var table = $('#examinationresult').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -78,8 +137,18 @@
                     },
                 },
                 columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
+                    {data: 'academicyear_student_id', name: 'academicyear_student_id'},
+                    {data: 'class_id', name: 'class_id'},
+                    {data: 'classsection_id', name: 'classsection_id'},
+                    {data: 'student_id', name: 'student_id'},
+                    {data: 'classsection_id', name: 'classsection_id'},
+                    {data: 'examinationtype_id', name: 'examinationtype_id'},
+                    {data: 'semester_id', name: 'semester_id'},
+                    {data: 'year_id', name: 'year_id'},
+                    {data: 'subject_id', name: 'subject_id'},
+                    {data: 'examination_nature', name: 'examination_nature'},
+                    {data: 'marks', name: 'marks'},
+                    {data: 'remarks', name: 'remarks'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -132,7 +201,7 @@
             });
         
 
-        $('#department tbody').on('click', 'td.details-control', function () {
+        $('#examinationresult tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  
