@@ -94,7 +94,7 @@ class StudentController extends Controller
              'photo'=>$profile,
             'address'=>request('address'), 
             'phone_no'=>request('phone_no'), 
-            'student_number'=>$studentnumber,
+            'student_number'=>$this->studentGeneratedNumber(),
             'birth_country'=>request('birth_country'),
             'course'=>request('course'),
             'blood_group'=>request('blood_group'),
@@ -183,5 +183,23 @@ class StudentController extends Controller
         $student->delete();
         alert()->success('success', 'Student status  has  successfully Deleted.')->persistent();
         return redirect()->route('student.student.index');
+    }
+
+         public function studentGeneratedNumber()
+    {
+             $number = "%STUDENT-".date('Y'). '%';
+       
+            $student_number = Student::withTrashed()->where('student_number', 'like', $number)->count();
+            $student_number += 1;
+            if ($student_number >= 0 && $student_number < 10) {
+                $assigned_number =$number."-000" . $student_number;
+            } else if ($student_number >= 10 && $student_number < 100) {
+                $assigned_number =$number."-00" . $student_number;
+            } else if ($student_number >= 100 && $student_number < 10000) {
+                $assigned_number =$number."-0" . $student_number;
+            } else {
+                $assigned_number =$number.'-'. $student_number;
+            }
+            return $assigned_number;
     }
 }

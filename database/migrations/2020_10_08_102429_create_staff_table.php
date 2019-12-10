@@ -28,6 +28,7 @@ class CreateStaffTable extends Migration
             $table->text('address')->nullable();
             $table->string('phone_no', 13)->nullable();
             $table->string('check_no', 50)->nullable();
+            $table->string('staff_number', 50)->nullable();
             $table->bigInteger('birth_country')->unsigned()->nullable();
             $table->foreign('birth_country')->references('id')->on('countries');
             $table->bigInteger('citzenship')->unsigned()->nullable();

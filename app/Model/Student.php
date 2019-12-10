@@ -117,4 +117,23 @@ class Student extends Model
     public function getFullNameAttribute(){
         return $this->firstname." ".$this->middlename." ".$this->lastname;
     }
+
+      public function copyUser(){
+        if(!User::where("email",$this->email)->exists()){
+            $user = new User();
+            $user->email = $this->email;
+            $user->username = $this->username;
+            $user->password_changed_at = now();
+            $user->phone_no = '255123456789';
+             $user->userable_type = "App/Student";
+            $user->userable_id = $this->id;
+            $user->center_id = $this->center_id??1;
+            $user->password = '$2y$10$hYn98f2N.XEuW9SD3jE8Tu6ElWLD5dmPmQLqsU5ULFFxO89/0kO9.';
+            $user->verifiedstatus = 1;
+            $user->status = 1;
+            $user->save();
+        }
+    }
+
+ 
 }

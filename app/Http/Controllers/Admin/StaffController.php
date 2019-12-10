@@ -90,6 +90,7 @@ class   StaffController extends Controller
             'birth_date'=>$birth_date, 
             'disability'=>request('disability'),
             'birth_place'=>request('birth_place'), 
+            'staff_number'=>$this->staffGeneratedNumber(),
             'email'=>request('email'),
             'address'=>request('address'),
             'phone_no'=>request('phone_no'),
@@ -187,5 +188,22 @@ class   StaffController extends Controller
             ->orWhere('display_name', 'like', '%' . $search . '%')
             ->orderBy('name')->paginate(10);
         return response()->json(['items' => $data->toArray()['data'], 'pagination' => $data->nextPageUrl() ? true : false]);
+    }
+
+        public function staffGeneratedNumber()
+    {
+            $number = "%STAFF-".date('Y'). '%';
+            $staff_number = Staff::withTrashed()->where('staff_number', 'like', $number)->count();
+            $staff_number += 1;
+            if ($staff_number >= 0 && $staff_number < 10) {
+                $assigned_number =$number."-000" . $staff_number;
+            } else if ($staff_number >= 10 && $staff_number < 100) {
+                $assigned_number =$number."-00" . $staff_number;
+            } else if ($staff_number >= 100 && $staff_number < 10000) {
+                $assigned_number =$number."-0" . $staff_number;
+            } else {
+                $assigned_number =$number.'-'. $staff_number;
+            }
+            return $assigned_number;
     }
 }

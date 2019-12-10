@@ -35,7 +35,7 @@
             <div class="card card-default">
           <div class="card-body">
 
-          <div class="row">
+<div class="row">
 <div class="col-sm-2">
 <div class="form-group">
 <label for="cvv">Class setup</label>

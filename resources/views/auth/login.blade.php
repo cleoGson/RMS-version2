@@ -18,7 +18,7 @@
                     @endisset
                             @csrf
                         {{ csrf_field() }}
-                        <h1>{{ env('APP_NAME', 'Permissions Manager') }}</h1>
+                        <h1>{{ env('APP_NAME', 'Result Management System (RMS)') }}</h1>
                         <p class="text-muted">Login</p>
 
                         <div class="input-group mb-3">

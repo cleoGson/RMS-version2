@@ -10,6 +10,7 @@
     <title>{{ env('APP_NAME', 'RMS') }}</title>
      <link rel="stylesheet" href="/css/app.css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+     <link href="{{ base_path('checkbox/css/dataTables.checkboxes.css') }}" rel="stylesheet" />
     @yield('styles')
 </head>
 
@@ -77,9 +78,9 @@
     </div>
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="{{ asset('js/main.js') }}"></script>
-     <script src="{{ asset('js/checkboxdatatableplugins/dataTables.checkboxes.min.js') }}"></script>
     <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />
     <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/js/dataTables.checkboxes.min.js"></script>
+    <!-- <script type="text/javascript" src="{{base_path('checkbox/js/dataTables.checkboxes.min.js')"></script> -->
     <script type="text/javascript">
         $(document).ready(function () {
             $(".editor").editor();

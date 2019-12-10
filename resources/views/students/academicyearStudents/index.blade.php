@@ -14,6 +14,44 @@
                    </a>
                    </div>
 <div class="card-body">
+<div class="row">
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="cvv">Class setup</label>
+    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+</div>
 <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>
@@ -118,7 +156,7 @@
                 columns: [
                     {data: 'student_id', name: 'student_id'},
                     {data: 'year_id', name: 'year_id'},
-                    {data: 'class.name', name: 'class_id'},
+                    {data: 'class_id', name: 'class_id'},
                     {data: 'classsection_id', name: 'classsection_id' },
                     {data: 'classsetup_id', name: 'classsetup_id'},
                     {data: 'classsetup_id', name: 'studentstatus_id'},

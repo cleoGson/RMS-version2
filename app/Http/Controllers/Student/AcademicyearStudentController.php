@@ -71,7 +71,12 @@ class AcademicyearStudentController extends Controller
                 })
                 ->make(true);
          }
-         return view('students.academicyearStudents.index');
+        $years=Academicyear::pluck('name','id')->toArray();
+        $classsetups=Classsetup::pluck('name','id')->toArray();
+        $studentstatus=Studentstatus::pluck('name','id')->toArray();
+        $classes=Classroom::pluck('name','id')->toArray();
+        $classsections=Classsection::pluck('name','id')->toArray();
+         return view('students.academicyearStudents.index',compact(['years','classsetups','studentstatus','classes','classsections']));
     }
 
     /**
