@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add highcharts
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add datatables.net-buttons-bs4
 
 PATH: 
   /usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@ttskch/select2-bootstrap4-theme/LICENSE'
+  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@fullcalendar/daygrid/README.md'
 
 npm manifest: 
   {
@@ -52,7 +52,7 @@ npm manifest:
       "datatables.net-dt": "^1.10.20",
       "flag-icon-css": "^3.4.2",
       "gijgo": "^1.9.13",
-      "highcharts": "^7.2.0",
+      "highcharts": "^7.2.1",
       "jquery": "^3.4.1",
       "pace": "^0.0.4",
       "pace-progress": "^1.0.2",
@@ -3365,10 +3365,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
     integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
   
-  highcharts@^7.2.0:
-    version "7.2.0"
-    resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-7.2.0.tgz#d6bd00240767cfab67210ead47c6cd015384e74d"
-    integrity sha512-jOlMzj3oRuqNBoJg+rqHZI9vnlLHipwVfceJr00gAreXu8268UwahEh7yBGI/m1wa6Uc/XoBMIuzMpXUFMvFdg==
+  highcharts@^7.2.1:
+    version "7.2.1"
+    resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-7.2.1.tgz#313c434bbfd4525a72b76c6bfbd9c39dfe2d1993"
+    integrity sha512-/fSUZiONmM+x49IQJNf8XwZGiNGOPRmxEOcd0xdJP9Xc3OlG46ZiUWgSLfhYQ9Oyhmzc3V3SKYCLud8+rKLi+w==
   
   hmac-drbg@^1.0.0:
     version "1.0.1"

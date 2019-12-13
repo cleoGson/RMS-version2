@@ -17,38 +17,32 @@
 <div class="row">
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="class_id">Class </label>
+    {!! Form::select('class_id',[''=>'All']+$classes,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="classsection_id">Section</label>
+    {!! Form::select('classsection_id',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="year_id">Year</label>
+    {!! Form::select('year_id',[''=>'Select Year']+$years,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for=semester_id>Semester</label>
+    {!! Form::select('semester_id',[''=>'Select Semester']+$semesters,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-4">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="classsetup_id">Class setup</label>
+    {!! Form::select('classsetup_id',[''=>'Setup']+$classsetups,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 </div>
@@ -148,7 +142,12 @@
                 ajax: {
                     url: url,
                     data: function (d) {
-                        d.status = $('select[name=status]').val()
+                            d.class_id = $('select[name=class_id]').val()
+                            d.classsection_id = $('select[name=classsection_id]').val()
+                            d.year_id = $('select[name=year_id]').val()
+                            d.semester_id = $('select[name=classsetup_id]').val()
+                            d.classsetup_id = $('select[name=classsetup_id]').val()
+                            
                     },
                 },
 
@@ -211,6 +210,70 @@
                     },
                 ]
             });
+              
+               // Handle form submission event 
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+      // The code below is not needed in production
+      
+      // Output form data to a console     
+      $('#example-console-rows').text(rows_selected.join(","));
+      
+      // Output form data to a console     
+      $('#example-console-form').text($(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
+   });     // Handle form submission event 
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+      // The code below is not needed in production
+      
+      // Output form data to a console     
+      $('#example-console-rows').text(rows_selected.join(","));
+      
+      // Output form data to a console     
+      $('#example-console-form').text($(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
+   });  
         
 
         $('#academicyearStudent tbody').on('click', 'td.details-control', function () {

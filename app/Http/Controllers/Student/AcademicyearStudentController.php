@@ -10,6 +10,7 @@ use Yajra\DataTables\DataTables;
 use App\Model\Academicyear;
 use App\Model\Classsetup;
 use App\Model\Student;
+use App\Model\Semester;
 use App\Model\Studentstatus;
 use App\Model\Classsection;
 use App\Model\Classroom;
@@ -75,8 +76,9 @@ class AcademicyearStudentController extends Controller
         $classsetups=Classsetup::pluck('name','id')->toArray();
         $studentstatus=Studentstatus::pluck('name','id')->toArray();
         $classes=Classroom::pluck('name','id')->toArray();
+        $semesters=Semester::pluck('name','id')->toArray();
         $classsections=Classsection::pluck('name','id')->toArray();
-         return view('students.academicyearStudents.index',compact(['years','classsetups','studentstatus','classes','classsections']));
+         return view('students.academicyearStudents.index',compact(['years','classsetups','studentstatus','classes','classsections','semesters']));
     }
 
     /**

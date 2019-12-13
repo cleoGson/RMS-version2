@@ -255,13 +255,7 @@ $(document).ready(function() {
            {
                alert(data); // show response from the php script.
            }
-         });
-       
-    //   // Remove added elements
-    //   $('input[name="id\[\]"]', form).remove();
-       
-    //   // Prevent actual form submission
-    //  
+         });  
    });   
 
 //collapse table view

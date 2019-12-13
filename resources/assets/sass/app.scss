@@ -1,26 +1,24 @@
-
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+//@import url(https://fonts.googleapis.com/css?family=Raleway:300, 400, 600);
 
 // Variables
 @import "variables";
 
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import '~@coreui/coreui/dist/css/coreui.min.css';
-@import '~@coreui/coreui/dist/css/coreui-standalone.min.css';
+@import "~@coreui/coreui/dist/css/coreui.min.css";
+@import "~@coreui/coreui/dist/css/coreui-standalone.min.css";
 //@import '~@coreui/coreui/dist/css/coreui.min.css.map';
-@import '~flag-icon-css/css/flag-icon.min';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '~@fortawesome/fontawesome-free/scss/regular.scss';
-@import '~@fortawesome/fontawesome-free/scss/solid.scss';
-@import '~@fortawesome/fontawesome-free/scss/brands.scss';
-@import '~@fortawesome/fontawesome-free/scss/v4-shims.scss';
-@import '~flag-icon-css/css/flag-icon.min';
-@import '~simple-line-icons/css/simple-line-icons';
-@import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
-@import '~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
-@import '~datatables.net-dt/css/jquery.dataTables.min.css';
-@import '~select2/dist/css/select2.min.css';
-@import '~gijgo/css/gijgo.min.css';
+@import "~flag-icon-css/css/flag-icon.min";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/v4-shims.scss";
+@import "~flag-icon-css/css/flag-icon.min";
+@import "~simple-line-icons/css/simple-line-icons";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+@import "~datatables.net-dt/css/jquery.dataTables.min.css";
+@import "~select2/dist/css/select2.min.css";
+@import "~gijgo/css/gijgo.min.css";

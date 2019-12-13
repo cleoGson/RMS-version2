@@ -187,9 +187,9 @@ class StudentController extends Controller
 
          public function studentGeneratedNumber()
     {
-             $number = "%STUDENT-".date('Y'). '%';
+             $number = "STUDENT-".date('Y');
        
-            $student_number = Student::withTrashed()->where('student_number', 'like', $number)->count();
+            $student_number = Student::withTrashed()->where('student_number', 'like', '%'.$number.'%')->count();
             $student_number += 1;
             if ($student_number >= 0 && $student_number < 10) {
                 $assigned_number =$number."-000" . $student_number;

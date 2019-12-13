@@ -105,11 +105,10 @@ class ClasssetupController extends Controller
             'approved_by'=>auth()->id(),
             'created_by'=>auth()->id(),
         ]);
-    
         $subjects = request('subject_curricular');
         $examinations = request('examination_curricular');
-         $classsetup->subjectCurriculars()->sync($subjects);
-         $classsetup->examinationCurriculars()->sync($examinations);
+        $classsetup->subjectCurriculars()->sync($subjects);
+        $classsetup->examinationCurriculars()->sync($examinations);
         alert()->success('success', 'classsetup  has  successfully added.')->persistent();
         return redirect()->route('academic.classsetup.index');
     }

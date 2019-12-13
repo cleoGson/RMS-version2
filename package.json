@@ -30,6 +30,8 @@
     "bootstrap-sass": "^3.4.1",
     "chart.js": "^2.8.0",
     "datatables.net-bs4": "^1.10.20",
+    "datatables.net-buttons-bs4": "^1.6.1",
+    "datatables.net-buttons-dt": "^1.6.1",
     "datatables.net-dt": "^1.10.20",
     "flag-icon-css": "^3.4.2",
     "gijgo": "^1.9.13",

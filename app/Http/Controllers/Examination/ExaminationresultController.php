@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Examination;
 use App\Http\Controllers\Controller;
 use App\Model\Examinationnaature;
 use App\Model\Examinationresult;
+use App\Model\Examinationcurricular;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Model\Academicyear;
@@ -13,6 +14,10 @@ use App\Model\Gradecurricular;
 use App\Model\Curricular;
 use App\Model\Feesstructure;
 use App\Model\Examinationnature;
+use App\Model\Classsetup;
+use App\Http\Requests\Examination\ExaminationresultRequest;
+use DB;
+use App\Model\Semester;
 
 use App\Http\Requests\Examination\EventRequest;
 
@@ -46,11 +51,9 @@ class ExaminationresultController extends Controller
          $years=Academicyear::pluck('name','id')->toArray();
          $classsections=Classsection::pluck('name','id')->toArray();
          $classes=Classroom::pluck('name','id')->toArray();
-         $grades=Gradecurricular::pluck('name','id')->toArray();
-         $curricular=Curricular::pluck('name','id')->toArray();
-         $feesstructure=Feesstructure::pluck('name','id')->toArray();
-         $nature=Examinationnature::pluck('name','id')->toArray();
-         return view('examinations.results.index',compact(['years','classsections','classes','grades','curricular','feesstructure']));
+         $classsetups=Classsetup::pluck('name','id')->toArray();
+         $semesters=Semester::pluck('name','id')->toArray();
+         return view('examinations.results.index',compact(['years','classsections','classes','classsetups','semesters',]));
     }
 
     /**
@@ -68,7 +71,9 @@ class ExaminationresultController extends Controller
          $curricular=Curricular::pluck('name','id')->toArray();
          $feesstructure=Feesstructure::pluck('name','id')->toArray();
          $nature=Examinationnature::pluck('name','id')->toArray();
-         return view('examinations.results.create',compact(['years','classsections','classes','grades','curricular','feesstructure'])); 
+        $semesters=Semester::pluck('name','id')->toArray();
+         $classsetups=Classsetup::pluck('name','id')->toArray();
+         return view('examinations.results.create',compact(['semesters','classsetups','years','classsections','classes','grades','curricular','feesstructure'])); 
     
     }
 
@@ -79,7 +84,7 @@ class ExaminationresultController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(examinationresultRequest $request)
+    public function store(ExaminationresultRequest $request)
     {
         $examinationresult = examinationresult::create([
          'classsection_id'=>request('classsection_id'),
@@ -143,7 +148,7 @@ class ExaminationresultController extends Controller
      * @param  \App\Model\Examinationresult  $examinationresult
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examinationresult $examinationresult)
+    public function update(ExaminationresultRequest $request, Examinationresult $examinationresult)
     {
         
         $examinationresult->updated_by = auth()->id();
@@ -175,5 +180,37 @@ class ExaminationresultController extends Controller
         $examinationresult->delete();
         alert()->success('success', 'examinationresult  has  successfully Deleted.')->persistent();
         return redirect()->route('examination.examinationresult.index');
+    }
+
+   public function getSubjects($id) 
+    {
+       if(is_null($id)){
+         return json_encode($id);
+          }
+        $setup_data=Classsetup::findOrFail($id);
+        $semisters=$setup_data->subjectCurriculars->pluck('semester_id','id')->toArray();
+        $exam_curricular_id=(!is_null($semisters) & in_array(1,$semisters)) ? $semisters[1] :null;
+        if(!is_null($exam_curricular_id)){
+        $subjectCurricular=Curricular::findOrFail($exam_curricular_id);
+        $subjects=$subjectCurricular->curricularSubjects->pluck('name','id')->toArray();
+        return json_encode($subjects);
+        }
+        return json_encode($exam_curricular_id);
+    }
+
+     public function getExaminations($id) 
+    {
+        if(is_null($id)){
+         return json_encode($id);
+          }
+         $setup_data=Classsetup::findOrFail($id);
+         $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
+         $exam_curricular_id=(!is_null($semisters) & in_array(1,$semisters)) ? $semisters[1] :null;
+         if(!is_null($exam_curricular_id)){
+         $examinations=Examinationcurricular::findOrFail($exam_curricular_id);
+         $examinationtype=$examinations->examinationCurriculars->pluck('full_name','examinationtype_id')->toArray();
+         return json_encode($examinationtype);
+         }
+         return json_encode($exam_curricular_id);
     }
 }

@@ -64,13 +64,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('examinationtype','Academic\ExaminationtypeController');
     Route::resource('examinationcurricular','Academic\ExaminationcurricularController');
     Route::resource('examinationmarks','Academic\ExaminationmarksController');
-    Route::resource('examinationresult','Academic\ExaminationresultController');
     Route::resource('examinationnature','Academic\ExaminationnatureController');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
-    
       Route::resource('examinationresult','Examination\ExaminationresultController');
+      Route::get('examlist/{id}','Examination\ExaminationresultController@getExaminations');
+      Route::get('subjlist/{id}','Examination\ExaminationresultController@getSubjects');
    
 });
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {

@@ -192,8 +192,8 @@ class   StaffController extends Controller
 
         public function staffGeneratedNumber()
     {
-            $number = "%STAFF-".date('Y'). '%';
-            $staff_number = Staff::withTrashed()->where('staff_number', 'like', $number)->count();
+            $number = "STAFF-".date('Y');
+            $staff_number = Staff::withTrashed()->where('staff_number', 'like', '%'.$number.'%')->count();
             $staff_number += 1;
             if ($staff_number >= 0 && $staff_number < 10) {
                 $assigned_number =$number."-000" . $staff_number;

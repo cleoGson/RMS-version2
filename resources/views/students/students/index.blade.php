@@ -19,6 +19,7 @@
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="student">
 <thead>
 <tr>
+<th>Student Number</th>
 <th>First Name</th>
 <th>Middle Name</th>
 <th>Last Name</th>
@@ -31,6 +32,7 @@
 </thead>
 <tfoot>
 <tr>
+<th>Student Number</th>
 <th>First Name</th>
 <th>Middle Name</th>
 <th>Last Name</th>
@@ -57,6 +59,10 @@
             var orign = '/student/student';
             function format ( d ) {
     return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+      '<tr>'+
+            '<td>First name:</td>'+
+            '<td colspan="3">'+d.student_number+'</td>'+
+        '</tr>'+
         '<tr>'+
             '<td>First name:</td>'+
             '<td colspan="3">'+d.firstname+'</td>'+
@@ -109,7 +115,7 @@
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -117,7 +123,7 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
+            '<td colspan="3">'+d.updated_by+'</td>'+
         '</tr>'+
         '<tr>'+
         '<td>Updated At:</td>'+
@@ -137,6 +143,7 @@
                     },
                 },
                 columns: [
+                    {data: 'student_number', name: 'student_number'},
                     {data: 'firstname', name: 'firstname'},
                     {data: 'middlename', name: 'middlename'},
                     {data: 'lastname', name: 'lastname'},

@@ -34,42 +34,41 @@
         <div class="container-fluid">
             <div class="card card-default">
           <div class="card-body">
-
-<div class="row">
+          <div class="row">
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="class_id">Class </label>
+    {!! Form::select('class_id',[''=>'All']+$classes,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-1">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="classsection_id">Section</label>
+    {!! Form::select('classsection_id',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-1">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="year_id">Year</label>
+    {!! Form::select('year_id',[''=>'Select Year']+$years,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for=semester_id>Semester</label>
+    {!! Form::select('semester_id',[''=>'Select Semester']+$semesters,null, ['id'=>'project-type','class'=>'form-control']) !!}
 </div>
 </div>
 <div class="col-sm-2">
 <div class="form-group">
-<label for="cvv">Class setup</label>
-    {!! Form::select('project_type',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
+<label for="classsetup_id">Class setup</label>
+    {!! Form::select('classsetup_id',[''=>'Setup']+$classsetups,null, ['id'=>'project-type','class'=>'form-control']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="classsetup_id"> </br></label>
+{!! Form::submit("Filter",['class'=>'form-control btn btn-success']) !!}
 </div>
 </div>
 </div>
@@ -265,19 +264,22 @@
     <script type="text/javascript">
     jQuery(document).ready(function ()
     {
-            jQuery('select[name="class_id"]').on('change',function(){
+            jQuery('select[name="classsetup_id"]').on('change',function(){
                var classId = jQuery(this).val();
+               alert(classId);
                if(classId)
                {
                   jQuery.ajax({
-                     url : 'examination/getexamination/' +classId,
+                     url : 'examination/subjlist/' +classId,
                      type : "GET",
                      dataType : "json",
                      success:function(data)
                      {
                         console.log(data);
+                        
                         jQuery('select[name="examination_type"]').empty();
                         jQuery.each(data, function(key,value){
+                            alert(data);
                            $('select[name="examination_type"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
                      }

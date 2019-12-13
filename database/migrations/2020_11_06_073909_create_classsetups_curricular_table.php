@@ -19,6 +19,8 @@ class CreateClasssetupsCurricularTable extends Migration
             $table->foreign('classsetup_id')->references('id')->on('classsetups');
             $table->bigInteger('curricular_id')->unsigned()->nullable();
             $table->foreign('curricular_id')->references('id')->on('curriculars');
+            $table->bigInteger('semester_id')->unsigned()->nullable();
+            $table->foreign('semester_id')->references('id')->on('semesters');
             $table->timestamps();
             $table->softDeletes();
         });
