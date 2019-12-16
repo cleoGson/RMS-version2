@@ -11,6 +11,7 @@ use App\Model\Academicyear;
 use App\Model\Classsection;
 use App\Model\Classroom;
 use App\Model\Gradecurricular;
+use App\Model\AcademicyearStudent;
 use App\Model\Curricular;
 use App\Model\Feesstructure;
 use App\Model\Examinationnature;
@@ -31,6 +32,9 @@ class ExaminationresultController extends Controller
      */
     public function index(DataTables $dataTables)
     {   
+
+       
+
         if (request()->wantsJson()) {
             $template = 'examinations.results.actions';
             return $dataTables->eloquent(Examinationresult::with(['createdBy','updatedBy','classes','classsections','years','gradings','curricular'])->select('examinationresults.*'))
@@ -53,7 +57,8 @@ class ExaminationresultController extends Controller
          $classes=Classroom::pluck('name','id')->toArray();
          $classsetups=Classsetup::pluck('name','id')->toArray();
          $semesters=Semester::pluck('name','id')->toArray();
-         return view('examinations.results.index',compact(['years','classsections','classes','classsetups','semesters',]));
+         return view('examinations.results.index',compact(['years','classsections','classes','classsetups',
+         'semesters']));
     }
 
     /**
@@ -61,9 +66,84 @@ class ExaminationresultController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(DataTables $dataTables,Request $request)
     {
+           if (request()->wantsJson()) {
+               return $request->all();
+            $template = 'students.academicyearStudents.actionsreg';
+            $query=AcademicyearStudent::with(['createdBy','student','createdBy','years','studentStatus','class','classSetup','classSection']);
+            if ($request->class_id) {
+                $query = $query->whereClassId($request->class_id);
+            }
+            if ($request->year_id) {
+                $query = $query->whereYearId($request->year_id);
+            }
+             if ($request->classsetup_id) {
+                $query = $query->whereClasssetupId($request->classsetup_id);
+            }
+            return $dataTables->eloquent($query->select('academicyear_students.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'student.academicyearStudent';
+                    $routeKey = 'student.academicyearStudent';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                    ->editColumn('student_id', function ($row) {
+                    return $row->student_id ? $row->student->firstname."  ".$row->student->middlename." ".$row->student->lastname." (".$row->student->student_number." )" : '';
+                })
+                    ->editColumn('year_id', function ($row) {
+                    return $row->year_id ? $row->years->name : '';
+                })
+                      ->editColumn('studentstatus_id', function ($row) {
+                    return $row->studentstatus_id ? $row->studentStatus->name : '';
+                })
+                      ->editColumn('class_id', function ($row) {
+                    return $row->class_id ? $row->class->name : '';
+                })
+                      ->editColumn('classsection_id', function ($row) {
+                    return $row->classsection_id ? $row->classSection->name : '';
+                })
+                    ->editColumn('classsetup_id', function ($row) {
+                    return $row->classsetup_id ? $row->classSetup->name : '';
+                })
+              
+              
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('year_id', function ($row) {
+                    return $row->year_id ? $row->years->name : '';
+                })
+                 ->editColumn('studentstatus_id', function ($row) {
+                    return $row->studentstatus_id ? $row->studentstatus_id : '';
+                })
+                  ->editColumn('class_id', function ($row) {
+                    return $row->class_id ? $row->class_id : '';
+                })
+                   ->editColumn('classsetup_id', function ($row) {
+                    return $row->classsetup_id ? $row->classsetup_id : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? ucfirst(strtolower($row->createdBy->email)) : '';
+                })
+                ->make(true);
+         }
      
+          if(!is_null($request->class_id) && !is_null($request->classsection_id) && !is_null($request->semester_id) && !is_null($request->classsetup_id)){
+        $this->validate($request,[
+            'class_id'=>'required|exists:classrooms,id',
+            'classsection_id'=>'required|exists:classsections,id',
+            'semester_id'=>'required|exists:semesters,id',
+            'classsetup_id'=>'required|exists:classsetups,id',
+            'year_id'=>'required|exists:academicyears,id',
+         ]);
+        }
+            $examinations=null;
+            $subjects=null;
+                if(!is_null($request->classsetup_id) && !is_null($request->semester_id)){
+                 $examinations=$this->getSubjects($request->classsetup_id,$request->semester_id);
+                 $subjects =$this->getExaminations($request->classsetup_id,$request->semester_id);
+              }
+              
          $years=Academicyear::pluck('name','id')->toArray();
          $classsections=Classsection::pluck('name','id')->toArray();
          $classes=Classroom::pluck('name','id')->toArray();
@@ -71,9 +151,9 @@ class ExaminationresultController extends Controller
          $curricular=Curricular::pluck('name','id')->toArray();
          $feesstructure=Feesstructure::pluck('name','id')->toArray();
          $nature=Examinationnature::pluck('name','id')->toArray();
-        $semesters=Semester::pluck('name','id')->toArray();
+         $semesters=Semester::pluck('name','id')->toArray();
          $classsetups=Classsetup::pluck('name','id')->toArray();
-         return view('examinations.results.create',compact(['semesters','classsetups','years','classsections','classes','grades','curricular','feesstructure'])); 
+         return view('examinations.results.create',compact(['semesters','classsetups','years','classsections','classes','grades','curricular','feesstructure','examinations','subjects'])); 
     
     }
 
@@ -154,7 +234,7 @@ class ExaminationresultController extends Controller
         $examinationresult->updated_by = auth()->id();
 
         $examinationresult->update(request([
-             'name',
+              'name',
               'class_id',
               'classsection_id',
               'grade_curricular',
@@ -182,35 +262,35 @@ class ExaminationresultController extends Controller
         return redirect()->route('examination.examinationresult.index');
     }
 
-   public function getSubjects($id) 
+   public function getSubjects($id,$id2) 
     {
-       if(is_null($id)){
-         return json_encode($id);
+       if(is_null($id )|| is_null($id2)){
+         return null;
           }
         $setup_data=Classsetup::findOrFail($id);
         $semisters=$setup_data->subjectCurriculars->pluck('semester_id','id')->toArray();
-        $exam_curricular_id=(!is_null($semisters) & in_array(1,$semisters)) ? $semisters[1] :null;
+        $exam_curricular_id=(!is_null($semisters) & in_array($id2,$semisters)) ? $semisters[$id2] :null;
         if(!is_null($exam_curricular_id)){
         $subjectCurricular=Curricular::findOrFail($exam_curricular_id);
         $subjects=$subjectCurricular->curricularSubjects->pluck('name','id')->toArray();
-        return json_encode($subjects);
+        return $subjects;
         }
-        return json_encode($exam_curricular_id);
+        return null;
     }
 
-     public function getExaminations($id) 
+     public function getExaminations($id,$id2) 
     {
-        if(is_null($id)){
-         return json_encode($id);
+        if(is_null($id) || is_null($id2)){
+         return  null;
           }
          $setup_data=Classsetup::findOrFail($id);
          $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
-         $exam_curricular_id=(!is_null($semisters) & in_array(1,$semisters)) ? $semisters[1] :null;
+         $exam_curricular_id=(!is_null($semisters) & in_array($id2,$semisters)) ? $semisters[$id2] :null;
          if(!is_null($exam_curricular_id)){
          $examinations=Examinationcurricular::findOrFail($exam_curricular_id);
          $examinationtype=$examinations->examinationCurriculars->pluck('full_name','examinationtype_id')->toArray();
-         return json_encode($examinationtype);
+         return $examinationtype;
          }
-         return json_encode($exam_curricular_id);
+         return null;
     }
 }

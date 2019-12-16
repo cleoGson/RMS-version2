@@ -34,8 +34,9 @@
         <div class="container-fluid">
             <div class="card card-default">
           <div class="card-body">
-          <div class="row">
-<div class="col-sm-2">
+<!-- {!! Form::open(['route'=>'examination.examinationresult.create','method'=>'GET']); !!}       -->
+<div class="row">      
+<div class="col-sm-1">
 <div class="form-group">
 <label for="class_id">Class </label>
     {!! Form::select('class_id',[''=>'All']+$classes,null, ['id'=>'project-type','class'=>'form-control']) !!}
@@ -56,26 +57,42 @@
 <div class="col-sm-2">
 <div class="form-group">
 <label for=semester_id>Semester</label>
-    {!! Form::select('semester_id',[''=>'Select Semester']+$semesters,null, ['id'=>'project-type','class'=>'form-control']) !!}
+    {!! Form::select('semester_id',[''=>'Select Semester']+$semesters,null, ['id'=>'semester_id','class'=>'form-control']) !!}
 </div>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-1">
 <div class="form-group">
 <label for="classsetup_id">Class setup</label>
-    {!! Form::select('classsetup_id',[''=>'Setup']+$classsetups,null, ['id'=>'project-type','class'=>'form-control']) !!}
+    {!! Form::select('classsetup_id',[''=>'Setup']+$classsetups,null, ['id'=>'classsetup_id','class'=>'form-control']) !!}
 </div>
 </div>
+@if(!is_null($examinations))
 <div class="col-sm-2">
+<div class="form-group">
+<label for="classsetup_id">Examination</label>
+    {!! Form::select('examination_id',[''=>'Select Examination']+$examinations,null, ['id'=>'examination_id','class'=>'form-control']) !!}
+</div>
+</div>
+@endif
+@if(!is_null($examinations))
+<div class="col-sm-1">
+<div class="form-group">
+<label for="classsetup_id">Subject Type</label>
+    {!! Form::select('subject_id',[''=>'Select Subject']+$subjects,null, ['id'=>'subject_id','class'=>'form-control']) !!}
+</div>
+</div>
+@endif
+<div class="col-sm-1">
 <div class="form-group">
 <label for="classsetup_id"> </br></label>
 {!! Form::submit("Filter",['class'=>'form-control btn btn-success']) !!}
 </div>
 </div>
 </div>
+<!-- {!! form::close() !!}  -->
   <fieldset class="border p-2">
  <legend  class="w-auto  btn btn-default" style="border-radius:3px; color:#306a99; font-weight:bold; font-size:18px; "> List of Student: </legend>
                  
-        {!! Form::open(['route'=>'examination.examinationresult.store','files'=>true]); !!}
         <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>
@@ -103,7 +120,6 @@
 </table>
 </div>      
           
-            {!! Form::close()!!}
           </div>
              </div>
         <br /><br /><br /><br />
@@ -116,10 +132,10 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/student/academicyearStudent';
+            var url = '/examination/examinationresult/create';
             var start = '';
             var end = '';
-            var orign = '/student/academicyearStudent';
+            var orign = '/examination/examinationresult/create';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
@@ -178,7 +194,9 @@
                 ajax: {
                     url: url,
                     data: function (d) {
-                        d.status = $('select[name=status]').val()
+                        d.class_id = $('select[name=class_id]').val()
+                        d.classsetup_id = $('input[name=classsetup_id]').val()
+                        d.year_id = $('select[name=year_id]').val()
                     },
                 },
 

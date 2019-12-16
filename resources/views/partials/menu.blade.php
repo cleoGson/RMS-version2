@@ -393,7 +393,7 @@
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                 </i>
-                              Examination
+                               Result upload
                             </a>
                         </li>
                         <li class="nav-item">
@@ -401,7 +401,7 @@
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                 </i>
-                              Results
+                            Result Reports
                             </a>
                         </li> 
                         <li class="nav-item">
@@ -409,7 +409,7 @@
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                 </i>
-                              Reports
+                               Individual  Reports
                             </a>
                         </li>       
                     </ul>

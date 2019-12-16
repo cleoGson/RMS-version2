@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use Crypt;
 use App\Model\Semester;
 use App\Model\Classroom;
 use App\Model\Classsection;
@@ -61,6 +62,20 @@ class Examinationresult extends Model
          'remarks',
     ];
 
+
+    /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setmarksAttribute($value)
+    {
+        $this->attributes['remarks'] = Crypt::encrypt($value);
+    }
+
+   
+    
 
      /**
      * An applicant belongs to users
