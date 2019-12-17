@@ -69,7 +69,6 @@ class ExaminationresultController extends Controller
     public function create(DataTables $dataTables,Request $request)
     {
            if (request()->wantsJson()) {
-               return $request->all();
             $template = 'students.academicyearStudents.actionsreg';
             $query=AcademicyearStudent::with(['createdBy','student','createdBy','years','studentStatus','class','classSetup','classSection']);
             if ($request->class_id) {

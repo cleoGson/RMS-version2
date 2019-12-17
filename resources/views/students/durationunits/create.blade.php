@@ -33,7 +33,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
         {!! Form::open(['route'=>'student.durationunit.store','files'=>true]); !!}
                 @include('students.durationunits.form')
                 <div class="row">

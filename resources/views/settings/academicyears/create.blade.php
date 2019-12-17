@@ -32,8 +32,8 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <div class="card card-default">
-          <div class="card-body">
+            <div class="card card-default ">
+          <div class="card-body card card-accent-primary">
         {!! Form::open(['route'=>'setting.academicyear.store','files'=>true]); !!}
                 @include('settings.academicyears.form')
                 <div class="row">

@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
  {!! Form::open(['route'=>'student.academicyearStudent.store','files'=>true,'id'=>"frm-example"] ); !!}
  @include('students.academicyearStudents.form')
 <table id="example" class="table  table-striped table-bordered display" cellspacing="0" width="100%">

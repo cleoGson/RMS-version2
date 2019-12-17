@@ -6,7 +6,7 @@
         {{ trans('global.edit') }} {{ trans('cruds.permission.title_singular') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body card card-accent-primary">
         <form action="{{ route("admin.permissions.update", [$permission->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')

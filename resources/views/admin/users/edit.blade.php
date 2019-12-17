@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-body">
+                <div class="card-body card card-accent-primary">
         <form action="{{ route("admin.users.update", [$user->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')

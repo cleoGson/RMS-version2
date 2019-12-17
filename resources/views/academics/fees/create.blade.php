@@ -35,7 +35,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
         {!! Form::open(['route'=>'academic.fees.store','files'=>true]); !!}
                 @include('academics.fees.form')
                 <div class="row">

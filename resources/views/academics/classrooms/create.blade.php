@@ -33,7 +33,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
         {!! Form::open(['route'=>'academic.classroom.store','files'=>true]); !!}
                 @include('academics.classrooms.form')
                 <div class="row">

@@ -33,7 +33,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
 
         <form action="{{ route('admin.roles.store') }}" method="POST" enctype="multipart/form-data">
             @csrf

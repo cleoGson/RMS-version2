@@ -6,7 +6,7 @@
         {{ trans('global.create') }} {{ trans('cruds.permission.title_singular') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body card card-accent-primary">
         <form action="{{ route("admin.permissions.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
