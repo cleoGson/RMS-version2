@@ -16,8 +16,10 @@ use App\Model\Curricular;
 use App\Model\Feesstructure;
 use App\Model\Examinationnature;
 use App\Model\Classsetup;
+
 use App\Http\Requests\Examination\ExaminationresultRequest;
 use DB;
+use Crypt;
 use App\Model\Semester;
 
 use App\Http\Requests\Examination\EventRequest;
@@ -61,6 +63,88 @@ class ExaminationresultController extends Controller
          'semesters']));
     }
 
+    public function individualResult(DataTables $dataTables, Request $request){
+
+        $years=Academicyear::pluck('name','id')->toArray();
+         $classes=Classroom::pluck('name','id')->toArray();
+          $examinations=null;
+            $subjects=null;
+                if(!is_null($request->classsetup_id) && !is_null($request->semester_id)){
+                 $examinations=$this->getSubjects($request->classsetup_id,$request->semester_id);
+                 $subjects =$this->getExaminations($request->classsetup_id,$request->semester_id);
+              }
+          $classesprovider=Classroom::pluck('id')->toArray();
+          
+          foreach($classes as $key=>$value){
+              foreach($years as $keyy=>$valuey){
+                    $student_data=AcademicyearStudent::where([['class_id','=',$key],['year_id','=',$keyy]]);
+           $studentsprovider1[$keyy]=array('students'=>$student_data->get(),
+                                    'number_student'=>$student_data->count(),
+                                    'female'=>0,
+                                    'male'=>0,
+                                    'year'=>$valuey,
+                                    'class_id'=>$key,
+                                    'year_id'=>$keyy,
+                                    'classsetup_name'=>!is_null($student_data->first()) ? $student_data->first()->classSetup->name : "",
+                                    'classsetup_id'=>!is_null($student_data->first()) ? $student_data->first()->classSetup->id : 0,
+
+                                    
+                                );
+         
+              }
+              $studentsprovider[$key]=array(
+                  'data'=>$studentsprovider1,
+                  'name'=>$value,
+              );
+
+          }
+
+         $classsections=Classsection::pluck('name','id')->toArray();
+        
+         $grades=Gradecurricular::pluck('name','id')->toArray();
+         $curricular=Curricular::pluck('name','id')->toArray();
+         $feesstructure=Feesstructure::pluck('name','id')->toArray();
+         $nature=Examinationnature::pluck('name','id')->toArray();
+         $semesters=Semester::pluck('name','id')->toArray();
+         $classsetups=Classsetup::pluck('name','id')->toArray();
+         
+     return view('examinations.results.individual',compact(['semesters','classsetups',
+     'years','classsections','classes','grades','curricular','feesstructure','examinations','subjects','studentsprovider'])); 
+
+    }
+
+    public function classDetails($class_id,$classsetup_id,$year_id){
+
+              $classid=$class_id;
+              $classsetupid=$classsetup_id;
+              $yearid=$year_id;
+              $classsetup=Classsetup::findOrFail($classsetupid);
+              $class =Classroom::findOrFail($classid);
+              $years=Academicyear::findOrFail($yearid);
+               $classsections=Classsection::pluck('name','id')->toArray();
+              $data=Examinationresult::with(['createdBy','updatedBy','classes','years'])->where([['class_id','=',$classid],['year_id','=',$yearid]])->get();
+
+              if (request()->wantsJson()) {
+               $template = 'examinations.results.actions';
+                 return DataTables::of($data)
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'examination.examinationresult';
+                    $routeKey = 'examination.examinationresult';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                }) 
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
+                })
+                ->make(true);
+              }
+              $semesters=Semester::pluck('name','id')->toArray();
+              $students =  $student_data=AcademicyearStudent::with('student')->where([['class_id','=',$classid],['year_id','=',$yearid]])->get()->pluck('student_details','student_id_detail')->toArray();
+             return view('examinations.results.posting',compact(['classsetup','class','years','classsections','semesters','students']));
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *

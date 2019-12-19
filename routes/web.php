@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
       Route::resource('examinationresult','Examination\ExaminationresultController');
+      Route::get('individualresult','Examination\ExaminationresultController@individualResult')->name('examinationresult.result');
+      Route::get('classdetails/{classid}/{curriculumid}/{yearid}','Examination\ExaminationresultController@classDetails')->name('examinationresult.classdetails');
       Route::get('examlist/{id}','Examination\ExaminationresultController@getExaminations');
       Route::get('subjlist/{id}','Examination\ExaminationresultController@getSubjects');
    

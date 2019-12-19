@@ -33,7 +33,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
 <!-- {!! Form::open(['route'=>'examination.examinationresult.create','method'=>'GET']); !!}       -->
 <div class="row">      
 <div class="col-sm-1">

@@ -92,6 +92,7 @@
 
 
 
+
  <div class="row">
  <div class="col-md-12">
 <div class="card">
@@ -192,6 +193,152 @@
 </ul>
 </div>
 </div>
+</div>
+<div class="row">
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-facebook content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">89k</div>
+<div class="text-uppercase text-muted small">friends</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">459</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="row">
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-facebook content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">89k</div>
+<div class="text-uppercase text-muted small">friends</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">459</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>

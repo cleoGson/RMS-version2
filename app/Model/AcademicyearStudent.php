@@ -111,4 +111,11 @@ class AcademicyearStudent extends Model
     {
         return $this->belongsTo(User::class,'updated_by')->withDefault();
     }
+    public function getStudentDetailsAttribute(){
+
+        return $this->student->firstname." ".$this->student->middlename." ".$this->student->lastname."  [ ".$this->student->student_number." ] ";
+    }
+     public function getStudentIdDetailAttribute(){
+        return $this->student->id;
+    }
 }

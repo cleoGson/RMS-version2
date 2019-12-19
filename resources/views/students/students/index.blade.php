@@ -19,6 +19,7 @@
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="student">
 <thead>
 <tr>
+<th>Image</th>
 <th>Student Number</th>
 <th>First Name</th>
 <th>Middle Name</th>
@@ -32,6 +33,7 @@
 </thead>
 <tfoot>
 <tr>
+<th>Image</th>
 <th>Student Number</th>
 <th>First Name</th>
 <th>Middle Name</th>
@@ -59,6 +61,10 @@
             var orign = '/student/student';
             function format ( d ) {
     return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+     '<tr>'+
+            '<td>Image:</td>'+
+            '<td colspan="3"> '+"<img src={{ URL::to('/')}}/"+ d.photo +" width='150' height='150' class='c-avatar-img'/>"+'</td>'+
+        '</tr>'+
       '<tr>'+
             '<td>First name:</td>'+
             '<td colspan="3">'+d.student_number+'</td>'+
@@ -143,6 +149,14 @@
                     },
                 },
                 columns: [
+                    {
+                         data: 'photo',
+                         name: 'photo',
+                         render: function(data ,type, full,meta){
+                             return "<img src={{ URL::to('/')}}/"+ data +" width='40' height='40' class='c-avatar-img img-fluid rounded-circle'/>"
+                         },
+                         orderable:false,
+                     },
                     {data: 'student_number', name: 'student_number'},
                     {data: 'firstname', name: 'firstname'},
                     {data: 'middlename', name: 'middlename'},

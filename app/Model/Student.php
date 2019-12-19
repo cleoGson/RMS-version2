@@ -104,6 +104,15 @@ class Student extends Model
         return $this->belongsTo(User::class, 'created_by')->withDefault();
     }
   
+
+
+    /**
+     * Get all of the posts for the user.
+     */
+    public function academicYearStudents()
+    {
+        return $this->hasMany(AcademicyearStudent::class);
+    }
     /**
      * A verifier belongs to users
      *      *

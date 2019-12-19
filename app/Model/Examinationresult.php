@@ -105,7 +105,7 @@ class Examinationresult extends Model
      */
     public function classsections()
     {
-        return $this->belongsTo(Classection::class, 'subject_id')->withDefault();
+        return $this->belongsTo(Classsection::class, 'subject_id')->withDefault();
     }
  
     /**

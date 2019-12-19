@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
              <div class="card card-default">
-             <div class="card-body"> 
+             <div class="card-body card card-accent-primary"> 
              <div class="row">
              <div class="col-lg-4">
                   <div class="client card">
@@ -43,8 +43,9 @@
                     </div>
                     <div class="card-body text-center">
                       <div class="client-avatar">
-                      <img  width="200" height="200" src="https://d19m59y37dris4.cloudfront.net/admin/1-4-5/img/avatar-2.jpg" 
-                      alt="..." class="img-fluid rounded-circle">
+                      <!-- <img  width="200" height="200" src="https://d19m59y37dris4.cloudfront.net/admin/1-4-5/img/avatar-2.jpg" 
+                      > -->
+                      <img src="{{ URL::to('/').'/'.$show->photo}}" width='200' height='200' alt='...'  class='img-fluid rounded-circle'/>
                         <div class="status bg-green"></div>
                       </div>
                       <div class="client-title">

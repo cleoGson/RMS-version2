@@ -19,6 +19,7 @@
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="student">
 <thead>
 <tr>
+<th>Image</th>
 <th>First Name</th>
 <th>Middle Name</th>
 <th>Last Name</th>
@@ -31,6 +32,7 @@
 </thead>
 <tfoot>
 <tr>
+<th>Image</th>
 <th>First Name</th>
 <th>Middle Name</th>
 <th>Last Name</th>
@@ -137,6 +139,14 @@
                     },
                 },
                 columns: [
+                       {
+                         data: 'photo',
+                         name: 'photo',
+                         render: function(data ,type, full,meta){
+                             return "<img src={{ URL::to('/')}}/images/"+ data +"width='70' class='img-thumbnail'/>"
+                         },
+                         orderable:false,
+                     },
                     {data: 'firstname', name: 'firstname'},
                     {data: 'middlename', name: 'middlename'},
                     {data: 'lastname', name: 'lastname'},
@@ -150,6 +160,7 @@
                         data:           null,
                         defaultContent: "<button class='btn btn-success'> <i class='fa fa-eye'></i> View</button>"
                      },
+                  
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ], dom: 'lBfrtip<"actions">',
                 columnDefs: [],
