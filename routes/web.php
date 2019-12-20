@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'exam
       Route::get('classdetails/{classid}/{curriculumid}/{yearid}','Examination\ExaminationresultController@classDetails')->name('examinationresult.classdetails');
       Route::get('examlist/{id}','Examination\ExaminationresultController@getExaminations');
       Route::get('subjlist/{id}','Examination\ExaminationresultController@getSubjects');
+      Route::get('dependantdata/{semester}/{setup}','Examination\ExaminationresultController@dependantData');
    
 });
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {

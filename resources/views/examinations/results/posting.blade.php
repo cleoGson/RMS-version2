@@ -7,8 +7,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
-                        <p class="blue">
-                        Posting Examination Result  <i class="fas fa-plus-circle fa-fw"></i>
+                        <p class="blue">    
+                        Posting Result for  {{$class->name}} Student class of {{$years->name}}  <i class="fas fa-file fa-fw"></i>
                         </p>
                     </h1>
                 </div>
@@ -23,7 +23,7 @@
                             <a href="{{ route('examination.examinationresult.result') }}" class="blue">Result Posting</a>
                         </li>
                         <li class="breadcrumb-item active" class="blue">
-                           Posting  Examination Result
+                             Posting  Examination Result
                         </li>
                     </ol>
                 </div>
@@ -38,40 +38,67 @@
             <div class="col-md-12 mb-4">
             <div class="nav-tabs-boxed">
             <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-book-open" style="color:green; font-size:18px;"></i>Individual Result Uploading </a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i>Upload Result Using csv/Text</a></li>
-            
-  
-            </ul>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-file" style="color:green; font-size:18px;"></i> Individual Result Uploading </a></li>
+             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-upload" style="color:green"></i> Upload Result Using Excel</a></li>
+             </ul>
             <div class="tab-content">
             <div class="tab-pane active" id="home-1" role="tabpanel">
+            {!! Form::open(['route'=>'examination.examinationresult.store','files'=>true]); !!}      
              @include('examinations.results.uploading.individual')
+             <div class="row">
+             <div class="col-md-12 form-group text-right">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">
+                            Save
+                        </button>
+
+                        <a href="{{route('academic.classsetup.index')}}" class="btn btn-primary">
+                            Back to List <i class="fas fa-fast-forward"></i>
+                        </a>
+                    </div>
+            </div>
+            </div>
+             {!! Form::close() !!}
             </div>
 
             <div class="tab-pane" id="profile-1" role="tabpanel">
-            Csv/Upload
+            <div class="row"> 
+           <div class="col-md-8">
+            @include('examinations.results.uploading.group')
             </div>
-         
-          
+            <div class="col-md-4">
+            <h4 style="font-size:24; color:black; font-weight:bold"><i class="fa fa-warning red"></i>
+            Click download below Button to download the Excel 
+            File with Students name and Number, Please do not edit any other 
+             column Except for the marks and Remarks, column which are to be filled 
+             <h3>Click Download <a href="#" class="button ">Download Template  <i class="fa fa-download"></i>  </a> </h3>
+            </h4>
+            
+            </div>
+            </div>
+            </div>      
             </div>
             </div>
             </div>
             </div>
             </div>
+
+<div class="row"> 
+<div class="col-md-12">
 <div class="table-responsive">
+<fieldset class="border p-2">
+   <legend  class="w-auto" style="color:#306a99; font-size:24px; font-weight:bold;">Results for  {{$class->name}} Student class of {{$years->name}}</legend>
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="examinationresult">
 <thead>
 <tr>
-         <th> </th>
          <th>Class</th>
          <th>Classsection</th>
-         <th>Examination  nature</th>
          <th>Student</th>
-         <th>Academicyear student</th>
-         <th>Examination type</th>
+         <th>Examination  nature</th>
          <th>Semester</th>
          <th>Year</th>
          <th>Subject</th>
+        <th>Examination type</th>
          <th>Marks</th>
          <th>Remarks</th>
          <th>View</th>
@@ -79,22 +106,24 @@
 </tr>
 </thead>
 <tfoot>
-          <th> </th>
+    
           <th>Class</th>
          <th>Classsection</th>
-         <th>Examination  nature</th>
          <th>Student</th>
-         <th>Academicyear student</th>
-         <th>Examination type</th>
+         <th>Examination  nature</th>
          <th>Semester</th>
          <th>Year</th>
          <th>Subject</th>
+        <th>Examination type</th>
          <th>Marks</th>
          <th>Remarks</th>
          <th>View</th>
         <th>Action</th>
 </tfoot>
 </table>
+</fieldset>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -123,7 +152,7 @@ $classId3 =  $years->id;
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
       '<tr>'+
             '<td>Student :</td>'+
-            '<td colspan="3">'+d.student_id+'</td>'+
+            '<td colspan="3">'+d.academicyear_student_id+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Class :</td>'+
@@ -191,11 +220,9 @@ $classId3 =  $years->id;
                     },
                 },
                 columns: [
-                    {data: 'academicyear_student_id', name: 'academicyear_student_id'},
                     {data: 'class_id', name: 'class_id'},
                     {data: 'classsection_id', name: 'classsection_id'},
-                    {data: 'student_id', name: 'student_id'},
-                    {data: 'classsection_id', name: 'classsection_id'},
+                    {data: 'academicyear_student_id', name: 'academicyear_student_id'},
                     {data: 'examinationtype_id', name: 'examinationtype_id'},
                     {data: 'semester_id', name: 'semester_id'},
                     {data: 'year_id', name: 'year_id'},
@@ -271,8 +298,41 @@ $classId3 =  $years->id;
         }
     } );
 
+         $('select[name="semester_id"]').on('change',function(){
+               var semesterId = $(this).val();
+               if(semesterId)
+               {
+                  $.ajax({
+                     url : '/examination/dependantdata/' +semesterId+'/'+id2,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     { 
+                        $('select[name="examination_type"]').empty();
+                          $('select[name="examination_type"]').append('<option value="">Select Examination Type</option>');
+                        $.each(data['examination'], function(key,value){
+                           $('select[name="examination_type"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                        $('select[name="subject"]').empty();
+                         $('select[name="subject"]').append('<option value="">Select Subject</option>');
+                        $.each(data['subjects'], function(key1,value1){
+                           $('select[name="subject"]').append('<option value="'+ key1 +'">'+ value1 +'</option>');
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('select[name="state"]').empty();
+               }
+            });
+
+
         });
     </script>
-   
+  
+       
+
 @stop
                            

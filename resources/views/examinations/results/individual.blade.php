@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                        Result Posting  <i class="fas fa-file fa-fw"></i>
+                         Student Summary List  <i class="fas fa-file fa-fw"></i>
                         </p>
                     </h1>
                 </div>
@@ -19,8 +19,8 @@
                         <a  class="blue" href="{{ url('/') }}">Home</a>
        
                         </li>
-                        <li class="breadcrumb-item active" class="blue">
-                          Result Posting
+                        <li class="breadcrumb-item active" class="blue"> 
+                       Student Summary List
                          </li>
                     </ol>
                 </div>
@@ -31,46 +31,49 @@
         <div class="container-fluid">
             <div class="card card-default">
           <div class="card-body card card-accent-primary">
+<div class="row">
+<div class="col-sm-2">
+<div class="form-group">
+<label for="year_id">Year</label>
+    {!! Form::select('year_id',$years,null, ['id'=>'year_id','class'=>'form-control']) !!}
+</div>
+</div>
+</div>
 <div class="table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
 <tr>
 <th> Class</th>
+<th> Student </th>
+<th> Year </th>
+<th> Curricullum</th>
 <?php 
 $total=0;
 ?>
-@foreach($years as $year=>$value)
-<th> Class   setup</th>
-<th> {{$value}} </th>
-@endforeach
-</tr>
-@foreach($studentsprovider as $provider) 
-  <tr><td>{{$provider['name']}} </td> 
-  @foreach($provider['data'] as $studentdata)
-  <td>{{$studentdata['classsetup_name']}}</td>  
-  <?php  $std_number= $studentdata['number_student'];
+ 
+
+  @foreach($studentsprovider as $studentdata)
+  <tr>
+  <td> {{$studentdata['class_name']}}</td>
+    <?php 
+        $std_number= $studentdata['number_student'];
         $class_id=$studentdata['class_id'];
         $classsetup_id=$studentdata['classsetup_id'];
         $year_id =$studentdata['year_id'];
+        $total+= $std_number;
   ?>
   <td> @if($std_number > 0 ) 
   <a href="{{url('examination/classdetails',['class_id'=>$class_id,'classsetup_id'=>$classsetup_id,'year_id'=>$year_id])}}" >{{$std_number}}</a>
         @else
      {{$std_number}}   
         @endif
-        </td> 
- 
-  @endforeach
-  <?php 
-  $total +=   $std_number; 
-  $totalstudents[$provider['name']]=array(
-     'total'=>$total);
-  ?>
+</td> 
+<td> {{$studentdata['year']}}</td>
+ <td>{{$studentdata['classsetup_name']}}</td>  
   </tr>
-
-@endforeach
- <tr>
+  @endforeach
+  <tr>
 <td> Total Number of Students </td>
-<th> </th>
+<td colspan=3>{{$total}} </td>
 </tr>
 
 </table>

@@ -39,6 +39,7 @@ class Examinationresult extends Model
          'updated_by',
          'marks',
          'remarks',
+         'status'
     ];
 
     /**
@@ -60,6 +61,7 @@ class Examinationresult extends Model
          'updated_by',
          'marks',
          'remarks',
+         'status'
     ];
 
 
@@ -69,13 +71,22 @@ class Examinationresult extends Model
      * @param  string  $value
      * @return void
      */
-    public function setmarksAttribute($value)
+    public function setremarksAttribute($value)
     {
         $this->attributes['remarks'] = Crypt::encrypt($value);
     }
 
    
-    
+      /**
+     * Get the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRemarksAttribute($value)
+    {
+        return  Crypt::decrypt($value);
+    }
 
      /**
      * An applicant belongs to users
@@ -97,6 +108,15 @@ class Examinationresult extends Model
         return $this->belongsTo(Subject::class, 'subject_id')->withDefault();
     }
 
+      /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function examinationNature()
+    {
+        return $this->belongsTo(Examinationnature::class, 'examination_nature')->withDefault();
+    }
 
          /**
      * An applicant belongs to users
@@ -108,17 +128,6 @@ class Examinationresult extends Model
         return $this->belongsTo(Classsection::class, 'subject_id')->withDefault();
     }
  
-    /**
-     * An applicant belongs to users
-     *      *
-     * @return belongsTo
-     */
-    public function students()
-    {
-        return $this->belongsTo(Student::class, 'student_id')->withDefault();
-    }
-
-
           /**
      * An applicant belongs to users
      *      *
@@ -128,6 +137,8 @@ class Examinationresult extends Model
     {
         return $this->belongsTo(AcademicyearStudent::class, 'academicyear_student_id')->withDefault();
     }
+
+
 
 
          /**

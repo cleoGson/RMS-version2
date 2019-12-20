@@ -15,12 +15,8 @@ class CreateExaminationresultsTable extends Migration
     {
         Schema::create('examinationresults', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('class_id')->unsigned()->nullable();
-            $table->foreign('class_id')->references('id')->on('classrooms');
             $table->bigInteger('classsection_id')->unsigned()->nullable();
             $table->foreign('classsection_id')->references('id')->on('classsections');
-            $table->bigInteger('student_id')->unsigned()->nullable();
-            $table->foreign('student_id')->references('id')->on('students');
             $table->bigInteger('academicyear_student_id')->unsigned()->nullable();
             $table->foreign('academicyear_student_id')->references('id')->on('academicyear_students');
             $table->bigInteger('examinationtype_id')->unsigned()->nullable();
@@ -39,6 +35,7 @@ class CreateExaminationresultsTable extends Migration
             $table->foreign('updated_by')->references('id')->on('users');
             $table->double('marks')->nullable();
             $table->text('remarks')->nullable();
+            $table->enum('status',['A','N'])->default('A');
             $table->timestamps();
             $table->softDeletes();
         });
