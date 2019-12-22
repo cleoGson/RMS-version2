@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                         Select Class to upload Result  <i class="fas fa-file fa-fw"></i>
+                         Student Summary List  <i class="fas fa-file fa-fw"></i>
                         </p>
                     </h1>
                 </div>
@@ -20,7 +20,7 @@
        
                         </li>
                         <li class="breadcrumb-item active" class="blue"> 
-                      Select Class to upload Result
+                       Student Summary List
                          </li>
                     </ol>
                 </div>
@@ -41,7 +41,7 @@
                                 $year_selected =array($year_id);
                                 ?>
 <div class="col-sm-2">
-{!! Form::open(['route'=>'examination.examinationresult.result','method'=>'GET']); !!}   
+{!! Form::open(['route'=>'examination.classreports.index','method'=>'GET']); !!}   
 <div class="form-group">
 <label for="year_id">Year</label>
 
@@ -68,9 +68,8 @@
 $total=0;
 ?>
  
-
   @foreach($studentsprovider as $studentdata)
-     <?php 
+   <?php 
         $std_number= $studentdata['number_student'];
         $class_id=$studentdata['class_id'];
         $classsetup_id=$studentdata['classsetup_id'];

@@ -388,38 +388,38 @@
                        Examinations 
                     </a>
                 <ul class="nav-dropdown-items">
+                         <li class="nav-item">
+                            <a href="{{ route('examination.examinationresult.result') }}" class="nav-link {{ request()->is('examination/examinationresult') || request()->is('examination/examinationresult/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                            Post Result
+                            </a>
+                        </li>
                         <li class="nav-item">
+                            <a href="{{ route('examination.individualreport.index') }}" class="nav-link {{ request()->is('examination/individualreports') || request()->is('examination/individualreports/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                            Individual Reports
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="{{ route('examination.classreports.index') }}" class="nav-link {{ request()->is('examination/classreports') || request()->is('examination/classreports/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                            Class   Reports
+                            </a>
+                        </li>  
+                          <li class="nav-item">
                             <a href="{{ route('examination.examinationresult.index') }}" class="nav-link {{ request()->is('examination/examinationresult') || request()->is('examination/examinationresult/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                 </i>
                                Result upload
                             </a>
-                        </li>
-                         <li class="nav-item">
-                            <a href="{{ route('examination.examinationresult.result') }}" class="nav-link {{ request()->is('examination/examinationresult') || request()->is('examination/examinationresult/*') ? 'active' : '' }}">
-                                <i class="fa-fw fas fa-unlock-alt nav-icon">
-
-                                </i>
-                              Individual  Result posting
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('setting.department.index') }}" class="nav-link {{ request()->is('setting/department') || request()->is('setting/department/*') ? 'active' : '' }}">
-                                <i class="fa-fw fas fa-unlock-alt nav-icon">
-
-                                </i>
-                            Result Reports
-                            </a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="{{ route('setting.department.index') }}" class="nav-link {{ request()->is('setting/department') || request()->is('setting/department/*') ? 'active' : '' }}">
-                                <i class="fa-fw fas fa-unlock-alt nav-icon">
-
-                                </i>
-                               Individual  Reports
-                            </a>
-                        </li>       
+                        </li>     
                     </ul>
             </li>
 

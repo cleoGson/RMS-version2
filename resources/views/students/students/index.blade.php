@@ -66,7 +66,7 @@
             '<td colspan="3"> '+"<img src={{ URL::to('/')}}/"+ d.photo +" width='150' height='150' class='c-avatar-img'/>"+'</td>'+
         '</tr>'+
       '<tr>'+
-            '<td>First name:</td>'+
+            '<td>Student Number:</td>'+
             '<td colspan="3">'+d.student_number+'</td>'+
         '</tr>'+
         '<tr>'+

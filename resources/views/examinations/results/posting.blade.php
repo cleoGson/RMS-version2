@@ -35,6 +35,11 @@
             <div class="card card-default">
           <div class="card-body card card-accent-primary">
  <div class="row">
+            <?php
+            $classId = $class->id;
+            $setupId = $classsetup->id;
+            $yearId =  $years->id;
+            ?>
             <div class="col-md-12 mb-4">
             <div class="nav-tabs-boxed">
             <ul class="nav nav-tabs" role="tablist">
@@ -49,12 +54,9 @@
              <div class="col-md-12 form-group text-right">
                     <div class="pull-right">
                         <button type="submit" class="btn btn-success">
-                            Save
+                            Save Result
                         </button>
 
-                        <a href="{{route('academic.classsetup.index')}}" class="btn btn-primary">
-                            Back to List <i class="fas fa-fast-forward"></i>
-                        </a>
                     </div>
             </div>
             </div>
@@ -64,14 +66,25 @@
             <div class="tab-pane" id="profile-1" role="tabpanel">
             <div class="row"> 
            <div class="col-md-8">
+            {!! Form::open(['route'=>'examination.examinationresult.import','files'=>true]); !!}   
             @include('examinations.results.uploading.group')
+             <div class="row">
+             <div class="col-md-12 form-group text-right">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">
+                            Upload Result
+                        </button>
+                    </div>
+            </div>
+            </div>
+             {!! Form::close() !!}
             </div>
             <div class="col-md-4">
             <h4 style="font-size:24; color:black; font-weight:bold"><i class="fa fa-warning red"></i>
             Click download below Button to download the Excel 
             File with Students name and Number, Please do not edit any other 
              column Except for the marks and Remarks, column which are to be filled 
-             <h3>Click Download <a href="#" class="button ">Download Template  <i class="fa fa-download"></i>  </a> </h3>
+             <h3>Click Download <a href="{{url('examination/export_student',['class_id'=>$classId,'year_id'=>$yearId])}}" class="button ">Download Template  <i class="fa fa-download"></i>  </a> </h3>
             </h4>
             
             </div>
@@ -127,20 +140,16 @@
 </div>
 </div>
 </div>
-<?php
-$classId1 = $class->id;
-$classId2 = $classsetup->id;
-$classId3 =  $years->id;
-?>
+
 
 @endsection
 
 @section('scripts')
     <script>
         $(function () {
-            var id1 = <?php echo $classId1 ?>;
-            var id2 = <?php echo $classId2 ?>;
-            var id3 = <?php echo $classId3 ?>;
+            var id1 = <?php echo $classId ?>;
+            var id2 = <?php echo $setupId ?>;
+            var id3 = <?php echo $yearId ?>;
          
             var url = '/examination/classdetails/'+id1+'/'+id2+'/'+id3;
             var start = '';

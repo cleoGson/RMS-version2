@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use Crypt;
 class AcademicyearStudent extends Model
 {
     use LogsActivity,softDeletes;
@@ -118,4 +119,5 @@ class AcademicyearStudent extends Model
      public function getStudentIdDetailAttribute(){
         return $this->student->id;
     }
+ 
 }

@@ -71,8 +71,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'exam
       Route::resource('examinationresult','Examination\ExaminationresultController');
       Route::get('individualresult','Examination\ExaminationresultController@individualResult')->name('examinationresult.result');
       Route::get('classdetails/{classid}/{curriculumid}/{yearid}','Examination\ExaminationresultController@classDetails')->name('examinationresult.classdetails');
+      Route::get('export_student/{classid}/{yearid}','Examination\ExaminationresultController@studentsExports')->name('examinationresult.export');
+      Route::post('import_result','Examination\ExaminationresultController@resultImport')->name('examinationresult.import');
       Route::get('examlist/{id}','Examination\ExaminationresultController@getExaminations');
       Route::get('subjlist/{id}','Examination\ExaminationresultController@getSubjects');
+      Route::resource('classreports','Examination\ClassreportController');
+      Route::resource('individualreport','Examination\IndividualreportController');
+      Route::get('list_student/{classid}/{yearid}','Examination\ExaminationresultController@studentsLists')->name('individualreport.student_list');
       Route::get('dependantdata/{semester}/{setup}','Examination\ExaminationresultController@dependantData');
    
 });

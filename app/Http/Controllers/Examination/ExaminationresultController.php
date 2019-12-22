@@ -18,7 +18,9 @@ use App\Rules\MarksvalidatorRule;
 use App\Rules\ResultPostingRule;
 use App\Model\Examinationnature;
 use App\Model\Classsetup;
-
+use App\Exports\AcademicyearStudentExport;
+use App\Imports\ExaminationresultImports;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\Examination\ExaminationresultRequest;
 use DB;
 use Crypt;
@@ -36,14 +38,44 @@ class ExaminationresultController extends Controller
      */
     public function index(DataTables $dataTables)
     {   
-        if (request()->wantsJson()) {
-            $template = 'examinations.results.actions';
-            return $dataTables->eloquent(Examinationresult::with(['createdBy','updatedBy','classsections','years'])->select('examinationresults.*'))
+           $data=Examinationresult::with(['classsections','examinationsType','academicyearStudent','years','examinationNature','semesters','subjects','classes']);
+              if (request()->wantsJson()) {
+               $template = 'examinations.results.actions';
+                 return $dataTables->eloquent($data->select('examinationresults.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'examination.examinationresult';
                     $routeKey = 'examination.examinationresult';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 }) 
+                  ->editColumn('remarks', function ($row) {
+                    return $row->remarks ? strip_tags($row->remarks) : '';
+                })
+                  ->editColumn('classsection_id', function ($row) {
+                    return $row->classsection_id ?  $row->classsections->name : '';
+                })
+                   ->editColumn('academicyear_student_id', function ($row) {
+                    return $row->academicyear_student_id ?  $row->academicyearStudent->student_details : '';
+                })
+                
+                   ->editColumn('examinationtype_id', function ($row) {
+                    return $row->examinationtype_id ?  $row->examinationsType->name : '';
+                })
+                   ->editColumn('year_id', function ($row) {
+                    return $row->year_id ?  $row->years->name : '';
+                })
+                   ->editColumn('semester_id', function ($row) {
+                    return $row->semester_id ?  $row->semesters->name : '';
+                })
+                    ->editColumn('examination_nature', function ($row) {
+                    return $row->examination_nature ?  $row->examinationNature->name : '';
+                })
+                    ->editColumn('subject_id', function ($row) {
+                    return $row->subject_id ?  $row->subjects->name : '';
+                })
+                    ->editColumn('class_id', function ($row) {
+                    return $row->class_id ?  $row->classes->name : '';
+                })
+                
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->createdBy->email : '';
                 })
@@ -51,7 +83,7 @@ class ExaminationresultController extends Controller
                     return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
                 })
                 ->make(true);
-         }
+              }
 
          $years=Academicyear::pluck('name','id')->toArray();
          $classsections=Classsection::pluck('name','id')->toArray();
@@ -63,17 +95,23 @@ class ExaminationresultController extends Controller
     }
 
     public function individualResult(DataTables $dataTables, Request $request){
-
+        if(!is_null($request->year_id)){
+        $this->validate($request,[
+            'year_id'=>'required|exists:academicyears,id',
+        ]);
+        }
          $classes=Classroom::pluck('name','id')->toArray();
           $years=Academicyear::pluck('name','id')->toArray();
+          $year_id = !is_null($request->year_id) ?  $request->year_id : Academicyear::whereStatus('open')->first()->id;
+          $year_data=Academicyear::findOrFail($year_id);
           foreach($classes as $key=>$value){
-            $student_data=AcademicyearStudent::with(['student'])->where([['class_id','=',$key],['year_id','=',1]]);
+            $student_data=AcademicyearStudent::with(['student'])->where([['class_id','=',$key],['year_id','=', $year_id]]);
            $studentsprovider[$key]=array('students'=>$student_data->get(),
                                     'number_student'=>$student_data->count(),
-                                    'year'=>2019,
+                                    'year'=>$year_data->name,
                                     'class_id'=>$key,
                                     'class_name'=>$value,
-                                    'year_id'=>1,
+                                    'year_id'=> $year_id,
                                     'classsetup_name'=>!is_null($student_data->first()) ? $student_data->first()->classSetup->name : "",
                                     'classsetup_id'=>!is_null($student_data->first()) ? $student_data->first()->classSetup->id : 0,
 
@@ -84,8 +122,8 @@ class ExaminationresultController extends Controller
 
     }
 
-    public function classDetails(Datatables $dataTables,$class_id,$classsetup_id,$year_id){
-
+    public function classDetails(DataTables $dataTables,$class_id,$classsetup_id,$year_id){
+        
               $classid=$class_id;
               $classsetupid=$classsetup_id;
               $yearid=$year_id;
@@ -144,6 +182,41 @@ class ExaminationresultController extends Controller
              return view('examinations.results.posting',compact(['classsetup','class','years','classsections','semesters','students']));
     }
  
+
+
+    public function studentsExports($classid,$yearid){
+                    $students =  $student_data=AcademicyearStudent::join('students','academicyear_students.student_id','=','students.id')
+                    ->where([['class_id','=',$classid],['year_id','=',$yearid]])
+                    ->select('academicyear_students.id','students.firstname','students.middlename','students.lastname','students.student_number')
+                    ->get();
+                    $data=array($students);
+                    $export =new AcademicyearStudentExport($data);
+                    return Excel::download($export, 'students_result_import.csv');
+             }
+        
+
+    public function resultImport(Request $request){
+
+     $this->validate($request, [
+             'examination_type'=>'required|integer|exists:examinationtypes,id',
+             'classsetup_id'=>'required|integer|exists:classsetups,id',
+             'semester_id' => 'required|numeric|exists:semesters,id',
+             'subject'=>['required','integer','exists:subjects,id'],
+             'file'=>'required|file|max:2048',
+             ]);
+     if($request->hasFile('file')) {
+        $extension = $request->file('file')->getClientOriginalExtension();
+        //filename to store
+        $filenametostore = date('Ymdhms').microtime(true).'.'.$extension;
+        //Upload File
+        $request->file('file')->storeAs('public/result', $filenametostore);
+        $filename = 'storage/result/'.$filenametostore;
+
+        Excel::import(new ExaminationresultImports($request),$filename);
+         return redirect()->back();
+     }
+        }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -26,14 +26,14 @@ use DB;
 use Crypt;
 use App\Model\Semester;
 
-class IndividualreportController extends Controller
+class ClassreportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-   public function index(Request $request){
+    public function index(Request $request){
         if(!is_null($request->year_id)){
         $this->validate($request,[
             'year_id'=>'required|exists:academicyears,id',
@@ -57,63 +57,10 @@ class IndividualreportController extends Controller
                                     
                                 );
           }
-     return view('examinations.reports.index',compact(['studentsprovider','years'])); 
+     return view('examinations.class_reports.index',compact(['studentsprovider','years'])); 
 
     }
 
-
-
-     public function studentsLists(DataTables $dataTables,$classid,$yearid){
-                  
-      if (request()->wantsJson()) {
-                $students =  $student_data=AcademicyearStudent::join('students','academicyear_students.student_id','=','students.id')
-                ->where([['class_id','=',$classid],['year_id','=',$yearid]])
-                ->select('academicyear_students.id','students.firstname','students.middlename','students.lastname','students.student_number');
-               $template = 'examinations.results.actions';
-                 return $dataTables->eloquent($students)
-                ->editColumn('action', function ($row) use ($template) {
-                    $gateKey = 'examination.examinationresult';
-                    $routeKey = 'examination.examinationresult';
-                    return view($template, compact('row', 'gateKey', 'routeKey'));
-                }) 
-                  ->editColumn('remarks', function ($row) {
-                    return $row->remarks ? strip_tags($row->remarks) : '';
-                })
-                  ->editColumn('classsection_id', function ($row) {
-                    return $row->classsection_id ?  $row->classsections->name : '';
-                })
-                   ->editColumn('academicyear_student_id', function ($row) {
-                    return $row->academicyear_student_id ?  $row->academicyearStudent->student_details : '';
-                })
-                
-                   ->editColumn('examinationtype_id', function ($row) {
-                    return $row->examinationtype_id ?  $row->examinationsType->name : '';
-                })
-                   ->editColumn('year_id', function ($row) {
-                    return $row->year_id ?  $row->years->name : '';
-                })
-                   ->editColumn('semester_id', function ($row) {
-                    return $row->semester_id ?  $row->semesters->name : '';
-                })
-                    ->editColumn('examination_nature', function ($row) {
-                    return $row->examination_nature ?  $row->examinationNature->name : '';
-                })
-                    ->editColumn('subject_id', function ($row) {
-                    return $row->subject_id ?  $row->subjects->name : '';
-                })
-                    ->editColumn('class_id', function ($row) {
-                    return $row->class_id ?  $row->classes->name : '';
-                })
-                
-                ->editColumn('created_by', function ($row) {
-                    return $row->created_by ? $row->createdBy->email : '';
-                })
-                ->editColumn('updated_by', function ($row) {
-                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
-                })
-                ->make(true);
-              }   
-             }
     /**
      * Show the form for creating a new resource.
      *

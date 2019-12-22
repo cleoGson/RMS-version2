@@ -83,10 +83,10 @@ class Examinationresult extends Model
      * @param  string  $value
      * @return string
      */
-    public function getRemarksAttribute($value)
-    {
-        return  Crypt::decrypt($value);
-    }
+    // public function getRemarksAttribute($value)
+    // {
+    //     return  Crypt::decrypt($value);
+    // }
 
      /**
      * An applicant belongs to users

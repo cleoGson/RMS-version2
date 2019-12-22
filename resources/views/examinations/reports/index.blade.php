@@ -1,19 +1,110 @@
-
-
 @extends('layouts.admin')
 @section('content')
 
-<div class="col-lg-12">
-<div class="card">
-<div class="card-header">
-<i class="fa fa-align-justify"></i>List of Examination Result 
+<section class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class=" m-0 text-dark">
+                        <p class="blue">
+                         Student Summary List  <i class="fas fa-file fa-fw"></i>
+                        </p>
+                    </h1>
+                </div>
 
-  
-  <a href="{{ url('/') }}" class="float-right">
-                         
-  <button class="btn btn-success  bold ">  Home  <i class="fas fa-list fa-fw"></i> </button>
-                   </a>
-                   </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                        <a  class="blue" href="{{ url('/') }}">Home</a>
+       
+                        </li>
+                        <li class="breadcrumb-item active" class="blue"> 
+                       Student Summary List
+                         </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+          <div class="card-body card card-accent-primary">
+<div class="row">
+  <?php 
+                              if (isset($_GET['year_id'])) { 
+                                      $year_id=$_GET['year_id'];   
+                                }else{
+                                    $year_id=null;
+                                }
+                                $year_selected =array($year_id);
+                                ?>
+<div class="col-sm-2">
+{!! Form::open(['route'=>'examination.individualreport.index','method'=>'GET']); !!}   
+<div class="form-group">
+<label for="year_id">Year</label>
+
+{!! Form::select('year_id',$years, $year_selected, ['id'=>'year_id','class'=>'form-control select2-single']) !!}
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+<label for="year_id"></br></label>
+    <button class="form-control btn btn-success">Filter</buutton>
+</div>
+{!!  Form::close()!!}
+</div>
+
+</div>
+<div class="table-responsive">
+<table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
+<tr>
+<th> Class</th>
+<th> Student </th>
+<th> Year </th>
+<th> Curricullum</th>
+<?php 
+$total=0;
+?>
+ 
+
+  @foreach($studentsprovider as $studentdata)
+    <?php 
+        $std_number= $studentdata['number_student'];
+        $class_id=$studentdata['class_id'];
+        $classsetup_id=$studentdata['classsetup_id'];
+        $year_id =$studentdata['year_id'];
+        $total+= $std_number;
+  ?>
+  <tr>
+  <td> 
+  @if($std_number > 0 ) 
+  <a  class="list_of_students" onClick="return studentsListDetails($class_id,$year_id)" href="#" >
+     {{$studentdata['class_name']}}
+  </a>
+        @else
+      {{$studentdata['class_name']}}   
+        @endif
+  </td>
+ 
+  <td> @if($std_number > 0 ) 
+  <a class="list_of_students" onClick="return studentsListDetails($class_id,$year_id)" href="#" >{{$std_number}}</a>
+        @else
+     {{$std_number}}   
+        @endif
+</td> 
+<td> {{$studentdata['year']}}</td>
+ <td>{{$studentdata['classsetup_name']}}</td>  
+  </tr>
+  @endforeach
+  <tr>
+<td> Total Number of Students </td>
+<td colspan=3>{{$total}} </td>
+</tr>
+
+</table>
+</div>
 <div class="card-body card card-accent-primary">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="examinationresult">
 <thead>
@@ -50,16 +141,17 @@
 </table>
 </div>
 </div>
+</div>
 
 @endsection
+
 
 @section('scripts')
     <script>
         $(function () {
-            var url = '/examination/examinationresult';
+           
             var start = '';
             var end = '';
-            var orign = '/examination/examinationresult';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
@@ -122,7 +214,13 @@
         '</tr>'+
     '</table>';
 }          
-            var table = $('#examinationresult').DataTable({
+
+ $('.list_of_students').on('click', function studentsListDetails(id,id2) {
+              alert("here");
+              alert(id2);
+              var url = '/examination/list_student'+id+'/'+id2;
+              var orign = '/examination/list_student'+id+'/'+id2;
+              var table = $('#examinationresult').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -193,7 +291,8 @@
                     },
                 ]
             });
-        
+            
+         } );
 
         $('#examinationresult tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
