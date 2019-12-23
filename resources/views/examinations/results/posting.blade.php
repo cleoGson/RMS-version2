@@ -66,7 +66,23 @@
             <div class="tab-pane" id="profile-1" role="tabpanel">
             <div class="row"> 
            <div class="col-md-8">
-            {!! Form::open(['route'=>'examination.examinationresult.import','files'=>true]); !!}   
+           @if(!is_null($errors))
+           <p class="help-block">  
+           <i class="fa fa-warning" style="color:red; font-size:24;">
+           </i>
+            Please fix the excel  lines as The error  lines indicates then reupload the csv file .
+           </p>
+           @php($count=1)
+             @foreach ($errors->all() as $message) 
+            <span class="help-block" style="color:red">
+            CSV Line number {{$count}} {{explode('.',$message)[1]}} </br>
+             </span>
+             @php($count++)
+            @endforeach
+            @endif
+            </br>
+            {!! Form::open(['route'=>'examination.examinationresult.import','files'=>true]); !!}  
+            {!! Form::hidden('classsetup_id',$setupId) !!} 
             @include('examinations.results.uploading.group')
              <div class="row">
              <div class="col-md-12 form-group text-right">

@@ -77,12 +77,12 @@ class Examinationresult extends Model
     // }
 
    
-      /**
-     * Get the user's first name.
-     *
-     * @param  string  $value
-     * @return string
-     */
+    //   /**
+    //  * Get the user's first name.
+    //  *
+    //  * @param  string  $value
+    //  * @return string
+    //  */
     // public function getRemarksAttribute($value)
     // {
     //     return  Crypt::decrypt($value);

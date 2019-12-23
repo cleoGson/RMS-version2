@@ -3,8 +3,13 @@
 namespace App\Imports;
 
 use App\Model\Examinationresult;
+use App\Model\Classsetup;
+use App\Model\Examinationcurricular;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Crypt;
 
@@ -23,7 +28,16 @@ class ExaminationresultImports implements ToCollection,WithHeadingRow
    
     public function collection(Collection $rows)
     {
-       // dd($rows->toArray());
+       $max_marks=$this->maximumMarks($this->request->examination_type,$this->request->classsetup_id,$this->request->semester_id);
+        $validator=Validator::make($rows->toArray(), [
+             "*.id" => "required|integer|exists:academicyear_students,id",
+             "*.marks"=>"required|numeric|max:$max_marks",
+             "*.remarks"=>"nullable|string",
+         ]);
+         if ($validator->fails()) {
+        return redirect('/examination/classdetails/'.$this->request->class_id.'/'.$this->request->classsetup_id.'/'.$this->request->semester_id)
+                        ->withErrors($validator)->withInput();
+        }         
       foreach($rows->toArray() as $data){
           $student_id=intval($data['id']);
           $semester_id=$this->request->semester_id;
@@ -55,6 +69,21 @@ class ExaminationresultImports implements ToCollection,WithHeadingRow
             ];
             }
         }
+        
       Examinationresult::insert($dataz);
     }
+        public function maximumMarks($examinationtnature_id,$classsetup_id,$semester_id){
+          if(!is_null($classsetup_id) && !is_null($semester_id)){ 
+         $setup_data=Classsetup::findOrFail($classsetup_id);
+         $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
+         $exam_curricular_id=(!is_null($semisters) & in_array($semester_id,$semisters)) ? $semisters[$semester_id] :null;
+         if(!is_null($exam_curricular_id)){
+         $examinations=Examinationcurricular::findOrFail($exam_curricular_id);
+         $examinationtype=$examinations->examinationCurriculars->pluck('marks','examinationtype_id')->toArray();
+         $max_marks=(!is_null($examinationtype) & array_key_exists($examinationtnature_id,$examinationtype)) ? $examinationtype[$examinationtnature_id] :null;
+         return $max_marks;
+         }
+       }
+     }
+
 }
