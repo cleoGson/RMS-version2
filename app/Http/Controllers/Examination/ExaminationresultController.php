@@ -22,6 +22,7 @@ use App\Exports\AcademicyearStudentExport;
 use App\Imports\ExaminationresultImports;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\Examination\ExaminationresultRequest;
+use Illuminate\Filesystem\Filesystem;
 use DB;
 use Crypt;
 use App\Model\Semester;
@@ -211,8 +212,9 @@ class ExaminationresultController extends Controller
         //Upload File
         $request->file('file')->storeAs('public/result', $filenametostore);
         $filename = 'storage/result/'.$filenametostore;
-
         Excel::import(new ExaminationresultImports($request),$filename);
+        $filecleaner = new Filesystem;
+        $filecleaner->cleanDirectory('storage/result');
          return redirect()->back();
      }
         }

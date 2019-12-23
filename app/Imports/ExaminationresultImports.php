@@ -23,6 +23,7 @@ class ExaminationresultImports implements ToCollection,WithHeadingRow
    
     public function collection(Collection $rows)
     {
+       // dd($rows->toArray());
       foreach($rows->toArray() as $data){
           $student_id=intval($data['id']);
           $semester_id=$this->request->semester_id;

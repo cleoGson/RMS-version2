@@ -65,16 +65,16 @@ class Examinationresult extends Model
     ];
 
 
-    /**
-     * Set the user's first name.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setremarksAttribute($value)
-    {
-        $this->attributes['remarks'] = Crypt::encrypt($value);
-    }
+    // /**
+    //  * Set the user's first name.
+    //  *
+    //  * @param  string  $value
+    //  * @return void
+    //  */
+    // public function setremarksAttribute($value)
+    // {
+    //     $this->attributes['remarks'] = Crypt::encrypt($value);
+    // }
 
    
       /**
