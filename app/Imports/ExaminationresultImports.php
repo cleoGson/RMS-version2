@@ -69,7 +69,6 @@ class ExaminationresultImports implements ToCollection,WithHeadingRow
             ];
             }
         }
-        
       Examinationresult::insert($dataz);
     }
         public function maximumMarks($examinationtnature_id,$classsetup_id,$semester_id){

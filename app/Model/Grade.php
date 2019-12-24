@@ -22,6 +22,7 @@ class Grade extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'point',
         'created_by',
         'updated_by'
     ];
@@ -34,6 +35,7 @@ class Grade extends Model
     protected static $logAttributes = [
         'name',
         'display_name',
+        'point',
         'created_by',
         'updated_by'
     ];

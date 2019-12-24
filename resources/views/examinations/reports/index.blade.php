@@ -80,7 +80,7 @@ $total=0;
   <tr>
   <td> 
   @if($std_number > 0 ) 
-  <a  class="list_of_students" onClick="return studentsListDetails($class_id,$year_id)" href="#" >
+  <a  class="list_of_students" href="{{url('examination/list_student',['class_id'=>$class_id,'year_id'=>$year_id])}}" >
      {{$studentdata['class_name']}}
   </a>
         @else
@@ -89,7 +89,7 @@ $total=0;
   </td>
  
   <td> @if($std_number > 0 ) 
-  <a class="list_of_students" onClick="return studentsListDetails($class_id,$year_id)" href="#" >{{$std_number}}</a>
+  <a class="list_of_students" href="{{url('examination/list_student',['class_id'=>$class_id,'year_id'=>$year_id])}}" >{{$std_number}}</a>
         @else
      {{$std_number}}   
         @endif
@@ -216,8 +216,6 @@ $total=0;
 }          
 
  $('.list_of_students').on('click', function studentsListDetails(id,id2) {
-              alert("here");
-              alert(id2);
               var url = '/examination/list_student'+id+'/'+id2;
               var orign = '/examination/list_student'+id+'/'+id2;
               var table = $('#examinationresult').DataTable({

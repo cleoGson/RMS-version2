@@ -27,6 +27,7 @@ class GradeRequest extends FormRequest
        return [
            'name'=>"required|string|unique:grades,name",
            'display_name'=>'required',
+           'point'=>'required|integer',
        ];
       }
       case 'PUT':
@@ -36,6 +37,7 @@ class GradeRequest extends FormRequest
        return [
            'name'=>"required|string|unique:grades,id,$this->route('grade')->id",
            'display_name'=>'required',
+           'point'=>'required|integer',
        ];
       }
       default:break;

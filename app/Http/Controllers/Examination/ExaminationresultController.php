@@ -215,6 +215,7 @@ class ExaminationresultController extends Controller
         Excel::import(new ExaminationresultImports($request),$filename);
         $filecleaner = new Filesystem;
         $filecleaner->cleanDirectory('storage/result');
+         alert()->success('success', 'examinationresult  has  successfully uploaded.')->persistent();
          return redirect()->back();
      }
         }

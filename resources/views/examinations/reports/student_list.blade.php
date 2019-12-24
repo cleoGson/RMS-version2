@@ -1,42 +1,66 @@
-
-
 @extends('layouts.admin')
 @section('content')
+<section class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class=" m-0 text-dark">
+                        <p class="blue">
+                         Individual Results for {{$classdetails->name}}  {{$yeardetails->name}} <i class="fas fa-file fa-fw"></i>
+                        </p>
+                    </h1>
+                </div>
 
-<div class="col-lg-12">
-<div class="card">
-<div class="card-header">
-<i class="fa fa-align-justify"></i>List of Grades 
-
-  
-  <a href="{{ route('academic.grade.create') }}" class="float-right">
-                         
-  <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
-                   </a>
-                   </div>
-<div class="card-body">
-<div class="table table-responsive">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="grade">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                        <a  class="blue" href="{{ url('/') }}">Home</a>
+       
+                        </li>
+                          <li class="breadcrumb-item">
+                            <a href="{{ route('examination.individualreport.index') }}" class="blue">Result Posting</a>
+                        </li>
+                        <li class="breadcrumb-item active" class="blue"> 
+                      Student List </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+          <div class="card-body card card-accent-primary">
+<table class="table table-responsive-sm table-bordered table-striped table-hover" id="list_student">
 <thead>
 <tr>
-<th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>View</th>
-<th>Actions </th>
+         <th>Full Name</th>
+         <th>Year</th>
+         <th>Class</th>
+         <th>Student Number</th>
+         <th>View</th>
+         <th>Action</th>
 </tr>
 </thead>
 <tfoot>
-<tr>
-<th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>View</th>
-<th>Actions </th>
-</tr>
+    
+          <th>Full Name</th>
+          <th>Student Number</th>
+         <th>Year</th>
+         <th>Class</th>
+         <th>View</th>
+        <th>Action</th>
 </tfoot>
 </table>
-</div>
+<?php 
+$classid=$classdetails->id;
+$yearid=$yeardetails->id;
+?>
+
+
+
+
 </div>
 </div>
 
@@ -45,45 +69,38 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/academic/grade';
+            var id1 = <?php echo  $yearid; ?>;
+            var id2 = <?php echo $classid; ?>;
+            var url = '/examination/list_student/'+id2+'/'+id1;
             var start = '';
             var end = '';
-            var orign = '/academic/grade';
+            var orign = '/examination/list_student/'+id2+'/'+id1;
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
-    return '<table cellpadding="5"  class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+     
         '<tr>'+
-            '<td>grade name:</td>'+
-            '<td colspan="3">'+d.name+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
+            '<td>Student Name :</td>'+
+            '<td colspan="3">'+d.student_id+'</td>'+
         '</tr>'+
           '<tr>'+
-            '<td>Point:</td>'+
-            '<td colspan="3">'+d.point+'</td>'+
+            '<td>Year :</td>'+
+            '<td colspan="3">'+d.year_id+'</td>'+
+        '</tr>'+ 
+         '<tr>'+
+            '<td>Class :</td>'+
+            '<td colspan="3">'+d.class_id+'</td>'+
         '</tr>'+
-        '<tr>'+
-            '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Created At:</td>'+
-            '<td colspan="3">'+d.created_at+'</td>'+
-        '</tr>'+
-        '<tr>'+
-        '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'
-        +'<td>Updated At:</td>'+
-            '<td  colspan="3">'+d.updated_at+'</td>'+
+         '<tr>'+
+            '<td>Student Number :</td>'+
+            '<td colspan="3">'+d.student_number+'</td>'+
         '</tr>'+
     '</table>';
-}
-            
-            var table = $('#grade').DataTable({
+}      
+
+
+            var table = $('#list_student').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -92,13 +109,15 @@
                     data: function (d) {
                         d.status = $('select[name=status]').val()
                     },
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
-                    {data: 'point', name: 'point'},
+                 },
+                   columns: [
+              
+                    {data: 'student_id', name: 'student_id'},
+                    {data: 'student_number', name: 'student_number'},
+                    {data: 'year_id', name: 'year_id'},
+                    {data: 'class_id', name: 'class_id'},
                     {
-                        className:      'details-control',
+                      className:      'details-control',
                         orderable:      false,
                         searchable: false,
                         data:           null,
@@ -149,7 +168,7 @@
             });
         
 
-        $('#grade tbody').on('click', 'td.details-control', function () {
+        $('#list_student tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  
