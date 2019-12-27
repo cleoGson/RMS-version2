@@ -21,6 +21,8 @@ class Subject extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'code',
+        'units',
         'created_by',
         'updated_by'
     ];
@@ -33,6 +35,8 @@ class Subject extends Model
     protected static $logAttributes = [
         'name',
         'display_name',
+        'code',
+        'units',
         'created_by',
         'updated_by'
     ];

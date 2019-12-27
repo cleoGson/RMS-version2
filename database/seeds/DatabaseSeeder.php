@@ -43,5 +43,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FeesAmountSeeder::class);
         $this->call(ExaminationmarkSeeder::class);
         $this->call(ExaminationnatureTableSeeder::class);
+        $this->call(GpaRangeSeeder::class);
     }
 }

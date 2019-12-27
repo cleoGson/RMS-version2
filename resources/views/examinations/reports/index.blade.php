@@ -51,7 +51,7 @@
 <div class="col-sm-2">
 <div class="form-group">
 <label for="year_id"></br></label>
-    <button class="form-control btn btn-success">Filter</buutton>
+    <button class="form-control btn btn-success">Filter</button>
 </div>
 {!!  Form::close()!!}
 </div>

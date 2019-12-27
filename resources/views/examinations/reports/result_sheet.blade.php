@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                          Results for  <i class="fas fa-file fa-fw"></i>
+                      {{$studentDetails->years->name}}  {{ucwords(ucfirst($studentDetails->class->name))}} Result  For  {{ucwords(ucfirst($studentDetails->student->full_name))}} <i class="fas fa-file fa-fw"></i>
                         </p>
                     </h1>
                 </div>
@@ -35,20 +35,12 @@
             <div class="col-md-12 mb-4">
             <div class="nav-tabs-boxed">
             <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-book-open" style="color:green; font-size:18px;"></i> Semester One</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Semester Two</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Full Year</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-book-open" style="color:green; font-size:18px;"></i> Result per Semester</a></li>
+          
             </ul>
             <div class="tab-content">
             <div class="tab-pane active" id="home-1" role="tabpanel">
             @include('examinations.reports.tabs_data.semester_one')
-            </div>
-
-            <div class="tab-pane" id="profile-1" role="tabpanel">
-            @include('examinations.reports.tabs_data.semester_two')
-            </div>
-            <div class="tab-pane" id="registration-1" role="tabpanel">
-             @include('examinations.reports.tabs_data.full_year_result')
             </div>
             </div>
             </div>

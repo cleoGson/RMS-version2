@@ -26,6 +26,7 @@ class CreateCurricularsTable extends Migration
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
             $table->enum('status',[1,0])->default(1);
+            $table->enum('locked',[0,1])->default(0); 
             $table->timestamps();
             $table->softDeletes();
         });

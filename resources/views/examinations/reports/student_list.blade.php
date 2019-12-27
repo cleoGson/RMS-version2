@@ -121,7 +121,7 @@ $yearid=$yeardetails->id;
                         orderable:      false,
                         searchable: false,
                         data:           null,
-                        defaultContent: "<button class='btn btn-success'> <i class='fa fa-eye'></i> View</button>"
+                        defaultContent: "<button class='btn btn-primary'> <i class='fa fa-eye'></i> View</button>"
                      },
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ], dom: 'lBfrtip<"actions">',

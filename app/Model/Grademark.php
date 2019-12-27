@@ -66,6 +66,20 @@ class Grademark extends Model
     {
         return $this->grades->name." ( ".$this->minimum_marks.'/'.$this->maximum_marks." point-".$this->grade_point." )";
     }
+    
+    public function getGradeRangeAttribute(){
+            $grade_name= $this->grades->name;
+            $max_mark= $this->maximum_marks;
+            $min_marks=$this->minimum_marks;
+            $grading_package=array(
+                'grade'=>$grade_name,
+                'max_marks'=>$max_mark,
+                'min_marks'=>$min_marks,
+                'grade_point'=>$this->grade_point,
+                'remarks'=>$this->grades->remarks,
+            );
+        return  $grading_package;
+    }
 
     /**
      * A verifier belongs to users

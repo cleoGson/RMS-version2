@@ -26,6 +26,8 @@ class CreateClasssetupsTable extends Migration
             $table->double('maximum_capacity')->default(0);
             $table->bigInteger('year_id')->unsigned()->nullable();
             $table->foreign('year_id')->references('id')->on('academicyears');
+            $table->bigInteger('gpa_curricular')->unsigned()->nullable();
+            $table->foreign('gpa_curricular')->references('id')->on('gpacurriculars');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
@@ -34,6 +36,9 @@ class CreateClasssetupsTable extends Migration
             $table->foreign('approved_by')->references('id')->on('users');
             $table->enum('status',[1,0])->default(1);
             $table->enum('approved',[1,0])->default(1);
+            $table->enum('locked',[0,1])->default(0);
+            $table->enum('result_system',[1,0])->default(0);
+            $table->enum('gpa_applicable',[1,0])->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

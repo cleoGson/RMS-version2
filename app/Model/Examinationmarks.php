@@ -76,4 +76,10 @@ class Examinationmarks extends Model
         return $this->types->name ."(".$this->marks."/".$this->out_of.")";
 
     }
+    public function getPartialNameAttribute(){
+         return $this->types->name;
+    }
+      public function getPartialNameTwoAttribute(){
+         return $this->types->display_name;
+    }
 }

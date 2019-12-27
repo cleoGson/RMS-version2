@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('examinationcurricular','Academic\ExaminationcurricularController');
     Route::resource('examinationmarks','Academic\ExaminationmarksController');
     Route::resource('examinationnature','Academic\ExaminationnatureController');
+    Route::resource('gparange','Academic\GparangeController');
+    Route::resource('gpacurricular','Academic\GpacurricularController');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'examination.'], function () {
@@ -76,6 +78,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'exam
       Route::get('examlist/{id}','Examination\ExaminationresultController@getExaminations');
       Route::get('subjlist/{id}','Examination\ExaminationresultController@getSubjects');
       Route::resource('classreports','Examination\ClassreportController');
+      Route::get('class_student/{classid}/{yearid}','Examination\ClassreportController@studentsLists')->name('classreports.class_list');
+      Route::get('class_sheet/{studentid}/{year_id}/{classsetup_id}','Examination\ClassreportController@resultSheets')->name('classreports.details');
       Route::resource('individualreport','Examination\IndividualreportController');
       Route::get('list_student/{classid}/{yearid}','Examination\IndividualreportController@studentsLists')->name('individualreport.student_list');
       Route::get('result_sheet/{studentid}/{year_id}/{classsetup_id}','Examination\IndividualreportController@resultSheets')->name('individualreport.details');

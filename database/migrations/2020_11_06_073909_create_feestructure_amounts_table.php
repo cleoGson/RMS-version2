@@ -19,6 +19,7 @@ class CreateFeestructureAmountsTable extends Migration
             $table->foreign('feestructure_id')->references('id')->on('feesstructures');
             $table->bigInteger('feesamount_id')->unsigned()->nullable();
             $table->foreign('feesamount_id')->references('id')->on('feesamounts');
+            $table->enum('locked',[0,1])->default(0); 
             $table->timestamps();
             $table->softDeletes();
         });

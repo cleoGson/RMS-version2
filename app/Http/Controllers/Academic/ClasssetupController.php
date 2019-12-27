@@ -9,6 +9,7 @@ use App\Model\Curricular;
 use App\Model\Academicyear;
 use App\Model\Classroom;
 use App\Model\Examinationcurricular;
+use App\Model\Gpacurricular;
 use App\Model\Classsection;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -76,12 +77,13 @@ class ClasssetupController extends Controller
         $grades=Gradecurricular::pluck('name','id')->toArray();
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
+        $gpa_curricular=Gpacurricular::pluck('name','id')->toArray();
         $selectedexamcurr=[];
         $selectedsubjectcurr=[];
         return view('academics.classsetups.create',compact(['years',
         'classsections','classes','grades','curricular',
         'selectedexamcurr','selectedsubjectcurr',
-        'feesstructure','examcurriculars']));
+        'feesstructure','examcurriculars','gpa_curricular']));
     }
 
 
@@ -102,6 +104,9 @@ class ClasssetupController extends Controller
             'minimum_capacity'=>request('minimum_capacity'),
             'maximum_capacity'=>request('maximum_capacity'),
             'fees_structure'=>request('fees_structure'),
+            'result_system'=>request('result_system'),
+            'gpa_applicable'=>request('gpa_applicable'),
+            'gpa_curricular'=>request('gpa_curricular'),
             'approved_by'=>auth()->id(),
             'created_by'=>auth()->id(),
         ]);
@@ -140,6 +145,7 @@ class ClasssetupController extends Controller
         $curricular=Curricular::pluck('name','id')->toArray();
         $feesstructure=Feesstructure::pluck('name','id')->toArray();
         $selectedexamcurr=$classsetup->subjectCurriculars->pluck('id')->toArray();
+        $gpa_curricular=Gpacurricular::pluck('name','id')->toArray();
         $selectedsubjectcurr=$classsetup->examinationCurriculars->pluck('id')->toArray();
         return view('academics.classsetups.edit',[
             'show'=>$classsetup,
@@ -150,6 +156,7 @@ class ClasssetupController extends Controller
             'curricular'=>$curricular,
             'selectedexamcurr'=>$selectedexamcurr,
             'selectedsubjectcurr'=> $selectedsubjectcurr,
+            'gpa_curricular'=>$gpa_curricular,
             'feesstructure'=>$feesstructure
             ]);
     }
@@ -173,6 +180,9 @@ class ClasssetupController extends Controller
               'fees_structure',
               'minimum_capacity',
               'maximum_capacity',
+              'gpa_curricular',
+              'result_system',
+              'gpa_applicable',
               'year_id',
             ]));
         $classsetup->subjectCurriculars()->sync($subjects);

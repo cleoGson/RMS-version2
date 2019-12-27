@@ -23,6 +23,7 @@ class CreateExaminationmarksTable extends Migration
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->enum('locked',[0,1])->default(0); 
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,6 +20,7 @@ class CreateFeesstructuresTable extends Migration
             $table->foreign('year_id')->references('id')->on('academicyears');
             $table->enum('status',[1,0])->default(1);
             $table->enum('approved',[1,0])->default(1);
+            $table->enum('locked',[0,1])->default(0); 
             $table->bigInteger('approved_by')->unsigned()->nullable();
             $table->foreign('approved_by')->references('id')->on('users');
             $table->bigInteger('created_by')->unsigned()->nullable();

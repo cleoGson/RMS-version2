@@ -6,23 +6,23 @@
 <div class="col-lg-12">
 <div class="card">
 <div class="card-header">
-<i class="fa fa-align-justify"></i>List of Grades 
+<i class="fa fa-align-justify"></i>List of GPA Classes
 
   
-  <a href="{{ route('academic.grade.create') }}" class="float-right">
+  <a href="{{ route('academic.gparange.create') }}" class="float-right">
                          
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
                    </div>
 <div class="card-body">
 <div class="table table-responsive">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="grade">
+<table class="table table-responsive-sm table-bordered table-striped table-hover" id="gparange">
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>Remarks</th>
+<th>Range from</th>
+<th>To</th>
+<th>Locked</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -30,9 +30,9 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>Remarks</th>
+<th>Range from</th>
+<th>To</th>
+<th>Locked</th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -47,30 +47,28 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/academic/grade';
+            var url = '/academic/gparange';
             var start = '';
             var end = '';
-            var orign = '/academic/grade';
+            var orign = '/academic/gparange';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
-    return '<table cellpadding="5"  class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>grade name:</td>'+
+            '<td>Gpa name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
+            '<td>Range From:</td>'+
+            '<td colspan="3">'+d.from+'</td>'+
         '</tr>'+
-          '<tr>'+
-            '<td>Point:</td>'+
-            '<td colspan="3">'+d.point+'</td>'+
+        '<tr>'+
+            '<td>To:</td>'+
+            '<td colspan="3">'+d.to+'</td>'+
         '</tr>'+
-         '</tr>'+
-          '<tr>'+
-            '<td>Remarks:</td>'+
-            '<td colspan="3">'+d.remarks+'</td>'+
+         '<td>Locked:</td>'+
+            '<td colspan="3">'+d.locked+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
@@ -90,7 +88,7 @@
     '</table>';
 }
             
-            var table = $('#grade').DataTable({
+            var table = $('#gparange').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -102,9 +100,9 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
-                    {data: 'point', name: 'point'},
-                     {data: 'remarks', name: 'remarks'},
+                    {data: 'from',name: 'from'},
+                    {data: 'to',name: 'to'},
+                     {data: 'locked',name: 'locked'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -157,7 +155,7 @@
             });
         
 
-        $('#grade tbody').on('click', 'td.details-control', function () {
+        $('#gparange tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  

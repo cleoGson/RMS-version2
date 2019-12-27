@@ -6,23 +6,25 @@
 <div class="col-lg-12">
 <div class="card">
 <div class="card-header">
-<i class="fa fa-align-justify"></i>List of Grades 
+<i class="fa fa-align-justify"></i>List of Grade Curriculars 
 
   
-  <a href="{{ route('academic.grade.create') }}" class="float-right">
+  <a href="{{ route('academic.gpacurricular.create') }}" class="float-right">
                          
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
                    </div>
 <div class="card-body">
 <div class="table table-responsive">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="grade">
+<table class="table table-responsive-sm table-bordered table-striped table-hover" id="gpacurricular">
 <thead>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>Remarks</th>
+<th>year </th> 
+<th>Status </th>
+<th>Grade Mark </th>
+<th>Approved </th>
+<th>Approved By </th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -30,9 +32,11 @@
 <tfoot>
 <tr>
 <th>Name</th>
-<th>Display Name</th>
-<th>Point</th>
-<th>Remarks</th>
+<th>year </th> 
+<th>Status </th>
+<th>Grade Mark </th>
+<th>Approved </th>
+<th>Approved By </th>
 <th>View</th>
 <th>Actions </th>
 </tr>
@@ -47,34 +51,38 @@
 @section('scripts')
     <script>
         $(function () {
-            var url = '/academic/grade';
+            var url = '/academic/gpacurricular';
             var start = '';
             var end = '';
-            var orign = '/academic/grade';
+            var orign = '/academic/gpacurricular';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
-    return '<table cellpadding="5"  class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>grade name:</td>'+
+            '<td>Name:</td>'+
             '<td colspan="3">'+d.name+'</td>'+
+        '</tr><tr>'+
+        '<td>Year:</td>'+
+            '<td colspan="3">'+d.years.name+'</td>'+
+        '</tr><tr>'+
+        '<td>Status:</td>'+
+            '<td colspan="3">'+d.status+'</td>'+
+        '</tr>'+
+         '<tr>'+
+            '<td>Created By:</td>'+
+            '<td colspan="3">'+d.gpa_range+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
+        '<td>Approved:</td>'+
+            '<td colspan="3">'+d.approved+'</td>'+
         '</tr>'+
-          '<tr>'+
-            '<td>Point:</td>'+
-            '<td colspan="3">'+d.point+'</td>'+
-        '</tr>'+
-         '</tr>'+
-          '<tr>'+
-            '<td>Remarks:</td>'+
-            '<td colspan="3">'+d.remarks+'</td>'+
+        '<td>Approved By:</td>'+
+            '<td colspan="3">'+d.approved_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td colspan="3">'+d.created_by+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -82,15 +90,15 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'
+            '<td colspan="3">'+d.updated_by+'</td>'+
+        '</tr><tr>'
         +'<td>Updated At:</td>'+
-            '<td  colspan="3">'+d.updated_at+'</td>'+
+            '<td  colspan="3">'+d.updated_at+'</tr>'+
         '</tr>'+
     '</table>';
 }
             
-            var table = $('#grade').DataTable({
+            var table = $('#gpacurricular').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -102,9 +110,11 @@
                 },
                 columns: [
                     {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
-                    {data: 'point', name: 'point'},
-                     {data: 'remarks', name: 'remarks'},
+                    {data: 'years.name', name: 'year_id'},
+                    {data: 'status', name: 'status'},
+                    {data: 'gpa_range', name: 'gpa_range'},
+                    {data: 'approved', name: 'approved'},
+                    {data: 'approved_by', name: 'apperoved_by'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -157,7 +167,7 @@
             });
         
 
-        $('#grade tbody').on('click', 'td.details-control', function () {
+        $('#gpacurricular tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  

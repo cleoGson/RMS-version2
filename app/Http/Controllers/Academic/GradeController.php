@@ -62,6 +62,7 @@ class GradeController extends Controller
             'name'=>request('name'),
             'display_name'=>request('display_name'),
             'point'=>request('point'),
+            'remarks'=>request('remarks'),
             'created_by'=>auth()->id(),
          
         ]);
@@ -103,7 +104,7 @@ class GradeController extends Controller
     public function update(GradeRequest $request, Grade $grade)
     {
         $grade->updated_by = auth()->id();
-        $grade->update(request(['name','display_name','point']));
+        $grade->update(request(['name','display_name','point','remarks']));
         alert()->success('success', 'Grade  has  successfully Updated.')->persistent();
         return redirect()->route('academic.grade.index');
     }

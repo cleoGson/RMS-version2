@@ -191,6 +191,22 @@
                               Grade Curricular
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a href="{{ route('academic.gparange.index') }}" class="nav-link {{ request()->is('academic/gparange') || request()->is('academic/gparange/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                              Gpa Classes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('academic.gpacurricular.index') }}" class="nav-link {{ request()->is('academic/gpacurricular') || request()->is('academic/gpacurricular/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                </i>
+                              Gpa Curricular
+                            </a>
+                        </li>
                      <li class="nav-item">
                             <a href="{{ route('academic.fees.index') }}" class="nav-link {{ request()->is('academic/fees') || request()->is('academic/fees/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-unlock-alt nav-icon">

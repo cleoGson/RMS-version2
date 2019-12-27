@@ -60,70 +60,77 @@ class ClassreportController extends Controller
      return view('examinations.class_reports.index',compact(['studentsprovider','years'])); 
 
     }
+     public function studentsLists(DataTables $dataTables,$classid,$yearid){    
+                $classsetup_id=1;
+         $students =  $student_data=AcademicyearStudent::with(['createdBy','student','createdBy','years','studentStatus','class','classSetup','classSection'])
+                ->where([['class_id','=',$classid],['year_id','=',$yearid]])->get();  
+          $yeardetails=Academicyear::findOrFail($yearid);
+         $setup_data=Classsetup::findOrFail($classsetup_id);
+         $grading_curricular=$setup_data->gradings->gradeCurricular->pluck('grade_range','id')->toArray();
+         $semesters=Semester::pluck('name','id')->toArray();
+         $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+         foreach($semisters  as $key=>$value){
+             $subjectCurricular=Curricular::findOrFail($key);
+             $examinations=Examinationcurricular::findOrFail($key);
+              $examinationtype=$examinations->examinationCurriculars->pluck('partial_name_two','examinationtype_id')->toArray();
+              $subjects=$subjectCurricular->curricularSubjects->pluck('name','id')->toArray();
+              foreach($students as $studentData){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+              foreach($subjects as $keysubj=>$valuesubj){
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+              foreach( $examinationtype as $keyExam=>$valueExam){
+             $data_marks=Examinationresult::where([['academicyear_student_id','=',$studentData->id],['year_id','=',$yearid],
+             ['semester_id','=',$value],['subject_id','=',$keysubj],['examinationtype_id','=',$keyExam]])->first();
+             $marksvalue=!is_null($data_marks) ?  $data_marks['marks'] : 0;
+             $marks_provider[$keyExam]=array(
+                 'marks'=>$marksvalue,
+                 'exam_type'=>$valueExam,
+             );
+             $total_marks[$keyExam]=$marksvalue;
+            }
+            $markssum=array_sum($total_marks);
+            foreach($grading_curricular as $gradingpackage){
+                    if(($markssum >= $gradingpackage['min_marks']) && ($markssum <= $gradingpackage['max_marks'] ) ){
+                      $grade_required= $gradingpackage['grade'];
+                      $grade_point = $gradingpackage['grade_point'];
+                      $grade_remark= $gradingpackage['remarks'];
+                      break;
+                    }
+            }
+             $subject_provider[$keysubj]=array(
+                 'exam_marks'=>$marks_provider,
+                 'subject_name'=>$valuesubj,
+                 'total_marks'=>$markssum,
+                 'point'=>$grade_point,
+                 'grade'=>$grade_required,
+                 'remarks'=>$grade_remark,
+             );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+              }
+      
+              $all_results[$studentData->id]=array(
+                'examinations'=>$subject_provider,
+                'subject_number'=> count($subjects),
+                'full_name'=>$studentData->student->full_name,
+                'student_number'=>$studentData->student->student_number,
+            );
+         }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+         $data_all_data1[$value]=array(
+             'result'=>$all_results,
+             'semester_name'=>$semesters[$value],
+             'examination_list'=>$examinationtype,
+             'subject_list'=> $subjects,
+         );
+            
+         }
+        
+                 $data_all_data = array_reverse($data_all_data1);   
+                             //dd($data_all_data);
+                 $classdetails=Classroom::findOrFail($classid);
+                 $yeardetails=Academicyear::findOrFail($yearid);
+    
+                 return view('examinations.class_reports.student_list',compact('classdetails','yeardetails','data_all_data','grading_curricular'));
+             }
 }

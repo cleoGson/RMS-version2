@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Model;
-
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-
-class Grade extends Model
+class Gparange extends Model
 {
-    use LogsActivity, softDeletes;
+   use LogsActivity, softDeletes;
 
-    protected $table = 'grades';
+    protected $table = 'gparanges';
     protected $primaryKey = 'id';
 
     /**
@@ -21,10 +19,12 @@ class Grade extends Model
      */
     protected $fillable = [
         'name',
-        'display_name',
-        'point',
+        'from',
+        'to',
+        'approved',
+        'approved_by',
+        'locked',
         'created_by',
-        'remarks',
         'updated_by'
     ];
 
@@ -34,10 +34,12 @@ class Grade extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name',
-        'display_name',
-        'point',
-        'remarks',
+        'name', 
+        'from',
+        'to',
+        'approved',
+        'approved_by',
+        'locked',
         'created_by',
         'updated_by'
     ];
@@ -54,6 +56,7 @@ class Grade extends Model
         return $this->belongsTo(User::class, 'created_by')->withDefault();
     }
 
+
     /**
      * A verifier belongs to users
      *      *
@@ -62,5 +65,18 @@ class Grade extends Model
     public function updator()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
+    }
+
+     
+      /**
+     * Get the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getAprovedAttribute($value)
+    {
+        $approvalstatus = $this->approved==1 ? "Approved" : "Not Approved";
+        return  $approvalstatus; 
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateGpacurricularsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,20 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('gpacurriculars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('code')->nullable();
-            $table->text('display_name')->nullable();
+            $table->enum('status',[0,1])->default(0); //1 locked 0 unlocked
+            $table->enum('locked',[0,1])->default(0); //1 locked 0 unlocked
+            $table->enum('approved',[0,1])->default(0);
+            $table->bigInteger('approved_by')->unsigned()->nullable();
+            $table->foreign('approved_by')->references('id')->on('users');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->bigInteger('units')->unsigned()->nullable();
+            $table->bigInteger('year_id')->unsigned()->nullable();
+            $table->foreign('year_id')->references('id')->on('academicyears');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +39,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('gpacurriculars');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateGparangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('gparanges', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('code')->nullable();
-            $table->text('display_name')->nullable();
+            $table->double('from')->nullable();
+            $table->double('to')->nullable();
+            $table->enum('locked',[0,1])->default(0);
+            $table->enum('approved',[0,1])->default(0);
+            $table->bigInteger('approved_by')->unsigned()->nullable();
+            $table->foreign('approved_by')->references('id')->on('users');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->bigInteger('units')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +38,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('gparanges');
     }
 }

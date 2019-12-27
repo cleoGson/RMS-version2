@@ -116,6 +116,9 @@ class AcademicyearStudent extends Model
 
         return $this->student->firstname." ".$this->student->middlename." ".$this->student->lastname."  [ ".$this->student->student_number." ] ";
     }
+    public function getFullNameAttribute(){
+        return $this->student->firstname." ".$this->student->middlename." ".$this->student->lastname;
+    }
      public function getStudentIdDetailAttribute(){
         return $this->student->id;
     }

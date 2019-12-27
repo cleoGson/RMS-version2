@@ -10,6 +10,7 @@ use Yajra\DataTables\DataTables;
 use App\Model\Academicyear;
 use App\Model\Classsection;
 use App\Model\Classroom;
+use App\Model\Semester;
 use App\Model\Gradecurricular;
 use App\Model\AcademicyearStudent;
 use App\Model\Curricular;
@@ -24,7 +25,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\Examination\ExaminationresultRequest;
 use DB;
 use Crypt;
-use App\Model\Semester;
 
 class IndividualreportController extends Controller
 {
@@ -109,10 +109,56 @@ class IndividualreportController extends Controller
 
 
     public function resultSheets($studentid,$yearid,$classsetup_id){
-        $yeardetails=Academicyear::findOrFail($yearid);
-        $classsetup_id=Classsetup::findOrFail($classsetup_id);
-        dd($classsetup_id);
-        return view('examinations.reports.result_sheet',compact(['yeardetails']));
+         $yeardetails=Academicyear::findOrFail($yearid);
+         $setup_data=Classsetup::findOrFail($classsetup_id);
+         $grading_curricular=$setup_data->gradings->gradeCurricular->pluck('grade_range','id')->toArray();
+         $studentDetails=AcademicyearStudent::with('student')->findOrFail($studentid);
+         $semesters=Semester::pluck('name','id')->toArray();
+         $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
+         foreach($semisters  as $key=>$value){
+             $subjectCurricular=Curricular::findOrFail($key);
+             $examinations=Examinationcurricular::findOrFail($key);
+              $examinationtype=$examinations->examinationCurriculars->pluck('partial_name','examinationtype_id')->toArray();
+              $subjects=$subjectCurricular->curricularSubjects->pluck('name','id')->toArray();
+              foreach($subjects as $keysubj=>$valuesubj){
+              foreach( $examinationtype as $keyExam=>$valueExam){
+             $data_marks=Examinationresult::where([['academicyear_student_id','=',$studentid],['year_id','=',$yearid],
+             ['semester_id','=',$value],['subject_id','=',$keysubj],['examinationtype_id','=',$keyExam]])->first();
+             $marksvalue=!is_null($data_marks) ?  $data_marks['marks'] : 0;
+             $marks_provider[$keyExam]=array(
+                 'marks'=>$marksvalue,
+                 'exam_type'=>$valueExam,
+             );
+             $total_marks[$keyExam]=$marksvalue;
+            }
+            $markssum=array_sum($total_marks);
+            foreach($grading_curricular as $gradingpackage){
+                    if(($markssum >= $gradingpackage['min_marks']) && ($markssum <= $gradingpackage['max_marks'] ) ){
+                      $grade_required= $gradingpackage['grade'];
+                      $grade_point = $gradingpackage['grade_point'];
+                      $grade_remark= $gradingpackage['remarks'];
+                      break;
+                    }
+            }
+             $subject_provider[$keysubj]=array(
+                 'exam_marks'=>$marks_provider,
+                 'subject_name'=>$valuesubj,
+                 'total_marks'=>$markssum,
+                 'point'=>$grade_point,
+                 'grade'=>$grade_required,
+                 'remarks'=>$grade_remark,
+             );
+
+              }
+            $all_results1[$value]=array(
+                'examinations'=>$subject_provider,
+                'semester_name'=>$semesters[$value],
+                'examination_list'=>$examinationtype,
+                'subject_number'=> count($subjects),
+            );
+         }
+         $all_results = array_reverse($all_results1);   
+        return view('examinations.reports.result_sheet',compact(['yeardetails','all_results','studentDetails','grading_curricular']));
     }
     /**
      * Show the form for creating a new resource.

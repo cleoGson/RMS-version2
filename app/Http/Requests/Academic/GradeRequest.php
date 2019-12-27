@@ -27,6 +27,7 @@ class GradeRequest extends FormRequest
        return [
            'name'=>"required|string|unique:grades,name",
            'display_name'=>'required',
+           'remarks'=>'required|string',
            'point'=>'required|integer',
        ];
       }
@@ -37,6 +38,7 @@ class GradeRequest extends FormRequest
        return [
            'name'=>"required|string|unique:grades,id,$this->route('grade')->id",
            'display_name'=>'required',
+           'remarks'=>'required|string',
            'point'=>'required|integer',
        ];
       }

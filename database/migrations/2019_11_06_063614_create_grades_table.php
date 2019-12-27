@@ -16,9 +16,10 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->bigInteger('point')->unsigned();
+            $table->double('point')->unsigned()->default(0);
             $table->text('display_name')->nullable();
             $table->bigInteger('created_by')->unsigned()->nullable();
+            $table->text('remarks')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');

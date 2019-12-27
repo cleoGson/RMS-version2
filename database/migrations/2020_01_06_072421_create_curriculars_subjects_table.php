@@ -20,6 +20,7 @@ class CreateCurricularsSubjectsTable extends Migration
             $table->bigInteger('subject_id')->unsigned()->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->enum('status',[1,0])->default(1); //1 compusory 0 optional
+             $table->enum('locked',[0,1])->default(0); 
             $table->timestamps();
             $table->softDeletes();
         });
