@@ -51,6 +51,42 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+
+     public function userable()
+    {
+        return $this->morphTo();
+    }
+
+     /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by')->withDefault();
+    }
+        /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function departments()
+    {
+        return $this->belongsTo(Department::class, 'department_id')->withDefault();
+    }
+
+
+    /**
+     * A verifier belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function updator()
+    {
+        return $this->belongsTo(User::class, 'updated_by')->withDefault();
+    }
+
     
     
     

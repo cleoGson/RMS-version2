@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                        Edit Department  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Edit examination Result  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </p>
                     </h1>
                 </div>
@@ -19,10 +19,10 @@
        
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('setting.department.index') }}" class="blue">Department List</a>
+                            <a href="{{ route('examination.examinationresult.index') }}" class="blue">Examination Result List</a>
                         </li>
                         <li class="breadcrumb-item active" class="blue">
-                            Edit Department
+                            Edit examinationresult
                         </li>
                     </ol>
                 </div>
@@ -33,8 +33,8 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-body card card-accent-primary">
-                    {!! Form::model($show,['method'=>'PATCH','route'=>['setting.department.update',$show->id],'files'=>true]); !!}
-                    @include('settings.departments.form')
+                    {!! Form::model($show,['method'=>'PATCH','route'=>['examination.examinationresult.update',$show->id],'files'=>true]); !!}
+                    @include('examinations.results.form')
                     <div class="row">
                         <div class="col-md-12 form-group text-right">
                             <div class="pull-right">
@@ -42,7 +42,7 @@
                                     Update
                                 </button>
 
-                                <a href="{{route('setting.department.index')}}" class="btn btn-default">
+                                <a href="{{route('examination.examinationresult.index')}}" class="btn btn-default">
                             Back to List <i class="fas fa-list fa-fw"></i>
                               </a>
                             </div>

@@ -41,7 +41,14 @@ class Subject extends Model
         'updated_by'
     ];
 
-
+  public  function getSubjectDetailsAttribute(){
+        $details= array(
+            'name'=>$this->name,
+            'code'=>$this->code,
+            'units'=>$this->units,
+        );
+        return $details;
+    }
 
       /**
      * An applicant belongs to users

@@ -7,6 +7,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Model\Curricular;
+use App\Model\Gpacurricular;
 use App\Model\Academicyear;
 use App\Model\Gradecurricular;
 use App\Model\Examinationcurricular;
@@ -83,6 +84,16 @@ class Classsetup extends Model
     public function centers()
     {
         return $this->belongsTo(Classroom::class, 'class_id')->withDefault();
+    }
+
+          /**
+     * An applicant belongs to users
+     *      *
+     * @return belongsTo
+     */
+    public function gpa()
+    {
+        return $this->belongsTo(Gpacurricular::class, 'gpa_curricular')->withDefault();
     }
 
 

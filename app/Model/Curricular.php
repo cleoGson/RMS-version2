@@ -97,4 +97,5 @@ class Curricular extends Model
     {
         return $this->belongsTo(User::class, 'verified_by')->withDefault();
     }
+  
 }

@@ -79,4 +79,17 @@ class Gparange extends Model
         $approvalstatus = $this->approved==1 ? "Approved" : "Not Approved";
         return  $approvalstatus; 
     }
+    public function getGpaNameAttribute(){
+        return $this->name.' ['.$this->to.'-'.$this->from.']';
+    }
+    public function getGpaPackageAttribute(){
+
+        $gpa_package=array(
+            'name'=>$this->name,
+            'from'=>$this->from,
+            'to'=>$this->to,
+        );
+        return $gpa_package;
+
+    }
 }

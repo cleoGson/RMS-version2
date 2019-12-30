@@ -8,7 +8,7 @@
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> 
     <a href="{{ route($routeKey.'.edit', $row->id) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i>  Edit</a>
- 
+    <a href="{{ route($routeKey.'.copy', $row->id) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i> Make User</a>
 <a href="{{ route($routeKey.'.destroy', $row->id) }}" class="dropdown-item bg-danger text-white btn-delete" ><i class="fa fa-trash"></i> Delete</a>
   </div>
 </div>

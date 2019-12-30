@@ -59,6 +59,8 @@ class SubjectController extends Controller
         $subject = Subject::create([
             'name'=>request('name'),
             'display_name'=>request('display_name'),
+            'code'=>request('code'),
+            'units'=>request('units'),
             'created_by'=>auth()->id(),
         ]);
         alert()->success('success', 'Subject  has  successfully added.')->persistent();
@@ -98,7 +100,7 @@ class SubjectController extends Controller
     public function update(SubjectRequest $request, Subject $subject)
     {
         $subject->updated_by=auth()->id();
-        $subject->update(request(['name','display_name']));
+        $subject->update(request(['name','display_name','code','units']));
         alert()->success('success', 'Subject  has  successfully Updated.')->persistent();
         return redirect()->route('academic.subject.index');
     }

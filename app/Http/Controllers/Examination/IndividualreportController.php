@@ -111,6 +111,8 @@ class IndividualreportController extends Controller
     public function resultSheets($studentid,$yearid,$classsetup_id){
          $yeardetails=Academicyear::findOrFail($yearid);
          $setup_data=Classsetup::findOrFail($classsetup_id);
+         $result_system=$setup_data->result_system;
+         $gpa_grading=$setup_data->gpa->gpaCurricular->pluck('gpa_package','id')->toArray();
          $grading_curricular=$setup_data->gradings->gradeCurricular->pluck('grade_range','id')->toArray();
          $studentDetails=AcademicyearStudent::with('student')->findOrFail($studentid);
          $semesters=Semester::pluck('name','id')->toArray();
@@ -119,7 +121,8 @@ class IndividualreportController extends Controller
              $subjectCurricular=Curricular::findOrFail($key);
              $examinations=Examinationcurricular::findOrFail($key);
               $examinationtype=$examinations->examinationCurriculars->pluck('partial_name','examinationtype_id')->toArray();
-              $subjects=$subjectCurricular->curricularSubjects->pluck('name','id')->toArray();
+              $number_of_exam=count($examinationtype);
+              $subjects=$subjectCurricular->curricularSubjects->pluck('subject_details','id')->toArray();
               foreach($subjects as $keysubj=>$valuesubj){
               foreach( $examinationtype as $keyExam=>$valueExam){
              $data_marks=Examinationresult::where([['academicyear_student_id','=',$studentid],['year_id','=',$yearid],
@@ -132,19 +135,26 @@ class IndividualreportController extends Controller
              $total_marks[$keyExam]=$marksvalue;
             }
             $markssum=array_sum($total_marks);
+            $mark_divider=$result_system==2 ?  $number_of_exam : $result_system;
+            $average_mark =($markssum/$mark_divider);
             foreach($grading_curricular as $gradingpackage){
-                    if(($markssum >= $gradingpackage['min_marks']) && ($markssum <= $gradingpackage['max_marks'] ) ){
+                    if(($average_mark >= $gradingpackage['min_marks']) && ($average_mark <= $gradingpackage['max_marks'] ) ){
                       $grade_required= $gradingpackage['grade'];
                       $grade_point = $gradingpackage['grade_point'];
                       $grade_remark= $gradingpackage['remarks'];
                       break;
                     }
             }
+            $total_units=($grade_point * $valuesubj['units']);
              $subject_provider[$keysubj]=array(
                  'exam_marks'=>$marks_provider,
-                 'subject_name'=>$valuesubj,
+                 'subject_name'=>$valuesubj['name'],
                  'total_marks'=>$markssum,
+                 'average_marks'=>$average_mark,
+                 'subject_units'=>$valuesubj['units'],
+                 'subject_code'=>$valuesubj['code'],
                  'point'=>$grade_point,
+                 'total_units'=>$total_units,
                  'grade'=>$grade_required,
                  'remarks'=>$grade_remark,
              );
@@ -155,10 +165,13 @@ class IndividualreportController extends Controller
                 'semester_name'=>$semesters[$value],
                 'examination_list'=>$examinationtype,
                 'subject_number'=> count($subjects),
+                'examination_number'=>count($examinationtype),
             );
+            unset($examinationtype);
+            unset($subject_provider);
          }
-         $all_results = array_reverse($all_results1);   
-        return view('examinations.reports.result_sheet',compact(['yeardetails','all_results','studentDetails','grading_curricular']));
+         $all_results = $all_results1;   
+        return view('examinations.reports.result_sheet',compact(['yeardetails','all_results','studentDetails','setup_data','gpa_grading','grading_curricular']));
     }
     /**
      * Show the form for creating a new resource.

@@ -1,80 +1,75 @@
-
-
 @extends('layouts.admin')
 @section('content')
-
-<div class="col-lg-12">
+@can('users_manage')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.users.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
-<div class="card-header">
-<i class="fa fa-align-justify"></i>List of Subjects 
+    <div class="card-header">
+        {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
+    </div>
 
-  
-  <a href="{{ route('academic.subject.create') }}" class="float-right">
-                         
-  <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
-                   </a>
-                   </div>
-<div class="card-body">
-<div class="table table-responsive">
-<table class="table table-responsive-sm table-bordered table-striped table-hover" id="subject">
-<thead>
-<tr>
-<th>Code</th>
-<th>Name</th>
-<th>Display Name</th>
-<th>Units</th>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-User" id="studentAccount">
+                <thead>
+                    <tr>
+                        <th>
+                            User Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Account Status
+                        </th>
+                        <th> 
+                        Specific Permission
+                        </th>
+                        <th>
+                           Roles
+                        </th>
+                        <th>
+                          Actions
+                        </th>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
 
-<th>View</th>
-<th>Actions </th>
-</tr>
-</thead>
-<tfoot>
-<tr>
-<th>Code</th>
-<th>Name</th>
-<th>Display Name</th>
-<th>Units</th>
-<th>View</th>
-<th>Actions </th>
-</tr>
-</tfoot>
-</table>
-</div>
-</div>
-</div>
 
+    </div>
+</div>
 @endsection
 
 @section('scripts')
     <script>
         $(function () {
-            var url = '/academic/subject';
+            var url = '/student/studentAccount';
             var start = '';
             var end = '';
-            var orign = '/academic/subject';
+            var orign = '/student/studentAccount';
             function format ( d ) {
     //alert(JSON.stringify(d));
     // `d` is the original data object for the row
     return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
-       '<tr>'+
-            '<td>subject code:</td>'+
-            '<td colspan="3">'+d.code+'</td>'+
-        '</tr>'+ 
         '<tr>'+
-            '<td>subject name:</td>'+
-            '<td colspan="3">'+d.name+'</td>'+
+            '<td>Email:</td>'+
+            '<td colspan="3">'+d.email+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Display name:</td>'+
-            '<td colspan="3">'+d.display_name+'</td>'+
-        '</tr>'+
-          '<tr>'+
-            '<td>Units:</td>'+
-            '<td colspan="3">'+d.units+'</td>'+
+            '<td>Username:</td>'+
+            '<td colspan="3">'+d.username+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Created By:</td>'+
-            '<td colspan="3">'+d.creator.email+'</td>'+
+            '<td>verified:</td>'+
+            '<td colspan="3">'+d.verifiedstatus+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Created At:</td>'+
@@ -82,15 +77,15 @@
         '</tr>'+
         '<tr>'+
         '<td>Updated By:</td>'+
-            '<td colspan="3">'+d.updator.email+'</td>'+
-        '</tr>'
+            '<td colspan="3">'+d.email+'</td>'+
+        '</tr><tr>'
         +'<td>Updated At:</td>'+
             '<td  colspan="3">'+d.updated_at+'</td>'+
         '</tr>'+
     '</table>';
 }
             
-            var table = $('#subject').DataTable({
+            var table = $('#studentAccount').DataTable({
                 serverSide: true,
                 processing: true,
                 "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
@@ -101,10 +96,10 @@
                     },
                 },
                 columns: [
-                    {data: 'code', name: 'code'}, 
-                    {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
-                    {data: 'units', name: 'units'},
+                    {data: 'email', name: 'email'},
+                    {data: 'username', name: 'username'},
+                     {data: 'status', name: 'status'},
+                    {data: 'password_changed_at', name: 'password_changed_at'},
                     {
                         className:      'details-control',
                         orderable:      false,
@@ -112,7 +107,8 @@
                         data:           null,
                         defaultContent: "<button class='btn btn-success'> <i class='fa fa-eye'></i> View</button>"
                      },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                   {data: 'action', name: 'action', orderable: false, searchable: false}
+
                 ], dom: 'lBfrtip<"actions">',
                 columnDefs: [],
                 "iDisplayLength": 15,
@@ -157,7 +153,7 @@
             });
         
 
-        $('#subject tbody').on('click', 'td.details-control', function () {
+        $('#studentAccount tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
  
@@ -177,4 +173,3 @@
     </script>
    
 @stop
-                           

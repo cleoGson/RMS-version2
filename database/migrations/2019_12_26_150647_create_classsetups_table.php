@@ -37,7 +37,7 @@ class CreateClasssetupsTable extends Migration
             $table->enum('status',[1,0])->default(1);
             $table->enum('approved',[1,0])->default(1);
             $table->enum('locked',[0,1])->default(0);
-            $table->enum('result_system',[1,0])->default(0);
+            $table->enum('result_system',[2,1])->default(2);
             $table->enum('gpa_applicable',[1,0])->default(0);
             $table->timestamps();
             $table->softDeletes();

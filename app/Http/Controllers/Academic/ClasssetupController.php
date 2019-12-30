@@ -26,7 +26,7 @@ class ClasssetupController extends Controller
     {   
         if (request()->wantsJson()) {
             $template = 'academics.classsetups.actions';
-            return $dataTables->eloquent(Classsetup::with(['creator','updator','classes','years','gradings'])->select('classsetups.*'))
+            return $dataTables->eloquent(Classsetup::with(['creator','updator','classes','years','gpa','gradings'])->select('classsetups.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'academic.classsetup';
                     $routeKey = 'academic.classsetup';
@@ -51,9 +51,23 @@ class ClasssetupController extends Controller
                         ucfirst(strtoupper($grade->name));
                         
              })->implode(', ');
-               })        
+               })     
+                 ->addColumn('gpa_curricular', function ($row) {
+               return $row->gpa->gpaCurricular->map(function ($gpac) {
+                    return 
+                         
+                        ucfirst(strtoupper($gpac->gpa_name));
+                    
+             })->implode(', ');
+               })     
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->creator->email : '';
+                })
+                 ->editColumn('result_system', function ($row) {
+                    return $row->result_system ==2 ? 'percentage' : 'Non-percentage';
+                })
+                  ->editColumn('status', function ($row) {
+                    return $row->status ==1 ? 'active' : 'Non-active';
                 })
                 ->editColumn('updated_by', function ($row) {
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';

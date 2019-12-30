@@ -82,9 +82,9 @@ class Staff extends Model
      *      *
      * @return belongsTo
      */
-    public function disability()
+    public function disabilityData()
     {
-        return $this->belongsTo(Disability::class, 'disability_id')->withDefault();
+        return $this->belongsTo(Disability::class, 'disability')->withDefault();
     }
         /**
      * An applicant belongs to users
@@ -141,5 +141,10 @@ class Staff extends Model
     public function updator()
     {
         return $this->belongsTo(User::class, 'updated_by')->withDefault();
+    }
+
+
+    public function userAccount() {
+        return $this->morphMany(User::class, 'userable')->orderBy('id','DESC');
     }
 }

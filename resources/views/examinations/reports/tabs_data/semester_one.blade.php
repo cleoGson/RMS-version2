@@ -9,7 +9,7 @@
 <tr><th>Student Number:</th><td>{{$studentDetails->student->student_number}}</td></tr>
 <tr><th>Results for: </th><td>{{$semester_result['semester_name']}}</td> </tr>
 <tr><th>Class:</th><td>{{$studentDetails->class->name}}</td></tr>
-<!-- <tr><th>Class Section:</th><td>{{$studentDetails->classSection->name}}</td></tr> -->
+<tr><th>Result System:</th><td>{{$setup_data->result_system == 2 ? 'Percentage' : 'Non Percentage'}}</td></tr>
 <tr><th>Department:</th><td>{{$studentDetails->department->name}}</td></tr>
 <tr><th>Year:</th><td>{{$studentDetails->years->name}}</td></tr>
 </table>
@@ -63,8 +63,10 @@
 <th>{{$valuenames}}</th>
 @endforeach
 <th>Total Marks</th>
+@if($setup_data->result_system == 2)
+<th>Average</th>
+@endif
 <th>Grade</th>
-<th>Point</th>
 <th>Remarks</th>
 </tr>
 @php($count=1)
@@ -73,7 +75,11 @@
 @foreach($result_details['exam_marks'] as $results_list_data)
 <th> {{$results_list_data['marks']}}</th>
 @endforeach
-<th>{{$result_details['total_marks']}}</<th><th>{{$result_details['grade']}}</th><th>{{$result_details['point']}}</th><th>{{$result_details['remarks']}}</th></tr>
+<th>{{$result_details['total_marks']}}</th>
+@if($setup_data->result_system == 2)
+<th>{{$result_details['average_marks']}}</th>
+@endif
+<th>{{$result_details['grade']}}</th><th>{{$result_details['remarks']}}</th></tr>
 @php($count++)
 @endforeach
 </table>
@@ -87,18 +93,20 @@
 <div class="col-md-6">
 <div class="table table-responsive">
 <fieldset class="border p-2">
-   <legend class="w-auto">Total Marks & GPA</legend>
+   <legend class="w-auto">Total Marks</legend>
 <table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
 <tr><th>Total marks:</th><td>  <?php 
+if($setup_data->result_system == 1){
 $total_marks_per_semister = array_sum(array_column($semester_result['examinations'],'total_marks'));
-$total_point_per_semister = array_sum(array_column($semester_result['examinations'],'point'));
+}else{
+$total_marks_per_semister = array_sum(array_column($semester_result['examinations'],'average_marks')); 
+}
 $number_of_subject =  $semester_result['subject_number']; 
 $average_marks=$total_marks_per_semister/$number_of_subject;
 ?>
 {{$total_marks_per_semister}} 
 </td></tr>
 <tr><th>Average Marks:</th><td>{{$average_marks}}</td></tr>
-<tr><th>GPA:</th><td>{{$total_point_per_semister/$number_of_subject}}</td></tr>
 <tr><th>Letter Grade:</th><td>
 <?php
    foreach($grading_curricular as $gradingpackage){

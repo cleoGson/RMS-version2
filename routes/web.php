@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('permissionUser/{user}', 'Admin\UsersController@userPermission')->name('permission.user');
     Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
     Route::resource('staff', 'Admin\StaffController');
+    Route::get('staff/copy/{staff}', 'Admin\StaffController@copyToUser')->name('staff.copy');
     Route::post('disabilitydata','Admin\StaffController@disabilityData');
   });
 Route::group(['middleware' => ['auth'], 'prefix' => 'staff', 'as' => 'staff.'], function () {
@@ -89,12 +90,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'exam
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('studentstatus', 'Student\StudentstatusController');
     Route::resource('student', 'Student\StudentController');
+    Route::get('/copy/{student}', 'Student\StudentController@copyToUser')->name('student.copy');
     Route::resource('studentstudy', 'Student\StudentstudyController');
     Route::resource('level', 'Student\LevelController');
     Route::resource('course', 'Student\CourseController');
     Route::resource('durationunit', 'Student\DurationunitController');
     Route::resource('academicyearStudent', 'Student\AcademicyearStudentController');
-    Route::resource('promotion','Student\PromotionController');    
+    Route::resource('promotion','Student\PromotionController');   
+    Route::resource('studentAccount','Student\StudentAccount');    
+    
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applicant.'], function () {

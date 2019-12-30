@@ -9,6 +9,7 @@ use App\Model\Department;
 use App\Model\Designation;
 use App\Model\Disability;
 use App\Model\Country;
+use App\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -23,7 +24,7 @@ class   StaffController extends Controller
     {    
        if (request()->wantsJson()) {
             $template = 'admin.staffs.actions';
-            return $dataTables->eloquent(Staff::with(['departments','designations','citizens','countries','disability','maritals','creator','updator'])->select('staff.*'))
+            return $dataTables->eloquent(Staff::with(['departments','designations','citizens','countries','disabilityData','maritals','creator','updator'])->select('staff.*'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'admin.staff';
                     $routeKey = 'admin.staff';
@@ -36,6 +37,9 @@ class   StaffController extends Controller
                  })
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->creator->email : '';
+                })
+                ->editColumn('disability', function ($row) {
+                    return $row->disability ? $row->disabilityData->name : '';
                 })
                 ->editColumn('updated_by', function ($row) {
                     return $row->updated_by ? ucfirst(strtolower($row->updator->email)) : '';
@@ -55,11 +59,11 @@ class   StaffController extends Controller
         $maritals=  Marital::pluck('name','id')->toArray();
         $departments=  Department::pluck('name','id')->toArray();
         $designations=  Designation::pluck('name','id')->toArray();
-//$disabilities=  Disability::pluck('name','id')->toArray();
+        $disabilities=  [];
         $citizenship=  $countrydata->pluck('name','id')->toArray();
         $birthcountries= $countrydata->pluck('name','id')->toArray();
         return view('admin.staffs.create',compact([ 'maritals','departments',
-        'designations','citizenship','birthcountries']));
+        'designations','citizenship','birthcountries','disabilities']));
     }
 
     public function disabilityData(Request $request){
@@ -129,7 +133,7 @@ class   StaffController extends Controller
         $maritals=  Marital::pluck('name','id')->toArray();
         $departments=  Department::pluck('name','id')->toArray();
         $designations=  Designation::pluck('name','id')->toArray();
-        $disabilities=  Disability::pluck('name','id')->toArray();
+        $disabilities=  Disability::where('id','=',$staff->disability)->pluck('name','id')->toArray();
         $citizenship=  $countrydata->pluck('name','id')->toArray();
         $birthcountries= $countrydata->pluck('name','id')->toArray();
         $show = $staff; 
@@ -205,5 +209,28 @@ class   StaffController extends Controller
                 $assigned_number =$number.'-'. $staff_number;
             }
             return $assigned_number;
+    }
+
+
+    public function copyToUser(Staff $staff)
+    {
+         if(!User::where("email",$staff->email)->exists()){
+            $user = new User();  
+            $user->email= $staff->email;
+            $user->username= $staff->staff_number;
+            $user->password= '$2y$10$hYn98f2N.XEuW9SD3jE8Tu6ElWLD5dmPmQLqsU5ULFFxO89/0kO9.';
+            $user->verifiedstatus=1;
+            $user->userable_type="App/Model/Staff";
+            $user->userable_id=$staff->id;
+            $user->password_changed_at= now();
+            $user->image='profile/avatar.png';
+            $user->status=1;
+            $user->center_id= $staff->center_id??1;
+            $user->created_by=auth()->user()->id;
+            $user->created_at= now();
+            $user->save();
+         }
+        alert()->success('success', 'User Account created');
+        return redirect()->back();
     }
 }

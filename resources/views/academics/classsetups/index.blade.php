@@ -24,8 +24,8 @@
 <th>Subject Curricular</th>
 <th>Examinaation Curricular</th>
 <th>Grading</th>
-<th>Minimum Capacity</th>
- <th>Maximum Capacity</th>
+<th>Result System</th>
+ <th>GPA Classes</th>
 <th>Year</th> 
 <th>Status</th>
 <th>View</th>
@@ -39,8 +39,8 @@
 <th>Subject Curricular</th>
 <th>Examinaation Curricular</th>
 <th>Grading</th>
-<th>Minimum Capacity</th>
- <th>Maximum Capacity</th>
+<th>Result System</th>
+ <th>GPA Classes</th>
 <th>Year</th> 
 <th>Status</th>
 <th>View</th>
@@ -87,11 +87,11 @@
          '<td> Year:</td>'+
             '<td colspan="3">'+d.years.name+'</td>'+
         '</tr><tr>'+
-         '<td>Minimum Capacity:</td>'+
-            '<td colspan="3">'+d.minimum_capacity+'</td>'+
+         '<td>Result System:</td>'+
+            '<td colspan="3">'+d.result_system+'</td>'+
         '</tr><tr>'+
-        '<td>Maximum Capacity:</td>'+
-            '<td colspan="3">'+d.maximum_capacity+'</td>'+
+        '<td>GPA Classes:</td>'+
+            '<td colspan="3">'+d.gpa_curricular+'</td>'+
         '</tr><tr>'+
         '<td>Status:</td>'+
             '<td colspan="3">'+d.status+'</td>'+
@@ -130,8 +130,8 @@
                     {data: 'subject_curricular', name: 'subject_curricular' },
                     {data: 'examination_curricular', name: 'examination_curricular' },
                     {data: 'grade_curricular', name: 'grade_curricular'},          
-                    {data: 'minimum_capacity', name: 'minimum_capacity'}, 
-                    {data: 'maximum_capacity', name: 'maximum_capacity'},
+                    {data: 'result_system', name: 'result_system'}, 
+                    {data: 'gpa_curricular', name: 'gpa_curricular'},
                     {data: 'years.name', name: 'year_id'},
                     
                     

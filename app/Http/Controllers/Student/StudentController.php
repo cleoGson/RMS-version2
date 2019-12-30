@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use PDF;
 use Crypt;
+use App\User;
 use App\Http\Requests\Student\StudentRequest;
 
 
@@ -201,5 +202,26 @@ class StudentController extends Controller
                 $assigned_number =$number.'-'. $student_number;
             }
             return $assigned_number;
+    }
+    public function copyToUser(Student $student)
+    {
+         if(!User::where("email",$student->email)->exists()){
+            $user = new User();  
+            $user->email= $student->email;
+            $user->username= $student->student_number;
+            $user->password= '$2y$10$hYn98f2N.XEuW9SD3jE8Tu6ElWLD5dmPmQLqsU5ULFFxO89/0kO9.';
+            $user->verifiedstatus=1;
+            $user->userable_type="App/Model/Student";
+            $user->userable_id=$student->id;
+            $user->password_changed_at= now();
+            $user->image='profile/avatar.png';
+            $user->status=1;
+            $user->center_id= $student->center_id??1;
+            $user->created_by=auth()->user()->id;
+            $user->created_at= now();
+            $user->save();
+         }
+        alert()->success('success', 'User Account created');
+        return redirect()->back();
     }
 }

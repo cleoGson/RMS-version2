@@ -22,7 +22,7 @@ class CreateSubjectsTable extends Migration
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->bigInteger('units')->unsigned()->nullable();
+            $table->bigInteger('units')->unsigned()->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

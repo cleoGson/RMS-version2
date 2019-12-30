@@ -36,10 +36,12 @@ class MarksvalidatorRule implements Rule
          $setup_data=Classsetup::findOrFail($this->classsetup_id);
          $semisters=$setup_data->examinationCurriculars->pluck('semester_id','id')->toArray();
          $exam_curricular_id=(!is_null($semisters) & in_array($this->semester_id,$semisters)) ? $semisters[$this->semester_id] :null;
+        
          if(!is_null($exam_curricular_id)){
          $examinations=Examinationcurricular::findOrFail($exam_curricular_id);
          $examinationtype=$examinations->examinationCurriculars->pluck('marks','examinationtype_id')->toArray();
          $max_marks=(!is_null($examinationtype) & array_key_exists($this->examinationtnature_id,$examinationtype)) ? $examinationtype[$this->examinationtnature_id] :null;
+    
         if(!is_null($max_marks) &&  ($value<=$max_marks)){
             return true;
         }   

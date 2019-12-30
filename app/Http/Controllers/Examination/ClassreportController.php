@@ -98,7 +98,7 @@ class ClassreportController extends Controller
                       break;
                     }
             }
-             $subject_provider[$keysubj]=array(
+             $subject_provider[$keysubj.$key]=array(
                  'exam_marks'=>$marks_provider,
                  'subject_name'=>$valuesubj,
                  'total_marks'=>$markssum,
@@ -115,6 +115,8 @@ class ClassreportController extends Controller
                 'full_name'=>$studentData->student->full_name,
                 'student_number'=>$studentData->student->student_number,
             );
+            unset($subject_provider);
+
          }
 
          $data_all_data1[$value]=array(
@@ -126,8 +128,8 @@ class ClassreportController extends Controller
             
          }
         
-                 $data_all_data = array_reverse($data_all_data1);   
-                             //dd($data_all_data);
+         
+                 $data_all_data = $data_all_data1;   
                  $classdetails=Classroom::findOrFail($classid);
                  $yeardetails=Academicyear::findOrFail($yearid);
     

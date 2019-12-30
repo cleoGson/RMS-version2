@@ -28,6 +28,8 @@ class SubjectRequest extends FormRequest
         return [
             'name'=>"required|string|unique:subjects,name",
             'display_name'=>'required',
+            'code'=>'nullable|string',
+            'units'=>'nullable|integer',
         ];
        }
        case 'PUT':
@@ -35,8 +37,10 @@ class SubjectRequest extends FormRequest
        { 
 
         return [
-            'name'=>"required|string|unique:subjects,id,$this->route('subject')->id",
-            'display_name'=>'required',
+             'name'=>"required|string|unique:subjects,id,$this->route('subject')->id",
+             'display_name'=>'required',
+             'code'=>'nullable|string',
+             'units'=>'nullable|integer|min:1',
         ];
        }
        default:break;

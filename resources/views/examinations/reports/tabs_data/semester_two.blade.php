@@ -1,37 +1,25 @@
+ <?php 
+ $gpa_applicable=$setup_data->gpa_applicable; 
+ ?>
+ @foreach($all_results as $semester_result)
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-10">
 <div class="table table-responsive">
 <fieldset class="border p-2">
    <legend class="w-auto">Student Details</legend>
 <table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
-<tr><th>Student Name:</th><td>Godson F. Kileo</td></tr>
-<tr><th>Student Number:</th><td>Student-2019-0001</td></tr>
-<tr><th>Class:</th><td>Form One</td></tr>
-<tr><th>Department:</th><td>Education</td></tr>
-<tr><th>Year:</th><td>2019/2020</td></tr>
-<tr><th>Year:</th><td>2019/2020</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Student Name:</th><td>{{$studentDetails->student->full_name}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Student Number:</th><td>{{$studentDetails->student->student_number}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Results for: </th><td>{{$semester_result['semester_name']}}</td> </tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Class:</th><td>{{$studentDetails->class->name}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Result System:</th><td>{{$setup_data->result_system == 2 ? 'Percentage' : 'Non Percentage'}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>GPA:</th><td>{{$setup_data->gpa_applicable == 1 ? 'Applicable' : 'Not Applicable'}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Department:</th><td>{{$studentDetails->department->name}}</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Year:</th><td>{{$studentDetails->years->name}}</td></tr>
 </table>
 </fieldset>
 </div>
 </div>
-
-<div class="col-md-4">
-<div class="table table-responsive">
-<fieldset class="border p-2">
-   <legend class="w-auto">Grade Point Chart</legend>
-
-<table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
-<tr><th>Letter grade:</th><th>Marks Interval</th><th>Grade Point</th><th>Remarks</th></tr>
-<tr><th>A</th><th>100-80</th><th>5.0</th><th>Excellent </th></tr>
-<tr><th>B</th><th>79-61</th><th>4.0</th><th>Very Good </th></tr>
-<tr><th>C</th><th>60-41</th><th>3.0</th><th>Good </th></tr>
-<tr><th>D</th><th>40-21</th><th>2.0</th><th>Average </th></tr>
-<tr><th>F</th><th>20-0</th> <th>1.0</<th><th>Poor </th></tr>
-</table>
-</fieldset>
-</div>
-</div>
-
 <div class="col-md-2">
 <div class="table table-responsive">
 <fieldset class="border p-2">
@@ -43,25 +31,126 @@
                          <div class="status bg-green"></div>
                       </div>
                       <div class="client-title">
-                        <h4 class="btn  btn-primary" style="height=20">Completed Student</h4>
+                        <h4 class="btn  btn-primary" style="height=20">Continue</h4>
                       </div>
                     </div>
    </fieldset>
 </div>
 </div>
 </div>
+
 <div class="row">
 <div class="col-md-12">
  <div class="table table-responsive">
+
 <fieldset class="border p-2">
-   <legend class="w-auto">Examination Result:semester One</legend>
-<table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
-<tr><th>#:</th><th>Subject:</th><th>Test One</th><th>Test Two</th><th>Test Three</th><th>Home Work</th><th>Semester Examination</th><th>Letter grade:</th><th>Total</th><th>Grade Point</th></tr>
-<tr><th>1</th><th>Geography</th><th>20</th><th>20</th><th>20</th><th>20</th><th>20</th><th>A</th><th>100</th><th>5.0</th></tr>
-<tr><th>2</th><th>Civics</th><th>20</th><th>20</th><th>20</th><th>20</th><th>20</th><th>B</th><th>79</th><th>4.0</th></tr>
-<tr><th>3</th><th>Civics</th><th>20</th><th>20</th><th>20</th><th>20</th><th>20</th><th>C</th><th>60</th><th>3.0</th></tr>
-<tr><th>4</th><th>Civics</th><th>20</th><th>20</th><th>20</th><th>20</th><th>20</th><th>D</th><th>48</th><th>2.0</th></tr>
-<tr><th>5</th><th>Civics</th><th>20</th><th>20</th><th>20</th><th>20</th><th>20</th><th>F</th><th>78</th> <th>1.0</></tr>
+   <legend class="w-auto">Examination Result:{{$semester_result['semester_name']}}</legend>
+<table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%">
+<tr style="font-weight:bold; background-color:#ABC;"><th>#:</th>
+<th>Code</th>
+<th>Subject:</th>
+@if($gpa_applicable)
+<th> Units </th>
+@endif
+@foreach($semester_result['examination_list'] as $keynames=>$valuenames)
+<th>{{$valuenames}}</th>
+@endforeach
+<th>Total Marks</th>
+@if($setup_data->result_system == 2)
+<th>Average</th>
+@endif
+<th>Grade</th>
+@if($gpa_applicable)
+<th>Point</th>
+<th>GPA</th>
+@endif
+<th>Remarks</th>
+</tr>
+@php($count=1)
+@foreach($semester_result['examinations'] as $result_details)
+<tr style="font-weight:bold; background-color:#ABC;" ><th>{{$count}}</th>
+<th >{{$result_details['subject_code']}}</th>
+<th >{{$result_details['subject_name']}}</th>
+@if($gpa_applicable)
+<th >{{$result_details['subject_units']}}</th>
+@endif
+@foreach($result_details['exam_marks'] as $results_list_data)
+<th > {{$results_list_data['marks']}}</th>
+@endforeach
+<th >{{$result_details['total_marks']}}</<th>
+@if($setup_data->result_system == 2)
+<th >{{$result_details['average_marks']}}</th>
+@endif
+<th >{{$result_details['grade']}}</th>
+
+@if($gpa_applicable)
+<th >{{$result_details['total_units']}}</th>
+<th >   </th>
+@endif
+<th >{{$result_details['remarks']}}</th>
+</tr>
+@php($count++)
+@endforeach
+<?php 
+$number_of_subject =  $semester_result['subject_number']; 
+$number_of_examination =$semester_result['examination_number'];
+if($setup_data->result_system == 2){
+$additional_column=1;
+}else{
+$additional_column=1;
+}
+if($gpa_applicable){
+   $gpa_rows=0;
+}
+else{
+   $gpa_rows=-1;
+}
+$total_column=3+$number_of_examination+$additional_column+  $gpa_rows;
+
+$units_per_semester=array_sum(array_column($semester_result['examinations'],'subject_units'));
+$total_point_per_semister = array_sum(array_column($semester_result['examinations'],'total_units'));
+if($setup_data->result_system == 1){
+$total_marks_per_semister = array_sum(array_column($semester_result['examinations'],'total_marks'));
+}else{
+$total_marks_per_semister = array_sum(array_column($semester_result['examinations'],'average_marks')); 
+}
+
+$average_marks=$total_marks_per_semister/$number_of_subject;
+$gpa_calculated=$total_point_per_semister/$units_per_semester;
+
+ foreach($gpa_grading as $gpa_data){
+ if(($gpa_calculated >= $gpa_data['from']) && ($gpa_calculated <= $gpa_data['to'] ) ){
+                      $gpa_required= $gpa_data['name'];
+                      break;
+                    } 
+
+ }
+
+   foreach($grading_curricular as $gradingpackage){
+                    if(($average_marks >= $gradingpackage['min_marks']) && ($average_marks <= $gradingpackage['max_marks'] ) ){
+                      $grade_required= $gradingpackage['grade'];
+                      $grade_remarks=$gradingpackage['remarks'];
+                      break;
+                    }
+            }
+      
+
+?>
+
+<tr style="font-weight:bold; background-color:#ABC;"> <td colspan="<?=$total_column?>" style="text-align:right; font-weight:bold">Sub- Total </td>
+@if($setup_data->result_system == 2)
+<td>{{array_sum(array_column($semester_result['examinations'],'total_marks'))}}</td>
+@endif
+<td>{{$total_marks_per_semister}}</td>
+<td>{{$grade_required}} </td> 
+@if($gpa_applicable)
+<td>{{$total_point_per_semister}}</td>
+<td>{{$gpa_calculated}}</td>
+<td> {{$gpa_required}}</td>
+@else
+<td> {{$grade_remarks}}</td>
+@endif
+<tr>
 </table>
 </fieldset>
 </div>
@@ -73,38 +162,40 @@
 <div class="col-md-6">
 <div class="table table-responsive">
 <fieldset class="border p-2">
-   <legend class="w-auto">Total Marks & GPA</legend>
+   <legend class="w-auto">Grade Point Chart</legend>
+
 <table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
-<tr><th>Total marks:</th><td>234</td></tr>
-<tr><th>Average Marks:</th><td>62</td></tr>
-<tr><th>GPA:</th><td>3.5</td></tr>
-<tr><th>Letter Grade:</th><td>B</td></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Letter grade:</th><th>Marks Interval</th><th>Grade Point</th><th>Remarks</th></tr>
+@foreach($grading_curricular as $grading_chart)
+ <tr style="font-weight:bold; background-color:#ABC;"><th>{{$grading_chart['grade']}}</th><th>{{$grading_chart['max_marks']}} - {{$grading_chart['min_marks']}}</th><th>{{$grading_chart['grade_point']}}</th><th>{{$grading_chart['remarks']}}</th></tr>
+@endforeach
 </table>
 </fieldset>
 </div>
 </div>
-
 <div class="col-md-6">
 <div class="table table-responsive">
 <fieldset class="border p-2">
-   <legend class="w-auto">Position in Merit List</legend>
+   <legend class="w-auto">GPA Classes</legend>
 
 <table class="table table-responsive-sm table-bordered table-striped table-hover" width="100%"> 
-<tr><th>Class</th> <th>Position</th></tr>
-<tr><th>Class</th><th>5.0 out Of 50</th></tr>
-<tr><th>Performance Remarks</th><th>Average </th></tr>
+<tr style="font-weight:bold; background-color:#ABC;"><th>Class</th> <th>GPA from</th> <th> GPA To </th></tr>
+ @foreach($gpa_grading  as  $gpa_details)
+ <tr style="font-weight:bold; background-color:#ABC;"> <td> {{$gpa_details['name']}} </td> <td>{{$gpa_details['from']}} </td> <td>{{$gpa_details['to']}}</td> </tr>
+ @endforeach
 </table>
 </fieldset>
 </div>
 </div>
+
 </div>
  <div class="row">
 <div class="col-md-12 form-group text-right">
 <div class="pull-right">
-    <button type="submit" class="btn btn-success">
-    <i class="fa fa-printer"></i>
+    <button type="submit" class="btn btn-success"><i class="fa fa-file"></i>
         Print Result
     </button>
 </div>
 </div>
 </div>
+@endforeach

@@ -132,7 +132,7 @@ class ExaminationresultController extends Controller
               $class =Classroom::findOrFail($classid);
               $years=Academicyear::findOrFail($yearid);
                $classsections=Classsection::pluck('name','id')->toArray();
-              $data=Examinationresult::with(['classsections','examinationsType','academicyearStudent','years','examinationNature','semesters','subjects','classes'])->where([['class_id','=',$classid],['year_id','=',$yearid]]);
+              $data=Examinationresult::with(['classsections','examinationsType','academicyearStudent','years','examinationNature','semesters','subjects','classes'])->where([['class_id','=',$classid],['year_id','=',$yearid],['created_by','=',auth()->user()->id]]);
               if (request()->wantsJson()) {
                $template = 'examinations.results.actions';
                  return $dataTables->eloquent($data->select('examinationresults.*'))
@@ -206,7 +206,12 @@ class ExaminationresultController extends Controller
              'file'=>'required|file|max:2048',
              ]);
      if($request->hasFile('file')) {
+
         $extension = $request->file('file')->getClientOriginalExtension();
+        if($extension != 'csv'){
+          alert()->warning('warning', 'Only CSV  files can Be uploaded.')->persistent();
+         return redirect()->back();
+        }
         //filename to store
         $filenametostore = date('Ymdhms').microtime(true).'.'.$extension;
         //Upload File
@@ -370,21 +375,8 @@ class ExaminationresultController extends Controller
      */
     public function edit(Examinationresult $examinationresult)
     {
-      $years=Academicyear::pluck('name','id')->toArray();
-        $classsections=Classsection::pluck('name','id')->toArray();
-        $classes=Classroom::pluck('name','id')->toArray();
-        $grades=Gradecurricular::pluck('name','id')->toArray();
-        $curricular=Curricular::pluck('name','id')->toArray();
-        $feesstructure=Feesstructure::pluck('name','id')->toArray();
-        $nature=Examinationnature::pluck('name','id')->toArray();
         return view('examinations.results.edit',[
             'show'=>$examinationresult,
-            'years'=>$years,
-            'classsections'=>$classsections,
-            'classes'=>$classes,
-            'grades'=>$grades,
-            'curricular'=>$curricular,
-            'feesstructure'=>$feesstructure
             ]);
     }
 
@@ -395,22 +387,15 @@ class ExaminationresultController extends Controller
      * @param  \App\Model\Examinationresult  $examinationresult
      * @return \Illuminate\Http\Response
      */
-    public function update(ExaminationresultRequest $request, Examinationresult $examinationresult)
+    public function update(Request $request, Examinationresult $examinationresult)
     {
-        
+         $this->validate($request, [
+               'marks' => ['required', 'string',new MarksvalidatorRule($examinationresult->semester_id,$examinationresult->academicyearStudent->classsetup_id,$examinationresult->examinationtype_id,"marks must be less or equal to:")],
+              'remarks'=>'nullable|string'
+        ]);
         $examinationresult->updated_by = auth()->id();
-
         $examinationresult->update(request([
-              'name',
-              'class_id',
-              'classsection_id',
-              'grade_curricular',
-              'minimum_capacity',
-              'maximum_capacity',
-              'examination_nature',
-              'curricular_id',
-              'feesstructure_id',
-              'year_id',
+              'marks','remarks'
             ]));
         alert()->success('success', 'Examination result  has  successfully Updated.')->persistent();
         return redirect()->route('examination.examinationresult.index');

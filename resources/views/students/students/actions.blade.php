@@ -8,8 +8,8 @@
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> 
    <a href="{{ route($routeKey.'.show', encrypt($row->id)) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i>  Show</a>
-    <a href="{{ route($routeKey.'.edit', encrypt($row->id)) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i>  Edit</a>
- 
-<a href="{{ route($routeKey.'.destroy', encrypt($row->id)) }}" class="dropdown-item bg-danger text-white btn-delete" ><i class="fa fa-trash"></i> Delete</a>
+  <a href="{{ route($routeKey.'.edit', encrypt($row->id)) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i>  Edit</a>
+  <a href="{{ route($routeKey.'.copy', encrypt($row->id)) }}" class="dropdown-item bg-dark text-white" > <i class="fa fa-edit"></i>Make User</a>
+  <a href="{{ route($routeKey.'.destroy', encrypt($row->id)) }}" class="dropdown-item bg-danger text-white btn-delete" ><i class="fa fa-trash"></i> Delete</a>
   </div>
 </div>

@@ -329,7 +329,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('student.student.index') }}" class="nav-link {{ request()->is('student/student') || request()->is('student/student/*') ? 'active' : '' }}">
+                            <a href="{{ route('student.studentAccount.index') }}" class="nav-link {{ request()->is('student/studentAccount') || request()->is('student/studentAccount/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-lock nav-icon">
 
                                 </i>
