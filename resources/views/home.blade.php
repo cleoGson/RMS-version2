@@ -339,11 +339,14 @@
 </div>
 </div>
 
+{!! $chart->container() !!}
+
 </div>
 </div>
 </div>
 @endsection
 @section('scripts')
+{!! $chart->script() !!}
 
 @parent
 

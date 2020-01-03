@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-
+use  App\Charts\UserChart;
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -32,6 +33,10 @@ class HomeController extends Controller
         // }
         // }
         // $age=substr((date('Ymd')-date('Ymd', strtotime(date('1994-07-21 00:00:00')))), 0, -4);
-        return view('home');
+        $chart = new UserChart();
+        $chart->labels(['One', 'Two', 'Three', 'Four','Five']);
+        $chart->dataset('My dataset', 'line', [1, 2, 3, 4,9]);
+        $chart->dataset('My dataset 2', 'line', [4, 3, 2, 1,9]);
+        return view('home',compact('chart'));
     }
 }
