@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 
-use App\Model\Comment;
+use App\Model\ChartSubCategory;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class ChartSubCategoryController extends Controller
 {
-    
+  
      /**
      * Display a listing of the resource.
      *
@@ -85,11 +85,12 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Comment  $comment
+     * @param  \App\Model\ChartSubCategory  $chartSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(ChartSubCategory $chartSubCategory)
     {
+        
        alert()->warning('warning', 'Sorry please  use the provided view Link.')->persistent();
         return redirect()->back();
     }
@@ -97,24 +98,24 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Comment  $comment
+     * @param  \App\Model\ChartSubCategory  $chartSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(ChartSubCategory $chartSubCategory)
     {
-          return view('generals.attachmenttypes.edit',['show'=>$attachmenttype]);
+       return view('generals.attachmenttypes.edit',['show'=>$attachmenttype]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Comment  $comment
+     * @param  \App\Model\ChartSubCategory  $chartSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, ChartSubCategory $chartSubCategory)
     {
-         $attachment->updated_by = auth()->id();
+      $attachment->updated_by = auth()->id();
         
         $attachment->update(request(['file','attachment_type','remarks']));
         alert()->success('success', 'Attachment  has  successfully Updated.')->persistent();
@@ -124,12 +125,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Comment  $comment
+     * @param  \App\Model\ChartSubCategory  $chartSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(ChartSubCategory $chartSubCategory)
     {
-         $attachment->delete();
+        $attachment->delete();
         alert()->success('success', 'Attachment  has  successfully Deleted.')->persistent();
         return redirect()->route('general.attachment.index');
     }

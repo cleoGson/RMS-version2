@@ -486,6 +486,36 @@
             </li>
            
 
+            <li class="nav-item nav-dropdown">
+                    <a class="nav-link  nav-dropdown-toggle" href="#">
+                        <i class="fa-fw fas fa-users nav-icon"></i>
+                        Forum 
+                    </a>
+                <ul class="nav-dropdown-items">
+                  <li class="nav-item">
+                            <a href="{{ route('general.attachmenttype.index') }}" class="nav-link {{ request()->is('general/attachmenttype') || request()->is('general/attachmenttype/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Attachment Type
+                            </a>
+                        </li>
+                  <li class="nav-item">
+                            <a href="{{ route('general.attachment.index') }}" class="nav-link {{ request()->is('general/attachment') || request()->is('general/attachment/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Attachment
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('general.familymember.index') }}" class="nav-link {{ request()->is('general/familymember') || request()->is('general/familymember/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-unlock-alt nav-icon">
+                                </i>
+                              Familly Member
+                            </a>
+                        </li>
+                    </ul>
+            </li>
+           
              <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle" href="#">
                         <i class="fa-fw fas fa-users nav-icon"></i>
