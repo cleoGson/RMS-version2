@@ -117,8 +117,8 @@ class   StaffController extends Controller
      */
     public function show(Staff $staff)
     {
-        alert()->warning('warning', 'Sorry please  use the provided view Link.')->persistent();
-        return redirect()->back(); //
+         $show =$staff;
+        return view('admin.staffs.show',compact('show'));
     }
 
     /**
@@ -233,4 +233,66 @@ class   StaffController extends Controller
         alert()->success('success', 'User Account created');
         return redirect()->back();
     }
+      public function  staffRelatives(DataTables $dataTables,$staffid){
+         $type="App/Model/Staff";
+         $typeid=$staffid;
+             if (request()->wantsJson()) {
+            $template = 'generals.familymembers.actions';
+            return $dataTables->eloquent(Familymember::with(['disability','relationship','createdBy','updatedBy'])->where([['memberable_type','=',$type, 
+           ],[ 'memberable_id','=',$typeid->id]])->select('familymembers.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'general.familymember';
+                    $routeKey = 'general.familymember';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                ->editColumn('firstname', function ($row) {
+                    return $row->firstname ? strip_tags($row->firstname) : '';
+                })
+                
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? $row->updatedBy->email : '';
+                })
+                ->make(true);
+        }
+      }
+
+     public function  staffRegistrations(DataTables $dataTables,$staffid){
+       
+         
+     }
+
+      public function  staffAttachments(DataTables $dataTables,$staffid){
+         $type="App/Model/Staff";
+         $typeid=$staffid;
+        if (request()->wantsJson()) {
+            $template = 'generals.attachments.actions';
+            return $dataTables->eloquent(Attachment::with(['createdBy','updatedBy','attachmentType'])
+            ->where([['attachable_type','=',$type, 
+           ],[ 'attachable_id','=',$typeid->id]])->select('attachments.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'general.attachment';
+                    $routeKey = 'general.attachment';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                ->editColumn('display_name', function ($row) {
+                    return $row->display_name ? strip_tags($row->display_name) : '';
+                })
+                  ->editColumn('attachment_type', function ($row) {
+                    return $row->attachment_type ? strip_tags($row->attachmentType->name) : '';
+                })
+                
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
+                })
+                ->make(true);
+         }
+
+      }
+
 }

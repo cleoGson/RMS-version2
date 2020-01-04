@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                         Student Details  <i class="fa fa-eye-o" aria-hidden="true"></i>
+                         Staff  Details  <i class="fa fa-eye-o" aria-hidden="true"></i>
                         </p>
                     </h1>
                 </div>
@@ -19,10 +19,10 @@
        
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('student.student.index') }}" class="blue">student List</a>
+                            <a href="{{ route('admin.staff.index') }}" class="blue">Staff List</a>
                         </li>
                         <li class="breadcrumb-item active" class="blue">
-                             Student Details
+                             Staff Details
                         </li>
                     </ol>
                 </div>
@@ -50,7 +50,7 @@
                       </div>
                       <div class="client-title">
                         <h3>Godson F. Kileo</h3>
-                        <h4 class="btn  btn-primary" style="height=20">Continue Student</h4>
+                        <h4 class="btn  btn-primary" style="height=20">Staff</h4>
                       </div>
                     </div>
                   </div>
@@ -90,28 +90,28 @@
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Registration</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#education-1" role="tab" aria-controls="education" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-list" style="color:green"></i> Education History</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#attachment-1" role="tab" aria-controls="attachment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-file" style="color:green"></i> Attachments</a></li>     
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#payment-1" role="tab" aria-controls="payment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-money" style="color:green"></i> Payments</a></li>       
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#payment-1" role="tab" aria-controls="payment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Referee</a></li>       
   
             </ul>
             <div class="tab-content">
             <div class="tab-pane active" id="home-1" role="tabpanel">
-            @include('students.students.tabs.details')
+            @include('admin.staffs.tabs.details')
             </div>
 
             <div class="tab-pane" id="profile-1" role="tabpanel">
-            @include('students.students.tabs.parents')
+            @include('admin.staffs.tabs.parents')
             </div>
             <div class="tab-pane" id="payment-1" role="tabpanel">
-            @include('students.students.tabs.payments')
+            @include('admin.staffs.tabs.payments')
             </div>
             <div class="tab-pane" id="registration-1" role="tabpanel">
-            @include('students.students.tabs.registration')
+            @include('admin.staffs.tabs.registration')
             </div>
             <div class="tab-pane" id="education-1" role="tabpanel">
-            @include('students.students.tabs.education')
+            @include('admin.staffs.tabs.education')
             </div>
             <div class="tab-pane" id="attachment-1" role="tabpanel">
-            @include('students.students.tabs.attachments')
+            @include('admin.staffs.tabs.attachments')
             </div>
           
             </div>

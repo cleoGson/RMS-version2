@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
     Route::resource('staff', 'Admin\StaffController');
     Route::get('staff/copy/{staff}', 'Admin\StaffController@copyToUser')->name('staff.copy');
+    Route::get('/relatives/{staff}', 'Admin\StaffController@studentRelatives')->name('staff.relatives');
+    Route::get('/registration/{staff}','Admin\StaffController@studentRegistrations')->name('staff.registration');
+    Route::get('/attachment/{staff}','Admin\StaffController@studentAttachments')->name('staff.attachment');
     Route::post('disabilitydata','Admin\StaffController@disabilityData');
   });
 Route::group(['middleware' => ['auth'], 'prefix' => 'staff', 'as' => 'staff.'], function () {
@@ -91,6 +94,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.
     Route::resource('studentstatus', 'Student\StudentstatusController');
     Route::resource('student', 'Student\StudentController');
     Route::get('/copy/{student}', 'Student\StudentController@copyToUser')->name('student.copy');
+    Route::get('/relatives/{student}', 'Student\StudentController@studentRelatives')->name('student.relatives');
+    Route::get('/registration/{student}','Student\StudentController@studentRegistrations')->name('student.registration');
+    Route::get('/attachment/{student}','Student\StudentController@studentAttachments')->name('student.attachment');
+    
     Route::resource('studentstudy', 'Student\StudentstudyController');
     Route::resource('level', 'Student\LevelController');
     Route::resource('course', 'Student\CourseController');

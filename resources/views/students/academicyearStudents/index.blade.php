@@ -12,40 +12,9 @@
                          
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
+                   
                    </div>
 <div class="card-body">
-<div class="row">
-<div class="col-sm-2">
-<div class="form-group">
-<label for="class_id">Class </label>
-    {!! Form::select('class_id',[''=>'All']+$classes,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-<label for="classsection_id">Section</label>
-    {!! Form::select('classsection_id',[''=>'All']+$classsections,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-<label for="year_id">Year</label>
-    {!! Form::select('year_id',[''=>'Select Year']+$years,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-2">
-<div class="form-group">
-<label for=semester_id>Semester</label>
-    {!! Form::select('semester_id',[''=>'Select Semester']+$semesters,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-<div class="col-sm-4">
-<div class="form-group">
-<label for="classsetup_id">Class setup</label>
-    {!! Form::select('classsetup_id',[''=>'Setup']+$classsetups,null, ['id'=>'project-type','class'=>'form-control']) !!}
-</div>
-</div>
-</div>
 <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>
@@ -158,7 +127,7 @@
                     {data: 'class_id', name: 'class_id'},
                     {data: 'classsection_id', name: 'classsection_id' },
                     {data: 'classsetup_id', name: 'classsetup_id'},
-                    {data: 'classsetup_id', name: 'studentstatus_id'},
+                    {data: 'studentstatus_id', name: 'studentstatus_id'},
                     {
                         className:      'details-control',
                         orderable:      false,

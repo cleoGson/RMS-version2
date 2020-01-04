@@ -28,10 +28,10 @@ class CountryRequest extends FormRequest
         return [
              'name'=>"required|string|unique:countries,name",
              'display_name'=>"required",
-             'code'=>'required|unique:countries,code',
+             'code'=>'required|integer|min:1|unique:countries,code',
              'monetary'=>'required',
              'monetary_short_name'=>'required',
-             'monetary_sign'=>'nullable',
+             'citizenship'=>'nullable',
 
         ];
        }
@@ -42,10 +42,10 @@ class CountryRequest extends FormRequest
         return [
             'name'=>"required|string|unique:countries,id,$this->route('country')->id",
             'display_name'=>"required",
-            'code'=>"required|unique:countries,id,$this->route('country')->id",
+            'code'=>"required|integer|min:1|unique:countries,id,$this->route('country')->id",
             'monetary'=>'required',
             'monetary_short_name'=>'required',
-            'monetary_sign'=>'nullable',
+            'citizenship'=>'nullable',
         ];
        }
        default:break;

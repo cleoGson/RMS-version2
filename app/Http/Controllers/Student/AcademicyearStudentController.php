@@ -32,7 +32,7 @@ class AcademicyearStudentController extends Controller
                     $routeKey = 'student.academicyearStudent';
                     return view($template, compact('row', 'gateKey', 'routeKey'));
                 })
-                    ->editColumn('student_id', function ($row) {
+                 ->editColumn('student_id', function ($row) {
                     return $row->student_id ? $row->student->firstname."  ".$row->student->middlename." ".$row->student->lastname." (".$row->student->student_number." )" : '';
                 })
                     ->editColumn('year_id', function ($row) {
@@ -51,21 +51,8 @@ class AcademicyearStudentController extends Controller
                     return $row->classsetup_id ? $row->classSetup->name : '';
                 })
               
-              
                 ->editColumn('created_by', function ($row) {
                     return $row->created_by ? $row->createdBy->email : '';
-                })
-                ->editColumn('year_id', function ($row) {
-                    return $row->year_id ? $row->years->name : '';
-                })
-                 ->editColumn('studentstatus_id', function ($row) {
-                    return $row->studentstatus_id ? $row->studentstatus_id : '';
-                })
-                  ->editColumn('class_id', function ($row) {
-                    return $row->class_id ? $row->class_id : '';
-                })
-                   ->editColumn('classsetup_id', function ($row) {
-                    return $row->classsetup_id ? $row->classsetup_id : '';
                 })
                 ->editColumn('updated_by', function ($row) {
                     return $row->updated_by ? ucfirst(strtolower($row->createdBy->email)) : '';

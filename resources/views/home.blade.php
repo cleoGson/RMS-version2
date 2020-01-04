@@ -2,344 +2,328 @@
 
 @section('content')
 <div class="content">
-<div class="row"> 
-<example> </example>
+
+<div class="animated fadeIn">
+<div class="row">
+<div class="col-sm-6 col-lg-3">
+<div class="brand-card">
+<div class="brand-card-header bg-facebook">
+<i class="fa fa-users"></i>  <span style="color:white"> &nbsp; STUDENTS</span>
+<div class="chart-wrapper"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 391px;" width="782" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="brand-card-body">
+<div>
+<div class="text-value">89k</div>
+<div class="text-uppercase text-muted small">Male</div>
+</div>
+<div>
+<div class="text-value">459</div>
+<div class="text-uppercase text-muted small">Female</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+<div class="brand-card">
+<div class="brand-card-header bg-twitter">
+<i class="fa fa-users"></i>  <span style="color:white"> &nbsp; STAFF</span>
+<div class="chart-wrapper"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<canvas id="social-box-chart-2" height="192" style="display: block; height: 96px; width: 391px;" width="782" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="brand-card-body">
+<div>
+<div class="text-value">973k</div>
+<div class="text-uppercase text-muted small">Male</div>
+</div>
+<div>
+<div class="text-value">1.792</div>
+<div class="text-uppercase text-muted small">Female</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+<div class="brand-card">
+<div class="brand-card-header bg-linkedin">
+<i class="fa fa-users"></i> <span style="color:white"> &nbsp; APPLICANTS</span>
+<div class="chart-wrapper"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 391px;" width="782" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="brand-card-body">
+<div>
+<div class="text-value">500+</div>
+<div class="text-uppercase text-muted small">Male</div>
+</div>
+<div>
+<div class="text-value">292</div>
+<div class="text-uppercase text-muted small">Female</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-3">
+<div class="brand-card">
+<div class="brand-card-header bg-linkedin">
+<i class="fa fa-money"></i> <span style="color:white"> &nbsp; Fees</span>
+<div class="chart-wrapper"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<canvas id="social-box-chart-4" height="192" style="display: block; height: 96px; width: 391px;" width="782" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="brand-card-body">
+<div>
+<div class="text-value">894</div>
+<div class="text-uppercase text-muted small">Application Fees</div>
+</div>
+<div>
+<div class="text-value">92</div>
+<div class="text-uppercase text-muted small">Student Fees</div>
+</div>
+</div>
+</div>
+</div>
 
 </div>
 <div class="row">
-<div class="col-sm-6 col-lg-3">
-<div class="card text-white bg-primary">
-<div class="card-body pb-0">
-<div class="btn-group float-right">
-<button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<i class="icon-settings"></i>
-</button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<a class="dropdown-item" href="#">Another action</a>
-<a class="dropdown-item" href="#">Something else here</a>
-</div>
-</div>
-<div class="text-value">9.823</div>
-<div>Members online</div>
-</div>
-<div class="chart-wrapper mt-3 mx-3" style="height:70px;"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-<canvas class="chart chartjs-render-monitor" id="card-chart1" height="140" style="display: block; height: 70px; width: 359px;" width="718"></canvas>
-<div id="card-chart1-tooltip" class="chartjs-tooltip bottom top" style="opacity: 0; left: 313.517px; top: 125.889px;"><div class="tooltip-header"><div class="tooltip-header-item">June</div></div><div class="tooltip-body"><div class="tooltip-body-item"><span class="tooltip-body-item-color" style="background-color: rgb(0, 165, 224);"></span><span class="tooltip-body-item-label">My First dataset</span><span class="tooltip-body-item-value">55</span></div></div></div></div>
-</div>
-</div>
-
-<div class="col-sm-6 col-lg-3">
-<div class="card text-white bg-info">
-<div class="card-body pb-0">
-<button class="btn btn-transparent p-0 float-right" type="button">
-<i class="icon-location-pin"></i>
-</button>
-<div class="text-value">9.823</div>
-<div>Members online</div>
-</div>
-<div class="chart-wrapper mt-3 mx-3" style="height:70px;"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-<canvas class="chart chartjs-render-monitor" id="card-chart2" height="140" style="display: block; height: 70px; width: 359px;" width="718"></canvas>
-</div>
-</div>
-</div>
-
-<div class="col-sm-6 col-lg-3">
-<div class="card text-white bg-warning">
-<div class="card-body pb-0">
-<div class="btn-group float-right">
-<button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<i class="icon-settings"></i>
-</button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<a class="dropdown-item" href="#">Another action</a>
-<a class="dropdown-item" href="#">Something else here</a>
-</div>
-</div>
-<div class="text-value">9.823</div>
-<div>Members online</div>
-</div>
-<div class="chart-wrapper mt-3" style="height:70px;"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-<canvas class="chart chartjs-render-monitor" id="card-chart3" height="140" style="display: block; height: 70px; width: 391px;" width="782"></canvas>
-</div>
-</div>
-</div>
-
-<div class="col-sm-6 col-lg-3">
-<div class="card text-white bg-danger">
-<div class="card-body pb-0">
-<div class="btn-group float-right">
-<button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<i class="icon-settings"></i>
-</button>
-<div class="dropdown-menu dropdown-menu-right">
-<a class="dropdown-item" href="#">Action</a>
-<a class="dropdown-item" href="#">Another action</a>
-<a class="dropdown-item" href="#">Something else here</a>
-</div>
-</div>
-<div class="text-value">9.823</div>
-<div>Members online</div>
-</div>
-<div class="chart-wrapper mt-3 mx-3" style="height:70px;"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-<canvas class="chart chartjs-render-monitor" id="card-chart4" height="140" style="display: block; height: 70px; width: 359px;" width="718"></canvas>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
- <div class="row">
- <div class="col-md-12">
+<div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-header">
-<i class="fa fa-align-justify"></i> List group
-<small>with badges</small>
-</div>
 <div class="card-body">
-<ul class="list-group">
-<li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-info green"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li><li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li><li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive oksy</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li>
-                <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-primary  "><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li><li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
-<span class="handle ui-sortable-handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                        <input type="checkbox" value="">
-                        <span class="text">Make the theme responsive</span>
-                      </span>
-
-                  
-                  <div class="tools">
-                  <small class="label label-success"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  </div>
-                </li>
-</ul>
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-people"></i>
+</div>
+<div class="text-value">87.500</div>
+<small class="text-muted text-uppercase font-weight-bold">Ongoing Students</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 </div>
 </div>
+</div>
+
+<div class="col-sm-6 col-md-2">
+<div class="card">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-user-follow"></i>
+</div>
+<div class="text-value">385</div>
+<small class="text-muted text-uppercase font-weight-bold">Completed Student</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-2">
+<div class="card">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-basket-loaded"></i>
+</div>
+<div class="text-value">1238</div>
+<small class="text-muted text-uppercase font-weight-bold">Staff</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-2">
+<div class="card">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-pie-chart"></i>
+</div>
+<div class="text-value">28%</div>
+<small class="text-muted text-uppercase font-weight-bold">Applicants</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-2">
+<div class="card">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-speedometer"></i>
+</div>
+<div class="text-value">5:34:11</div>
+<small class="text-muted text-uppercase font-weight-bold">Transfered students</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-2">
+<div class="card">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="icon-speech"></i>
+</div>
+<div class="text-value">972</div>
+<small class="text-muted text-uppercase font-weight-bold">Comments</small>
+<div class="progress progress-xs mt-3 mb-0">
+<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<div class="card">
+<div class="card-body">
 <div class="row">
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-facebook content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">89k</div>
-<div class="text-uppercase text-muted small">friends</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">459</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
-</div>
+<div class="col-sm-5">
+<h4 class="card-title mb-0">Student Summary</h4>
+<div class="small text-muted">year 2019</div>
 </div>
 
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-linkedin content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">500+</div>
-<div class="text-uppercase text-muted small">contacts</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">292</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-linkedin content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">500+</div>
-<div class="text-uppercase text-muted small">contacts</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">292</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
+<div class="col-sm-7 d-none d-md-block">
+<button class="btn btn-primary float-right" type="button">
+<i class="icon-cloud-download"></i>
+</button>
+<div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+<label class="btn btn-outline-secondary">
+<input id="option1" type="radio" name="options" autocomplete="off"> Day
+</label>
+<label class="btn btn-outline-secondary active">
+<input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
+</label>
+<label class="btn btn-outline-secondary">
+<input id="option3" type="radio" name="options" autocomplete="off"> Year
+</label>
 </div>
 </div>
 
 </div>
-<div class="row">
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-facebook content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">89k</div>
-<div class="text-uppercase text-muted small">friends</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">459</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-linkedin content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">500+</div>
-<div class="text-uppercase text-muted small">contacts</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">292</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-sm-6 col-lg-4">
-<div class="card">
-<div class="card-header bg-linkedin content-center">
-<svg class="c-icon c-icon-3xl text-white my-4">
-<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
-</svg>
-<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
-</div>
-</div>
-<div class="card-body row text-center">
-<div class="col">
-<div class="text-value-xl">500+</div>
-<div class="text-uppercase text-muted small">contacts</div>
-</div>
-<div class="c-vr"></div>
-<div class="col">
-<div class="text-value-xl">292</div>
-<div class="text-uppercase text-muted small">feeds</div>
-</div>
-</div>
-</div>
-</div>
-
+<div height="400">
 {!! $chart->container() !!}
+</div>
+</div>
+</div>
+
+
+
+<div class="card">
+<div class="card-body">
+<div class="row">
+<div class="col-sm-5">
+<h4 class="card-title mb-0">Student Results</h4>
+<div class="small text-muted">year 2019</div>
+</div>
+
+<div class="col-sm-7 d-none d-md-block">
+<button class="btn btn-primary float-right" type="button">
+<i class="icon-cloud-download"></i>
+</button>
+<div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+<label class="btn btn-outline-secondary">
+<input id="option1" type="radio" name="options" autocomplete="off"> Day
+</label>
+<label class="btn btn-outline-secondary active">
+<input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
+</label>
+<label class="btn btn-outline-secondary">
+<input id="option3" type="radio" name="options" autocomplete="off"> Year
+</label>
+</div>
+</div>
+
+</div>
+<div height="400">
+{!! $chart->container() !!}
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-facebook content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-1" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">89k</div>
+<div class="text-uppercase text-muted small">friends</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">459</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-6 col-lg-4">
+<div class="card">
+<div class="card-header bg-linkedin content-center">
+<svg class="c-icon c-icon-3xl text-white my-4">
+<use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
+</svg>
+<div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+<canvas id="social-box-chart-3" height="192" style="display: block; height: 96px; width: 515px;" width="1030" class="chartjs-render-monitor"></canvas>
+</div>
+</div>
+<div class="card-body row text-center">
+<div class="col">
+<div class="text-value-xl">500+</div>
+<div class="text-uppercase text-muted small">contacts</div>
+</div>
+<div class="c-vr"></div>
+<div class="col">
+<div class="text-value-xl">292</div>
+<div class="text-uppercase text-muted small">feeds</div>
+</div>
+</div>
+</div>
+</div>
+
+
 
 </div>
 </div>

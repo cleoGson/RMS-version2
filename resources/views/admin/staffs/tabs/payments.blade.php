@@ -1,18 +1,19 @@
 
 <div class="card">
 <div class="card-header">
-<i class="fa fa-money"></i>Payment(s) 
+<i class="fa fa-users"></i>Referee(s) 
                    </div>
 <div class="card-body">
 <div class="table table-responsive">
 <table width="100%" class="table table-responsive-sm table-bordered table-striped table-hover" id="payments">
 <thead>
 <tr>
-<th>Payments For</th>
-<th>Amount</th>
-<th>Paid Date</th>
-<th>Payment Channel</th>
-<th>Received By</th>
+<th>Full Name</th>
+<th>Role</th>
+<th>email</th>
+<th>from </th>
+<th>To</th>
+<th>View Report</th>
 <th>View</th>
 <th>Download Recept</th>
 
@@ -20,11 +21,12 @@
 </thead>
 <tfoot>
 <tr>
-<th>Payments For</th>
-<th>Amount</th>
-<th>Paid Date</th>
-<th>Payment Channel</th>
-<th>Received By</th>
+<th>Full Name</th>
+<th>Role</th>
+<th>email</th>
+<th>from </th>
+<th>To</th>
+<th>View Report</th>
 <th>View</th>
 <th>Download Recept</th>
 

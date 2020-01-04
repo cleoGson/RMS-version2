@@ -8,15 +8,6 @@
                    </a>
                    </div>
 <div class="card-body">
-                     <div class="row">
-                     <div class="col-md-8">
-                     <center>
-                     
-                      picture will be here
-                     </center>
-                    
-                     </div>
-                     </div>
                         <table class="table table-bordered table-sm table-hover">
                                 <tr><td><b>Full Name:</b>  </td><td> <b>{{$show->full_name}}</b></td></tr>
                                 <tr><td><b>Gender:</b>  </td><td> <b>{{$show->sex}}</b></td></tr>

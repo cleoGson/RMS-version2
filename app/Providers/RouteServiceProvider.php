@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Crypt;
 use App\Model\Student;
+use App\Model\Staff;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -35,6 +36,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::bind('studentAccount', function ($value) {
                         $id=Crypt::decrypt($value);
             return User::where('id',$id)->first();
+        });
+          Route::bind('staff', function ($value) {
+                        $id=Crypt::decrypt($value);
+            return Staff::where('id',$id)->first();
         });
         
     }

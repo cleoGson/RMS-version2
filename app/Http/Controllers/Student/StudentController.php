@@ -8,9 +8,12 @@ use App\Model\Disability;
 use App\Setting\Bloodgroup;
 use App\Model\Course;
 use Illuminate\Http\Request;
+use App\Model\AcademicyearStudent;
+use App\Model\Attachment;
 use Yajra\DataTables\DataTables;
 use PDF;
 use Crypt;
+use App\Model\Familymember;
 use App\User;
 use App\Http\Requests\Student\StudentRequest;
 
@@ -224,4 +227,97 @@ class StudentController extends Controller
         alert()->success('success', 'User Account created');
         return redirect()->back();
     }
+
+    public function  studentRelatives(DataTables $dataTables,$studentid){
+         $type="App/Model/Student";
+         $typeid=$studentid;
+             if (request()->wantsJson()) {
+            $template = 'generals.familymembers.actions';
+            return $dataTables->eloquent(Familymember::with(['disability','relationship','createdBy','updatedBy'])->where([['memberable_type','=',$type, 
+           ],[ 'memberable_id','=',$typeid->id]])->select('familymembers.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'general.familymember';
+                    $routeKey = 'general.familymember';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                ->editColumn('firstname', function ($row) {
+                    return $row->firstname ? strip_tags($row->firstname) : '';
+                })
+                
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? $row->updatedBy->email : '';
+                })
+                ->make(true);
+        }
+      }
+
+     public function  studentRegistrations(DataTables $dataTables,$studentid){
+       
+      if (request()->wantsJson()) {
+            return $dataTables->eloquent(AcademicyearStudent::with(['createdBy','student','createdBy','years','studentStatus','class','classSetup','classSection'])->where('student_id',$studentid->id)->select('academicyear_students.*'))
+                    ->editColumn('student_id', function ($row) {
+                    return $row->student_id ? $row->student->firstname."  ".$row->student->middlename." ".$row->student->lastname." (".$row->student->student_number." )" : '';
+                })
+                    ->editColumn('year_id', function ($row) {
+                    return $row->year_id ? $row->years->name : '';
+                })
+                      ->editColumn('studentstatus_id', function ($row) {
+                    return $row->studentstatus_id ? $row->studentStatus->name : '';
+                })
+                      ->editColumn('class_id', function ($row) {
+                    return $row->class_id ? $row->class->name : '';
+                })
+                      ->editColumn('classsection_id', function ($row) {
+                    return $row->classsection_id ? $row->classSection->name : '';
+                })
+                    ->editColumn('classsetup_id', function ($row) {
+                    return $row->classsetup_id ? $row->classSetup->name : '';
+                })
+              
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? ucfirst(strtolower($row->createdBy->email)) : '';
+                })
+                ->make(true);
+         }
+         
+     }
+
+      public function  studentAttachments(DataTables $dataTables,$studentid){
+         $type="App/Model/Student";
+         $typeid=$studentid;
+        if (request()->wantsJson()) {
+            $template = 'generals.attachments.actions';
+            return $dataTables->eloquent(Attachment::with(['createdBy','updatedBy','attachmentType'])
+            ->where([['attachable_type','=',$type, 
+           ],[ 'attachable_id','=',$typeid->id]])->select('attachments.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'general.attachment';
+                    $routeKey = 'general.attachment';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                ->editColumn('display_name', function ($row) {
+                    return $row->display_name ? strip_tags($row->display_name) : '';
+                })
+                  ->editColumn('attachment_type', function ($row) {
+                    return $row->attachment_type ? strip_tags($row->attachmentType->name) : '';
+                })
+                
+                ->editColumn('created_by', function ($row) {
+                    return $row->created_by ? $row->createdBy->email : '';
+                })
+                ->editColumn('updated_by', function ($row) {
+                    return $row->updated_by ? ucfirst(strtolower($row->updatedBy->email)) : '';
+                })
+                ->make(true);
+         }
+
+      }
+
+
 }

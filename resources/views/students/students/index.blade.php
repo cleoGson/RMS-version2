@@ -8,7 +8,8 @@
 <div class="card-header">
 <i class="fa fa-align-justify"></i>List of students 
 
-  
+    <button class="btn btn-primary float-right  bold ">  Upload Student  <i class="fas fa-file fa-fw"></i> </button> 
+
   <a href="{{ route('student.student.create') }}" class="float-right">
                          
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
