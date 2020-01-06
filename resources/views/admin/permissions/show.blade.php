@@ -6,7 +6,7 @@
         {{ trans('global.show') }} {{ trans('cruds.permission.title') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body card card-accent-primary">
         <div class="mb-2">
             <table class="table table-bordered table-striped">
                 <tbody>

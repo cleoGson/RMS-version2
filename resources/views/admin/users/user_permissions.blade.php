@@ -5,7 +5,7 @@
         {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body card card-accent-primary">
         <div class="table-responsive">
 
     <div class="content-header">
@@ -35,9 +35,9 @@
     <section class="content">
         <div class="container-fluid">
              <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
        
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
             <div class="row">
                     <div class="col-md-4">
                         <h3>Username :</h3> {{ $user->username }}

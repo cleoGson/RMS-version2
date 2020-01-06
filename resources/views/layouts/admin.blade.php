@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,6 +13,11 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
      <link href="{{ base_path('checkbox/css/dataTables.checkboxes.css') }}" rel="stylesheet" />
     @yield('styles')
+       <script>
+          window.Laravel = <?php echo json_encode([
+              'csrfToken' => csrf_token(),
+          ]); ?>
+        </script>
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
@@ -36,13 +42,21 @@
                    <span class="custom1" style="font-weight:bold;"> {{ trans('global.logout') }}</span>
                 </a>
           </li> 
+
           &nbsp;&nbsp;
-        <li> 
+            <li> 
+          <a href="{{ route('general.forum.indexforum') }}" class="cyan nav-link">
+                    <i class="nav-icon fas fa-fw fa-comment custom1"></i>
+                   <span class="custom1" style="font-weight:bold;"> Forum </span>
+                </a>
+            </li> 
+          &nbsp;&nbsp;
+            <li> 
           <a href="{{ route('auth.change_password') }}" class="cyan nav-link">
                     <i class="nav-icon fas fa-fw fa-key custom1"></i>
                    <span class="custom1" style="font-weight:bold;">   Change password </span>
                 </a>
-        </li> 
+            </li> 
                 <li class="nav-item dropdown d-md-down-none" style="margin-right:50px">
                     <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                       <img class="c-avatar-img img-fluid rounded-circle"  width="40" height="40" src="https://d19m59y37dris4.cloudfront.net/admin/1-4-5/img/avatar-2.jpg"/> 
@@ -53,6 +67,7 @@
                             <a class="dropdown-item" href="#"> <i class="custom1 fa fa-list"></i>  <span class="custom1" style="font-weight:bold;"> Profile </span></a>
                        
                     </div>
+                    
                 </li>
             
 
@@ -60,7 +75,7 @@
         </ul>
     </header>
 
-    <div class="app-body">
+    <div class="app-body" id="app">
         @include('partials.menu')
         <main class="main">
 
@@ -76,6 +91,7 @@
             {{ csrf_field() }}
         </form>
     </div>
+    
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />

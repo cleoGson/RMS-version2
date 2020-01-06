@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-body"> 
+                <div class="card-body card card-accent-primary"> 
 
 
                 <div class="card">
@@ -40,7 +40,7 @@
 <div class="card-header-actions">
 </div>
 </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="jumbotron">
 <h1 class="display-3">{{$show->name}}</h1>
 <p class="lead">This shows the details for the setup.</p>

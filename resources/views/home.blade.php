@@ -93,7 +93,7 @@
 <div class="row">
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-people"></i>
 </div>
@@ -108,7 +108,7 @@
 
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-user-follow"></i>
 </div>
@@ -123,7 +123,7 @@
 
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-basket-loaded"></i>
 </div>
@@ -138,7 +138,7 @@
 
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-pie-chart"></i>
 </div>
@@ -153,7 +153,7 @@
 
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-speedometer"></i>
 </div>
@@ -168,7 +168,7 @@
 
 <div class="col-sm-6 col-md-2">
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="h1 text-muted text-right mb-4">
 <i class="icon-speech"></i>
 </div>
@@ -187,7 +187,7 @@
 
 
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="row">
 <div class="col-sm-5">
 <h4 class="card-title mb-0">Student Summary</h4>
@@ -221,7 +221,7 @@
 
 
 <div class="card">
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="row">
 <div class="col-sm-5">
 <h4 class="card-title mb-0">Student Results</h4>

@@ -14,7 +14,7 @@
         {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body card card-accent-primary">
         
             <div class="col-md-12">
             <div class="card-header">
@@ -64,7 +64,7 @@
                         </div>
                 <div class="card">
                 <div class = "table-responsive">
-                <div class="card-body">
+                <div class="card-body card card-accent-primary">
                         <table id="logsdata" class="table table-striped table-bordered" width="100%">
                             <thead>
                             <tr>

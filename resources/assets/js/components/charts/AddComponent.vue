@@ -5,7 +5,7 @@
             <div class="card card-default">
                 <div class="card-header">Add Coin</div>
 
-                <div class="card-body">
+                <div class="card-body card card-accent-primary">
                     <form @submit.prevent="addCoin">
                         <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>

@@ -98,7 +98,7 @@
 <i class="fa fa-align-justify"></i> List group
 <small>with badges</small>
 </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <ul class="list-group">
 <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center" >
 <span class="handle ui-sortable-handle">

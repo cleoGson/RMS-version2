@@ -7,7 +7,7 @@
   <button class="btn btn-success  bold ">  Update Details  <i class="fa fa-pencil-square-o fa-fw"></i> </button>
                    </a>
                    </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
                         <table class="table table-bordered table-sm table-hover">
                                 <tr><td><b>Full Name:</b>  </td><td> <b>{{$show->full_name}}</b></td></tr>
                                 <tr><td><b>Gender:</b>  </td><td> <b>{{$show->sex}}</b></td></tr>

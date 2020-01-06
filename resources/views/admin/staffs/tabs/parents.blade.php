@@ -7,7 +7,7 @@
 
                    </a>
                    </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
                      <div class="row">
                      <div class="col-md-8">
                 

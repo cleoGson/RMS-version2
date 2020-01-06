@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-body">
+                <div class="card-body card card-accent-primary">
                     {!! Form::model($show,['method'=>'PATCH','route'=>['admin.users.update',$show->id],'files'=>true]); !!}
                     @include('admin.users.form')
                     <div class="row">

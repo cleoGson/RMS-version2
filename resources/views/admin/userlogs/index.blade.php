@@ -6,7 +6,7 @@
 <div class="card-header">
 <i class="fa fa-align-justify"></i>List of User Logs 
   </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
                         <table id="logsdata" class="table table-striped table-bordered" width="100%">
                             <thead>
                             <tr>

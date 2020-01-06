@@ -14,7 +14,7 @@
                    </a>
                    
                    </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="academicyearStudent">
 <thead>

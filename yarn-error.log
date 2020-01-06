@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add datatables.net-buttons-bs4
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add vuex
 
 PATH: 
   /usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@fullcalendar/daygrid/README.md'
+  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@ttskch/select2-bootstrap4-theme/README.md'
 
 npm manifest: 
   {
@@ -47,13 +47,17 @@ npm manifest:
       "bootstrap": "^4.3.1",
       "bootstrap-datepicker": "^1.9.0",
       "bootstrap-sass": "^3.4.1",
-      "chart.js": "^2.8.0",
+      "chart.js": "^2.9.3",
       "datatables.net-bs4": "^1.10.20",
+      "datatables.net-buttons-bs4": "^1.6.1",
+      "datatables.net-buttons-dt": "^1.6.1",
       "datatables.net-dt": "^1.10.20",
       "flag-icon-css": "^3.4.2",
       "gijgo": "^1.9.13",
       "highcharts": "^7.2.1",
       "jquery": "^3.4.1",
+      "moment": "^2.24.0",
+      "nprogress": "^0.2.0",
       "pace": "^0.0.4",
       "pace-progress": "^1.0.2",
       "perfect-scrollbar": "^1.4.0",
@@ -68,8 +72,10 @@ npm manifest:
       "vue-chartjs": "^3.4.2",
       "vue-ctk-date-time-picker": "^2.2.0",
       "vue-progressbar": "^0.7.5",
+      "vue-quill-editor": "^3.0.6",
       "vue-router": "^3.1.3",
       "vue-select2": "^0.2.6",
+      "vue-simple-spinner": "^1.2.8",
       "vue-template-compiler": "^2.6.10",
       "vuejs-datatable": "^1.7.0",
       "vuex": "^3.1.1",
@@ -1647,10 +1653,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/charm/-/charm-0.1.2.tgz#06c21eed1a1b06aeb67553cdc53e23274bac2296"
     integrity sha1-BsIe7RobBq62dVPNxT4jJ0usIpY=
   
-  chart.js@^2.8.0:
-    version "2.8.0"
-    resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.8.0.tgz#b703b10d0f4ec5079eaefdcd6ca32dc8f826e0e9"
-    integrity sha512-Di3wUL4BFvqI5FB5K26aQ+hvWh8wnP9A3DWGvXHVkO13D3DSnaSsdZx29cXlEsYKVkn1E2az+ZYFS4t0zi8x0w==
+  chart.js@^2.9.3:
+    version "2.9.3"
+    resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.9.3.tgz#ae3884114dafd381bc600f5b35a189138aac1ef7"
+    integrity sha512-+2jlOobSk52c1VU6fzkh3UwqHMdSlgH1xFv9FKMqHiNCpXsGPQa/+81AFa+i3jZ253Mq9aAycPwDjnn1XbRNNw==
     dependencies:
       chartjs-color "^2.1.0"
       moment "^2.10.2"
@@ -1767,6 +1773,11 @@ Lockfile:
       is-plain-object "^2.0.4"
       kind-of "^6.0.2"
       shallow-clone "^3.0.0"
+  
+  clone@^2.1.1:
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+    integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
   
   coa@^2.0.2:
     version "2.0.2"
@@ -2268,7 +2279,7 @@ Lockfile:
       es5-ext "^0.10.50"
       type "^1.0.1"
   
-  datatables.net-bs4@^1.10.20:
+  datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.10.20:
     version "1.10.20"
     resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.10.20.tgz#beff1c8d3510826c0678eaa055270607c0e53882"
     integrity sha512-kQmMUMsHMOlAW96ztdoFqjSbLnlGZQ63iIM82kHbmldsfYdzuyhbb4hTx6YNBi481WCO3iPSvI6YodNec46ZAw==
@@ -2276,7 +2287,33 @@ Lockfile:
       datatables.net "1.10.20"
       jquery ">=1.7"
   
-  datatables.net-dt@^1.10.20:
+  datatables.net-buttons-bs4@^1.6.1:
+    version "1.6.1"
+    resolved "https://registry.yarnpkg.com/datatables.net-buttons-bs4/-/datatables.net-buttons-bs4-1.6.1.tgz#4abd9c83fbd753ffa4913adca1fae094df64b3ba"
+    integrity sha512-PdE1vrnRIeX+p++wnbpdnr97kgTCs+DDomtTccsQvMrFm29lxVa7uTz1awasfGRrCrJzpb5HjPrPJBzbGHrUyg==
+    dependencies:
+      datatables.net-bs4 "^1.10.15"
+      datatables.net-buttons "1.6.1"
+      jquery ">=1.7"
+  
+  datatables.net-buttons-dt@^1.6.1:
+    version "1.6.1"
+    resolved "https://registry.yarnpkg.com/datatables.net-buttons-dt/-/datatables.net-buttons-dt-1.6.1.tgz#d6c21dfe3b61bbb023c1e16036fa22785495b043"
+    integrity sha512-0VFjDKknx3TzaXasnql+i49HFlfCug8B2W/L6MXBFMS9gGD7DC8PaxRbJVlimj7UKr7Lfdal5HYsgcf4gsffQQ==
+    dependencies:
+      datatables.net-buttons "1.6.1"
+      datatables.net-dt "^1.10.15"
+      jquery ">=1.7"
+  
+  datatables.net-buttons@1.6.1:
+    version "1.6.1"
+    resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-1.6.1.tgz#f62847e7c6f905fcf7339e7541a40741bbb3b8fb"
+    integrity sha512-Lcgvi/xGB2X0jr1n/uQMmg43Z1JQO6aaGjPHO+sAQAMfBGBi9cK1hhfM4Vg8gzC5fz3sW4QrtjAdKvOPnQ1A3w==
+    dependencies:
+      datatables.net "^1.10.15"
+      jquery ">=1.7"
+  
+  datatables.net-dt@^1.10.15, datatables.net-dt@^1.10.20:
     version "1.10.20"
     resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.10.20.tgz#998ab7d035e1ad52ad406451026ab968d1e63849"
     integrity sha512-D+65buDke96a3WlJo2re+SbcAVfjPh2nsFZG198Vbkz3i1wKPdB+wkV2K07qYIiIpypcXWOnD2pz3MvnUqM9Tw==
@@ -2284,7 +2321,7 @@ Lockfile:
       datatables.net "1.10.20"
       jquery ">=1.7"
   
-  datatables.net@1.10.20:
+  datatables.net@1.10.20, datatables.net@^1.10.15:
     version "1.10.20"
     resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.20.tgz#9d65ecc3c83cbe7baa4fa5a053405c8fe42c1350"
     integrity sha512-4E4S7tTU607N3h0fZPkGmAtr9mwy462u+VJ6gxYZ8MxcRIjZqHy3Dv1GNry7i3zQCktTdWbULVKBbkAJkuHEnQ==
@@ -2747,6 +2784,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
     integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
   
+  eventemitter3@^2.0.3:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
+    integrity sha1-teEHm1n7XhuidxwKmTvgYKWMmbo=
+  
   eventemitter3@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
@@ -2856,6 +2898,11 @@ Lockfile:
       assign-symbols "^1.0.0"
       is-extendable "^1.0.1"
   
+  extend@^3.0.2:
+    version "3.0.2"
+    resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
+    integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
+  
   extglob@^2.0.4:
     version "2.0.4"
     resolved "https://registry.yarnpkg.com/extglob/-/extglob-2.0.4.tgz#ad00fe4dc612a9232e8718711dc5cb5ab0285543"
@@ -2884,6 +2931,11 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
     integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+  
+  fast-diff@1.1.2:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
+    integrity sha512-KaJUt+M9t1qaIteSvjc6P3RbMdXsNhK61GRftR6SNxqmhthcd9MGIi4T+o0jD8LUSpSnSKXE20nLtJ3fOHxQig==
   
   fast-glob@^2.0.2:
     version "2.2.7"
@@ -4763,6 +4815,11 @@ Lockfile:
       gauge "~2.7.3"
       set-blocking "~2.0.0"
   
+  nprogress@^0.2.0:
+    version "0.2.0"
+    resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+    integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
+  
   nth-check@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"
@@ -5034,6 +5091,11 @@ Lockfile:
     integrity sha1-35T9jPZTHs915r75oIWPvHK+Ikc=
     dependencies:
       no-case "^2.2.0"
+  
+  parchment@^1.1.4:
+    version "1.1.4"
+    resolved "https://registry.yarnpkg.com/parchment/-/parchment-1.1.4.tgz#aeded7ab938fe921d4c34bc339ce1168bc2ffde5"
+    integrity sha512-J5FBQt/pM2inLzg4hEWmzQx/8h8D0CiDxaG3vyp9rKrQRSDgBlhjdP5jQGgosEajXPSQouXGHOmVdgo7QmJuOg==
   
   parse-asn1@^5.0.0:
     version "5.1.5"
@@ -5658,6 +5720,27 @@ Lockfile:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
     integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
+  
+  quill-delta@^3.6.2:
+    version "3.6.3"
+    resolved "https://registry.yarnpkg.com/quill-delta/-/quill-delta-3.6.3.tgz#b19fd2b89412301c60e1ff213d8d860eac0f1032"
+    integrity sha512-wdIGBlcX13tCHOXGMVnnTVFtGRLoP0imqxM696fIPwIf5ODIYUHIvHbZcyvGlZFiFhK5XzDC2lpjbxRhnM05Tg==
+    dependencies:
+      deep-equal "^1.0.1"
+      extend "^3.0.2"
+      fast-diff "1.1.2"
+  
+  quill@^1.3.4:
+    version "1.3.7"
+    resolved "https://registry.yarnpkg.com/quill/-/quill-1.3.7.tgz#da5b2f3a2c470e932340cdbf3668c9f21f9286e8"
+    integrity sha512-hG/DVzh/TiknWtE6QmWAF/pxoZKYxfe3J/d/+ShUWkDvvkZQVTPeVmUJVu1uE6DDooC4fWTiCLh84ul89oNz5g==
+    dependencies:
+      clone "^2.1.1"
+      deep-equal "^1.0.1"
+      eventemitter3 "^2.0.3"
+      extend "^3.0.2"
+      parchment "^1.1.4"
+      quill-delta "^3.6.2"
   
   randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
     version "2.1.0"
@@ -6939,6 +7022,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/vue-progressbar/-/vue-progressbar-0.7.5.tgz#414730892252b1e45582d4979dec93038e007f79"
     integrity sha512-VeNG/inMsFbvdCTS7lJ1gjDAKSUZdqkhW9gS1tb0we1rqFKxR+BCEiVUgw5C84vODKb14M2GWHTw0WVdpoVg6g==
   
+  vue-quill-editor@^3.0.6:
+    version "3.0.6"
+    resolved "https://registry.yarnpkg.com/vue-quill-editor/-/vue-quill-editor-3.0.6.tgz#1f85646211d68a31a80a72cb7f45bb2f119bc8fb"
+    integrity sha512-g20oSZNWg8Hbu41Kinjd55e235qVWPLfg4NvsLW6d+DhgBTFbEuMpcWlUdrD6qT3+Noim6DRu18VLM9lVShXOQ==
+    dependencies:
+      object-assign "^4.1.1"
+      quill "^1.3.4"
+  
   vue-router@^3.1.3:
     version "3.1.3"
     resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.3.tgz#e6b14fabc0c0ee9fda0e2cbbda74b350e28e412b"
@@ -6948,6 +7039,11 @@ Lockfile:
     version "0.2.6"
     resolved "https://registry.yarnpkg.com/vue-select2/-/vue-select2-0.2.6.tgz#d3dbbff656d7ab755b3acee48a725efd1fd0fc1b"
     integrity sha1-09u/9lbXq3VbOs7kinJe/R/Q/Bs=
+  
+  vue-simple-spinner@^1.2.8:
+    version "1.2.8"
+    resolved "https://registry.yarnpkg.com/vue-simple-spinner/-/vue-simple-spinner-1.2.8.tgz#638249e9b25b43424ff906c14f1b7c7ed441ce9d"
+    integrity sha1-Y4JJ6bJbQ0JP+QbBTxt8ftRBzp0=
   
   vue-style-loader@^4.1.0:
     version "4.1.2"

@@ -33,7 +33,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
 
             <table class="table table-responsive-sm table-bordered table-striped table-hover">
                 <tbody>

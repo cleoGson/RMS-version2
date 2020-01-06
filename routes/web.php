@@ -117,6 +117,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.
      Route::resource('familymember', 'General\FamilymemberController');
      Route::resource('attachment', 'General\AttachmentController');
      Route::resource('attachmenttype', 'General\AttachmenttypeController');
-    
+     Route::resource('category', 'General\CategoryController');
+     Route::resource('forum', 'General\ForumController');
+     Route::get('init', 'General\ForumController@init')->name('forum.init');
+     Route::get('/forumdashboard', 'General\ForumController@indexForum')->name('forum.indexforum');
+     Route::resource('/thread', 'General\ThreadController');
+     Route::get('/search/{searchQuery}', 'General\ThreadController@search')->name('thread.search');
+     Route::post('/createpost', 'General\ThreadController@createPost')->name('thread.createpost');
+     Route::get('/currentthread/{id}', 'General\ThreadController@getThreadById')->name('thread.currentthread');
+     Route::resource('post', 'General\PostController');    
 });
    

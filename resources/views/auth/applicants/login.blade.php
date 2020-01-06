@@ -4,7 +4,7 @@
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
-                <div class="card-body">
+                <div class="card-body card card-accent-primary">
                     @if(\Session::has('message'))
                         <p class="alert alert-info">
                             {{ \Session::get('message') }}

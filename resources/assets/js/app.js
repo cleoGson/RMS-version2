@@ -9,19 +9,53 @@ require("./bootstrap");
 window.Vue = require("vue");
 import VueRouter from "vue-router";
 import { Form, HasError, AlertError } from "vform";
+import routes from "./routes";
 import VueProgressBar from "vue-progressbar";
 import Highcharts from "highcharts";
 import { mapState } from "vuex";
+import Vuex from "vuex";
 import Swal from "sweetalert2";
-import VueCtkDateTimePicker from "vue-ctk-date-time-picker";
 import "vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css";
 window.Swal = Swal;
-
+window.moment = require("moment");
 window.Form = Form;
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 Vue.use(Highcharts);
 Vue.component("mapState", mapState);
+import Store from "./store";
+Vue.use(Vuex);
+
+const store = new Vuex.Store(Store);
+
+/**
+ * Components
+ */
+
+/*
+Nprogress
+ */
+
+import "nprogress/nprogress.css";
+
+/*
+Spinner
+ */
+
+/**
+ * Spinner
+ *
+ *
+ */
+
+Vue.component("spinner", require("vue-simple-spinner"));
+
+/*
+Plugins
+ */
+
+import Pagination from "./plugins/pagination";
+Vue.use(Pagination);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,11 +63,12 @@ Vue.component("mapState", mapState);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("example", require("./components/Example.vue"));
+Vue.component("example", require("./components/Example.vue").default);
 Vue.component(
   "coin-add-component",
-  require("./components/charts/AddComponent.vue")
+  require("./components/charts/AddComponent.vue").default
 );
+Vue.component("categories", require("./app.vue").default);
 Vue.component(
   "chart-component",
   require("./components/charts/ChartComponent.vue")
@@ -44,18 +79,6 @@ const app = new Vue({
 });
 Vue.use(VueRouter);
 Vue.use({ mapState });
-const routes = [
-  // { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-  // { path: '/users', component: require('./components/Users.vue').default },
-  // { path: '/profile', component: require('./components/Profile.vue').default },
-  // { path: '/projects', component: require('./components/Project.vue').default },
-  // { path: '/developer', component: require('./components/Developer.vue').default },
-  // { path: '/country', component: require('./components/settings/Country.vue').default },
-  // { path: '/region', component: require('./components/settings/Region.vue').default },
-  // { path: '/district', component: require('./components/settings/District.vue').default },
-  // { path: '/ward', component: require('./components/settings/Ward.vue').default },
-  // { path: '*', component: require('./components/Profile.vue').default },
-];
 
 const toast = Swal.mixin({
   toast: true,

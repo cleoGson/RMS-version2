@@ -32,7 +32,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-default">
-          <div class="card-body">
+          <div class="card-body card card-accent-primary">
  <div class="row">
              <div class="col-lg-6">
                   <div class="client card">

@@ -14,7 +14,7 @@
   <button class="btn btn-success  bold ">  Add New  <i class="fas fa-plus-circle fa-fw"></i> </button>
                    </a>
                    </div>
-<div class="card-body">
+<div class="card-body card card-accent-primary">
 <div class="table table-responsive">
 <table class="table table-responsive-sm table-bordered table-striped table-hover" id="familyrelationship">
 <thead>
