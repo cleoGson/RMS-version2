@@ -134,11 +134,18 @@ class ForumController extends Controller
         {
             $activeThread['latestPost'] = Post::with('user')->where('thread_id', $activeThread->id)->latest()->first();
         }
-        return response()->json([
-            'threadCount' => $threadsCount,
+
+        $data_provider=array(
+             'threadCount' => $threadsCount,
             'activeThreads' => $activeThreads,
             'user' => $user
-        ], 200);
+        );
+        return $data_provider;
+        // return response()->json([
+        //     'threadCount' => $threadsCount,
+        //     'activeThreads' => $activeThreads,
+        //     'user' => $user
+        // ], 200);
     }
 
 }

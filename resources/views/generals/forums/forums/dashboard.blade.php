@@ -14,7 +14,7 @@
                    </a>
                    </div>
 <div class="card-body card card-accent-primary">
- <categories></categories>
+ <example></example>
 </div>
 </div>
 

@@ -58,7 +58,7 @@ export default {
       },
       xAxis: {
         categories: [
-          "Jan",
+          "January",
           "Feb",
           "Mar",
           "Apr",

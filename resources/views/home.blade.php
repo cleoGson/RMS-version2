@@ -244,10 +244,14 @@
 </label>
 </div>
 </div>
-
 </div>
-<div height="400">
-{!! $chart->container() !!}
+</div>
+</div>
+   
+<div class="row">
+<div class="col-lg-12">
+<div class="card-body card card-accent-primary">
+ <chart-component></chart-component>
 </div>
 </div>
 </div>

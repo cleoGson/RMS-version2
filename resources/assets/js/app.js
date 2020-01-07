@@ -71,7 +71,7 @@ Vue.component(
 Vue.component("categories", require("./app.vue").default);
 Vue.component(
   "chart-component",
-  require("./components/charts/ChartComponent.vue")
+  require("./components/charts/ChartComponent.vue").default
 );
 
 const app = new Vue({

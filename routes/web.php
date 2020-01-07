@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.
      Route::resource('attachment', 'General\AttachmentController');
      Route::resource('attachmenttype', 'General\AttachmenttypeController');
      Route::resource('category', 'General\CategoryController');
+     Route::get('lists', 'General\CategoryController@getCats');
      Route::resource('forum', 'General\ForumController');
      Route::get('init', 'General\ForumController@init')->name('forum.init');
      Route::get('/forumdashboard', 'General\ForumController@indexForum')->name('forum.indexforum');

@@ -96,7 +96,7 @@ class CategoryController extends Controller
 
             for ($j = 0; $j < count($currentCategory['forum']); $j++)
             {
-                $currentForum = $currentCategory['fora'][$j];
+                $currentForum = $currentCategory['forum'][$j];
 
                 $currentForum['latest'] = Post::leftJoin('threads', 'posts.thread_id', '=', 'threads.id')
                     ->where('threads.forum_id', '=', $currentForum->id)
@@ -112,7 +112,6 @@ class CategoryController extends Controller
             }
 
         }
-
         return response()->json($cats, 200);
     }
 }
