@@ -1,77 +1,67 @@
 <template>
     <div>
-
-        <div v-if="categories">
-
-            <div class="container" v-for="category in categories" v-bind:key="category.id" style="margin-bottom: 13px">
-
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <div class="card card-default">
-                            <div class="card-header">{{ category.title }}</div>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-center align-content-center"
-                                    style="height: 100px"
-                                    v-for="forum in category.forum"
-                                    v-bind:key="forum.id">
-                                    <div style="width: 40%; display: inline-block;">
-                                        <h5 style="line-height: 75px;">
-                                            <router-link :to="{ name: 'forum', params: { id: forum.id } }">
-                                                {{ forum.title }}
-                                            </router-link>
-                                        </h5>
-                                    </div>
-                                    <div style="width: 20%; display: inline-block; text-align: center">
-                                            <span style="line-height: 75px;">
-                                                {{ forum.views }} / <strong>{{ forum.replies - 1 }}</strong>
-                                            </span>
-                                    </div>
-                                    <div style="width: 40%; display: inline-block; padding-top: 15px">
-                                        <router-link :to="{ name: 'thread', params: { id: forum.latest.thread_id } }">
-                                            {{ forum.latest.thread_title }}
-
-                                        </router-link>
-                                        <br/>
-                                        <span>by {{ forum.latest.user.name }} &middot; {{ forum.latest.created_at | friendlyDate }}</span>
-                                    </div>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- <navbar :app="this"></navbar> -->
+        <spinner class="bigSpinner"
+                 size="massive"
+                 line-fg-color="#4CAF50"
+                 v-if="$store.state.loading"
+                 message="Loading...">
+        </spinner>
+        <div v-else>
+            <transition name="fade">
+                <router-view :app="this" style="margin-top: 25px; margin-bottom: 50px"></router-view>
+            </transition>
         </div>
 
     </div>
 </template>
 
 <script>
-import CategorySearch from "../components/category-search";
+// import Navbar from "./components/navbar";
+import NProgress from "nprogress";
+
+import Helper from "../utils/helper";
+
 export default {
+  name: "app",
+  // components: {Navbar},
   data() {
     return {
-      categories: {}
+      user: null,
+      postsCount: 0,
+      activeThreads: null,
+      threadCount: 0,
+      loading: false,
+      helper: Helper
     };
   },
 
-  filters: {
-    friendlyDate(value) {
-      return moment(value).fromNow();
-    }
-  },
-  methods() {},
-
   mounted() {
-    axios.get("/general/lists").then(function(response) {
-      console.log(response.data);
-      $this.categories = response;
-    });
+    this.init();
   },
-  created() {}
+
+  methods: {
+    init() {
+      let $this = this;
+      axios.get("general/lists").then(function(response) {
+        $this.user = response.data.user;
+        $this.threadCount = response.data.threadCount;
+        $this.activeThreads = response.data.activeThreads;
+      });
+    }
+  }
 };
 </script>
 
-<style scoped>
+<style>
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.bigSpinner {
+  margin: 25% auto auto;
+}
 </style>

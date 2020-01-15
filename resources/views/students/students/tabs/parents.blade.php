@@ -1,6 +1,9 @@
 <div class="card">
 <div class="card-header">
 <i class="fa fa-align-justify"></i>Next of Kings  Details
+
+
+
   <a href="{{ route('general.familymember.show',$show->id) }}" class="float-right">
                          
   <button class="btn btn-success  bold "> Add Next of King <i class="fa fa-plus-circle fa-fw"></i> </button>
@@ -43,5 +46,8 @@
 </div>
 </div>
 </div>
+
+
+
 
 

@@ -7,7 +7,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 
 const routes = [
-  { path: "general/category", component: Categories, name: "categories" },
+  { path: "/general/category", component: Categories, name: "categories" },
 
   { path: "/forum/:id", component: Forum, name: "forum" },
   { path: "/thread/create", component: ThreadCreate, name: "thread.create" },

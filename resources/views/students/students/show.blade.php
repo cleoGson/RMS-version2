@@ -42,6 +42,9 @@
                       </div>
                     </div>
                     <div class="card-body text-center">
+                    </br>
+                    </br>
+                    </br>
                       <div class="client-avatar">
                       <!-- <img  width="200" height="200" src="https://d19m59y37dris4.cloudfront.net/admin/1-4-5/img/avatar-2.jpg" 
                       > -->
@@ -125,6 +128,8 @@
             </div>
             <br /><br /><br /><br />
         </div>
+
+
     </section>
 </section>
 @endsection

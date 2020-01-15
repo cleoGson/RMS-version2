@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add vuex
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add bootstrapmodal
 
 PATH: 
   /usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
@@ -14,7 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@ttskch/select2-bootstrap4-theme/README.md'
+  Error: https://registry.yarnpkg.com/bootstrapmodal: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:66058:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:129541:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:130513:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:130435:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -44,6 +54,7 @@ npm manifest:
       "@fortawesome/fontawesome-free": "5.2.0",
       "@fullcalendar/daygrid": "^4.3.0",
       "@ttskch/select2-bootstrap4-theme": "^1.3.2",
+      "babel-loader": "^8.0.6",
       "bootstrap": "^4.3.1",
       "bootstrap-datepicker": "^1.9.0",
       "bootstrap-sass": "^3.4.1",
@@ -78,7 +89,7 @@ npm manifest:
       "vue-simple-spinner": "^1.2.8",
       "vue-template-compiler": "^2.6.10",
       "vuejs-datatable": "^1.7.0",
-      "vuex": "^3.1.1",
+      "vuex": "^3.1.2",
       "webpack": "^4.41.2"
     }
   }
@@ -1253,7 +1264,7 @@ Lockfile:
       esutils "^2.0.2"
       js-tokens "^3.0.2"
   
-  babel-loader@^8.0.4:
+  babel-loader@^8.0.4, babel-loader@^8.0.6:
     version "8.0.6"
     resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.6.tgz#e33bdb6f362b03f4bb141a0c21ab87c501b70dfb"
     integrity sha512-4BmWKtBOBm13uoUwd08UwjZlaw3O9GWf456R9j+5YykFZ6LUIjIKLc0zEZf+hauxPOJs96C8k6FvYD09vWzhYw==
@@ -7079,10 +7090,10 @@ Lockfile:
       object-path "^0.11.4"
       vue "^2.5.17"
   
-  vuex@^3.1.1:
-    version "3.1.1"
-    resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
-    integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
+  vuex@^3.1.2:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.2.tgz#a2863f4005aa73f2587e55c3fadf3f01f69c7d4d"
+    integrity sha512-ha3jNLJqNhhrAemDXcmMJMKf1Zu4sybMPr9KxJIuOpVcsDQlTBYLLladav2U+g1AvdYDG5Gs0xBTb0M5pXXYFQ==
   
   watchpack@^1.6.0:
     version "1.6.0"

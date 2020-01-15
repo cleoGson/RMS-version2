@@ -74,9 +74,7 @@ export default {
   methods: {
     getCategories() {
       let $this = this;
-
       this.app.loading = true;
-
       this.app.request.get("categories").then(function(response) {
         $this.app.loading = false;
         $this.categories = response.data;

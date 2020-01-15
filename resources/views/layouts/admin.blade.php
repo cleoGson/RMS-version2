@@ -12,6 +12,24 @@
      <link rel="stylesheet" href="/css/app.css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
      <link href="{{ base_path('checkbox/css/dataTables.checkboxes.css') }}" rel="stylesheet" />
+     <style>
+     .fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.fade.out {
+  opacity: 0;
+}
+     
+     </style>
     @yield('styles')
        <script>
           window.Laravel = <?php echo json_encode([

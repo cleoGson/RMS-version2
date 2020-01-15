@@ -252,6 +252,7 @@
 <div class="col-lg-12">
 <div class="card-body card card-accent-primary">
  <chart-component></chart-component>
+<div id="container-highchart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 </div>
 </div>
 </div>
@@ -334,7 +335,92 @@
 </div>
 @endsection
 @section('scripts')
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
 {!! $chart->script() !!}
+<script>
+
+$(document).ready(function () {
+var options = {
+
+    chart: {
+        renderTo: 'container-highchart',
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: null
+    },
+    subtitle: {
+        text: null
+    },
+    credits: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y:.1f}</b>'
+    },
+    plotOptions: {
+        pie: {
+            colors: ['#739600', '#566CCC', '#6666ab'],
+            size: '100%',
+            //innerSize: 100,
+            depth: 45,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Amount',
+        data: []
+    }]
+}
+
+$.ajax({
+    type: "GET",
+    url: "{{route('sample.graph')}}",
+    data: {},
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    async: true,
+    success: OnSuccess,
+    error: OnError
+});
+
+function OnSuccess(data) {
+    $.each(data.d, function (key, value) {
+        options.series[0].data.push([value.Status_Color, value.Corrective_Action_ID]);
+    })
+    chart = new Highcharts.Chart(options);
+
+  }
+function OnError(data) {
+    alert('fail');
+}});
+ 
+</script>
+<script >
+$(function () {
+    var original_api_url = {{ $chart->id }}_api_url;
+
+    $(".sel").change(function(){
+
+        var year = $(this).val();
+
+        {{ $chart->id }}_refresh(original_api_url + "?year="+year);
+
+    });
+});
+
+</script>
 
 @parent
 

@@ -128,4 +128,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.
      Route::get('/currentthread/{id}', 'General\ThreadController@getThreadById')->name('thread.currentthread');
      Route::resource('post', 'General\PostController');    
 });
+
+Route::resource('sample', 'SampleController');
+Route::get('graph_load','SampleController@loadData')->name('sample.graph');
+ Route::get('chart-line-ajax', 'HomeController@chartLineAjax');
+Route::post('sample/update', 'SampleController@update')->name('sample.update');
+
+Route::get('sample/destroy/{id}', 'SampleController@destroy');
    
