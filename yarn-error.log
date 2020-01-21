@@ -1,11 +1,11 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add bootstrapmodal
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.21.1/libexec/bin/yarn.js add chart.js
 
 PATH: 
-  /usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
+  /usr/local/opt/mysql@8.0/bin:/usr/local/opt/openssl/bin:/usr/local/opt/openssl/bin:/usr/local/opt/openssl/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/Users/cleog/.npm-global/bin:/Users/cleog/.npm-packages/bin:/Users/cleog/Documents/mongodb/bin:/Users/cleog/Application/flutter/bin:$HOME/.composer/vendor/bin:/usr/local/opt/openssl/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/gettext/bin:/Users/cleog/arcanist/bin:/Users/cleog/.composer/vendor/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/cleog/Application/flutter/bin
 
 Yarn version: 
-  1.15.2
+  1.21.1
 
 Node version: 
   10.15.3
@@ -14,17 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/bootstrapmodal: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:66058:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:129541:22)
-      at Request.emit (events.js:189:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:130513:10)
-      at Request.emit (events.js:189:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:130435:12)
-      at Object.onceWrapper (events.js:277:13)
-      at IncomingMessage.emit (events.js:194:15)
-      at endReadableNT (_stream_readable.js:1125:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: EACCES: permission denied, unlink '/usr/local/var/www/laravel6/node_modules/@fullcalendar/daygrid/LICENSE.txt'
 
 npm manifest: 
   {

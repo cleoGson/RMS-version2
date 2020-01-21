@@ -145,16 +145,16 @@ $data=array(
         array(
           'Status_Color'=>'Blue',
           'Corrective_Action_ID'=>9,
-        ),
+           'graph_data'=>array(12,13,13,25,26)),
         array('Status_Color'=>'Green',
-          'Corrective_Action_ID'=>80),
+          'Corrective_Action_ID'=>80,
+          'graph_data'=>array(12,13,13,25,26)),
         array('Status_Color'=>'Yellow',
-          'Corrective_Action_ID'=>15),
-    );
-return response()->json([
-        'd'=>$data
-        ]
-    );
+          'Corrective_Action_ID'=>15,
+         'graph_data'=>array(12,13,13,25,26)),
+        );
+      return response()->json([
+        'd'=>$data]);
     }
 }
 

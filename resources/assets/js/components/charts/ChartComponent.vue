@@ -6,23 +6,36 @@ import Highcharts from "highcharts";
 export default {
   data() {
     return {
-      graphsCategoryData: [],
+      graphsCategoryData: [
+        49.9,
+        71.5,
+        106.4,
+        129.2,
+        144.0,
+        176.0,
+        135.6,
+        148.5,
+        216.4,
+        194.1,
+        95.6,
+        54.4
+      ],
       graphsCategoryData2: [],
       graphsCategoryData3: [
-        42.4,
-        33.2,
-        34.5,
-        39.7,
-        52.6,
-        75.5,
-        57.4,
-        60.4,
-        47.6,
-        39.1,
-        46.8,
-        51.1
+        49.9,
+        71.5,
+        106.4,
+        129.2,
+        144.0,
+        176.0,
+        135.6,
+        148.5,
+        216.4,
+        194.1,
+        95.6,
+        54.4
       ],
-      graphsCategoryDat4: [],
+      graphsCategoryData4: [],
       graphscolumn: [
         "Jan",
         "Feb",
@@ -40,23 +53,11 @@ export default {
     };
   },
   methods: {
-    loadCategoryColumn() {
-      this.graphscolumn = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ];
+    loadCategoryColum1() {
+      axios.get("sample.graph").then(res => {
+        this.graphsCategoryData2 = res.data.d.graph_data;
+      });
     },
-
     loadCategoryData() {
       this.graphsCategoryData = [
         49.9,
@@ -106,7 +107,7 @@ export default {
       ];
     },
     loadCategoryData4() {
-      this.graphsCategoryDat4 = [
+      this.graphsCategoryData4 = [
         42.4,
         33.2,
         34.5,
@@ -183,11 +184,11 @@ export default {
         },
         {
           name: "London",
-          data: this.loadCategoryData3
+          data: this.graphsCategoryData3
         },
         {
           name: "Berlin",
-          data: this.loadCategoryData4
+          data: this.graphsCategoryData4
         }
       ]
     });

@@ -17,13 +17,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
     Route::resource('users', 'Admin\UsersController');
-    Route::post('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
+    Route::get('permission_user/{user}', 'Admin\UsersController@userPermission')->name('users.permission');
+    Route::post('permissionUser', 'Admin\UsersController@permissionsAssignment')->name('users.process_permission');
+    Route::get('addadminrole/{user}', 'Admin\UsersController@addAdminRole')->name('users.ad_adminrole')->middleware(['auth']);
+    Route::get('removedadminrole/{user}', 'Admin\UsersController@removeAdminRole')->name('users.remove_adminrole')->middleware(['auth']);
+    //Route::post('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
     Route::resource('log', 'Admin\LogController');
     Route::get('logsdata', 'Admin\LogController@data')->name('logs.data');
     Route::get('activitylogs', 'Admin\LogController@activityIndex')->name('activitylogs.index');
     Route::get('activitylogsdata', 'Admin\LogController@dataActivityLogs')->name('activitylogs.data');
-    Route::get('permissionUser/{user}', 'Admin\UsersController@userPermission')->name('permission.user');
-    Route::patch('permissionUser/{user}', 'Admin\UsersController@userPermissionsAssignment')->name('permission.userprocess');
     Route::resource('staff', 'Admin\StaffController');
     Route::get('staff/copy/{staff}', 'Admin\StaffController@copyToUser')->name('staff.copy');
     Route::get('/relatives/{staff}', 'Admin\StaffController@studentRelatives')->name('staff.relatives');
@@ -88,8 +90,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'examination', 'as' => 'exam
       Route::get('list_student/{classid}/{yearid}','Examination\IndividualreportController@studentsLists')->name('individualreport.student_list');
       Route::get('result_sheet/{studentid}/{year_id}/{classsetup_id}','Examination\IndividualreportController@resultSheets')->name('individualreport.details');
       Route::get('dependantdata/{semester}/{setup}','Examination\ExaminationresultController@dependantData');
-   
 });
+
 Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('studentstatus', 'Student\StudentstatusController');
     Route::resource('student', 'Student\StudentController');
@@ -104,9 +106,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.
     Route::resource('durationunit', 'Student\DurationunitController');
     Route::resource('academicyearStudent', 'Student\AcademicyearStudentController');
     Route::resource('promotion','Student\PromotionController');   
-    Route::resource('studentAccount','Student\StudentAccount');    
-    
+    Route::resource('studentAccount','Student\StudentAccount');        
 });
+
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'applicant', 'as' => 'applicant.'], function () {
     

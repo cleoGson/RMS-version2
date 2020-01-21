@@ -36,12 +36,12 @@
         <form action="{{ route("student.studentAccount.update", [$studentAccount->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($studentAccount) ? $studentAccount->name : '') }}" required>
-                @if($errors->has('name'))
+            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                <label for="username">User Name*</label>
+                <input type="text" id="username" name="username" class="form-control" value="{{ old('username', isset($studentAccount) ? $studentAccount->username : '') }}" required>
+                @if($errors->has('username'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('name') }}
+                        {{ $errors->first('username') }}
                     </em>
                 @endif
                 <p class="helper-block">
@@ -58,18 +58,6 @@
                 @endif
                 <p class="helper-block">
                     {{ trans('cruds.user.fields.email_helper') }}
-                </p>
-            </div>
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
-                @if($errors->has('password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.password_helper') }}
                 </p>
             </div>
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">

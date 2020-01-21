@@ -14,6 +14,9 @@ import VueProgressBar from "vue-progressbar";
 import Highcharts from "highcharts";
 import { mapState } from "vuex";
 import Vuex from "vuex";
+import "chart.js";
+import "hchs-vue-charts";
+
 import Swal from "sweetalert2";
 import "vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css";
 window.Swal = Swal;
@@ -25,7 +28,7 @@ Vue.use(Highcharts);
 Vue.component("mapState", mapState);
 import Store from "./store";
 Vue.use(Vuex);
-
+Vue.use(window.VueCharts);
 const store = new Vuex.Store(Store);
 
 /**
@@ -64,6 +67,7 @@ Vue.use(Pagination);
  */
 
 Vue.component("example", require("./components/Example.vue").default);
+Vue.component("chart-js", require("./components/chart.vue").default);
 Vue.component(
   "coin-add-component",
   require("./components/charts/AddComponent.vue").default

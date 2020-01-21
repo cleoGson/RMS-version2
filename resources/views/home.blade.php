@@ -212,8 +212,12 @@
 </div>
 
 </div>
+
 <div height="400">
 {!! $chart->container() !!}
+</div>
+<div height="400">
+<chart-js></chart-js>
 </div>
 </div>
 </div>
@@ -251,8 +255,7 @@
 <div class="row">
 <div class="col-lg-12">
 <div class="card-body card card-accent-primary">
- <chart-component></chart-component>
-<div id="container-highchart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="container-highchart" width="100%" style="height: 400px; margin: 0 auto"></div>
 </div>
 </div>
 </div>
@@ -349,14 +352,14 @@ var options = {
         type: 'pie',
         options3d: {
             enabled: true,
-            alpha: 45
+            alpha: 360
         }
     },
     title: {
-        text: null
+        text: 'Result Graphical Representation'
     },
     subtitle: {
-        text: null
+        text:null
     },
     credits: {
         enabled: false
@@ -379,9 +382,18 @@ var options = {
         }
     },
     series: [{
-        name: 'Amount',
+        name: 'Marks',
         data: []
-    }]
+    },
+    {
+        name: 'Marks2',
+        data: []
+    },
+     {
+        name: 'Marks3',
+        data: []
+    }
+]
 }
 
 $.ajax({
@@ -397,7 +409,10 @@ $.ajax({
 
 function OnSuccess(data) {
     $.each(data.d, function (key, value) {
+        //options.series[0].name='Name2';
         options.series[0].data.push([value.Status_Color, value.Corrective_Action_ID]);
+        // options.series[1].data.push([value.Status_Color, value.Corrective_Action_ID]);
+        // options.series[2].data.push([value.Status_Color, value.Corrective_Action_ID]);
     })
     chart = new Highcharts.Chart(options);
 

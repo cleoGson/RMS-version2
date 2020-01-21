@@ -41,6 +41,10 @@ class RouteServiceProvider extends ServiceProvider
                         $id=Crypt::decrypt($value);
             return Staff::where('id',$id)->first();
         });
+             Route::bind('users', function ($value) {
+                        $id=Crypt::decrypt($value);
+             return User::where('id',$id)->first();
+        });
         
     }
 

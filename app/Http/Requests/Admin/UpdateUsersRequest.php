@@ -23,8 +23,6 @@ class UpdateUsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.auth()->user()->id,
             'roles' => 'required',
         ];
     }

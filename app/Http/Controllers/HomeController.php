@@ -34,9 +34,10 @@ class HomeController extends Controller
         // }
         // $age=substr((date('Ymd')-date('Ymd', strtotime(date('1994-07-21 00:00:00')))), 0, -4);
         $chart = new UserChart();
-        $chart->labels(['One', 'Two', 'Three', 'Four','Five']);
-        $chart->dataset('My dataset', 'line', [1, 2, 3, 4,9]);
-        $chart->dataset('My dataset 2', 'line', [4, 3, 2, 1,9]);
+        $chart->labels(['One', 'Two', 'Three', 'Four','Five','six','seven']);
+        $chart->dataset('My dataset', 'bar', [1, 2, 3, 4,9])->backgroundcolor('#4545df');
+        $chart->dataset('My dataset 2', 'bar', [4, 3, 2, 1,9])->backgroundcolor('#3ae374');
+        $chart->dataset('data set 3', 'bar',array(12,12,3,4,5,7,6))->backgroundcolor('#3097d1');
         return view('home',compact('chart'));
     }
 }

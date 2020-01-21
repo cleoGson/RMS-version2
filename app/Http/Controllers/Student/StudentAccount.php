@@ -81,7 +81,8 @@ class StudentAccount extends Controller
     public function edit(User  $studentAccount)
     {
           $roles = Role::get()->pluck('name', 'name');
-        return view('students.accounts.edit',compact('studentAccount','roles'));
+          $rolesin=$studentAccount->roles->pluck('id')->toArray();
+         return view('students.accounts.edit',compact('studentAccount','roles','rolesin'));
     }
 
     /**

@@ -1,15 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
-    </div>
-
-    <div class="card-body card card-accent-primary">
-        <div class="table-responsive">
-
+<section class="content-wrapper">
     <div class="content-header">
-        <div class="container-fluid">
+    <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
@@ -17,14 +10,17 @@
                     </h1>
                 </div>
 
-                <div class="col-sm-6">
+               <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard-index') }}">Home</a>
+                        <a  class="blue" href="{{ url('/') }}">Home</a>
+       
                         </li>
-
-                        <li class="breadcrumb-item active">
-                        User Permission
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.users.index') }}" class="blue">Users List</a>
+                        </li>
+                        <li class="breadcrumb-item active" class="blue">
+                            Edit User
                         </li>
                     </ol>
                 </div>
@@ -36,16 +32,13 @@
         <div class="container-fluid">
              <div class="card card-default">
           <div class="card-body card card-accent-primary">
-       
-          <div class="card-body card card-accent-primary">
             <div class="row">
                     <div class="col-md-4">
                         <h3>Username :</h3> {{ $user->username }}
                     </div>
-                    <div class="col-md-4">
+                   
+                    <div class="col-md-8">
                         <h3>Email Address : </h3>{{ $user->email }}
-                    </div>
-                    <div class="col-md-4">
                         <h3>Attached Roles</h3>
                         @if($user->roles)
                             @foreach($user->roles as $role)
@@ -56,12 +49,15 @@
                         @endif
                     </div>
                 </div>
-                        <form class="form-horizontal" method="POST" action="{{ route('permission-user-process', ['id' => $user->id]) }}">
+                   <div class="row">
+                    <div class="col-md-12">
+                    <form class="form-horizontal" method="POST" action="{{ route('admin.users.process_permission') }}">
                         {{ csrf_field() }}
-                            {{ method_field('PATCH') }}
+                            {{ method_field('POST') }}
                             <div class="form-group">
                                 <h3 class="text-center">Attach Permissions</h3>
                                 <div class="form-group row">
+                                    <input type="hidden" name="user_id" value="{{$user->id}}">
                                 @foreach($permissions as $permission)
                                     <div class="col-md-3">
                                      
@@ -91,15 +87,15 @@
                                     Update
                                 </button>
                     
-                                <a href="{{route('user-index')}}" class="btn btn-warning">
+                                <a href="{{route('admin.users.index')}}" class="btn btn-warning">
                                     Cancel
                                 </a>
                             </div>
                              </div>
                         </form>
                         </div>
-                    </div>
-
+                        </div>
+                        </div>
                     </div>
                 </div>
                 </div>

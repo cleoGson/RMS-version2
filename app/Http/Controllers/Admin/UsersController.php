@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
 use Yajra\DataTables\DataTables;
+use App\Permission;
+use DB;
 class UsersController extends Controller
 {
     /**
@@ -19,9 +21,38 @@ class UsersController extends Controller
      */
     public function index(DataTables $dataTables)
     {
-    
-       $users=User::all();
-        return view('admin.users.index', compact('users'));
+            if (request()->wantsJson()) {
+            $template = 'admin.users.actions';
+            return $dataTables->eloquent(User::with(['roles','permissions'])->where(
+            'userable_type','=','App/Model/Staff'
+            )->select('users.*'))
+                ->editColumn('action', function ($row) use ($template) {
+                    $gateKey = 'admin.users';
+                    $routeKey = 'admin.users';
+                    return view($template, compact('row', 'gateKey', 'routeKey'));
+                })
+                ->editColumn('status', function($row){
+                return $row->status == 1 ? 'Active' : 'Not Active';   
+                })
+                    ->editColumn('verifiedstatus', function($row){
+                return $row->verifiedstatus == 1 ? 'Yes' : 'No';   
+                })
+             ->addColumn('user_roles', function ($row) {
+                return $row->roles->map(function ($roleName) {
+                    return
+                        ucfirst(strtolower($roleName->name));
+                        
+             })->implode(', '); })
+            ->addColumn('user_permission', function ($row) {
+                return $row->permissions->map(function ($permissionName) {
+                    return
+                        ucfirst(strtolower($permissionName->name));
+                        
+             })->implode(', '); })
+             
+         ->make(true);
+         }
+        return view('admin.users.index');
     }
 
     /**
@@ -46,8 +77,6 @@ class UsersController extends Controller
     public function store(StoreUsersRequest $request)
     {
                          
-                          
-
         $data=[
             'email'=>'email', 
             'username'=>'email', 
@@ -71,30 +100,33 @@ class UsersController extends Controller
     /**
      * Show the form for editing User.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        
-        $roles = Role::get()->pluck('name', 'name');
-
-        return view('admin.users.edit', compact('user', 'roles'));
+        $roles = Role::pluck('display_name', 'id')->toArray();
+        $show=$user;
+        $rolesin =$user->roles->pluck('id')->toArray();
+        return view('admin.users.edit', compact('show', 'rolesin','roles'));
     }
 
     /**
      * Update User in storage.
      *
      * @param  \App\Http\Requests\UpdateUsersRequest  $request
-     * @param  int  $id
+       * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUsersRequest $request, User $user)
     {
-        $user->update($request->all());
+    if(!is_null($user)){
         $roles = $request->input('roles') ? $request->input('roles') : [];
+        if(!is_null($roles)){
         $user->syncRoles($roles);
-
+        }
+        return redirect()->route('admin.users.index');
+      }
         return redirect()->route('admin.users.index');
     }
 
@@ -102,50 +134,41 @@ class UsersController extends Controller
     {
        
         $user->load('roles');
-        return view('admin.users.show', compact('user'));
+        return view('admin.users.show', compact('users'));
     }
 
 
       /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function userPermission(User $user)
     {
-        $extrapermission = [];
         $attachedpermissions = [];
         $admin_default_permissions = [];
-        foreach ($user->Permissions as $extrapermissions) {
-            $extrapermission[] = $extrapermissions->id;
+        $admin_default_roles=[];
+        $unique_permissions=[];
+        $extrapermission =$user->permissions->pluck('id')->toArray();
+        foreach ($user->roles as $roles_assigned) {
+        if(!is_null($roles_assigned)){
+         $data=$roles_assigned->permissions->pluck('id')->toArray();
+        $attachedpermissions=array_merge($attachedpermissions,$data);
         }
-        foreach ($user->roles as $roles) {
-          
-            foreach ($roles->permissions as $role_permission) {
-                $attachedpermissions[] = $role_permission->id;
-            }
         }
-       
         if (count($attachedpermissions) > 0) {
             $attachedpermissions = array_unique($attachedpermissions);
         }
-      
-        $adminroles = Role::whereIn('id', [1, 2])->get();
-        $adminrole2 =Role::all();
-       
-        foreach ($adminrole2 as $adminrole_default) {
-            //dd($adminrole_default);
-            dd($adminrole_default->permissions);
-            foreach ($adminrole_default->permissions as $admin_permission) {
-               
-                $admin_default_permissions[] = $admin_permission->id;
-            }
+        $admin_default_roles=DB::table('permission_role')->select('permission_id')->whereIn('role_id', [1,2])->get()->pluck('permission_id')->toArray();
+        if(!is_null($admin_default_roles)){
+          $admin_default_roles = array_unique($admin_default_roles);
+         }
+        $allattachedpermissions = array_merge($admin_default_roles, $attachedpermissions);
+        if(!is_null($allattachedpermissions)){
+         $unique_permissions = array_unique($allattachedpermissions);
         }
-        $uniq_admin_default_permissions = array_unique($admin_default_permissions);
-        $allattachedpermissions = array_merge($uniq_admin_default_permissions, $attachedpermissions);
-
-        $permission = Permission::whereNotIn('id', $allattachedpermissions)->get();
+        $permission = Permission::whereNotIn('id', $unique_permissions)->get();
         
         return view('admin.users.user_permissions',
             [
@@ -155,26 +178,99 @@ class UsersController extends Controller
             ]);
     }
 
-    public function userPermissionsAssignment(Request $request, $id)
+    public function permissionsAssignment(Request $request)
     {
-        $user = User::findorFail($id);
+        $user = User::findorFail($request->input('user_id'));
         $permissions = $request->input("permission_ids");
         $user->syncPermissions($permissions, 'App/User');
         alert()->success('User specific permission. ', 'Specific Permission Successfully Assigned', 'success')->persistent('Ok');
         return redirect()->back();
     }
 
+      public function addAdminRole($id)
+    {
+        //1 should be an admin role
+        $assigned_roles=Auth::user()->roles->pluck('id')->toArray();
+        $adminrole=in_array(1,$assigned_roles) ? true : false;
+        if ($adminrole) {
+            $user = User::findOrFail($id);
+            $user->attachRoles([1]);
+        alert()->success('Role assigned . ', 'Admin Role has been added successfully', 'success')->persistent('Ok');
+
+        } else {
+            \Session::flash('delete', 'Access denied, Your not Allowed');
+        }
+        return redirect()->route('admin.users.index');
+    }
+
+    public function removeAdminRole($id)
+    {
+        $assigned_roles=Auth::user()->roles->pluck('id')->toArray();
+        $adminrole=in_array(1,$assigned_roles) ? true : false;
+        if ($adminrole) {
+           $user = User::findOrFail($id);
+           $user->detachRoles([1]);
+           alert()->warning('Role removed . ', 'Admin Role has been removed ', 'warning')->persistent('Ok');
+
+        } 
+
+       alert()->warning('Access denied . ', 'Sorry your not authorised to perform this action ', 'warning')->persistent('Ok');
+        return redirect()->route('admin.users.index');
+    }
+
+
+    public function activateAccount(Request $request, $id)
+    {
+        $user = User::find($id);
+        $deactivationfactor = $user->accountStatus->name;
+        if ($user->deactivation_factor < 4) {
+            \Session::flash('delete', " Sorry!! user account deactivated due to   $deactivationfactor Cannot be activated.");
+        } elseif ($id == auth()->user()->id) {
+            \Session::flash('delete', " Sorry!! you can not activate Your own account.");
+        } else {
+            $user->update([
+                'status' => 1,
+                'deactivation_factor' => null,
+            ]);
+            \Session::flash('success', 'You have Successfully Activate  an Account');
+        }
+        return redirect()->back();
+    }
+    public function deactivateAccount(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($id == auth()->user()->id) {
+            \Session::flash('delete', " Sorry!! you can not Deactivate  Your own Account.");
+           return redirect()->back();  
+        } 
+          $assigned_roles=$user->roles->pluck('id')->toArray();
+          $adminrole=in_array(1,$assigned_roles) || in_array(2,$assigned_roles)  ? true : false;  
+          if($adminrole){
+            $user->update([
+                'account_status' => 0,
+                'deactivation_factor' => request('factor'),
+             ]);
+            \Session::flash('success', 'You have Successfully Deactivate  an Account');
+          }
+        return redirect()->back();
+        }
+      
     /**
      * Remove User from storage.
      *
-     * @param  int  $id
+       * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-       
+        $assigned_roles=$user->roles->pluck('id')->toArray();
+        $adminrole=in_array(1,$assigned_roles) || in_array(2,$assigned_roles)  ? true : false;  
+        if($adminrole){
         $user->delete();
-
+        \Session::flash('delete', " Sorry!! you can not Deactivate  Your own Account.");
+         return redirect()->route('admin.users.index');
+        }
+        alert()->warning('Access denied . ', 'Sorry your not authorised to perform this action ', 'warning')->persistent('Ok');
         return redirect()->route('admin.users.index');
     }
 

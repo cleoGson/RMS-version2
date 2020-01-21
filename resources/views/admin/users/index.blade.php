@@ -16,89 +16,65 @@
 
     <div class="card-body card card-accent-primary">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-User">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-User" id="userAccount" width="100%">
                 <thead>
                     <tr>
-                        <th width="10">
-
+                     
+                        <th>
+                           Email
                         </th>
                         <th>
-                         #
-                        </th>
-                        <th>
-                            User Name
-                        </th>
-                        <th>
-                            Email
+                            User name
                         </th>
                         <th>
                             Account Status
+                        </th>
+                        <th width="10">
+                            Role(s)
                         </th>
                         <th> 
                         Specific Permission
                         </th>
                         <th>
-                           Roles
+                           pessword Changed at
+                        </th>
+                         <th>
+                           View
                         </th>
                         <th>
-                            &nbsp;
+                            Actions
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($users as $key => $user)
-                        <tr data-entry-id="{{ $user->id }}">
-                            <td>
-
-                            </td>
-                          
-                            <td>
-                                {{ $user->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->username ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->email ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->status ==1  ? 'Active' : '' }} 
-                            </td>
-                            <td> 
-                                <a href="{{ route('admin.permission.user', $user->id) }}"
-                                        class="btn btn-link sims-show">
-                                        Assign                                    </a> 
-                                    <ul>
-                                    @foreach($user->Permissions as $permission_user)
-                                    <span class="badge badge-info">  {{$permission_user->name}} </span>
-                                    @endforeach
-                                        </ul>                                          
-                                </td>
-                            <td>
-                                @foreach($user->roles->pluck('name') as $role)
-                                    <span class="badge badge-info">{{ $role }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
-                                    {{ trans('global.view') }}
-                                </a>
-
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
-                                    {{ trans('global.edit') }}
-                                </a>
-
-                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                </form>
-
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </tbody>
+                  <tfoot>
+                    <tr>
+                     
+                        <th>
+                           Email
+                        </th>
+                        <th>
+                            User name
+                        </th>
+                        <th>
+                            Account Status
+                        </th>
+                        <th width="10">
+                            Role(s)
+                        </th>
+                        <th> 
+                        Specific Permission
+                        </th>
+                        <th>
+                           pessword Changed at
+                        </th>
+                         <th>
+                           View
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 
@@ -108,49 +84,142 @@
 @endsection
 @section('scripts')
 @parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('users_manage')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.users.mass_destroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+ <script>
+        $(function () {
+            var url = '/admin/users';
+            var start = '';
+            var end = '';
+            var orign = '/admin/users';
+            function format ( d ) {
+    //alert(JSON.stringify(d));
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" class="table table-responsive-sm table-bordered table-striped" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Email:</td>'+
+            '<td colspan="3">'+d.email+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Username:</td>'+
+            '<td colspan="3">'+d.username+'</td>'+
+        '</tr>'+
+          '<tr>'+
+            '<td>User Roles:</td>'+
+            '<td colspan="3">'+d.user_roles+'</td>'+
+        '</tr>'+
+          '<tr>'+
+            '<td>User Permission:</td>'+
+            '<td colspan="3">'+d.user_permission+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>verified:</td>'+
+            '<td colspan="3">'+d.verifiedstatus+'</td>'+
+        '</tr>'+
+            '<tr>'+
+            '<td>Account Status:</td>'+
+            '<td colspan="3">'+d.status+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Created At:</td>'+
+            '<td colspan="3">'+d.status+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Updated By:</td>'+
+            '<td colspan="3">'+d.email+'</td>'+
+        '</tr><tr>'
+        +'<td>Updated At:</td>'+
+            '<td  colspan="3">'+d.updated_at+'</td>'+
+        '</tr>'+
+    '</table>';
+}
+            
+            var table = $('#userAccount').DataTable({
+                serverSide: true,
+                processing: true,
+                "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
+                ajax: {
+                    url: url,
+                    data: function (d) {
+                        d.status = $('select[name=status]').val()
+                    },
+                },
+                columns: [
+                    {data: 'email', name: 'email'},
+                    {data: 'username', name: 'username'},
+                    {data: 'status', name: 'status'},
+                    {data: 'user_roles', name: 'user_roles'},
+                    {data: 'user_permission', name: 'user_permission'},
+                    {data: 'password_changed_at', name: 'password_changed_at'},
+                    {
+                        className:      'details-control',
+                        orderable:      false,
+                        searchable: false,
+                        data:           null,
+                        defaultContent: "<button class='btn btn-success'> <i class='fa fa-eye'></i> View</button>"
+                     },
+                   {data: 'action', name: 'action', orderable: false, searchable: false}
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+                ], dom: 'lBfrtip<"actions">',
+                columnDefs: [],
+                "iDisplayLength": 15,
+                "aaSorting": [],
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: window.copyButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: window.csvButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: window.excelButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: window.pdfButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: window.printButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                ]
+            });
+        
 
-        return
-      }
+        $('#userAccount tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+        });
+    </script>
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-        $($.fn.dataTable.tables(true)).DataTable()
-            .columns.adjust();
-    });
-})
 
-</script>
 @endsection
