@@ -4,7 +4,7 @@ namespace App\Student;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OptionalSubject extends Model
+class OptionalSubjectSelection extends Model
 {
     //
 }

@@ -19,10 +19,8 @@ class CreateOptionalSubjectsTable extends Migration
             $table->foreign('academicyear_student_id')->references('id')->on('academicyear_students');
             $table->bigInteger('subject_id')->unsigned()->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->bigInteger('class_id')->unsigned()->nullable();
-            $table->foreign('class_id')->references('id')->on('classrooms');
-            $table->bigInteger('year_id')->unsigned()->nullable();
-            $table->foreign('year_id')->references('id')->on('academicyears');
+            $table->bigInteger('semester_id')->unsigned()->nullable();
+            $table->foreign('semester_id')->references('id')->on('semesters');
             $table->timestamps();
         });
     }

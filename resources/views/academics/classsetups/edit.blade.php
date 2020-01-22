@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-body card card-accent-primary">
-                    {!! Form::model($show,['method'=>'PATCH','route'=>['academic.classsetup.update',$show->id],'files'=>true]); !!}
+                    {!! Form::model($show,['method'=>'PATCH','route'=>['academic.classsetup.update',encrypt($show->id)],'files'=>true]); !!}
                     @include('academics.classsetups.form')
                     <div class="row">
                         <div class="col-md-12 form-group text-right">

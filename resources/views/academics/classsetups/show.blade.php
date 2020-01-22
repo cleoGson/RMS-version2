@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                        Class set up Details  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Class Setup Details  <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                         </p>
                     </h1>
                 </div>
@@ -19,10 +19,10 @@
        
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('student.student.index') }}" class="blue">student List</a>
+                            <a href="{{ route('academic.classsetup.index') }}" class="blue">Class setup List</a>
                         </li>
                         <li class="breadcrumb-item active" class="blue">
-                            Class set up Details
+                            Class Setup Details
                         </li>
                     </ol>
                 </div>
@@ -36,94 +36,87 @@
 
 
                 <div class="card">
-<div class="card-header"> Setup Details
+<div class="card-header">Class  Setups Details
 <div class="card-header-actions">
 </div>
 </div>
 <div class="card-body card card-accent-primary">
 <div class="jumbotron">
 <h1 class="display-3">{{$show->name}}</h1>
-<p class="lead">This shows the details for the setup.</p>
 <hr class="my-4">
-<p>The page shows all curricullum for the above  mentioned class. the specified curricular are Examination curriculum, Grading system, and Subjects/courses allocated for each Semester .</p>
+<p>The page shows all curricullum for {{$show->name}}. the specified curricular are Examination curriculum, Grading system, and Subjects/courses allocated for each Semester .</p>
 <p class="lead">
+  <a class="btn btn-primary btn-s" href="#" role="button"> <i class="fa fa-download"></i>Curriculum</a>
+ </p>
 </div>
 </div>
 </div>
-<div class="row">
-<div class="col-md-12 mb-4">
-
-<fieldset class="border p-2">
-   <legend  class="w-auto badge-info">Subject Curriculum</legend>
-     <ul class="list-group">
-   @foreach($show->subjectCurriculars as $subjcurricular)
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-   {{$subjcurricular->name}}
-    <span class="badge-primary badge-pill"></span>
-  </li>
-  @endforeach
-   
-</ul>
-
-</fieldset>
-</br>
-
-<fieldset class="border p-2">
-   <legend  class="w-auto badge-info">Grading Curriculum</legend>
-   <ul class="list-group">
-   @foreach($show->gradings->gradeCurricular as $grades)
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-   {{$grades->name}}
-    <span class="badge-primary badge-pill"></span>
-
-  </li>
-  @endforeach
-   
-</ul>
-</fieldset>
-</br>
-
-
-<fieldset class="border p-2">
-   <legend  class="w-auto badge-info" >Examination Curriculum</legend>
-  <ul class="list-group">
-   @foreach($show->examinationCurriculars as $examinatioins)
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-   {{$examinatioins->name}}
-    <span class="badge-primary badge-pill"></span>
-  </li>
-  @endforeach
-   
-</ul>
-</fieldset>
-</br>
-
-</div>
-</div>
-
 <div class="row">
 <div class="col-md-12 mb-4">
 <div class="nav-tabs-boxed">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-book-open" style="color:blue"></i> Details</a></li>
-<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-users" style="color:blue"></i> Next of King</a></li>
-<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" aria-selected="false"><i class="fa fa-users" style="color:blue"></i>Registration</a></li>
-<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#education-1" role="tab" aria-controls="education" aria-selected="false"><i class="fa fa-users" style="color:blue"></i>Education History</a></li>
+<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="true"><i class="fa fa-book" style="color:light-blue; font-size:18px;"></i> Subject Curriculum</a></li>
+<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-award" style="color:light-blue; font-size:18px;"></i> Examination Curriculum </a></li>
+<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-graduation-cap" style="color:light-blue; font-size:18px;"></i> Grading Curriculum</a></li>
+<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#gpa-1" role="tab" aria-controls="gpa" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-balance-scale" style="color:light-blue; font-size:18px;"></i> GPA Classes</a></li>
 </ul>
 <div class="tab-content">
 <div class="tab-pane active" id="home-1" role="tabpanel">
- details 1
+    <table  class="table table-responsive-sm table-bordered table-striped table-hover">
+   @foreach($show->subjectCurriculars as $subjcurricular)
+ 
+    <tr ><th>Code </th><th>{{$subjcurricular->name}}</th> <th>Display Name </th> <th>Units</th> <th>Status</th></tr>
+   @foreach($subjcurricular->curricularSubjects as $subjects)
+    <tr><td>{{$subjects->code}} </td> <td> {{$subjects->name}} </td> <td> {{$subjects->display_name}}</td> <td>{{$subjects->units}}</td> <td>  {!!$subjects->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!} </td>
+  
+
+    </tr>
+    @endforeach
+   
+
+  @endforeach
+      </table>
 </div>
 
 <div class="tab-pane" id="profile-1" role="tabpanel">
+ <table  class="table table-responsive-sm table-bordered table-striped table-hover">
+   @foreach($show->examinationCurriculars as $examinatioins)
+   <tr><th>{{ $examinatioins->name}}</th> <th>Marks</th> <th> Out Of</th> <th>Status</th></tr>
+   @foreach($examinatioins->examinationCurriculars as $examinations_data)
+    <tr>
+    <td>{{$examinations_data->partial_name}}  </td> <td>{{$examinations_data->marks}} </td> <td>{{$examinations_data->out_of}} </td> <td>{!!$examinations_data->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!}  </td>
+  
 
-details 2
+    </tr>
+    @endforeach
+   
+
+  @endforeach
+      </table>
 </div>
 <div class="tab-pane" id="registration-1" role="tabpanel">
-details 3
+   <table  class="table table-responsive-sm table-bordered table-striped table-hover">
+    <tr><th>{{ $examinatioins->name}}</th> <th>Minimum marks</th> <th> Maximum Marks</th> <th>Grade Point </th> <th>Remarks </th></tr>
+   @foreach($show->gradings->gradeCurricular as $grades_data)
+       <tr>
+    <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
+  
+
+    </tr>
+ 
+   
+  @endforeach
+  </table>
 </div>
-<div class="tab-pane" id="education-1" role="tabpanel">
-details 4
+<div class="tab-pane" id="gpa-1" role="tabpanel">
+<table  class="table table-responsive-sm table-bordered table-striped table-hover">
+<tr><th>Class</th> <th> From</th> <th>To</th> </tr>
+  @foreach($show->gpa->gpaCurricular as $gpa)
+   <tr>
+    <td>  {{$gpa->name}}  </td> <td>{{$gpa->from}} </td> <td>{{$gpa->to}} </td> 
+    </tr>
+  @endforeach
+</table>
 </div>
 </div>
 </div>

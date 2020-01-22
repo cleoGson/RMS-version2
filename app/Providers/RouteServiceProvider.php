@@ -5,6 +5,7 @@ use Crypt;
 use App\Model\Student;
 use App\Model\Staff;
 use App\User;
+use App\Model\Classsetup;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -29,21 +30,26 @@ class RouteServiceProvider extends ServiceProvider
         
 
         parent::boot();
-        Route::bind('student', function ($value) {
-                        $id=Crypt::decrypt($value);
-            return Student::where('id',$id)->first();
+        Route::bind('student', function ($valuestudent) {
+                       $idstudent=Crypt::decrypt($valuestudent);
+            return Student::where('id',$idstudent)->first();
         });
-            Route::bind('studentAccount', function ($value) {
-                        $id=Crypt::decrypt($value);
-            return User::where('id',$id)->first();
+            Route::bind('studentAccount', function ($valuesa) {
+                        $idsa=Crypt::decrypt($valuesa);
+            return User::where('id',$idsa)->first();
         });
-          Route::bind('staff', function ($value) {
-                        $id=Crypt::decrypt($value);
-            return Staff::where('id',$id)->first();
+          Route::bind('staff', function ($valuestaff) {
+                        $idstaff=Crypt::decrypt($valuestaff);
+            return Staff::where('id',$idstaff)->first();
         });
-             Route::bind('users', function ($value) {
-                        $id=Crypt::decrypt($value);
-             return User::where('id',$id)->first();
+        Route::bind('users', function ($valueuser) {
+                        $iduser=Crypt::decrypt($valueuser);
+             return User::where('id',$iduser)->first();
+        });
+
+         Route::bind('classsetup', function ($valuesetup) {
+                        $idsetup=Crypt::decrypt($valuesetup);
+             return Classsetup::where('id',$idsetup)->first();
         });
         
     }

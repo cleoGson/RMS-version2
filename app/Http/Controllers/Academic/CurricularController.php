@@ -83,7 +83,13 @@ class CurricularController extends Controller
             'created_by'=>auth()->id(),
         ]);
         $subjects_lists = $request->input('subjects_id');
+        //optional subjects
+        $optional_subjects=$request->input('optional_subjects');
+        $optionalSubjects=array_diff($optional_subjects,$subjects_lists);
+        //compusory subject
         $curricular->curricularSubjects()->sync($subjects_lists);
+        //optional Subject 
+        $curricular->curricularSubjects()->sync($optionalSubjects);
         alert()->success('success', 'Curriculum  has  successfully added.')->persistent();
         return redirect()->route('academic.curricular.index');
     }
@@ -133,7 +139,12 @@ class CurricularController extends Controller
         $curricular->updated_by = auth()->id();
         $curricular->update(request(['name','semester_id','year_id','status']));
         $subjects_lists = $request->input('subjects_id');
+        //optional subjects
+        $optional_subjects=$request->input('optional_subjects');
+        $optionalSubjects=array_diff($optional_subjects,$subjects_lists);
+        //compusory subject
         $curricular->curricularSubjects()->sync($subjects_lists);
+        //optional Subject 
         alert()->success('success', 'Curriculum  has  successfully Updated.')->persistent();
         return redirect()->route('academic.curricular.index');
     }
