@@ -9,8 +9,10 @@ use App\Model\Curricular;
 use App\Model\Academicyear;
 use App\Model\Classroom;
 use App\Model\Examinationcurricular;
+use App\Exports\ClassSetup as ClassExportCurricular;
 use App\Model\Gpacurricular;
 use App\Model\Classsection;
+use Excel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\Academic\ClasssetupRequest;
@@ -216,5 +218,16 @@ class ClasssetupController extends Controller
        $classsetup->delete();
         alert()->success('success', 'classsetup  has  successfully Deleted.')->persistent();
         return redirect()->route('academic.classsetup.index');
+    }
+
+    /**
+     * download the specified resource from storage.
+     *
+     * @param  \App\Model\Classsetup  $classsetup
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadCurriculum(Classsetup $classsetup){
+            $show=$classsetup;
+             return Excel::download(new ClassExportCurricular($show), 'curriculumn.pdf');
     }
 }

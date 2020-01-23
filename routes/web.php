@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'academic', 'as' => 'academi
     Route::resource('curricular', 'Academic\CurricularController');
     Route::resource('classsection', 'Academic\ClasssectionController');
     Route::resource('classsetup', 'Academic\ClasssetupController');
+    Route::get('classetup/download/{classsetup}','Academic\ClasssetupController@downloadCurriculum')->name('classsetup.curriculumn');
     Route::resource('subject', 'Academic\SubjectController');
     Route::resource('examinationtype','Academic\ExaminationtypeController');
     Route::resource('examinationcurricular','Academic\ExaminationcurricularController');

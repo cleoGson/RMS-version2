@@ -7,13 +7,13 @@
                 <div class="col-sm-6">
                     <h1 class=" m-0 text-dark">
                         <p class="blue">
-                         Student Details  <i class="fa fa-eye-o" aria-hidden="true"></i>
+                         Student Details <i class="icon-people"></i>
                         </p>
                     </h1>
                 </div>
 
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <ol class="breadcrumb float-sm-right" style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
                         <li class="breadcrumb-item">
                         <a  class="blue" href="{{ url('/') }}">Home</a>
        
@@ -88,12 +88,12 @@
             <div class="col-md-12 mb-4">
             <div class="nav-tabs-boxed">
             <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-book-open" style="color:green; font-size:18px;"></i> Details</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Next of King</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:green"></i> Registration</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#education-1" role="tab" aria-controls="education" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-list" style="color:green"></i> Education History</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#attachment-1" role="tab" aria-controls="attachment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-file" style="color:green"></i> Attachments</a></li>     
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#payment-1" role="tab" aria-controls="payment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-money" style="color:green"></i> Payments</a></li>       
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true"  style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-book-open" style="color:light-blue; font-size:18px;"></i> Details</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:light-blue; font-size:18px;"></i> Next of King</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-users" style="color:light-blue; font-size:18px;"></i> Registration</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#education-1" role="tab" aria-controls="education" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-list" style="color:light-blue; font-size:18px;"></i> Education History</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#attachment-1" role="tab" aria-controls="attachment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-file" style="color:light-blue; font-size:18px;"></i> Attachments</a></li>     
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#payment-1" role="tab" aria-controls="payment" aria-selected="false" style="color:#306a99; font-size:18px; font-weight:bold;"><i class="fa fa-money" style="color:light-blue; font-size:18px;"></i> Payments</a></li>       
   
             </ul>
             <div class="tab-content">

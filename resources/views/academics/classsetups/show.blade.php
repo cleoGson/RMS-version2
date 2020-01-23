@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <ol class="breadcrumb float-sm-right"  style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
                         <li class="breadcrumb-item">
                         <a  class="blue" href="{{ url('/') }}">Home</a>
        
@@ -36,7 +36,7 @@
 
 
                 <div class="card">
-<div class="card-header">Class  Setups Details
+<div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">Class  Setups Details
 <div class="card-header-actions">
 </div>
 </div>
@@ -44,9 +44,10 @@
 <div class="jumbotron">
 <h1 class="display-3">{{$show->name}}</h1>
 <hr class="my-4">
-<p>The page shows all curricullum for {{$show->name}}. the specified curricular are Examination curriculum, Grading system, and Subjects/courses allocated for each Semester .</p>
+<p>The page shows all curriculum for {{$show->name}}. the specified curricular are Examination curriculum, Grading system, GPA class breakdown and Subjects/courses allocated for each Semester .</p>
 <p class="lead">
-  <a class="btn btn-primary btn-s" href="#" role="button"> <i class="fa fa-download"></i>Curriculum</a>
+  <a class="btn btn-primary btn-s" href="{{route('academic.classsetup.curriculumn',encrypt($show->id))}}" role="button"> <i class="fa fa-download"></i>Curriculum</a>
+    <a class="btn btn-success btn-s" href="{{route('academic.classsetup.edit',encrypt($show->id))}}" role="button"> <i class="fa fa-edit"></i>Edit</a>
  </p>
 </div>
 </div>
@@ -64,53 +65,39 @@
 <div class="tab-pane active" id="home-1" role="tabpanel">
     <table  class="table table-responsive-sm table-bordered table-striped table-hover">
    @foreach($show->subjectCurriculars as $subjcurricular)
- 
-    <tr ><th>Code </th><th>{{$subjcurricular->name}}</th> <th>Display Name </th> <th>Units</th> <th>Status</th></tr>
+    <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>Code </th><th>{{$subjcurricular->name}}</th> <th>Display Name </th> <th>Units</th> <th>Status</th></tr>
    @foreach($subjcurricular->curricularSubjects as $subjects)
     <tr><td>{{$subjects->code}} </td> <td> {{$subjects->name}} </td> <td> {{$subjects->display_name}}</td> <td>{{$subjects->units}}</td> <td>  {!!$subjects->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!} </td>
-  
-
     </tr>
     @endforeach
-   
-
   @endforeach
       </table>
 </div>
-
 <div class="tab-pane" id="profile-1" role="tabpanel">
  <table  class="table table-responsive-sm table-bordered table-striped table-hover">
    @foreach($show->examinationCurriculars as $examinatioins)
-   <tr><th>{{ $examinatioins->name}}</th> <th>Marks</th> <th> Out Of</th> <th>Status</th></tr>
+   <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>{{ $examinatioins->name}}</th> <th>Marks</th> <th> Out Of</th> <th>Status</th></tr>
    @foreach($examinatioins->examinationCurriculars as $examinations_data)
     <tr>
     <td>{{$examinations_data->partial_name}}  </td> <td>{{$examinations_data->marks}} </td> <td>{{$examinations_data->out_of}} </td> <td>{!!$examinations_data->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!}  </td>
-  
-
     </tr>
     @endforeach
-   
-
   @endforeach
-      </table>
+    </table>
 </div>
 <div class="tab-pane" id="registration-1" role="tabpanel">
    <table  class="table table-responsive-sm table-bordered table-striped table-hover">
-    <tr><th>{{ $examinatioins->name}}</th> <th>Minimum marks</th> <th> Maximum Marks</th> <th>Grade Point </th> <th>Remarks </th></tr>
+    <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>Grade</th> <th>Minimum marks</th> <th> Maximum Marks</th> <th>Grade Point </th> <th>Remarks </th></tr>
    @foreach($show->gradings->gradeCurricular as $grades_data)
-       <tr>
+     <tr>
     <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
-  
-
     </tr>
- 
-   
   @endforeach
   </table>
 </div>
 <div class="tab-pane" id="gpa-1" role="tabpanel">
 <table  class="table table-responsive-sm table-bordered table-striped table-hover">
-<tr><th>Class</th> <th> From</th> <th>To</th> </tr>
+<tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>Class</th> <th> From</th> <th>To</th> </tr>
   @foreach($show->gpa->gpaCurricular as $gpa)
    <tr>
     <td>  {{$gpa->name}}  </td> <td>{{$gpa->from}} </td> <td>{{$gpa->to}} </td> 
