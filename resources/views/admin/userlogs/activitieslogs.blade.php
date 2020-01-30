@@ -10,19 +10,15 @@
     </div>
 @endcan
 <div class="card">
-    <div class="card-header">
-        {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
+          <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
+       User Logs
     </div>
 
     <div class="card-body card card-accent-primary">
         
             <div class="col-md-12">
-            <div class="card-header">
-            <div class="row">
-            <div class="col-md-12">
-            <span class="form-label">Filter Activity Logs </span>
-            </div>
-            </div>
+        <div class="card-header">
             <hr/>
             <div class="row">
           <div class="col-lg-4  form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">           

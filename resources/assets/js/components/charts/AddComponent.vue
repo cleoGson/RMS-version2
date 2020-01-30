@@ -3,7 +3,8 @@
 <template>
    <div class="col-md-8">
             <div class="card card-default">
-                <div class="card-header">Add Coin</div>
+                      <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+Add Coin</div>
 
                 <div class="card-body card card-accent-primary">
                     <form @submit.prevent="addCoin">

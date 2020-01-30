@@ -13,7 +13,8 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                                         <ol class="breadcrumb float-sm-right"  style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
+
                         <li class="breadcrumb-item">
                         <a  class="blue" href="{{ url('/') }}">Home</a>
        
@@ -33,7 +34,7 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-body card card-accent-primary">
-             {!! Form::model($show,['method'=>'PATCH','route'=>['admin.users.update',,encrypt($show->id)],'files'=>true]); !!}
+             {!! Form::model($show,['method'=>'PATCH','route'=>['admin.users.update',encrypt($show->id)],'files'=>true]); !!}
               @include('admin.users.form')
         <div class="row">
          <div class="col-md-12 form-group text-right">

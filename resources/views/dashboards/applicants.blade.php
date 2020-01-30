@@ -94,7 +94,8 @@
  <div class="row">
  <div class="col-md-12">
 <div class="card">
-<div class="card-header">
+      <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
 <i class="fa fa-align-justify"></i> List group
 <small>with badges</small>
 </div>

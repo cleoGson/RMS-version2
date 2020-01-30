@@ -11,7 +11,8 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                                             <ol class="breadcrumb float-sm-right"  style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
+
                             <li class="breadcrumb-item">
                                 <a href="{{ route('dashboard-index') }}">Home</a>
                             </li>
@@ -43,7 +44,8 @@
             <div class="col-md-12">
 
             <div class="col-md-12">
-            <div class="card-header">
+                  <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
             <div class="row">
             <div class="col-md-12">
             <span class="form-label">Filter Activity Logs </span>

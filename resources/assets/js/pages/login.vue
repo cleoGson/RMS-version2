@@ -1,7 +1,8 @@
 <template>
     <div class="container page-container" style="position: relative">
         <div class="card">
-            <div class="card-header">Login</div>
+                  <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+Login</div>
             <div class="row">
 
 

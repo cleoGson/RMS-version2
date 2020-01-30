@@ -1,5 +1,6 @@
 <div class="card">
-<div class="card-header">
+      <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
 <i class="fa fa-align-justify"></i>Students Detail 
   
   <a href="{{ route('student.student.edit',$show->id) }}" class="float-right">

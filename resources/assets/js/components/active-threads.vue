@@ -1,6 +1,7 @@
 <template>
     <div class="card">
-        <div class="card-header">Active Threads</div>
+              <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+Active Threads</div>
         <div class="list-group list-group-flush">
             <router-link :to="{ name: 'thread', params: { id: thread.id } }"
                          class="list-group-item"

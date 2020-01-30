@@ -26,10 +26,13 @@ class CreateUsersTable extends Migration
             $table->bigInteger('status')->default(1);
             $table->bigInteger('center_id')->unsigned()->nullable();
             $table->foreign('center_id')->references('id')->on('centers');
+            $table->bigInteger('reseted_by')->unsigned()->nullable();
+            $table->foreign('reseted_by')->references('id')->on('users');
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->datetime('reseted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

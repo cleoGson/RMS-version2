@@ -2,7 +2,8 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
+          <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
         {{ trans('global.create') }} {{ trans('cruds.permission.title_singular') }}
     </div>
 

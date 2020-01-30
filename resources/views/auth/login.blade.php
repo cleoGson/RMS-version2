@@ -4,7 +4,8 @@
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
-            <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
+                  <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+ {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
                 <div class="card-body card card-accent-primary">
                     @if(\Session::has('message'))
                         <p class="alert alert-info">

@@ -5,7 +5,8 @@
 
 <div class="col-lg-12">
 <div class="card">
-<div class="card-header">
+      <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
 <i class="fa fa-align-justify"></i>List of students 
 
     <button class="btn btn-primary float-right  bold ">  Upload Student  <i class="fas fa-file fa-fw"></i> </button> 

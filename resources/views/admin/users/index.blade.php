@@ -10,8 +10,9 @@
     </div>
 @endcan
 <div class="card">
-    <div class="card-header">
-        {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
+          <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+
+       User Lists <i class="fa fa-users" aria-hidden="true"></i>
     </div>
 
     <div class="card-body card card-accent-primary">

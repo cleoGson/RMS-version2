@@ -11,7 +11,8 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="card card-default">
-                            <div class="card-header">{{ category.title }}</div>
+                                  <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+{{ category.title }}</div>
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-center align-content-center"

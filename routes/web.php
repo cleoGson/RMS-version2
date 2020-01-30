@@ -17,10 +17,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
     Route::resource('users', 'Admin\UsersController');
-    Route::get('permission_user/{user}', 'Admin\UsersController@userPermission')->name('users.permission');
-    Route::post('permissionUser', 'Admin\UsersController@permissionsAssignment')->name('users.process_permission');
-    Route::get('addadminrole/{user}', 'Admin\UsersController@addAdminRole')->name('users.ad_adminrole')->middleware(['auth']);
-    Route::get('removedadminrole/{user}', 'Admin\UsersController@removeAdminRole')->name('users.remove_adminrole')->middleware(['auth']);
+    Route::get('users/permission_user/{user}', 'Admin\UsersController@userPermission')->name('users.permission');
+    Route::post('users/permissionUser', 'Admin\UsersController@permissionsAssignment')->name('users.process_permission');
+    Route::get('users/add_adminrole/{user}', 'Admin\UsersController@addAdminRole')->name('users.ad_adminrole')->middleware(['auth']);
+    Route::get('users/removed_adminrole/{user}', 'Admin\UsersController@removeAdminRole')->name('users.remove_adminrole')->middleware(['auth']);
+    Route::get('users/default_password/{user}', 'Admin\UsersController@passwordReset')->name('users.password_reset')->middleware(['auth']);
+    Route::get('users/deactivate_account/{user}', 'Admin\UsersController@deactivateAccount')->name('users.accouct_deactivation')->middleware(['auth']);
+    Route::get('users/activate_account/{user}', 'Admin\UsersController@activateAccount')->name('users.accouct_activation')->middleware(['auth']);
     //Route::post('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
     Route::resource('log', 'Admin\LogController');
     Route::get('logsdata', 'Admin\LogController@data')->name('logs.data');

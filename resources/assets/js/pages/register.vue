@@ -2,7 +2,8 @@
     <div class="container page-container" style="position: relative">
 
         <div class="card">
-            <div class="card-header">Register</div>
+                  <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
+Register</div>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <form v-on:submit.prevent="onSubmit" style="margin: 25px">

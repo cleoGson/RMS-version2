@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right"  style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
+                     <ol class="breadcrumb float-sm-right"  style="color:white; font-size:14px; font-weight:bold; background-color:#50f56712">
                         <li class="breadcrumb-item">
                         <a  class="blue" href="{{ url('/') }}">Home</a>
        

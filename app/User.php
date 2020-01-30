@@ -31,6 +31,8 @@ class User extends Authenticatable
                             'password_changed_at',
                             'image', 
                             'status', 
+                            'reseted_ by',
+                            'reseted_at',
                             'created_by', 
                             'updated_by',
                         ];

@@ -12,6 +12,7 @@ use App\Http\Requests\Admin\UpdateUsersRequest;
 use Yajra\DataTables\DataTables;
 use App\Permission;
 use DB;
+use Crypt;
 class UsersController extends Controller
 {
     /**
@@ -103,8 +104,10 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($user)
     {
+        $id=Crypt::decrypt($user);
+        $user = User::find($id);
         $roles = Role::pluck('display_name', 'id')->toArray();
         $show=$user;
         $rolesin =$user->roles->pluck('id')->toArray();
@@ -118,9 +121,12 @@ class UsersController extends Controller
        * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsersRequest $request, User $user)
+    public function update(UpdateUsersRequest $request,$user)
     {
-    if(!is_null($user)){
+
+       $id=Crypt::decrypt($user);
+        $user = User::find($id);
+     if(!is_null($user)){
         $roles = $request->input('roles') ? $request->input('roles') : [];
         if(!is_null($roles)){
         $user->syncRoles($roles);
@@ -130,9 +136,10 @@ class UsersController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function show(User $user)
+    public function show($user)
     {
-       
+        $id=Crypt::decrypt($user);
+        $user = User::find($id);
         $user->load('roles');
         return view('admin.users.show', compact('users'));
     }
@@ -144,8 +151,10 @@ class UsersController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function userPermission(User $user)
+    public function userPermission($user)
     {
+         $id=Crypt::decrypt($user);
+        $user = User::find($id);
         $attachedpermissions = [];
         $admin_default_permissions = [];
         $admin_default_roles=[];
@@ -187,40 +196,41 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
-      public function addAdminRole($id)
+      public function addAdminRole($user)
     {
-        //1 should be an admin role
-        $assigned_roles=Auth::user()->roles->pluck('id')->toArray();
-        $adminrole=in_array(1,$assigned_roles) ? true : false;
+       $id=Crypt::decrypt($user);
+        $user = User::find($id);
+        $assigned_roles=auth()->user()->roles->pluck('id')->toArray();
+        $adminrole=in_array(2,$assigned_roles) ? true : false;
+     
         if ($adminrole) {
-            $user = User::findOrFail($id);
-            $user->attachRoles([1]);
+            $user->attachRoles([2]);
         alert()->success('Role assigned . ', 'Admin Role has been added successfully', 'success')->persistent('Ok');
 
         } else {
-            \Session::flash('delete', 'Access denied, Your not Allowed');
+   alert()->warning('Role assigned . ', 'Access denied, Your not Allowed', 'warning')->persistent('Ok');
         }
         return redirect()->route('admin.users.index');
     }
 
-    public function removeAdminRole($id)
+    public function removeAdminRole($user)
     {
-        $assigned_roles=Auth::user()->roles->pluck('id')->toArray();
+       $id=Crypt::decrypt($user);
+        $user = User::find($id);
+        $assigned_roles=auth()->user()->roles->pluck('id')->toArray();
         $adminrole=in_array(1,$assigned_roles) ? true : false;
         if ($adminrole) {
-           $user = User::findOrFail($id);
-           $user->detachRoles([1]);
-           alert()->warning('Role removed . ', 'Admin Role has been removed ', 'warning')->persistent('Ok');
-
+           $user->detachRoles([2]);
+           alert()->success('Role removed . ', 'Admin Role has been removed ', 'success')->persistent('Ok');
         } 
-
-       alert()->warning('Access denied . ', 'Sorry your not authorised to perform this action ', 'warning')->persistent('Ok');
+         alert()->warning('Access denied . ', 'Sorry your not authorised to perform this action ', 'warning')->persistent('Ok');
         return redirect()->route('admin.users.index');
     }
 
 
-    public function activateAccount(Request $request, $id)
+    public function activateAccount(Request $request, $user)
     {
+        $id=Crypt::decrypt($user);
         $user = User::find($id);
         $deactivationfactor = $user->accountStatus->name;
         if ($user->deactivation_factor < 4) {
@@ -236,8 +246,9 @@ class UsersController extends Controller
         }
         return redirect()->back();
     }
-    public function deactivateAccount(Request $request, $id)
+    public function deactivateAccount(Request $request, $user)
     {
+         $id=Crypt::decrypt($user);
         $user = User::find($id);
         if ($id == auth()->user()->id) {
             \Session::flash('delete', " Sorry!! you can not Deactivate  Your own Account.");
@@ -254,6 +265,21 @@ class UsersController extends Controller
           }
         return redirect()->back();
         }
+        public function passwordReset($user){
+        $id=Crypt::decrypt($user);
+        $user = User::find($id);
+        $nature=$user->userable_type;
+        $nature_details=explode('/',$nature);
+        $password_reset=($nature_details[2]=="Staff") ? bcrypt('Staff@255??') : bcrypt('Student@255??');
+        $user->password= $password_reset;
+        $user->password_changed_at=NULL;
+        $user->verifiedstatus;
+        $user->reseted_by=auth()->user()->id;
+        $user->reseted_at=date('Y-m-d h:m:s');
+        $user->status=1;
+        $user->save();
+        return redirect()->route('admin.users.index');
+        }
       
     /**
      * Remove User from storage.
@@ -261,8 +287,10 @@ class UsersController extends Controller
        * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($user)
     {
+        $id=Crypt::decrypt($user);
+        $user = User::find($id);
         $assigned_roles=$user->roles->pluck('id')->toArray();
         $adminrole=in_array(1,$assigned_roles) || in_array(2,$assigned_roles)  ? true : false;  
         if($adminrole){
