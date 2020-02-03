@@ -43,7 +43,18 @@ class Curricular extends Model
 
     public function curricularSubjects(){
         return $this->belongsToMany(Subject::class ,'curriculars_subjects', 
-        'curricular_id', 'subject_id')->withTimestamps();
+        'curricular_id', 'subject_id')->withPivot('status','locked')->withTimestamps();
+    }
+
+
+     public function compulsoryCurricularSubjects(){
+        return $this->belongsToMany(Subject::class ,'curriculars_subjects', 
+        'curricular_id', 'subject_id')->withPivot('status','locked')->whereStatus(1);
+    }
+
+      public function optionalCurricularSubjects(){
+        return $this->belongsToMany(Subject::class ,'curriculars_subjects', 
+        'curricular_id', 'subject_id')->withPivot('status','locked')->whereStatus('0');
     }
 
     /**

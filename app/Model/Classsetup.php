@@ -102,9 +102,9 @@ class Classsetup extends Model
      *      *
      * @return belongsTo
      */
-    public function feesStructure()
+    public function feesStructureAmount()
     {
-        return $this->belongsTo(Feessttructure::class, 'fees_structure')->withDefault();
+        return $this->belongsTo(Feesstructure::class, 'fees_structure')->withDefault();
     }
        /**
      * An applicant belongs to users

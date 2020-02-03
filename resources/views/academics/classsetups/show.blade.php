@@ -58,6 +58,7 @@
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="true"><i class="fa fa-book" style="color:light-blue; font-size:18px;"></i> Subject Curriculum</a></li>
 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-award" style="color:light-blue; font-size:18px;"></i> Examination Curriculum </a></li>
+<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#feestructure-1" role="tab" aria-controls="feestructure" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-money" style="color:light-blue; font-size:18px;"></i> Fee Structure </a></li>
 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#registration-1" role="tab" aria-controls="registration" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-graduation-cap" style="color:light-blue; font-size:18px;"></i> Grading Curriculum</a></li>
 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#gpa-1" role="tab" aria-controls="gpa" style="color:#306a99; font-size:18px; font-weight:bold;" aria-selected="false"><i class="fa fa-balance-scale" style="color:light-blue; font-size:18px;"></i> GPA Classes</a></li>
 </ul>
@@ -66,8 +67,12 @@
     <table  class="table table-responsive-sm table-bordered table-striped table-hover">
    @foreach($show->subjectCurriculars as $subjcurricular)
     <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>Code </th><th>{{$subjcurricular->name}}</th> <th>Display Name </th> <th>Units</th> <th>Status</th></tr>
-   @foreach($subjcurricular->curricularSubjects as $subjects)
-    <tr><td>{{$subjects->code}} </td> <td> {{$subjects->name}} </td> <td> {{$subjects->display_name}}</td> <td>{{$subjects->units}}</td> <td>  {!!$subjects->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!} </td>
+   @foreach($subjcurricular->compulsoryCurricularSubjects as $subjects)
+    <tr><td>{{$subjects->code}} </td> <td> {{$subjects->name}} </td> <td> {{$subjects->display_name}}</td> <td>{{$subjects->units}}</td> <td> <span class="badge-primary  badge-pill">Compassary </span> </td>
+    </tr>
+    @endforeach
+     @foreach($subjcurricular->optionalCurricularSubjects as $subjects)
+    <tr><td>{{$subjects->code}} </td> <td> {{$subjects->name}} </td> <td> {{$subjects->display_name}}</td> <td>{{$subjects->units}}</td> <td> <span class="badge-warning badge-pill">Optional</span> </td>
     </tr>
     @endforeach
   @endforeach
@@ -85,6 +90,21 @@
   @endforeach
     </table>
 </div>
+<div class="tab-pane" id="feestructure-1" role="tabpanel">
+ <table  class="table table-responsive-sm table-bordered table-striped table-hover">
+    <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>{{$show->feesStructureAmount->name}}</th> <th>Amount</th> <th> Year</th> <th>Status</th></tr>
+
+   @foreach($show->feesStructureAmount->feesStructures as  $stucture)
+    <tr>
+    <td>{{$stucture->fees->name}}  </td> <td>{{$stucture->amount}} </td> <td>{{$stucture->years->name}} </td> <td>{!!$stucture->status==1 ? '<span class="badge-primary badge-pill">Compassary </span>': '<span class="badge-primary badge-pill">Optional</span>'!!}  </td>
+    </tr>
+  @endforeach
+    <tr>
+    <td>Total  </td> <td colspan='3'>{{array_sum(array_column($show->feesStructureAmount->feesStructures->toArray(),'amount'))}}</td> 
+    </tr>
+    </table>
+</div>
+
 <div class="tab-pane" id="registration-1" role="tabpanel">
    <table  class="table table-responsive-sm table-bordered table-striped table-hover">
     <tr style="color:white; font-size:14px; font-weight:bold; background-color:#506f99"><th>Grade</th> <th>Minimum marks</th> <th> Maximum Marks</th> <th>Grade Point </th> <th>Remarks </th></tr>
@@ -93,6 +113,9 @@
     <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
     </tr>
   @endforeach
+    <tr>
+    <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
+    </tr>
   </table>
 </div>
 <div class="tab-pane" id="gpa-1" role="tabpanel">

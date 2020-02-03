@@ -64,7 +64,8 @@ class CurricularController extends Controller
         $years=Academicyear::pluck('name','id')->toArray();
         $semesters=Semester::pluck('name','id')->toArray();
         $selectedsubject=[];
-        return view('academics.curricular.create',compact(['years','semesters','subjects','selectedsubject']));
+        $selected_optional_subject=[];
+        return view('academics.curricular.create',compact(['years','semesters','subjects','selectedsubject','selected_optional_subject']));
     }
 
     /**
@@ -86,10 +87,24 @@ class CurricularController extends Controller
         //optional subjects
         $optional_subjects=$request->input('optional_subjects');
         $optionalSubjects=array_diff($optional_subjects,$subjects_lists);
-        //compusory subject
-        $curricular->curricularSubjects()->sync($subjects_lists);
-        //optional Subject 
-        $curricular->curricularSubjects()->sync($optionalSubjects);
+
+        $datacompulsory = [];
+        foreach( $subjects_lists  as $key_c=>$c_value) { 
+            $datacompulsory[$c_value] = [ 'status' => 1 ];
+        }
+
+        $dataoptional=[];
+        foreach ($optionalSubjects as $key_o => $o_value){
+             $dataoptional[$o_value] = [ 'status' => '0'];
+           }
+
+           if(!is_null($datacompulsory)){
+        $curricular->curricularSubjects()->sync($datacompulsory);
+           }
+         if(!is_null($dataoptional)){ 
+        $curricular->curricularSubjects()->syncWithoutDetaching($dataoptional,false);
+         }
+    
         alert()->success('success', 'Curriculum  has  successfully added.')->persistent();
         return redirect()->route('academic.curricular.index');
     }
@@ -114,7 +129,8 @@ class CurricularController extends Controller
      */
     public function edit(Curricular $curricular)
     {
-         $selectedsubject=$curricular->curricularSubjects->pluck('id')->toArray();
+         $selectedsubject=$curricular->compulsoryCurricularSubjects->pluck('id')->toArray();
+         $selected_optional_subject=$curricular->optionalCurricularSubjects->pluck('id')->toArray();
         $subjects = Subject::pluck('name','id')->toArray();
         $years=Academicyear::pluck('name','id')->toArray();
         $semesters=Semester::pluck('name','id')->toArray();
@@ -123,7 +139,8 @@ class CurricularController extends Controller
         'years'=>$years,
         'semesters'=>$semesters,
         'subjects'=>$subjects,
-        'selectedsubject'=>$selectedsubject
+        'selectedsubject'=>$selectedsubject,
+        'selected_optional_subject'=> $selected_optional_subject
         ]);
     }
 
@@ -142,9 +159,22 @@ class CurricularController extends Controller
         //optional subjects
         $optional_subjects=$request->input('optional_subjects');
         $optionalSubjects=array_diff($optional_subjects,$subjects_lists);
-        //compusory subject
-        $curricular->curricularSubjects()->sync($subjects_lists);
-        //optional Subject 
+
+        $datacompulsory = [];
+        foreach( $subjects_lists  as $key_c=>$c_value) { 
+            $datacompulsory[$c_value] = [ 'status' => 1 ];
+          }
+         
+        $dataoptional=[];
+        foreach ($optionalSubjects as $key_o => $o_value){
+             $dataoptional[$o_value] = [ 'status' => '0'];
+           }
+          if(!is_null($datacompulsory)){   
+        $curricular->curricularSubjects()->sync($datacompulsory);
+          }
+         if(!is_null($dataoptional)){ 
+        $curricular->curricularSubjects()->syncWithoutDetaching($dataoptional, false);
+         }
         alert()->success('success', 'Curriculum  has  successfully Updated.')->persistent();
         return redirect()->route('academic.curricular.index');
     }

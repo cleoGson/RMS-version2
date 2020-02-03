@@ -20,12 +20,15 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-User" id="userAccount" width="100%">
                 <thead>
                     <tr>
-                     
+                      <th>Online</th>
                         <th>
                            Email
                         </th>
                         <th>
                             User name
+                        </th>
+                        <th>
+                        Account for
                         </th>
                         <th>
                             Account Status
@@ -49,12 +52,17 @@
                 </thead>
                   <tfoot>
                     <tr>
-                     
+                      <th>
+                        Online
+                      </th>
                         <th>
                            Email
                         </th>
                         <th>
                             User name
+                        </th>
+                        <th>
+                        Account For
                         </th>
                         <th>
                             Account Status
@@ -103,6 +111,10 @@
             '<td>Username:</td>'+
             '<td colspan="3">'+d.username+'</td>'+
         '</tr>'+
+         '<tr>'+
+            '<td>Account for:</td>'+
+            '<td colspan="3">'+d.account_for+'</td>'+
+        '</tr>'+
           '<tr>'+
             '<td>User Roles:</td>'+
             '<td colspan="3">'+d.user_roles+'</td>'+
@@ -144,8 +156,10 @@
                     },
                 },
                 columns: [
+                    {data : 'is_online', name: 'is_online'},
                     {data: 'email', name: 'email'},
                     {data: 'username', name: 'username'},
+                    {data: 'account_for', name: 'account_for'},
                     {data: 'status', name: 'status'},
                     {data: 'user_roles', name: 'user_roles'},
                     {data: 'user_permission', name: 'user_permission'},

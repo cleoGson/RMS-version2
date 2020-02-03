@@ -20,6 +20,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
+    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
     use Notifiable;
     protected $fillable = ['email', 
                             'username', 

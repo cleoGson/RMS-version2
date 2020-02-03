@@ -22,8 +22,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('users/add_adminrole/{user}', 'Admin\UsersController@addAdminRole')->name('users.ad_adminrole')->middleware(['auth']);
     Route::get('users/removed_adminrole/{user}', 'Admin\UsersController@removeAdminRole')->name('users.remove_adminrole')->middleware(['auth']);
     Route::get('users/default_password/{user}', 'Admin\UsersController@passwordReset')->name('users.password_reset')->middleware(['auth']);
-    Route::get('users/deactivate_account/{user}', 'Admin\UsersController@deactivateAccount')->name('users.accouct_deactivation')->middleware(['auth']);
-    Route::get('users/activate_account/{user}', 'Admin\UsersController@activateAccount')->name('users.accouct_activation')->middleware(['auth']);
+    Route::get('users/deactivate_account/{user}', 'Admin\UsersController@deactivateAccount')->name('users.account_deactivation')->middleware(['auth']);
+    Route::get('users/activate_account/{user}', 'Admin\UsersController@activateAccount')->name('users.account_activation')->middleware(['auth']);
+    Route::get('users/email_send_password/{user}', 'Admin\UsersController@emailMyPassword')->name('users.email_send_password')->middleware(['auth']);
+
     //Route::post('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
     Route::resource('log', 'Admin\LogController');
     Route::get('logsdata', 'Admin\LogController@data')->name('logs.data');
@@ -137,8 +139,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'general', 'as' => 'general.
 
 Route::resource('sample', 'SampleController');
 Route::get('graph_load','SampleController@loadData')->name('sample.graph');
- Route::get('chart-line-ajax', 'HomeController@chartLineAjax');
+Route::get('chart-line-ajax', 'HomeController@chartLineAjax');
 Route::post('sample/update', 'SampleController@update')->name('sample.update');
-
 Route::get('sample/destroy/{id}', 'SampleController@destroy');
    

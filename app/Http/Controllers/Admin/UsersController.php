@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
+use App\Notifications\UserCredentialsNotifications;
 use Yajra\DataTables\DataTables;
 use App\Permission;
+use Notification;
 use DB;
 use Crypt;
 class UsersController extends Controller
@@ -24,9 +26,7 @@ class UsersController extends Controller
     {
             if (request()->wantsJson()) {
             $template = 'admin.users.actions';
-            return $dataTables->eloquent(User::with(['roles','permissions'])->where(
-            'userable_type','=','App/Model/Staff'
-            )->select('users.*'))
+            return $dataTables->eloquent(User::with(['roles','permissions'])->select('users.*')->orderBy('email'))
                 ->editColumn('action', function ($row) use ($template) {
                     $gateKey = 'admin.users';
                     $routeKey = 'admin.users';
@@ -44,6 +44,12 @@ class UsersController extends Controller
                         ucfirst(strtolower($roleName->name));
                         
              })->implode(', '); })
+               ->addColumn('account_for', function ($row) {
+                     return $row->userable_type == 'App/Model/Staff' ? 'Staff' : 'Student'; 
+               })
+                ->addColumn('is_online', function ($row) {
+                     return $row->isOnline() ? 'Yes' : 'no'; 
+               })
             ->addColumn('user_permission', function ($row) {
                 return $row->permissions->map(function ($permissionName) {
                     return
@@ -89,8 +95,7 @@ class UsersController extends Controller
             'password_changed_at'=>'email',
             'image'=>'email', 
             'status'=>'email', 
-            'created_by'=>'email', 
-        ];
+            'created_by'=>'email'];
         $user = User::create($request->all());
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->assignRole($roles);
@@ -208,7 +213,7 @@ class UsersController extends Controller
         alert()->success('Role assigned . ', 'Admin Role has been added successfully', 'success')->persistent('Ok');
 
         } else {
-   alert()->warning('Role assigned . ', 'Access denied, Your not Allowed', 'warning')->persistent('Ok');
+        alert()->warning('Role assigned . ', 'Access denied, Your not Allowed', 'warning')->persistent('Ok');
         }
         return redirect()->route('admin.users.index');
     }
@@ -234,15 +239,20 @@ class UsersController extends Controller
         $user = User::find($id);
         $deactivationfactor = $user->accountStatus->name;
         if ($user->deactivation_factor < 4) {
-            \Session::flash('delete', " Sorry!! user account deactivated due to   $deactivationfactor Cannot be activated.");
+        alert()->warning('Warning . ', "Sorry!! user account deactivated due to   $deactivationfactor Cannot be activated.", 'warning')->persistent('Ok');
+
         } elseif ($id == auth()->user()->id) {
-            \Session::flash('delete', " Sorry!! you can not activate Your own account.");
+          
+       alert()->warning('Warning . ', "Sorry!! you can not activate Your own account.", 'warning')->persistent('Ok');
+
         } else {
             $user->update([
                 'status' => 1,
                 'deactivation_factor' => null,
             ]);
-            \Session::flash('success', 'You have Successfully Activate  an Account');
+            \Session::flash('success', '');
+            alert()->success('Account Activation', "You have Successfully Activate  an Account.", 'success')->persistent('Ok');
+
         }
         return redirect()->back();
     }
@@ -253,19 +263,21 @@ class UsersController extends Controller
         if ($id == auth()->user()->id) {
             \Session::flash('delete', " Sorry!! you can not Deactivate  Your own Account.");
            return redirect()->back();  
-        } 
-          $assigned_roles=$user->roles->pluck('id')->toArray();
+         } 
+           $assigned_roles=$user->roles->pluck('id')->toArray();
           $adminrole=in_array(1,$assigned_roles) || in_array(2,$assigned_roles)  ? true : false;  
           if($adminrole){
-            $user->update([
+          $user->update([
                 'account_status' => 0,
                 'deactivation_factor' => request('factor'),
-             ]);
-            \Session::flash('success', 'You have Successfully Deactivate  an Account');
+         ]);
+         alert()->success('Account Deactivated . ', "$user->email deactivate ", 'success')->persistent('Ok');
           }
         return redirect()->back();
         }
+
         public function passwordReset($user){
+        
         $id=Crypt::decrypt($user);
         $user = User::find($id);
         $nature=$user->userable_type;
@@ -278,8 +290,39 @@ class UsersController extends Controller
         $user->reseted_at=date('Y-m-d h:m:s');
         $user->status=1;
         $user->save();
+        alert()->success('Password Reseted . ', "Password for $user->email reseted to Default", 'success')->persistent('Ok');
         return redirect()->route('admin.users.index');
         }
+
+    public function emailMyPassword($user){
+            $id=Crypt::decrypt($user);
+            $user = User::find($id);
+            $passwordgenerated = $this->randomPassword(10);
+            $passdencyp = Crypt::encrypt($passwordgenerated);
+            $user->password= bcrypt($passwordgenerated);
+            $user->password_changed_at=NULL;
+            $user->reseted_by=auth()->user()->id;
+            $user->reseted_at=date('Y-m-d h:m:s');
+            $user->status=1;
+            $user->save();  
+            alert()->success('Password Reseted and emailed ', "Password auto  regenerated and sent to $user->email", 'success')->persistent('Ok');
+             Notification::send($user, new UserCredentialsNotifications($passwordgenerated, $user->email, $user->username));
+            return redirect()->back();
+
+
+    }
+
+    public function randomPassword($length = 8)
+    {
+        $str = "";
+        $characters = array_merge(range('A', 'Z'), range('a', 'z'), range('0', '9'));
+        $max = count($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $rand = mt_rand(0, $max);
+            $str .= $characters[$rand];
+        }
+        return $str;
+    }
       
     /**
      * Remove User from storage.
@@ -295,10 +338,11 @@ class UsersController extends Controller
         $adminrole=in_array(1,$assigned_roles) || in_array(2,$assigned_roles)  ? true : false;  
         if($adminrole){
         $user->delete();
-        \Session::flash('delete', " Sorry!! you can not Deactivate  Your own Account.");
+        alert()->success('User Account Deleted . ', 'User account has been deleted', 'success')->persistent('Ok');
+
          return redirect()->route('admin.users.index');
         }
-        alert()->warning('Access denied . ', 'Sorry your not authorised to perform this action ', 'warning')->persistent('Ok');
+        alert()->warning('Access denied . ', 'Sorry your not authorized to perform this action ', 'warning')->persistent('Ok');
         return redirect()->route('admin.users.index');
     }
 
@@ -309,10 +353,7 @@ class UsersController extends Controller
      */
     public function massDestroy(Request $request)
     {
-
         User::whereIn('id', request('ids'))->delete();
-
         return response(null, Response::HTTP_NO_CONTENT);
     }
-
 }

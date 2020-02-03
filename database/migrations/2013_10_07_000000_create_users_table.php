@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('token')->default('token');
             $table->boolean('verifiedstatus')->defeault(1);
             $table->string('userable_type')->nullable();
+            $table->string('remeinder')->nullable();
             $table->bigInteger('userable_id')->nullable();
             $table->timestamp('password_changed_at')->nullable();
             $table->string('image')->default('avatar.png');
