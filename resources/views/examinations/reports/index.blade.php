@@ -52,7 +52,7 @@
 <div class="col-sm-2">
 <div class="form-group">
 <label for="year_id"></br></label>
-    <button class="form-control btn btn-success">Filter</button>
+<input type="submit" class="form-control btn btn-success" value="Filter"/>
 </div>
 {!!  Form::close()!!}
 </div>

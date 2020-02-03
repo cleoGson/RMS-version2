@@ -113,9 +113,6 @@
     <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
     </tr>
   @endforeach
-    <tr>
-    <td>  {{$grades_data->grades->name}}  </td> <td>{{$grades_data->minimum_marks}} </td> <td>{{$grades_data->maximum_marks}} </td> <td>{{$grades_data->grade_point}}</td> <td> <span class="badge-primary badge-pill"> {{$grades_data->grades->remarks}} </span>  </td> 
-    </tr>
   </table>
 </div>
 <div class="tab-pane" id="gpa-1" role="tabpanel">
