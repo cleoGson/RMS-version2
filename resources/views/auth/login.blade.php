@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
                   <div class="card-header" style="color:white; font-size:14px; font-weight:bold; background-color:#506f99">
  {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
                 <div class="card-body card card-accent-primary">
                     @if(\Session::has('message'))
-                        <p class="alert alert-info">
+                        <p class="alert alert-danger">
                             {{ \Session::get('message') }}
                         </p>
                     @endif
+               
                     @isset($url)
                     <form method="POST" action='{{ url("$url/login") }}' aria-label="{{ __('Login') }}">
                     @else
@@ -21,7 +21,6 @@
                         {{ csrf_field() }}
                         <h1>{{ env('APP_NAME', 'Result Management System (RMS)') }}</h1>
                         <p class="text-muted">Login</p>
-
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -74,7 +73,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 @endsection
