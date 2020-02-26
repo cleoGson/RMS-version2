@@ -8,7 +8,6 @@ window._ = require("lodash");
 
 try {
   window.$ = window.jQuery = require("jquery");
-
   //require('bootstrap-sass');
   require("select2");
   require("bootstrap");

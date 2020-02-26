@@ -74,6 +74,19 @@
   color: #306a99;
 }
 
+.fade {
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.fade.out {
+  opacity: 0;
+}
+
 td.details-control {
   background-image: url("/public/images/details_open.png") no-repeat center center;
   cursor: pointer;

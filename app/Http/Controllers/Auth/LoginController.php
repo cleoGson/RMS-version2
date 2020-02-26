@@ -66,17 +66,19 @@ class LoginController extends Controller
         return back()->withInput($request->only('email', 'remember'));
     }
 
+
+    
 protected function hasTooManyLoginAttempts(Request $request)
     {
-    
     
       $login_attemp= $this->limiter()->tooManyAttempts($this->throttleKey($request), 10, 30);
       $number_of_attemps=$this->limiter()->hit($this->throttleKey($request));
       if($number_of_attemps < 11){ 
          $message="Attention!! Your have  $number_of_attemps  login attempts, maximum allowed attempt is 10, else Your account will be locked";
          \Session::flash('message',$message);
-          return redirect()->route('login');
-           return  $login_attemp;
+         return  $login_attemp;
+          //return redirect()->route('login');
+         
          }
       else if($number_of_attemps = 11){  
           $user_name=explode('|',$this->throttleKey($request));
@@ -86,14 +88,16 @@ protected function hasTooManyLoginAttempts(Request $request)
           $user_detail->save();
           $message="Your have reach maximum login attemp which is $number_of_attemps your account has been Locked!! please consult  your System Administrator";
           \Session::flash('message',$message);
-          return redirect()->route('login');
+           return  $login_attemp;
+          //return redirect()->route('login');
          }
      
       } 
      else{  
         $message="Attention!! Your   account has been locked, Please contact Your administrator";
          \Session::flash('message',$message);
-          return redirect()->route('login');
+          return  $login_attemp;
+         // return redirect()->route('login');
          }
        
 
