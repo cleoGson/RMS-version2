@@ -409,9 +409,6 @@ $.ajax({
 
 function OnSuccess(data) {
     $.each(data.d, function (key, value) {
-        //options.series[0].name='Name2';
-        //options.series[0].data.push([value.Status_Color, value.Corrective_Action_ID]);
-        //options.series[1].data.push([value.Status_Color, value.Corrective_Action_ID]);
         options.series[2].data.push([value.Status_Color, value.Corrective_Action_ID]);
     })
     chart = new Highcharts.Chart(options);
